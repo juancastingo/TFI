@@ -1,0 +1,8 @@
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\SL.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\SL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\BarcodeLib.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Release\SL.csprojResolveAssemblyReference.cache
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Release\SL.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Release\SL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\BIZ.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\BIZ.pdb

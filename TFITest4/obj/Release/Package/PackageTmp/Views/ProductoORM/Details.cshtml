@@ -1,0 +1,85 @@
+﻿@model DAL.ORM.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Producto</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDProducto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDProducto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductoCategoria.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Imagen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Imagen)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EstadoMisc.Tipo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EstadoMisc.Tipo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CostoActual)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CostoActual)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CostoContable)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CostoContable)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAlta)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAlta)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UnidadMedida)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UnidadMedida)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

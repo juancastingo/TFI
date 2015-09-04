@@ -1,0 +1,37 @@
+﻿@using TFITest4.Resources;
+@model IEnumerable<TFITest4.Models.ModelPais>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><h2>@Language.Pais</h2></center>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDPais }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDPais }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDPais })
+        </td>
+    </tr>
+}
+    </tbody>
+
+</table>

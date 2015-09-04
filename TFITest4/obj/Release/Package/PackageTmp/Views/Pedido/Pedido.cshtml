@@ -1,0 +1,314 @@
+﻿@model IEnumerable<BIZ.BIZProducto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/Pedido.css" rel="stylesheet" />
+    </style>
+</head>
+
+
+
+
+<h2>Pedido</h2>
+
+<div id="cart" style="display: none">
+    <h1 class="ui-widget-header">Shopping Cart</h1>
+    <div class="ui-widget-content">
+        <ol>
+        <span class="glyphicon glyphicon-shopping-cart" style="font-size: 68px;"></span>
+            <li class="placeholder">Add your items here</li>
+        </ol>
+    </div>
+</div>
+
+<table class="table tableJqueryNormal table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            @*            <th>
+                @Html.DisplayNameFor(model => model.IDProducto)
+            </th>*@
+            <th>Producto
+                @*@Html.DisplayNameFor(model => model.Nombre)*@
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
+            </th>*@
+            @*            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.PrecioActual)
+            </th>
+            <th>Cantidad
+            </th>
+           
+            @*        <th>
+            @Html.DisplayNameFor(model => model.UnidadMedida)
+        </th>*@
+        <th style="width: auto"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.IDProducto">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ProductoCategoria.Detalle)
+                </td>*@
+                @*                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>*@
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Imagen)*@
+                    <a class="fancybox" href="@item.Imagen">
+                        <img class="PImage" src="@item.Imagen" alt="" /></a>
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.PrecioActual)
+                </td>
+                <td>
+                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />
+                </td>
+                @*        <td>
+            @Html.DisplayFor(modelItem => item.UnidadMedida)
+        </td>*@
+                <td>
+                    <a href="#" class="agregar">Agregar</a>
+                    <a href="#" class="borrar">Borrar</a>
+                    @* @Html.ActionLink("Agregar", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                 @*   @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div class="col-md-4 col-xs-12 column">
+    <h2>Carrito</h2>
+    <div id="carrito">
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Prod</th>
+                    <th>Cant</th>
+                    <th>$</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="PostDiv">
+        <h4>Subtotal= @ViewBag.subtotal</h4>
+    </div>
+
+</div>
+
+<div class="row"></div>
+<hr />
+<hr />
+<hr />
+
+
+
+<div id="popover_content_carrito" style="display: none">
+    <div>
+        <p>aca algo</p>
+
+    </div>
+</div>
+
+
+
+@section EndScript{
+
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            $('.tableJqueryNormal img').draggable({
+                appendTo: "body",
+                helper: "clone",
+                start: function () {
+                    $('#cart').show("blind");
+                    
+                    //console.log("start");
+                },
+                stop: function () {
+                    $('#cart').hide("blind");
+                    //console.log("stop");
+                }
+
+            });
+            $("#cart ol").droppable({
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-hover",
+                accept: ":not(.ui-sortable-helper)",
+                drop: function (event, ui) {
+                    //$(this).find(".placeholder").remove();
+                    //$("<li></li>").text(ui.draggable.closest('td').prev('td').prev('td').text()).appendTo(this);
+                    id = ui.draggable.closest('tr').attr('id');
+                    cantidad = ui.draggable.closest('tr').find('td').eq(3).children().val()
+                    ui.draggable.closest('tr').find('td').eq(3).children().val('');
+                    if (cantidad == "") {
+                        cantidad = 1;
+                    }
+                    console.log("atroden " + id + " " + cantidad);
+                    var DatosPedido = { id: id, cantidad: cantidad }
+                    executeAjaxPedido(DatosPedido);
+
+                }
+            }).sortable({
+                items: "li:not(.placeholder)",
+                sort: function () {
+                    // gets added unintentionally by droppable interacting with sortable
+                    // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+                    $(this).removeClass("ui-state-default");
+
+                }
+            });
+        });
+
+
+        function executeAjaxPedido(datos) {
+            console.log("executeAjaxPedido");
+            var dataToSend = datos;
+            var serviceURL = '@Url.Action("PedidoAjax", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify(dataToSend),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc
+            });
+
+            function successFunc(data, status) {
+                console.log(typeof (data));
+                console.log(data);
+                list = data;
+                var subt = 0;
+                $('#carrito table > tbody').html('');
+                list.forEach(function (elem) {
+                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                    subt += (elem.Precio * elem.Cant);
+                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
+                });
+                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
+
+                $('.CarritoSubtotal').html("$ " + subt);
+                if (subt == 0) {
+                    $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
+                } else {
+                    $('#popover_content_wrapper').find("p:first").html("");
+                }
+                //alert(data);
+            }
+
+            function errorFunc() {
+                //alert('error');
+                toastr["error"]("Please log in again", "Error")
+
+            }
+        }
+
+
+
+        $(document).ready(function () {
+
+            toastr["info"]("You can drag and drop item images to add it to the cart!","Psss")
+
+            $(".fancybox").fancybox({
+                openEffect: 'elastic',
+                closeEffect: 'elastic',
+                nextEffect: 'fade',
+                padding: 0,
+                closeBtn: false,
+
+            });
+
+
+            var serviceURL = '@Url.Action("GetInit", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: param = "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFuncInit,
+                error: errorFuncInit
+            });
+
+            function successFuncInit(data, status) {
+                console.log(data);
+                list = data;
+                var subt = 0;
+                $('#carrito table > tbody').html('');
+                list.forEach(function (elem) {
+                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                    subt += (elem.Precio * elem.Cant);
+                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
+                });
+
+
+                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
+
+
+            }
+
+            function errorFuncInit() {
+                //alert('error');
+                toastr["error"]("Please log in again", "Error")
+            }
+
+
+        });
+
+        var list;
+
+        $('.agregar').click(function () {
+            var id = $(this).closest('tr').attr('id');
+            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
+            console.log(id + " " + cantidad);
+            $(this).closest('tr').find('td').eq(3).children().val('');
+            if (cantidad == 0) {
+                cantidad = 1;
+            } 
+                var DatosPedido = { id: id, cantidad: cantidad }
+                executeAjaxPedido(DatosPedido);
+            
+        });
+        $('.borrar').click(function () {
+            var id = $(this).closest('tr').attr('id');
+            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
+            console.log(id + " " + cantidad);
+            $(this).closest('tr').find('td').eq(3).children().val('');
+            if (cantidad == 0) {
+                cantidad = 1;
+            }
+            cantidad *= -1;
+            var DatosPedido = { id: id, cantidad: cantidad }
+            executeAjaxPedido(DatosPedido);
+        });
+    </script>
+
+    @*jquery UI*@
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+}

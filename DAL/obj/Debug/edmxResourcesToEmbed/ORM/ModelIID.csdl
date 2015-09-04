@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IIDTest2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="IIDTest2Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Bitacora" EntityType="IIDTest2Model.Bitacora" />
+    <EntitySet Name="CierreContable" EntityType="IIDTest2Model.CierreContable" />
+    <EntitySet Name="ClienteEmpresa" EntityType="IIDTest2Model.ClienteEmpresa" />
+    <EntitySet Name="Cuenta" EntityType="IIDTest2Model.Cuenta" />
+    <EntitySet Name="Direccion" EntityType="IIDTest2Model.Direccion" />
+    <EntitySet Name="Documento" EntityType="IIDTest2Model.Documento" />
+    <EntitySet Name="DocumentoDetalle" EntityType="IIDTest2Model.DocumentoDetalle" />
+    <EntitySet Name="DocumentoTipo" EntityType="IIDTest2Model.DocumentoTipo" />
+    <EntitySet Name="EmpresaLocal" EntityType="IIDTest2Model.EmpresaLocal" />
+    <EntitySet Name="EstadoMisc" EntityType="IIDTest2Model.EstadoMisc" />
+    <EntitySet Name="ListaPrecio" EntityType="IIDTest2Model.ListaPrecio" />
+    <EntitySet Name="Localidad" EntityType="IIDTest2Model.Localidad" />
+    <EntitySet Name="MailLocal" EntityType="IIDTest2Model.MailLocal" />
+    <EntitySet Name="Pais" EntityType="IIDTest2Model.Pais" />
+    <EntitySet Name="PlanCuentaMayor" EntityType="IIDTest2Model.PlanCuentaMayor" />
+    <EntitySet Name="PrecioDetalle" EntityType="IIDTest2Model.PrecioDetalle" />
+    <EntitySet Name="Producto" EntityType="IIDTest2Model.Producto" />
+    <EntitySet Name="ProductoCategoria" EntityType="IIDTest2Model.ProductoCategoria" />
+    <EntitySet Name="Proveedor" EntityType="IIDTest2Model.Proveedor" />
+    <EntitySet Name="Provincia" EntityType="IIDTest2Model.Provincia" />
+    <EntitySet Name="Rubro" EntityType="IIDTest2Model.Rubro" />
+    <EntitySet Name="sysdiagrams" EntityType="IIDTest2Model.sysdiagrams" />
+    <EntitySet Name="TipoCuenta" EntityType="IIDTest2Model.TipoCuenta" />
+    <EntitySet Name="TipoIVA" EntityType="IIDTest2Model.TipoIVA" />
+    <EntitySet Name="TipoUsuario" EntityType="IIDTest2Model.TipoUsuario" />
+    <EntitySet Name="Usuario" EntityType="IIDTest2Model.Usuario" />
+    <AssociationSet Name="FK_Bitacora_Usuario" Association="IIDTest2Model.FK_Bitacora_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Bitacora" EntitySet="Bitacora" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteEmpresa_Direccion" Association="IIDTest2Model.FK_ClienteEmpresa_Direccion">
+      <End Role="Direccion" EntitySet="Direccion" />
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteEmpresa_EstadoMisc" Association="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc">
+      <End Role="EstadoMisc" EntitySet="EstadoMisc" />
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteEmpresa_TipoIVA" Association="IIDTest2Model.FK_ClienteEmpresa_TipoIVA">
+      <End Role="TipoIVA" EntitySet="TipoIVA" />
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_ClienteEmpresa" Association="IIDTest2Model.FK_Usuario_ClienteEmpresa">
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_PlanCuentaMayor" Association="IIDTest2Model.FK_Cuenta_PlanCuentaMayor">
+      <End Role="PlanCuentaMayor" EntitySet="PlanCuentaMayor" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_Rubro" Association="IIDTest2Model.FK_Cuenta_Rubro">
+      <End Role="Rubro" EntitySet="Rubro" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_TipoCuenta" Association="IIDTest2Model.FK_Cuenta_TipoCuenta">
+      <End Role="TipoCuenta" EntitySet="TipoCuenta" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentoTipo_Cuenta" Association="IIDTest2Model.FK_DocumentoTipo_Cuenta">
+      <End Role="Cuenta" EntitySet="Cuenta" />
+      <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentoTipo_Cuenta1" Association="IIDTest2Model.FK_DocumentoTipo_Cuenta1">
+      <End Role="Cuenta" EntitySet="Cuenta" />
+      <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Direccion_Localidad" Association="IIDTest2Model.FK_Direccion_Localidad">
+      <End Role="Localidad" EntitySet="Localidad" />
+      <End Role="Direccion" EntitySet="Direccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpresaLocal_Direccion" Association="IIDTest2Model.FK_EmpresaLocal_Direccion">
+      <End Role="Direccion" EntitySet="Direccion" />
+      <End Role="EmpresaLocal" EntitySet="EmpresaLocal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Direccion" Association="IIDTest2Model.FK_Proveedor_Direccion">
+      <End Role="Direccion" EntitySet="Direccion" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_DocumentoTipo" Association="IIDTest2Model.FK_Documento_DocumentoTipo">
+      <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_EstadoMisc" Association="IIDTest2Model.FK_Documento_EstadoMisc">
+      <End Role="EstadoMisc" EntitySet="EstadoMisc" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_Proveedor" Association="IIDTest2Model.FK_Documento_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_Usuario1" Association="IIDTest2Model.FK_Documento_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_Usuario2" Association="IIDTest2Model.FK_Documento_Usuario2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentoDetalle_Documento" Association="IIDTest2Model.FK_DocumentoDetalle_Documento">
+      <End Role="Documento" EntitySet="Documento" />
+      <End Role="DocumentoDetalle" EntitySet="DocumentoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentoDetalle_PrecioDetalle" Association="IIDTest2Model.FK_DocumentoDetalle_PrecioDetalle">
+      <End Role="PrecioDetalle" EntitySet="PrecioDetalle" />
+      <End Role="DocumentoDetalle" EntitySet="DocumentoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_EstadoMisc" Association="IIDTest2Model.FK_Producto_EstadoMisc">
+      <End Role="EstadoMisc" EntitySet="EstadoMisc" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_EstadoMisc" Association="IIDTest2Model.FK_Usuario_EstadoMisc">
+      <End Role="EstadoMisc" EntitySet="EstadoMisc" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrecioDetalle_ListaPrecio1" Association="IIDTest2Model.FK_PrecioDetalle_ListaPrecio1">
+      <End Role="ListaPrecio" EntitySet="ListaPrecio" />
+      <End Role="PrecioDetalle" EntitySet="PrecioDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Localidad_Provincia" Association="IIDTest2Model.FK_Localidad_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Localidad" EntitySet="Localidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Provincia_Pais" Association="IIDTest2Model.FK_Provincia_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Provincia" EntitySet="Provincia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrecioDetalle_Producto" Association="IIDTest2Model.FK_PrecioDetalle_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="PrecioDetalle" EntitySet="PrecioDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_ProductoCategoria" Association="IIDTest2Model.FK_Producto_ProductoCategoria">
+      <End Role="ProductoCategoria" EntitySet="ProductoCategoria" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_TipoUsuario" Association="IIDTest2Model.FK_Usuario_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(IIDTest2Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(IIDTest2Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <EntityType Name="Bitacora">
+    <Key>
+      <PropertyRef Name="IDBitacora" />
+    </Key>
+    <Property Name="IDBitacora" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="IDUsuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Bitacora" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="CierreContable">
+    <Key>
+      <PropertyRef Name="IDCierreContable" />
+    </Key>
+    <Property Name="IDCierreContable" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ClienteEmpresa">
+    <Key>
+      <PropertyRef Name="IDClienteEmpresa" />
+    </Key>
+    <Property Name="IDClienteEmpresa" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="IDEstado" Type="Int32" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="FechaUltimaOperacion" Type="DateTime" Precision="3" />
+    <Property Name="Limite" Type="Double" />
+    <Property Name="CUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="RazonSocial" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="NombreFantasia" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="TipoIVA" Type="Int32" />
+    <Property Name="IDDireccion" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="ClienteEmpresa" ToRole="Direccion" />
+    <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc" FromRole="ClienteEmpresa" ToRole="EstadoMisc" />
+    <NavigationProperty Name="TipoIVA1" Relationship="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" FromRole="ClienteEmpresa" ToRole="TipoIVA" />
+    <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="ClienteEmpresa" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="IDCuenta" />
+    </Key>
+    <Property Name="IDCuenta" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="IDRubro" Type="Int32" />
+    <Property Name="IDTipoCuenta" Type="Int32" />
+    <Property Name="IDPlanCuentaM" Type="Int32" />
+    <NavigationProperty Name="PlanCuentaMayor" Relationship="IIDTest2Model.FK_Cuenta_PlanCuentaMayor" FromRole="Cuenta" ToRole="PlanCuentaMayor" />
+    <NavigationProperty Name="Rubro" Relationship="IIDTest2Model.FK_Cuenta_Rubro" FromRole="Cuenta" ToRole="Rubro" />
+    <NavigationProperty Name="TipoCuenta" Relationship="IIDTest2Model.FK_Cuenta_TipoCuenta" FromRole="Cuenta" ToRole="TipoCuenta" />
+    <NavigationProperty Name="DocumentoTipo" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta" FromRole="Cuenta" ToRole="DocumentoTipo" />
+    <NavigationProperty Name="DocumentoTipo1" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta1" FromRole="Cuenta" ToRole="DocumentoTipo" />
+  </EntityType>
+  <EntityType Name="Direccion">
+    <Key>
+      <PropertyRef Name="IDDireccion" />
+    </Key>
+    <Property Name="IDDireccion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Calle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Numero" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Piso" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Dpto" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="IDLocalidad" Type="Int32" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="Direccion" ToRole="ClienteEmpresa" />
+    <NavigationProperty Name="Localidad" Relationship="IIDTest2Model.FK_Direccion_Localidad" FromRole="Direccion" ToRole="Localidad" />
+    <NavigationProperty Name="EmpresaLocal" Relationship="IIDTest2Model.FK_EmpresaLocal_Direccion" FromRole="Direccion" ToRole="EmpresaLocal" />
+    <NavigationProperty Name="Proveedor" Relationship="IIDTest2Model.FK_Proveedor_Direccion" FromRole="Direccion" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="Documento">
+    <Key>
+      <PropertyRef Name="IDDocumento" />
+    </Key>
+    <Property Name="IDDocumento" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NrDocumento" Type="Int32" />
+    <Property Name="IDDocumentoTipo" Type="Int32" />
+    <Property Name="FechaEmision" Type="DateTime" Precision="3" />
+    <Property Name="FechaContable" Type="DateTime" Precision="3" />
+    <Property Name="IDClienteEmpresa" Type="Int32" />
+    <Property Name="IDProveedor" Type="Int32" />
+    <Property Name="FechaVencimiento" Type="DateTime" Precision="3" />
+    <Property Name="Monto" Type="Double" />
+    <Property Name="IDEstado" Type="Int32" />
+    <Property Name="IDUsuarioCreacion" Type="Int32" />
+    <Property Name="IDDocumentoRef" Type="Int32" />
+    <Property Name="IDEmpresaLocal" Type="Int32" />
+    <Property Name="CodigoExterno" Type="Int32" />
+    <Property Name="IPCreacion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="IDUsuarioUltimaModificacion" Type="Int32" />
+    <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IPUltimaModificacion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="DocumentoTipo" Relationship="IIDTest2Model.FK_Documento_DocumentoTipo" FromRole="Documento" ToRole="DocumentoTipo" />
+    <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_Documento_EstadoMisc" FromRole="Documento" ToRole="EstadoMisc" />
+    <NavigationProperty Name="Proveedor" Relationship="IIDTest2Model.FK_Documento_Proveedor" FromRole="Documento" ToRole="Proveedor" />
+    <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Documento_Usuario1" FromRole="Documento" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario1" Relationship="IIDTest2Model.FK_Documento_Usuario2" FromRole="Documento" ToRole="Usuario" />
+    <NavigationProperty Name="DocumentoDetalle" Relationship="IIDTest2Model.FK_DocumentoDetalle_Documento" FromRole="Documento" ToRole="DocumentoDetalle" />
+  </EntityType>
+  <EntityType Name="DocumentoDetalle">
+    <Key>
+      <PropertyRef Name="IDDocumentoDetalle" />
+    </Key>
+    <Property Name="IDDocumentoDetalle" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IDDocumento" Type="Int32" />
+    <Property Name="IDPrecioDetalle" Type="Int32" />
+    <Property Name="Cantidad" Type="Int32" />
+    <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_DocumentoDetalle_Documento" FromRole="DocumentoDetalle" ToRole="Documento" />
+    <NavigationProperty Name="PrecioDetalle" Relationship="IIDTest2Model.FK_DocumentoDetalle_PrecioDetalle" FromRole="DocumentoDetalle" ToRole="PrecioDetalle" />
+  </EntityType>
+  <EntityType Name="DocumentoTipo">
+    <Key>
+      <PropertyRef Name="IDDocumentoTipo" />
+    </Key>
+    <Property Name="IDDocumentoTipo" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreDocumento" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UltimoNumero" Type="Int32" />
+    <Property Name="Letra" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="Sucursal" Type="Int32" />
+    <Property Name="AfectaStock" Type="Int32" />
+    <Property Name="AfectaCC" Type="Int32" />
+    <Property Name="Debito" Type="Int32" />
+    <Property Name="AfectaContabilidad" Type="Int32" />
+    <Property Name="Credito" Type="Int32" />
+    <Property Name="UltimoNumeroManual" Type="Int32" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta" FromRole="DocumentoTipo" ToRole="Cuenta" />
+    <NavigationProperty Name="Cuenta1" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta1" FromRole="DocumentoTipo" ToRole="Cuenta" />
+    <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_DocumentoTipo" FromRole="DocumentoTipo" ToRole="Documento" />
+  </EntityType>
+  <EntityType Name="EmpresaLocal">
+    <Key>
+      <PropertyRef Name="IDEmpresaLocal" />
+    </Key>
+    <Property Name="IDEmpresaLocal" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RazonSocial" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="NombreFantasia" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="IDDireccion" Type="Int32" />
+    <Property Name="CUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_EmpresaLocal_Direccion" FromRole="EmpresaLocal" ToRole="Direccion" />
+  </EntityType>
+  <EntityType Name="EstadoMisc">
+    <Key>
+      <PropertyRef Name="IDEstado" />
+    </Key>
+    <Property Name="IDEstado" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Detalle" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc" FromRole="EstadoMisc" ToRole="ClienteEmpresa" />
+    <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_EstadoMisc" FromRole="EstadoMisc" ToRole="Documento" />
+    <NavigationProperty Name="Producto" Relationship="IIDTest2Model.FK_Producto_EstadoMisc" FromRole="EstadoMisc" ToRole="Producto" />
+    <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Usuario_EstadoMisc" FromRole="EstadoMisc" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="ListaPrecio">
+    <Key>
+      <PropertyRef Name="IDListaPrecio" />
+    </Key>
+    <Property Name="IDListaPrecio" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="FechaDesde" Type="DateTime" Precision="3" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PrecioDetalle" Relationship="IIDTest2Model.FK_PrecioDetalle_ListaPrecio1" FromRole="ListaPrecio" ToRole="PrecioDetalle" />
+  </EntityType>
+  <EntityType Name="Localidad">
+    <Key>
+      <PropertyRef Name="IDLocalidad" />
+    </Key>
+    <Property Name="IDLocalidad" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CodigoPostal" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="IDProvincia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_Direccion_Localidad" FromRole="Localidad" ToRole="Direccion" />
+    <NavigationProperty Name="Provincia" Relationship="IIDTest2Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+  </EntityType>
+  <EntityType Name="MailLocal">
+    <Key>
+      <PropertyRef Name="IDMailLocal" />
+    </Key>
+    <Property Name="IDMailLocal" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DireccionMail" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Host" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="IDPais" />
+    </Key>
+    <Property Name="IDPais" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Provincia" Relationship="IIDTest2Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+  </EntityType>
+  <EntityType Name="PlanCuentaMayor">
+    <Key>
+      <PropertyRef Name="IDPlanCuentaMayor" />
+    </Key>
+    <Property Name="IDPlanCuentaMayor" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_PlanCuentaMayor" FromRole="PlanCuentaMayor" ToRole="Cuenta" />
+  </EntityType>
+  <EntityType Name="PrecioDetalle">
+    <Key>
+      <PropertyRef Name="IDPrecioDetalle" />
+    </Key>
+    <Property Name="IDPrecioDetalle" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="IDListaPrecio" Type="Int32" />
+    <Property Name="IDProducto" Type="Int32" />
+    <Property Name="Precio" Type="Double" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="DocumentoDetalle" Relationship="IIDTest2Model.FK_DocumentoDetalle_PrecioDetalle" FromRole="PrecioDetalle" ToRole="DocumentoDetalle" />
+    <NavigationProperty Name="ListaPrecio" Relationship="IIDTest2Model.FK_PrecioDetalle_ListaPrecio1" FromRole="PrecioDetalle" ToRole="ListaPrecio" />
+    <NavigationProperty Name="Producto" Relationship="IIDTest2Model.FK_PrecioDetalle_Producto" FromRole="PrecioDetalle" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDProducto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="IDProductoCategoria" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Imagen" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="IDEstado" Type="Int32" />
+    <Property Name="CostoActual" Type="Double" />
+    <Property Name="CostoContable" Type="Double" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="UnidadMedida" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_Producto_EstadoMisc" FromRole="Producto" ToRole="EstadoMisc" />
+    <NavigationProperty Name="PrecioDetalle" Relationship="IIDTest2Model.FK_PrecioDetalle_Producto" FromRole="Producto" ToRole="PrecioDetalle" />
+    <NavigationProperty Name="ProductoCategoria" Relationship="IIDTest2Model.FK_Producto_ProductoCategoria" FromRole="Producto" ToRole="ProductoCategoria" />
+  </EntityType>
+  <EntityType Name="ProductoCategoria">
+    <Key>
+      <PropertyRef Name="IDProductoCategoria" />
+    </Key>
+    <Property Name="IDProductoCategoria" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Estado" Type="Int32" />
+    <NavigationProperty Name="Producto" Relationship="IIDTest2Model.FK_Producto_ProductoCategoria" FromRole="ProductoCategoria" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="IDProveedor" />
+    </Key>
+    <Property Name="IDProveedor" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="IDDireccion" Type="Int32" />
+    <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_Proveedor_Direccion" FromRole="Proveedor" ToRole="Direccion" />
+    <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_Proveedor" FromRole="Proveedor" ToRole="Documento" />
+  </EntityType>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="IDProvincia" />
+    </Key>
+    <Property Name="IDProvincia" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+    <Property Name="IDPais" Type="Int32" />
+    <NavigationProperty Name="Localidad" Relationship="IIDTest2Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+    <NavigationProperty Name="Pais" Relationship="IIDTest2Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+  </EntityType>
+  <EntityType Name="Rubro">
+    <Key>
+      <PropertyRef Name="IDRubro" />
+    </Key>
+    <Property Name="IDRubro" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_Rubro" FromRole="Rubro" ToRole="Cuenta" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TipoCuenta">
+    <Key>
+      <PropertyRef Name="IDTipoCuenta" />
+    </Key>
+    <Property Name="IDTipoCuenta" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_TipoCuenta" FromRole="TipoCuenta" ToRole="Cuenta" />
+  </EntityType>
+  <EntityType Name="TipoIVA">
+    <Key>
+      <PropertyRef Name="IDTipoIVA" />
+    </Key>
+    <Property Name="IDTipoIVA" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Detalle" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Valor" Type="Double" />
+    <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" FromRole="TipoIVA" ToRole="ClienteEmpresa" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="IDTipoUsuario" />
+    </Key>
+    <Property Name="IDTipoUsuario" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IDUsuario" />
+    </Key>
+    <Property Name="IDUsuario" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Usuario1" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="IDEstado" Type="Int32" />
+    <Property Name="IDClienteEmpresa" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="Idioma" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="IDTipoUsuario" Type="Int32" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Bitacora" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Usuario" ToRole="Bitacora" />
+    <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="Usuario" ToRole="ClienteEmpresa" />
+    <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_Usuario1" FromRole="Usuario" ToRole="Documento" />
+    <NavigationProperty Name="Documento1" Relationship="IIDTest2Model.FK_Documento_Usuario2" FromRole="Usuario" ToRole="Documento" />
+    <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_Usuario_EstadoMisc" FromRole="Usuario" ToRole="EstadoMisc" />
+    <NavigationProperty Name="TipoUsuario" Relationship="IIDTest2Model.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+  </EntityType>
+  <Association Name="FK_Bitacora_Usuario">
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="0..1" />
+    <End Role="Bitacora" Type="IIDTest2Model.Bitacora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Bitacora">
+        <PropertyRef Name="IDUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteEmpresa_Direccion">
+    <End Role="Direccion" Type="IIDTest2Model.Direccion" Multiplicity="0..1" />
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.ClienteEmpresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direccion">
+        <PropertyRef Name="IDDireccion" />
+      </Principal>
+      <Dependent Role="ClienteEmpresa">
+        <PropertyRef Name="IDDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteEmpresa_EstadoMisc">
+    <End Role="EstadoMisc" Type="IIDTest2Model.EstadoMisc" Multiplicity="0..1" />
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.ClienteEmpresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoMisc">
+        <PropertyRef Name="IDEstado" />
+      </Principal>
+      <Dependent Role="ClienteEmpresa">
+        <PropertyRef Name="IDEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteEmpresa_TipoIVA">
+    <End Role="TipoIVA" Type="IIDTest2Model.TipoIVA" Multiplicity="0..1" />
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.ClienteEmpresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIVA">
+        <PropertyRef Name="IDTipoIVA" />
+      </Principal>
+      <Dependent Role="ClienteEmpresa">
+        <PropertyRef Name="TipoIVA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_ClienteEmpresa">
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.ClienteEmpresa" Multiplicity="0..1" />
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClienteEmpresa">
+        <PropertyRef Name="IDClienteEmpresa" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IDClienteEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_PlanCuentaMayor">
+    <End Role="PlanCuentaMayor" Type="IIDTest2Model.PlanCuentaMayor" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlanCuentaMayor">
+        <PropertyRef Name="IDPlanCuentaMayor" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="IDPlanCuentaM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_Rubro">
+    <End Role="Rubro" Type="IIDTest2Model.Rubro" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rubro">
+        <PropertyRef Name="IDRubro" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="IDRubro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_TipoCuenta">
+    <End Role="TipoCuenta" Type="IIDTest2Model.TipoCuenta" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoCuenta">
+        <PropertyRef Name="IDTipoCuenta" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="IDTipoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentoTipo_Cuenta">
+    <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="0..1" />
+    <End Role="DocumentoTipo" Type="IIDTest2Model.DocumentoTipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="DocumentoTipo">
+        <PropertyRef Name="Debito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentoTipo_Cuenta1">
+    <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="0..1" />
+    <End Role="DocumentoTipo" Type="IIDTest2Model.DocumentoTipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="DocumentoTipo">
+        <PropertyRef Name="Credito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Direccion_Localidad">
+    <End Role="Localidad" Type="IIDTest2Model.Localidad" Multiplicity="0..1" />
+    <End Role="Direccion" Type="IIDTest2Model.Direccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidad">
+        <PropertyRef Name="IDLocalidad" />
+      </Principal>
+      <Dependent Role="Direccion">
+        <PropertyRef Name="IDLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpresaLocal_Direccion">
+    <End Role="Direccion" Type="IIDTest2Model.Direccion" Multiplicity="0..1" />
+    <End Role="EmpresaLocal" Type="IIDTest2Model.EmpresaLocal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direccion">
+        <PropertyRef Name="IDDireccion" />
+      </Principal>
+      <Dependent Role="EmpresaLocal">
+        <PropertyRef Name="IDDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Direccion">
+    <End Role="Direccion" Type="IIDTest2Model.Direccion" Multiplicity="0..1" />
+    <End Role="Proveedor" Type="IIDTest2Model.Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direccion">
+        <PropertyRef Name="IDDireccion" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IDDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_DocumentoTipo">
+    <End Role="DocumentoTipo" Type="IIDTest2Model.DocumentoTipo" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentoTipo">
+        <PropertyRef Name="IDDocumentoTipo" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDDocumentoTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_EstadoMisc">
+    <End Role="EstadoMisc" Type="IIDTest2Model.EstadoMisc" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoMisc">
+        <PropertyRef Name="IDEstado" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_Proveedor">
+    <End Role="Proveedor" Type="IIDTest2Model.Proveedor" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="IDProveedor" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_Usuario1">
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDUsuarioCreacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_Usuario2">
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDUsuarioUltimaModificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentoDetalle_Documento">
+    <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="0..1" />
+    <End Role="DocumentoDetalle" Type="IIDTest2Model.DocumentoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documento">
+        <PropertyRef Name="IDDocumento" />
+      </Principal>
+      <Dependent Role="DocumentoDetalle">
+        <PropertyRef Name="IDDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentoDetalle_PrecioDetalle">
+    <End Role="PrecioDetalle" Type="IIDTest2Model.PrecioDetalle" Multiplicity="0..1" />
+    <End Role="DocumentoDetalle" Type="IIDTest2Model.DocumentoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PrecioDetalle">
+        <PropertyRef Name="IDPrecioDetalle" />
+      </Principal>
+      <Dependent Role="DocumentoDetalle">
+        <PropertyRef Name="IDPrecioDetalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_EstadoMisc">
+    <End Role="EstadoMisc" Type="IIDTest2Model.EstadoMisc" Multiplicity="0..1" />
+    <End Role="Producto" Type="IIDTest2Model.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoMisc">
+        <PropertyRef Name="IDEstado" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_EstadoMisc">
+    <End Role="EstadoMisc" Type="IIDTest2Model.EstadoMisc" Multiplicity="0..1" />
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoMisc">
+        <PropertyRef Name="IDEstado" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IDEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrecioDetalle_ListaPrecio1">
+    <End Role="ListaPrecio" Type="IIDTest2Model.ListaPrecio" Multiplicity="0..1" />
+    <End Role="PrecioDetalle" Type="IIDTest2Model.PrecioDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListaPrecio">
+        <PropertyRef Name="IDListaPrecio" />
+      </Principal>
+      <Dependent Role="PrecioDetalle">
+        <PropertyRef Name="IDListaPrecio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Localidad_Provincia">
+    <End Role="Provincia" Type="IIDTest2Model.Provincia" Multiplicity="1" />
+    <End Role="Localidad" Type="IIDTest2Model.Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="IDProvincia" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IDProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Provincia_Pais">
+    <End Role="Pais" Type="IIDTest2Model.Pais" Multiplicity="0..1" />
+    <End Role="Provincia" Type="IIDTest2Model.Provincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="IDPais" />
+      </Principal>
+      <Dependent Role="Provincia">
+        <PropertyRef Name="IDPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrecioDetalle_Producto">
+    <End Role="Producto" Type="IIDTest2Model.Producto" Multiplicity="0..1" />
+    <End Role="PrecioDetalle" Type="IIDTest2Model.PrecioDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="IDProducto" />
+      </Principal>
+      <Dependent Role="PrecioDetalle">
+        <PropertyRef Name="IDProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_ProductoCategoria">
+    <End Role="ProductoCategoria" Type="IIDTest2Model.ProductoCategoria" Multiplicity="0..1" />
+    <End Role="Producto" Type="IIDTest2Model.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductoCategoria">
+        <PropertyRef Name="IDProductoCategoria" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDProductoCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_TipoUsuario">
+    <End Role="TipoUsuario" Type="IIDTest2Model.TipoUsuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="IIDTest2Model.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="IDTipoUsuario" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IDTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

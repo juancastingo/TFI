@@ -1,0 +1,47 @@
+﻿@model BIZ.BIZProvincia
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BIZProvincia</legend>
+           @Html.HiddenFor(model => model.IDProvincia)
+
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <tr>
+         <td>
+            @Html.LabelFor(model => model.Nombre)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </td>
+            <tr>
+         <td>
+                    @Html.LabelFor(model => model.IDPais, "Pais")
+                </td>
+                <td>
+                    @Html.DropDownList("IDPais")
+                    @Html.ValidationMessageFor(model => model.IDPais)
+                </td>
+            </tr>
+         </table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

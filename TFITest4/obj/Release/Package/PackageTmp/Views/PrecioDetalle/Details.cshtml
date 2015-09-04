@@ -1,0 +1,64 @@
+﻿@model DAL.ORM.PrecioDetalle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PrecioDetalle</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDPrecioDetalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDPrecioDetalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ListaPrecio.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ListaPrecio.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Producto.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Producto.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Precio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Precio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAlta)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAlta)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaDesde)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaDesde)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Activo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Activo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

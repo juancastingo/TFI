@@ -1,0 +1,36 @@
+﻿@model DAL.ORM.ProductoCategoria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ProductoCategoria</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDProductoCategoria)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDProductoCategoria)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Estado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

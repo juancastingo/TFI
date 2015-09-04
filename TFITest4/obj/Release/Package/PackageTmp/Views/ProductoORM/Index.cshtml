@@ -1,0 +1,118 @@
+﻿@model IEnumerable<DAL.ORM.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="container">
+    <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDProducto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Imagen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoMisc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CostoActual)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CostoContable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaAlta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnidadMedida)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductoCategoria.Detalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        <a class="fancybox" rel="group" href="@item.Imagen">
+                            <img width="60px" height="60px" src="@item.Imagen" alt="" /></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CostoActual)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CostoContable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaAlta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnidadMedida)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProducto }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IDProducto }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IDProducto })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section EndScript{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: 'elastic',
+                closeEffect: 'elastic',
+                nextEffect: 'fade',
+                padding: 0,
+                closeBtn: false,
+                helpers: {
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    },
+                    buttons: {}
+                }
+            });
+        });
+    </script>
+
+}
+
+

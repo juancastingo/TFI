@@ -1,0 +1,7 @@
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Release\BIZ.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Release\BIZ.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Release\AutoMapper.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Release\AutoMapper.xml
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Release\BIZ.csprojResolveAssemblyReference.cache
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Release\BIZ.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Release\BIZ.pdb

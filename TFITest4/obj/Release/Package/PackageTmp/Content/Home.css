@@ -1,0 +1,38 @@
+﻿body {
+    font-family: 'Open Sans', Josefin Slab;
+}
+
+.minipost {
+    min-height: 300px;
+    max-height: 300px;
+}
+
+    .minipost p:first-of-type {
+        text-align: center;
+        font-weight: bold;
+    }
+
+
+
+    .minipost .precio {
+        text-align: right;
+    }
+
+    .minipost .valor {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        color: #C0392B;
+        margin: -8px 15px 0 0;
+    }
+
+    .minipost img {
+        max-height: 200px;
+        min-height: 200px;
+        max-width: 200px;
+        min-width: 200px;
+    }
+
+
+
+  

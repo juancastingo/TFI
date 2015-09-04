@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B8FAE9F-E4B8-478F-8725-AEDB41F024D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DALAutommaper.cs" />
+    <Compile Include="DALBitacora.cs" />
+    <Compile Include="DALCliente.cs" />
+    <Compile Include="DALDireccion.cs" />
+    <Compile Include="DALDocumento.cs" />
+    <Compile Include="DALUsuario.cs" />
+    <Compile Include="DataAccessMapperProfile.cs" />
+    <Compile Include="ORM\Bitacora.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\CierreContable.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ClienteEmpresa.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Cuenta.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Direccion.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Documento.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\DocumentoDetalle.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\DocumentoTipo.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\EmpresaLocal.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\EstadoMisc.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ListaPrecio.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Localidad.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\MailLocal.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ModelIID.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelIID.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ModelIID.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ModelIID.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelIID.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Pais.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\PlanCuentaMayor.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\PrecioDetalle.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Producto.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\ProductoCategoria.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Proveedor.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Provincia.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Rubro.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\sysdiagrams.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\TipoCuenta.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\TipoIVA.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\TipoUsuario.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Usuario.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="ORM\ModelIID.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelIID.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ORM\ModelIID.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelIID.edmx</DependentUpon>
+      <LastGenOutput>ModelIID.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ORM\ModelIID.edmx.diagram">
+      <DependentUpon>ModelIID.edmx</DependentUpon>
+    </None>
+    <None Include="ORM\ModelIID.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelIID.edmx</DependentUpon>
+      <LastGenOutput>ModelIID.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BIZ\BIZ.csproj">
+      <Project>{eadebb5c-f9b1-4463-8bb5-10d306d25c40}</Project>
+      <Name>BIZ</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

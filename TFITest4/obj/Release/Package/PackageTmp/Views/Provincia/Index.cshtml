@@ -1,0 +1,44 @@
+﻿@using TFITest4.Resources
+@model IEnumerable<BIZ.BIZProvincia>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.ActionLink("PDF", "DownloadViewPDF")
+<div class="container">
+
+<h2 class="center">@Language.ProvinciaTitle</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = "algo" }, new { @class = "btn btn-primary", @style = "color:white" })
+</p>
+    <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pais)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pais.Nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProvincia }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDProvincia })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<DAL.ORM.Producto>
+<head>
+    <link href="~/Content/Home.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+@{
+    ViewBag.Title = "Index";
+}
+<img style="right: 0px; position: absolute;" width="100px" height="100px" src="~/Content/images/Logo2.png" alt="logo" />
+<center><h1>Welcome!</h1></center>
+@*<p>User= @Session["usuario"]</p> *@
+@*<h2>@ViewBag.numero</h2> Esto va bien para la factura y la numeracion*@
+@*<h2>@ViewBag.url</h2>*@
+
+@*<script src="/Scripts/jquery-1.9.1.js"></script>*@
+
+@*@foreach (var p in ViewBag.productos)
+{
+    <h2>@p.Nombre</h2>
+    <h2>@p.PrecioActual</h2>
+}*@
+
+
+@foreach (var cat in ViewBag.categorias2)
+{
+    <center><h3>@cat.Detalle</h3></center>
+    <div class="row clearfix">
+        <div class="container">
+    @foreach (var item in cat.Producto)
+    {
+                <div>
+                <form action="posts" method="get">
+                    <div class="col-md-4">
+                        <div class="minipost thumbnail">
+                            <a class="fancybox" rel="@cat.Detalle" href="@item.Imagen">
+                                <img src="@item.Imagen" alt="" />
+                            </a>
+                            <p>
+                                <span>@item.Nombre</span>
+                                </p>
+                            <p  class="precio">
+                                <span class="valor MontoPrePedido">@item.PrecioActual</span>
+                            </p>
+@*                            <p>
+                                <span>@item.Descripcion</span>
+                            </p>*@
+                        </div>
+                    </div>
+                </form>
+            </div>
+    }
+        
+        </div>
+    </div>
+}
+
+
+
+@*
+
+@foreach (var cat in ViewBag.categorias)
+{
+    if ((Enumerable.Count(cat.Producto)) != 0)
+    {
+        <center><h3>@cat.Detalle</h3></center>
+    }
+    <div class="row clearfix">
+        <div class="container">
+    @foreach (var item in cat.Producto)
+    {
+                <div>
+                <form action="posts" method="get">
+                    <div class="col-md-4">
+                        <div class="minipost thumbnail">
+                            <a class="fancybox" rel="group" href="@item.Imagen">
+                                <img src="@item.Imagen" alt="" />
+                            </a>
+                            <p>
+                                <span>@item.Nombre</span>
+                            </p>
+                            <p>
+                                <span>@item.Descripcion</span>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    }
+        
+        </div>
+    </div>
+}*@
+
+@*   @foreach (var item in Model)
+        {
+            <div>
+                <form action="posts" method="get">
+                    <div class="col-md-4">
+                        <div class="minipost thumbnail">
+                            <a class="fancybox" rel="group" href="@item.Imagen">
+                                <img src="@item.Imagen" alt="" />
+                            </a>
+                            <span class="ProdCat">Categoria</span><span>: @item.ProductoCategoria.Detalle</span>
+                            <p>
+                                <span>@item.Nombre</span>
+                            </p>
+                            <p>
+                                <span>@item.Descripcion</span>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }*@
+
+
+@section EndScript{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: 'elastic',
+                closeEffect: 'elastic',
+                nextEffect: 'fade',
+                padding: 0,
+                closeBtn: false,
+                helpers: {
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    },
+                    buttons: {}
+                }
+            });
+        });
+
+    </script>
+
+}

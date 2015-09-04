@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DAL.ORM.PrecioDetalle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+    <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">  
+        <thead>
+        <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
+            Nr
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ListaPrecio.Detalle)*@
+            Lista
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>Edit</th>
+    </tr>
+            </thead>  
+        <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDPrecioDetalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ListaPrecio.Detalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producto.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaAlta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IDPrecioDetalle  })
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+    </div>

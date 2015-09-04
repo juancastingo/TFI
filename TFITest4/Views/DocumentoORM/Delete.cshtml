@@ -1,0 +1,158 @@
+﻿@model DAL.ORM.Documento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Documento</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDDocumento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDDocumento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NrDocumento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NrDocumento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentoTipo.NombreDocumento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentoTipo.NombreDocumento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaEmision)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaEmision)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaContable)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaContable)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDClienteEmpresa)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDClienteEmpresa)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Proveedor.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaVencimiento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaVencimiento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Monto)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Monto)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDEstado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDEstado)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDUsuario)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDUsuario)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDDocumentoRef)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDDocumentoRef)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDEmpresaLocal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDEmpresaLocal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodigoExterno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodigoExterno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaCreacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IPCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IPCreacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UsuarioUltimaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UsuarioUltimaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaUltimaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaUltimaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IPUltimaModificacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IPUltimaModificacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UsuarioCreacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UsuarioCreacion)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,36 @@
+﻿@model DAL.ORM.ListaPrecio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ListaPrecio</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDListaPrecio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDListaPrecio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaDesde)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaDesde)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DAL.ORM.Bitacora>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bitácora</h2>
+
+<table  class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+@*        <th>
+            @Html.DisplayNameFor(model => model.IDBitacora)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </th>
+    </tr>
+        </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+@*        <td>
+            @Html.DisplayFor(modelItem => item.IDBitacora)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @if (item.Usuario == null) {
+              <span>Invitado</span>
+            } else  { 
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+            }
+        </td>
+    </tr>
+}
+        </tbody>
+</table>

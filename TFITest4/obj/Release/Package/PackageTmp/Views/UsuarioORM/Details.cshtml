@@ -1,0 +1,92 @@
+﻿@model DAL.ORM.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Usuario</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDUsuario)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDUsuario)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Estado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDClienteEmpresa)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDClienteEmpresa)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telefono)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telefono)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAlta)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAlta)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Idioma)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Idioma)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoUsuario.Tipo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoUsuario.Tipo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id=Model.IDUsuario  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

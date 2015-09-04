@@ -1,0 +1,106 @@
+﻿@model DAL.ORM.ClienteEmpresa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ClienteEmpresa</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IDClienteEmpresa)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDClienteEmpresa)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Estado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Estado)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaAlta)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaAlta)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaUltimaOperacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaUltimaOperacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Limite)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Limite)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CUIT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CUIT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RazonSocial)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RazonSocial)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NombreFantasia)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NombreFantasia)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoIVA1.Detalle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoIVA1.Detalle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Direccion.Calle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Direccion.Calle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telefono)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telefono)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

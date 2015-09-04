@@ -1,0 +1,40 @@
+﻿
+
+#cart {
+    width: 200px;
+    position: fixed;
+    top: 30px;
+    right: 30%;
+    z-index: 999;
+    /*/float: right;*/
+}
+
+.ui-state-hover {
+    color: blue !important;
+}
+
+/* style the list to maximize the droppable hitarea */
+#cart ol {
+    margin: 0;
+    padding: 1em 0 1em 3em;
+}
+
+
+
+/*.minipost {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+    .minipost img {
+        max-height: 50px;
+        min-height: 50px;
+        max-width: 50px;
+        min-width: 50px;
+    }*/
+
+.PImage {
+    z-index: 9999999999 !important;
+    width: 60px;
+    height: 60px;
+}

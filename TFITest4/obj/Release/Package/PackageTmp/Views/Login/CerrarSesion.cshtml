@@ -1,0 +1,24 @@
+﻿@using TFITest4.Resources
+@{
+    ViewBag.Title = "CerrarSesion";
+}
+<hr />
+<p>Redirecting in: 
+<span id="timer">10</span> secs
+</p>
+<script>
+    var count = 10;
+    var counter = setInterval(timer, 1000);
+    function timer()
+    {
+        count=count-1;
+        if (count <= 0)
+        {
+            setTimeout(function () { document.location.href = "/Home"; }, 0);
+        }
+        if (count >= 0) {
+            document.getElementById("timer").innerHTML = count; // watch for spelling
+        }
+    }
+    
+</script> 

@@ -1,0 +1,44 @@
+﻿@model BIZ.BIZProvincia
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BIZProvincia</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+          <div class="editor-label">
+            @Html.LabelFor(model => model.Pais.IDPais, "Pais")
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownList("Pais", (IEnumerable<SelectListItem>)ViewBag.tipo_Proveedor)
+            @Html.ValidationMessageFor(model => model.Pais)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
