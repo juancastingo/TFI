@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<DAL.ORM.Producto>
-<head>
+
+@section headSection{
     <link href="~/Content/Home.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-</head>
+}
 @{
     ViewBag.Title = "Index";
 }
@@ -26,30 +27,30 @@
     <center><h3>@cat.Detalle</h3></center>
     <div class="row clearfix">
         <div class="container">
-    @foreach (var item in cat.Producto)
-    {
+            @foreach (var item in cat.Producto)
+            {
                 <div>
-                <form action="posts" method="get">
-                    <div class="col-md-4">
-                        <div class="minipost thumbnail">
-                            <a class="fancybox" rel="@cat.Detalle" href="@item.Imagen">
-                                <img src="@item.Imagen" alt="" />
-                            </a>
-                            <p>
-                                <span>@item.Nombre</span>
+                    <form action="posts" method="get">
+                        <div class="col-md-4">
+                            <div class="minipost thumbnail">
+                                <a class="fancybox" rel="@cat.Detalle" href="@item.Imagen">
+                                    <img src="@item.Imagen" alt="" />
+                                </a>
+                                <p>
+                                    <span>@item.Nombre</span>
                                 </p>
-                            <p  class="precio">
-                                <span class="valor MontoPrePedido">@item.PrecioActual</span>
-                            </p>
-@*                            <p>
+                                <p class="precio">
+                                    <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual</span>
+                                </p>
+                                @*                            <p>
                                 <span>@item.Descripcion</span>
                             </p>*@
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-    }
-        
+                    </form>
+                </div>
+            }
+
         </div>
     </div>
 }
@@ -115,7 +116,6 @@
 
 
 @section EndScript{
-
     <script type="text/javascript">
         $(document).ready(function () {
             $(".fancybox").fancybox({

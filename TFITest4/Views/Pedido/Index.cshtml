@@ -43,7 +43,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Imagen)
             </th>
-            <th>
+            <th colspan="2" style="width:100px;">
                 @Html.DisplayNameFor(model => model.PrecioActual)
             </th>
             <th>Cantidad
@@ -72,7 +72,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Imagen)
             </th>
-            <th>
+            <th colspan="2" style="width:100px;">
                 @Html.DisplayNameFor(model => model.PrecioActual)
             </th>
             <th>Cantidad
@@ -99,7 +99,8 @@
                     <a class="fancybox" href="@item.Imagen">
                         <img class="PImage" src="@item.Imagen" alt="" /></a>
                 </td>
-                <td class="numero2"><span class="MontoPrePedido">@Html.DisplayFor(modelItem => item.PrecioActual)</span>
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual</span>
                 </td>
                 <td>
                     <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />

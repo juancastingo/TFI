@@ -16,11 +16,29 @@
     top: 0px;
 }
 
-.numero {
+.numero, .MontoPrePedido {
     text-align: right;
     padding-right: 8% !important;
+    margin-right:0% !important;     
+}
+.numero2 {
+    text-align: right;
+    padding-right: 5% !important;
+    margin-right: 0px;
+}
+.tdNumero {
+    border-left: 0px solid !important;
+    text-align: right;
+    padding-right: 4% !important;
+    width: 1.5% !important
 }
 
+.SignoPesos {
+    border-right: 0px solid !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+    width: 1%;
+}
 
 
 

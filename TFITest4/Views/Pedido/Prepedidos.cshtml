@@ -21,7 +21,7 @@
             <th>
                 <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
             </th>
-            <th>
+            <th colspan="2" style="width:100px;">
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>Estado
@@ -46,7 +46,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
                 </td>
-                <td>
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero">
                     <span class="MontoPrePedido">@item.Monto</span>
                 </td>
                 <td>

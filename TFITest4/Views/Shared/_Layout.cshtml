@@ -20,6 +20,7 @@
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/general.css" rel="stylesheet" type="text/css" />
+    @RenderSection("headSection", false)
 </head>
 <body>
     <div id="preload">
@@ -103,8 +104,8 @@
               <tr>
                 <th>Product</th>
                 <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total Price</th>
+                <th colspan="2">Unit Price</th>
+                <th colspan="2">Total Price</th>
               </tr>
             </thead>
             <tbody>
@@ -286,7 +287,7 @@
                 //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
                 subt += (elem.Precio * elem.Cant);
                 thisSubtotal = (elem.Precio * elem.Cant);
-                $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td class="numero">$' + elem.Precio.format(2, 3, '.', ',') + '</td><td class="numero">$' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
             });
             $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
@@ -526,9 +527,19 @@
 
 
             $("#preload").addClass("oculto");
-            $('#LoginPassword').hideShowPassword({
-                innerToggle: true
-            });
+            //OJO veo si NO es IE
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            IEVersion = 13; //pongo 13 por si no es IE que tenga algo mayor que 9
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  {     // If Internet Explorer, return version number
+                IEVersion = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
+            }
+            if ( (msie == -1) || (IEVersion < 10) ) {  
+                $('#LoginPassword').hideShowPassword({
+                    innerToggle: true
+                });
+            }
+            //OJO
             $('.hideShowPassword-wrapper').css('width', '100%');
             $('.hideShowPassword-toggle').css('margin-top', '-25px');
 
@@ -565,7 +576,7 @@
             $('.MontoPrePedido').each(function (index) {
                 esto = $(this).text();
                 console.log(esto);
-                $(this).text("$" + parseFloat(esto).format(2, 3, '.', ','))
+                $(this).text(parseFloat(esto).format(2, 3, '.', ','))
             });
 
             
