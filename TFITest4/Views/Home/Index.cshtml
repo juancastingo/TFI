@@ -40,7 +40,7 @@
                                     <span>@item.Nombre</span>
                                 </p>
                                 <p class="precio">
-                                    <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual</span>
+                                    <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual.ToString().Replace(",",".")</span>
                                 </p>
                                 @*                            <p>
                                 <span>@item.Descripcion</span>

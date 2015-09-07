@@ -61,6 +61,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Atención!.
+        /// </summary>
+        public static string Atencion {
+            get {
+                return ResourceManager.GetString("Atencion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La operación no se pudo completar. Por favor logueese nuevamente.
         /// </summary>
         public static string ErrorLogInAgain {
@@ -183,6 +192,15 @@ namespace TFITest4.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Alguno/s precios de su prepedido han sido actualizados a los nuevos valores vigentes.
+        /// </summary>
+        public static string PrePedidoActualizado {
+            get {
+                return ResourceManager.GetString("PrePedidoActualizado", resourceCulture);
             }
         }
         

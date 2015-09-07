@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FechaDesde)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
         <th></th>
     </tr>
     </thead>
@@ -35,9 +38,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.FechaDesde)
         </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IDListaPrecio }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDListaPrecio })
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IDListaPrecio }) 
         </td>
     </tr>
 }

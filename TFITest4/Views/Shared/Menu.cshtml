@@ -30,9 +30,6 @@
                                 @Html.ActionLink("Register", "RegisterOut", "Account")
                             </li>
                         }
-                        <li>
-                            @Html.ActionLink("Usuario", "Index", "UsuarioORM")
-                        </li>
                         @*                        <li>
                             @Html.ActionLink("Cliente", "Index", "ClienteEmpresaORM")
 
@@ -85,33 +82,10 @@
 
                                     </ul>
                                 </li>
-                                <li class="dropdown-submenu">
-
-
-                                    <a tabindex="-1" href="#">Usuarios</a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            @Html.ActionLink("List", "Index", "Usuarios")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("Edit", "Index", "Usuarios")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("Create", "Create", "Usuarios")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("RegisterIN", "Register", "Account")
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#">Even More..</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">3rd level</a></li>
-                                                <li><a href="#">3rd level</a></li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
+                                <li>
+                                     @Html.ActionLink("Usuarios", "Index", "Usuarios")
                                 </li>
+                                
                                 <li class="dropdown-submenu">
 
 

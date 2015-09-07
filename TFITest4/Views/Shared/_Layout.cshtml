@@ -259,6 +259,14 @@
             return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
         };
         //number format end
+        //mostrar sacar gif
+        var ocultarGIF = function () {
+            $('#preload').addClass("oculto");
+        }
+        var mostrarGIF = function () {
+            $('#preload').removeClass("oculto");
+        }
+        //mostrar sacar gif
 
         function GetInit() {
             var serviceURL = '@Url.Action("GetInit", "Pedido")';

@@ -39,50 +39,57 @@ namespace TFITest4.Controllers
             ViewBag.numero = "3".PadLeft(8, '0'); //para la factura
 
 
-            //traer productos con precios
-            var ListaProdPrecio = db.Database.SqlQuery<string>(
-                       "SELECT * FROM dbo.Producto");
+            ////traer productos con precios
+            //var ListaProdPrecio = db.Database.SqlQuery<string>(
+            //           "SELECT * FROM dbo.Producto");
 
-            //var producto = db.Producto.
+            ////var producto = db.Producto.
 
-            //var ListaPrecio = db.ListaPrecio
-            //    .Where(b => b.FechaDesde < DateTime.Now)
-            //    .OrderByDescending(b => b.FechaDesde).FirstOrDefault();
+            ////var ListaPrecio = db.ListaPrecio
+            ////    .Where(b => b.FechaDesde < DateTime.Now)
+            ////    .OrderByDescending(b => b.FechaDesde).FirstOrDefault();
 
-            var ListaPrecio = db.Database.SqlQuery<int>("select TOP 1 IDListaPrecio from ListaPrecio where FechaDesde < GETDATE() and Activo = 1 order by FechaDesde Desc");
-            int IDListaPrecioActual = ListaPrecio.FirstOrDefault();
+            ////aca agarro el ID de la lista de precios vigente
+            //var ListaPrecio = db.Database.SqlQuery<int>("select TOP 1 IDListaPrecio from ListaPrecio where FechaDesde < GETDATE() and Activo = 1 order by FechaDesde Desc");
+            //int IDListaPrecioActual = ListaPrecio.FirstOrDefault();
 
-            var ListaPrecios = db.PrecioDetalle
-                .Where(b => b.IDListaPrecio == IDListaPrecioActual);
+            ////aca me traigo la lista con el ID
+            //var ListaPrecios = db.PrecioDetalle
+            //    .Where(b => b.IDListaPrecio == IDListaPrecioActual);
 
-            var productos = db.Producto
-                .Where(b => b.IDEstado == 3);
+            ////aca traigo todos los producto que tengan estado "3" //Activo
+            //var productos = db.Producto
+            //    .Where(b => b.IDEstado == 3);
 
-            //List<Producto> Lista = new List<Producto>();
-            List<BIZProducto> ListaP = new List<BIZProducto>();
-            foreach (var p in productos)
-            {
-                BIZProducto Prod = new BIZProducto();
-                Prod.Nombre = p.Nombre;
-                Prod.Imagen = p.Imagen;
-                Prod.Descripcion = p.Descripcion;
-                Prod.ProductoCategoria.Detalle = p.ProductoCategoria.Detalle;
-                Prod.ProductoCategoria.IDProductoCategoria = p.ProductoCategoria.IDProductoCategoria;
-                foreach (var precioDetalle in p.PrecioDetalle)
-                {
-                    if (precioDetalle.IDListaPrecio == IDListaPrecioActual)
-                    {
-                        if ((bool)precioDetalle.Activo)
-                        {
-                            Prod.PrecioActual = (double)precioDetalle.Precio;
-                        }
-                    }
-                }
-                if (Prod.PrecioActual != 0)
-                {
-                    ListaP.Add(Prod);
-                }
-            }
+            ////List<Producto> Lista = new List<Producto>();
+            //List<BIZProducto> ListaP = new List<BIZProducto>();
+            //foreach (var p in productos)
+            //{
+            //    BIZProducto Prod = new BIZProducto();
+            //    Prod.Nombre = p.Nombre;
+            //    Prod.Imagen = p.Imagen;
+            //    Prod.Descripcion = p.Descripcion;
+            //    Prod.ProductoCategoria.Detalle = p.ProductoCategoria.Detalle;
+            //    Prod.ProductoCategoria.IDProductoCategoria = p.ProductoCategoria.IDProductoCategoria;
+            //    foreach (var precioDetalle in p.PrecioDetalle)
+            //    {
+            //        if (precioDetalle.IDListaPrecio == IDListaPrecioActual)
+            //        {
+            //            if ((bool)precioDetalle.Activo) //aca me fijo si está activo
+            //            {
+            //                Prod.PrecioActual = (double)precioDetalle.Precio;
+            //            }
+            //        }
+            //    }
+            //    if (Prod.PrecioActual != 0) // si no tiene precio no lo agrego...
+            //    {
+            //        ListaP.Add(Prod);
+            //    }
+            //}
+
+            DAL.DALProducto DalWorker = new DAL.DALProducto();
+            var ListaP = DalWorker.getProductosConPrecio();
+            //esto es para limpiar categorias repetidas
             List<BIZProductoCategoria> AuxcatList = new List<BIZProductoCategoria>();
             foreach (var p in ListaP.Select(x => x.ProductoCategoria).Distinct())
             {
@@ -119,19 +126,8 @@ namespace TFITest4.Controllers
 
             ViewBag.categorias2 = catList;
 
-
-           // var producto = db.Producto
-            //    .Where(b
-
-            //var producto = db.Producto
-            //    .Where(b => b.IDEstado == 3)
-            //    .Where(b => b.PrecioDetalle.
-
-
-
             var categorias = db.ProductoCategoria;
             ViewBag.categorias = categorias.ToList();
-            //return View(producto.ToList());
             return View();
         }
 
@@ -156,95 +152,6 @@ namespace TFITest4.Controllers
 
             return Json(b, JsonRequestBehavior.AllowGet);
 
-        }
-
-
-  
-
-        //
-        // GET: /Home/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Home/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Home/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Home/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Home/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Home/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Home/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
 

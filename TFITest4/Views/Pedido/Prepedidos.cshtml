@@ -48,7 +48,7 @@
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
-                    <span class="MontoPrePedido">@item.Monto</span>
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",",".")</span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
@@ -75,6 +75,7 @@
     <script>
         //.attr('data-val') 
         $('.CargarPedidos').click(function () {
+            mostrarGIF();
             //var dataToSend = { CargarPedidoViejo: "juan" }
             var serviceURL = '@Url.Action("CargarPedidoViejo", "Pedido")';
             $.ajax({
@@ -85,19 +86,23 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: successFunc,
-                error: errorFunc
+                error: errorFunc,
+                complete: ocultarGIF
             });
             function successFunc(data, status) {
+                console.log(data);
                 toastr["success"]("The Cart has been loaded", "Success!")
+                if (data.Result != "") toastr["warning"](data.Result, "@Language.Atencion")
             }
             function errorFunc(status) {
                 toastr["error"]("@Language.ErrorLogInAgain", "Error")
             }
-
+            
             GetInit();
         });
 
-            $('.DescartarPrePedido').click(function () {
+        $('.DescartarPrePedido').click(function () {
+                mostrarGIF();
                 //var dataToSend = { CargarPedidoViejo: "juan" }
                 var serviceURL = '@Url.Action("DescartarPrePedido", "Pedido")';
                 $.ajax({
@@ -113,7 +118,8 @@
                     },
                     error: function (status) {
                         toastr["error"]("@Language.ErrorLogInAgain", "Error")
-                }
+                    },
+                    complete: ocultarGIF
             });
 
                 GetInit();

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\PruebaAndroidController.cs" />
     <Compile Include="Controllers\UsuarioORMController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,6 +188,7 @@
     <Compile Include="Models\ModelLocalidad.cs" />
     <Compile Include="Models\ModelPais.cs" />
     <Compile Include="Models\ModelProvincia.cs" />
+    <Compile Include="Models\ModelUsuario.cs" />
     <Compile Include="NavigationRouteFilterExamples\AdministrationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
@@ -826,11 +828,12 @@
     <Content Include="Views\DocumentoORM\Edit.cshtml" />
     <Content Include="Views\DocumentoORM\Delete.cshtml" />
     <Content Include="Views\Pedido\Prepedidos.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\RegisterIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="tmp\" />
-    <Folder Include="Views\Usuarios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

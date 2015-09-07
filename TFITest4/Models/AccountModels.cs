@@ -111,6 +111,7 @@ namespace TFITest4.Models
         [Display(Name = "Telefono", ResourceType = typeof(Language))]
         public int Telefono { get; set; }
 
+
         //[Required(ErrorMessageResourceType = typeof(Resources.Language),
         //ErrorMessageResourceName = "Required")]
         //public string direccion { get; set; }

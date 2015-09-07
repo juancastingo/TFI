@@ -20,41 +20,44 @@ namespace TFITest4.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var ListaPrecio = db.Database.SqlQuery<int>("select TOP 1 IDListaPrecio from ListaPrecio where FechaDesde < GETDATE() and Activo = 1 order by FechaDesde Desc");
-            int IDListaPrecioActual = ListaPrecio.FirstOrDefault();
-            var ListaPrecios = db.PrecioDetalle
-                .Where(b => b.IDListaPrecio == IDListaPrecioActual);
-            var productos = db.Producto.Include(p => p.EstadoMisc).Include(p => p.ProductoCategoria)
-                .Where(b => b.IDEstado == 3);
-            List<BIZProducto> ListaP = new List<BIZProducto>();
-            BIZProducto Prod;
-            foreach (var p in productos)
-            {
-                Prod = new BIZProducto();
-                Prod.IDProducto = p.IDProducto;
-                Prod.Nombre = p.Nombre;
-                Prod.Imagen = p.Imagen;
-                Prod.Descripcion = p.Descripcion;
-                Prod.ProductoCategoria.Detalle = p.ProductoCategoria.Detalle;
-                Prod.ProductoCategoria.IDProductoCategoria = p.ProductoCategoria.IDProductoCategoria;
-                foreach (var precioDetalle in p.PrecioDetalle)
-                {
-                    if (precioDetalle.IDListaPrecio == IDListaPrecioActual)
-                    {
-                        if ((bool)precioDetalle.Activo)
-                        {
-                            Prod.PrecioActual = (double)precioDetalle.Precio;
-                            Prod.IDPrecioDetalle = precioDetalle.IDPrecioDetalle;
+           
+            //var ListaPrecio = db.Database.SqlQuery<int>("select TOP 1 IDListaPrecio from ListaPrecio where FechaDesde < GETDATE() and Activo = 1 order by FechaDesde Desc");
+            //int IDListaPrecioActual = ListaPrecio.FirstOrDefault();
+            //var ListaPrecios = db.PrecioDetalle
+            //    .Where(b => b.IDListaPrecio == IDListaPrecioActual);
+            //var productos = db.Producto.Include(p => p.EstadoMisc).Include(p => p.ProductoCategoria)
+            //    .Where(b => b.IDEstado == 3);
+            //List<BIZProducto> ListaP = new List<BIZProducto>();
+            //BIZProducto Prod;
+            //foreach (var p in productos)
+            //{
+            //    Prod = new BIZProducto();
+            //    Prod.IDProducto = p.IDProducto;
+            //    Prod.Nombre = p.Nombre;
+            //    Prod.Imagen = p.Imagen;
+            //    Prod.Descripcion = p.Descripcion;
+            //    Prod.ProductoCategoria.Detalle = p.ProductoCategoria.Detalle;
+            //    Prod.ProductoCategoria.IDProductoCategoria = p.ProductoCategoria.IDProductoCategoria;
+            //    foreach (var precioDetalle in p.PrecioDetalle)
+            //    {
+            //        if (precioDetalle.IDListaPrecio == IDListaPrecioActual)
+            //        {
+            //            if ((bool)precioDetalle.Activo)
+            //            {
+            //                Prod.PrecioActual = (double)precioDetalle.Precio;
+            //                Prod.IDPrecioDetalle = precioDetalle.IDPrecioDetalle;
 
-                        }
-                    }
-                }
-                if (Prod.PrecioActual != 0)
-                {
-                    ListaP.Add(Prod);
-                }
-            }
+            //            }
+            //        }
+            //    }
+            //    if (Prod.PrecioActual != 0)
+            //    {
+            //        ListaP.Add(Prod);
+            //    }
+            //}
 
+            DAL.DALProducto DalWorker = new DAL.DALProducto();
+            var ListaP = DalWorker.getProductosConPrecio();
             // guardo todo en sesion
             Session["productosSesion"] = ListaP;
 
@@ -425,27 +428,54 @@ namespace TFITest4.Controllers
         public ActionResult CargarPedidoViejo(string PrePed)
         {
             try {
-            int IDPrePedido = int.Parse(PrePed);
-            //aca cargo los datos del Prepedido en la sesion
-            DAL.DALDocumento DALDoc = new DAL.DALDocumento();
-            var PrePedido = DALDoc.getDocByID(IDPrePedido);
-            ListCarrito carrito = new ListCarrito();
-            carrito.IDDocumento = PrePedido.IDDocumento;
-            modelCarrito item;
-            foreach (var p in PrePedido.DocumentoDetalle)
-            {
-                item = new modelCarrito();
-                item.id = p.PrecioDetalle.Producto.IDProducto;
-                item.Nombre = p.PrecioDetalle.Producto.Nombre;
-                item.IDPrecioDetalle = p.IDPrecioDetalle;
-                item.Cant = p.Cantidad;
-                item.Precio = (double)p.PrecioDetalle.Precio;
-                carrito.Productos.Add(item);
-            }
-            Session["ListCarrito"] = carrito;
-            ViewBag.NrPedido = carrito.IDDocumento;
-            return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
-            }
+                int IDPrePedido = int.Parse(PrePed);
+                //aca cargo los datos del Prepedido en la sesion
+                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
+                var PrePedido = DALDoc.getDocByID(IDPrePedido);
+                ListCarrito carrito = new ListCarrito();
+                carrito.IDDocumento = PrePedido.IDDocumento;
+                modelCarrito item;
+                foreach (var p in PrePedido.DocumentoDetalle)
+                {
+                    item = new modelCarrito();
+                    item.id = p.PrecioDetalle.Producto.IDProducto;
+                    item.Nombre = p.PrecioDetalle.Producto.Nombre;
+                    item.IDPrecioDetalle = p.IDPrecioDetalle;
+                    item.Cant = p.Cantidad;
+                    item.Precio = (double)p.PrecioDetalle.Precio;
+                    carrito.Productos.Add(item);
+                }
+                //ya tengo el carrito. Acá tengo q verificar los precios y actualizarlo.
+                //agarro los productos con precios.
+                DAL.DALProducto DALProductoWorker = new DAL.DALProducto();
+                var ListaP = DALProductoWorker.getProductosConPrecio();
+                Boolean PrePedidoActualizado  = false;
+                foreach (var prodCarr in carrito.Productos)
+                {
+                    foreach (var prodBase in ListaP)
+                    {
+                        if (prodCarr.id == prodBase.IDProducto)
+                        {
+                            if (prodCarr.IDPrecioDetalle != prodBase.IDPrecioDetalle)
+                            {
+                                prodCarr.IDPrecioDetalle = prodBase.IDPrecioDetalle;
+                                prodCarr.Precio = prodBase.PrecioActual;
+                                PrePedidoActualizado = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+                string msgReturn = "";
+                if (PrePedidoActualizado)
+                {
+                    msgReturn = Language.PrePedidoActualizado;
+                }
+
+                Session["ListCarrito"] = carrito;
+                ViewBag.NrPedido = carrito.IDDocumento;
+                return Json(new { Result = msgReturn }, JsonRequestBehavior.AllowGet);
+                }
             catch (Exception ex)
             {
                 return RedirectToAction("CerrarSesion", "Login");

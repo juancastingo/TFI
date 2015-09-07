@@ -53,6 +53,8 @@ namespace TFITest4.Controllers
         {
             if (ModelState.IsValid)
             {
+                preciodetalle.FechaAlta = DateTime.Now;
+                preciodetalle.FechaUltimaMod = (DateTime)preciodetalle.FechaAlta;
                 db.PrecioDetalle.Add(preciodetalle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,6 +88,7 @@ namespace TFITest4.Controllers
         {
             if (ModelState.IsValid)
             {
+                //preciodetalle.FechaUltimaMod = DateTime.Now;
                 db.Entry(preciodetalle).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

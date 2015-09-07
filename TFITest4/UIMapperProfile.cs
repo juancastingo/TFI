@@ -12,8 +12,12 @@ namespace TFITest4
     {
         protected override void Configure()
         {
+            //usuarios
             Mapper.CreateMap<RegisterModel, BIZUsuario>();
             Mapper.CreateMap<BIZUsuario, RegisterModel>();
+            //usuarios2
+            Mapper.CreateMap<ModelUsuario, BIZUsuario>();
+            Mapper.CreateMap<BIZUsuario, ModelUsuario>();
 
             Mapper.CreateMap<BIZPais, ModelPais>();
             Mapper.CreateMap<BIZLocalidad, ModelLocalidad>();
@@ -30,7 +34,6 @@ namespace TFITest4
             Mapper.CreateMap<BIZEstado, BIZEstado>();
 
 
-            //documento
             
 
         }

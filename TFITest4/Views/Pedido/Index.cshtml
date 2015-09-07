@@ -100,7 +100,7 @@
                         <img class="PImage" src="@item.Imagen" alt="" /></a>
                 </td>
                 <td class="SignoPesos">$</td>
-                <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual</span>
+                <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual.ToString().Replace(",",".")</span>
                 </td>
                 <td>
                     <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />
@@ -281,9 +281,9 @@
 
         $('.agregar').click(function () {
             var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
+            var cantidad = $(this).closest('tr').find('td').eq(4).children().val()
             console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
+            $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;
             }
@@ -293,9 +293,9 @@
         });
         $('.borrar').click(function () {
             var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
+            var cantidad = $(this).closest('tr').find('td').eq(4).children().val()
             console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
+            $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;
             }

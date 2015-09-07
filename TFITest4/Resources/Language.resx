@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Atencion" xml:space="preserve">
+    <value>Atención!</value>
+  </data>
   <data name="ErrorLogInAgain" xml:space="preserve">
     <value>La operación no se pudo completar. Por favor logueese nuevamente</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
+  </data>
+  <data name="PrePedidoActualizado" xml:space="preserve">
+    <value>Alguno/s precios de su prepedido han sido actualizados a los nuevos valores vigentes</value>
   </data>
   <data name="ProvinciaTitle" xml:space="preserve">
     <value>Provincia</value>

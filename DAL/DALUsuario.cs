@@ -37,20 +37,23 @@ namespace DAL
 
         public List<BIZ.BIZUsuario> GetAllUsuarios()
         {
-            BIZUsuario oUsuario;
+            //BIZUsuario oUsuario;
             List<BIZUsuario> rList = new List<BIZUsuario>();
             var usuario = db.Usuario.Include("TipoUsuario");
-            foreach (Usuario u in usuario)
-            {
-                oUsuario = new BIZUsuario();
-                oUsuario.Email = u.Email;
+            rList = Mapper.Map<List<Usuario>, List<BIZUsuario>>(usuario.ToList());
+           // foreach (Usuario u in usuario)
+           // {
+            //    oUsuario = new BIZUsuario();
+            //    oUsuario.Email = u.Email;
                 //oUsuario.Estado = new BIZEstado();
-                oUsuario.EstadoMisc.IDEstado = u.EstadoMisc.IDEstado;
-            }
+           //     oUsuario.EstadoMisc.IDEstado = u.EstadoMisc.IDEstado;
+
+            //}
 
            
             return rList;
         }
+
         public void InsertUsuario(BIZUsuario oUsuario)
         {
             //var TSave = Mapper.Map<BIZUsuario, Usuario>(oUsuario);
@@ -66,6 +69,10 @@ namespace DAL
             TSave.Password = oUsuario.Password;
             TSave.Telefono = oUsuario.Telefono;
             TSave.Usuario1 = oUsuario.Usuario1;
+            TSave.IDClienteEmpresa = null;
+            TSave.Documento = null;
+            TSave.Documento1 = null;
+            TSave.Bitacora = null;
             db.Usuario.Add(TSave);
             db.SaveChanges();
         }

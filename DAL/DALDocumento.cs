@@ -108,7 +108,10 @@ namespace DAL
         {
             
             //Documento SaveDoc = Mapper.Map<BIZDocumento, Documento>(_Documento); //no se puede mappear aca?
-            string query = "UPDATE Documento SET FechaUltimaModificacion='" + _Documento.FechaUltimaModificacion + "',IDUsuarioUltimaModificacion="+ _Documento.IDUsuarioUltimaModificacion +"  WHERE IDDocumento = " + _Documento.IDDocumento;
+            Documento BaseDoc = new Documento();
+            DateTime fecha = (DateTime)_Documento.FechaUltimaModificacion;
+
+            string query = "UPDATE Documento SET FechaUltimaModificacion='" + fecha.ToString("yyyy-MM-dd HH:mm:ss") +"',IDUsuarioUltimaModificacion=" + _Documento.IDUsuarioUltimaModificacion + "  WHERE IDDocumento = " + _Documento.IDDocumento;
             db.Database.ExecuteSqlCommand(query);
             DocumentoDetalle detalle;
             foreach (var d in _Documento.DocumentoDetalle)

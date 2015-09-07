@@ -15,51 +15,6 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.IDPrecioDetalle)
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IDPrecioDetalle)
-            @Html.ValidationMessageFor(model => model.IDPrecioDetalle)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IDListaPrecio, "ListaPrecio")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IDListaPrecio", String.Empty)
-            @Html.ValidationMessageFor(model => model.IDListaPrecio)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IDProducto, "Producto")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IDProducto", String.Empty)
-            @Html.ValidationMessageFor(model => model.IDProducto)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Precio)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Precio)
-            @Html.ValidationMessageFor(model => model.Precio)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaAlta)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaAlta)
-            @Html.ValidationMessageFor(model => model.FechaAlta)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaDesde)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaDesde)
-            @Html.ValidationMessageFor(model => model.FechaDesde)
-        </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Activo)
         </div>

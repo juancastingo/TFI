@@ -54,6 +54,7 @@
     <Compile Include="DALCliente.cs" />
     <Compile Include="DALDireccion.cs" />
     <Compile Include="DALDocumento.cs" />
+    <Compile Include="DALProducto.cs" />
     <Compile Include="DALUsuario.cs" />
     <Compile Include="DataAccessMapperProfile.cs" />
     <Compile Include="ORM\Bitacora.cs">
