@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TFITest4.Models.ModelUsuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "RegisterIn", new {} ,new { @class = "btn btn-primary", @style = "color:white" }) 
+</p>
+<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>
+            Codigo
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoMisc.Detalle)
+        </th>
+        <th>
+                @Html.DisplayNameFor(model => model.ClienteEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </th>
+@*        <th>
+            @Html.DisplayNameFor(model => model.Idioma)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TipoUsuario.Tipo)
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+        </td>
+        <td>
+            @if (item.ClienteEmpresa != null) {
+                 @Html.DisplayFor(modelItem => item.ClienteEmpresa.Nombre)
+            } else {
+               <span>Usuario Local</span>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaAlta)
+        </td>
+@*        <td>
+            @Html.DisplayFor(modelItem => item.Idioma)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoUsuario.Tipo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IDUsuario })
+        </td>
+    </tr>
+}
+        </tbody>
+</table>

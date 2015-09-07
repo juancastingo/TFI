@@ -1,0 +1,151 @@
+﻿@model TFITest4.Models.RegisterModel
+@using TFITest4.Resources
+
+@{
+    ViewBag.Title = "Registro";
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Registro</legend>
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Nombre)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Nombre)
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Usuario1)
+                    </td>
+                    <td>
+                        <p id="UserCheck">
+                            @Html.EditorFor(model => model.Usuario1) 
+                            <img height="30px" width="30px" src="~/Content/images/loader.gif" class="oculto" />
+                            <span class=""></span>
+                        </p>
+                        
+                        @Html.ValidationMessageFor(model => model.Usuario1)
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Password)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.ConfirmPassword)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ConfirmPassword)
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.email)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.email)
+                        @Html.ValidationMessageFor(model => model.email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Telefono)
+                    </td>
+                    <td class="editor-field">
+                        @Html.EditorFor(model => model.Telefono)
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.IDTipoUsuario, "TipoUsuario")
+                    </td>
+                    <td class="editor-field">
+                        @Html.DropDownList("IDTipoUsuario")
+                    </td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+        <p>
+            <input id="crearProv" class="btn btn-primary" type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@section EndScript{
+    <script type="text/javascript">
+        $('#crearProv').prop('disabled', true);
+
+        $('#UserCheck').focusout(function () {
+            $('#UserCheck span').text("");
+            var nombre = $('#UserCheck input').val()
+            if (nombre != "" && nombre.length < 11) {
+                $('#UserCheck img').toggleClass("oculto");
+                console.log("In FocusOut " + nombre);
+                var serviceURL = '@Url.Action("AjaxUserCheck", "Account")';
+                var dataToSend = { name: nombre }
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify(dataToSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: successFunc,
+                    error: errorFunc
+                });
+            }
+
+            function successFunc(data, status) {
+                console.log(data);
+                console.log("bien");
+                $('#UserCheck img').toggleClass("oculto");
+                if (data.existe) {
+                    $('#UserCheck span').text("Error, el nombre de usuario ya existe");
+                    $('#UserCheck span').text("@Language.UsuarioExistente");
+                    $('#UserCheck span').addClass("mal");
+                    $('#UserCheck span').removeClass("bien");
+                    $('#crearProv').prop('disabled', true);
+                } else {
+                    $('#UserCheck span').text("El usuario está disponible");
+                    $('#UserCheck span').text("@Language.UsuarioExistenteOK");
+                    $('#UserCheck span').addClass("bien");
+                    $('#UserCheck span').removeClass("mal");
+                    $('#crearProv').prop('disabled', false);
+                }
+
+            }
+            function errorFunc(data, status) {
+                console.log("ERROR in ajax request");
+                console.log(status);
+            }
+        });
+    </script>
+}
