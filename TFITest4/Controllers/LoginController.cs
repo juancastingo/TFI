@@ -130,7 +130,7 @@ namespace TFITest4.Controllers
             UserCheck.Password = Password;
             DAL.DALUsuario DalWorker = new DAL.DALUsuario();
             BIZUsuario _usuario = DalWorker.ValidateLogin(UserCheck);
-            if (_usuario != null)
+            if (_usuario != null && _usuario.IDEstado == 13)
             {
                 FormsAuthentication.SetAuthCookie(UserName, false);
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
