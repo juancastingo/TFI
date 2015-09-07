@@ -103,12 +103,61 @@ namespace DAL
 
         public BIZUsuario ValidateLogin(BIZUsuario oUser)
         {
+            try
+            {
             var TUser = db.Usuario
                 .Where(b => b.Usuario1 == oUser.Usuario1)
                 .Where(c => c.Password == oUser.Password)
                 .FirstOrDefault();
             var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
             return UserReturn;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public BIZUsuario getUserByUsuario(string username)
+        {
+            try
+            {
+                var TUser = db.Usuario
+                    .Where(b => b.Usuario1 == username)
+                    .FirstOrDefault();
+                var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
+                return UserReturn;
+            } catch(Exception ex) {
+                return null;
+            }
+        }
+        public string ResetPassword(string username)
+        {
+            try
+            {
+                var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                var random = new Random();
+                var result = new string(
+                    Enumerable.Repeat(chars, 8)
+                              .Select(s => s[random.Next(s.Length)])
+                              .ToArray());
+
+                if (getUserByUsuario(username) != null)
+                {
+                    string query = "UPDATE Usuario SET Password='" + result + "' WHERE Usuario ='" + username + "'";
+                    db.Database.ExecuteSqlCommand(query);
+                    return result;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
 
