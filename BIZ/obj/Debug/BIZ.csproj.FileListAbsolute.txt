@@ -4,3 +4,4 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Debug\Au
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\bin\Debug\AutoMapper.xml
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Debug\BIZ.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Debug\BIZ.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BIZ\obj\Debug\BIZ.csprojResolveAssemblyReference.cache
