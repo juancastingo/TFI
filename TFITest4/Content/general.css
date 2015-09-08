@@ -5,7 +5,18 @@
 .field-validation-error {
     color: red;
 }
+.NoStock {
+    color:red;
+    font-weight: bolder;
+}
 
+.SiStock {
+    color: green;
+}
+
+.ElStock {
+    color: blue;
+}
 #preload {
     width: 100%;
     height: 100%;
@@ -310,3 +321,20 @@ Main components
     bottom: 30px;
   }
 }
+
+
+@keyframes blink {  
+    0% { background-color: red; }
+    100% { background-color: white; }
+}
+@-webkit-keyframes blink {
+    0% { background-color: red; }
+    100% { background-color: white; }
+}
+.blink {
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    -ms-animation: blink 1s linear infinite;
+    -o-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
+} 

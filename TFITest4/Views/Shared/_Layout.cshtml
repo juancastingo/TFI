@@ -95,7 +95,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title">Shopping Cart</h3>
+          <h3 class="modal-title">Shopping Cart</h3> <span class="field-validation-error" id="TextoCarritoPedido"></span>
         </div>
         <div class="modal-body" id="carritoModal">
 		  <h5 class="text-center">Your shopping cart nr# <span id="NrPrePedido"></span></h5>
@@ -230,11 +230,11 @@
         <input id="LoginExiste" type="hidden" value="0" />   
     }
 
-
+    <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
      <script>
          // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
          if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
-             console.log("dif from invitado");
+             //console.log("dif from invitado");
              $.ajax({
                  cache: false,
                  type: 'post',
@@ -283,13 +283,14 @@
 
 
         function successFunc(data, status) {
-            console.log("success general");
+            //console.log("success general");
             list = data.Productos;
             //console.log("lista:");
             //console.log(list);
             $('#NrPrePedido').text(data.IDDocumento);
             var subt = 0;
             var count = 0;
+            $('#carritoModal table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
             $('#carritoModal table > tbody').html('');
             list.forEach(function (elem) {
                 //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
@@ -439,11 +440,20 @@
                     return $('#popover_content_wrapper').html();
                 }
             });
-
+            urlDTLang = "";
+            if ($('#ActualCulture').val() == "esp") {
+                //urlDTLang = '/Scripts/Spanish.json';
+                urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+            }
             $('.tableJquery').DataTable({
-                "oLanguage": {
-                    "sSearch": "@Language.FiltrarTabla"
-                }//,
+                
+                @*"oLanguage": {
+                   "sSearch": "@Language.FiltrarTabla"*@
+
+                language: {
+                    url: urlDTLang
+                }
+                //,
                 //   dom: 'Bfrtip',
                 //   buttons: [
                 //{
@@ -487,10 +497,10 @@
                             $('#login-modal span').text("Please check Username or Password");
                             $('#MainMenu').fadeTo("slow", 1);
                         } else {
-                            console.log("recargando ");
+                            //console.log("recargando ");
                             if (RetUrl != "") {
                                 fullURL = window.location.href.split("/")[0] + "//" + window.location.href.split("/")[2] + "/" + RetUrl;
-                                console.log(fullURL);
+                                //console.log(fullURL);
                                 window.location = fullURL
                             }
                             $("#MainMenu").html(result);
@@ -533,6 +543,64 @@
 
             });
 
+            $('#SubmitPedido').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Pedido/SubmitPedido",
+                    data: param = "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        //console.log(data);
+                        if (data.devolver != "") {
+                            list = data.CarritoStock.Productos;
+                            $('#NrPrePedido').text(data.IDDocumento);
+                            var subt = 0;
+                            var count = 0;
+                            $('#carritoModal table > thead').html('<th>@Language.producto</th><th style="padding-right: 15px;">@Language.cantidad</th><th>@Language.disponible</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                            $('#carritoModal table > thead')
+                            $('#carritoModal table > tbody').html('');
+                            list.forEach(function (elem) {
+                                //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                                subt += (elem.Precio * elem.Cant);
+                                thisSubtotal = (elem.Precio * elem.Cant);
+                                NoStockClass = "SiStock"; blink = "";
+                                if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
+                                $('#carritoModal table > tbody').append('<tr class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                            });
+                            setTimeout(function () { $('.blink').removeClass('blink'); }, 3000);
+                            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
+                            $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                            if (subt == 0) {
+                                $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
+                            } else {
+                                $('#popover_content_wrapper').find("p:first").html("");
+                            }
+                            $('#TextoCarritoPedido').text("No hay stock");
+                            //console.log(data);
+                            //$('#TextoCarritoPedido').text("No hay stock");
+                            //i = 0;
+                            //$('#carritoModal table > thead').find('tr').eq(0).append("<th>Quantity</th>")
+                            //$('#carritoModal table > tbody tr').each(function () {
+                            //    $(this).append("<td>" + data.CarritoStock.Productos[i].stock + "</td>");
+                            //    $(this).find('td').eq(1).each(function () {
+
+                            //        $(this).text(data.CarritoStock.Productos[i].Cant + " " + data.CarritoStock.Productos[i].stock);
+                            //        i++;
+                            //        //console.log($(this).find('td').eq(1).text())
+                            //    });
+                            //});
+
+                        } else {
+
+                            toastr["success"](data.Result, "Success!")
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]("@Language.ErrorLogInAgain", "Error!")
+                    }
+                });
+            });
 
             $("#preload").addClass("oculto");
             //OJO veo si NO es IE
@@ -583,7 +651,7 @@
 
             $('.MontoPrePedido').each(function (index) {
                 esto = $(this).text();
-                console.log(esto);
+                //console.log(esto);
                 $(this).text(parseFloat(esto).format(2, 3, '.', ','))
             });
 

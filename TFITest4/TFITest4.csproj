@@ -725,6 +725,7 @@
     <Content Include="Scripts\messages_es.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\UserExistsCheck.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\LanguageSelection.ascx" />
     <Content Include="Web.config" />
@@ -832,6 +833,7 @@
     <Content Include="Views\Usuarios\RegisterIn.cshtml" />
     <Content Include="Views\Login\ForgetPassword.cshtml" />
     <Content Include="Views\Login\resetPassword.cshtml" />
+    <Content Include="Scripts\Spanish.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

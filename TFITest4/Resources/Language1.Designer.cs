@@ -70,6 +70,24 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cantidad.
+        /// </summary>
+        public static string cantidad {
+            get {
+                return ResourceManager.GetString("cantidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a disponible.
+        /// </summary>
+        public static string disponible {
+            get {
+                return ResourceManager.GetString("disponible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La operación no se pudo completar. Por favor logueese nuevamente.
         /// </summary>
         public static string ErrorLogInAgain {
@@ -102,6 +120,15 @@ namespace TFITest4.Resources {
         public static string Home_Title {
             get {
                 return ResourceManager.GetString("Home_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a esp.
+        /// </summary>
+        public static string Lenguaje {
+            get {
+                return ResourceManager.GetString("Lenguaje", resourceCulture);
             }
         }
         
@@ -196,11 +223,29 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Precio Unitario.
+        /// </summary>
+        public static string precioUnitario {
+            get {
+                return ResourceManager.GetString("precioUnitario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Alguno/s precios de su prepedido han sido actualizados a los nuevos valores vigentes.
         /// </summary>
         public static string PrePedidoActualizado {
             get {
                 return ResourceManager.GetString("PrePedidoActualizado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Producto.
+        /// </summary>
+        public static string producto {
+            get {
+                return ResourceManager.GetString("producto", resourceCulture);
             }
         }
         
@@ -241,11 +286,29 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor verifique Usuario/Contraseña.
+        /// </summary>
+        public static string RevisarUsuarioContra {
+            get {
+                return ResourceManager.GetString("RevisarUsuarioContra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Teléfono.
         /// </summary>
         public static string Telefono {
             get {
                 return ResourceManager.GetString("Telefono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Total Producto.
+        /// </summary>
+        public static string TotalProducto {
+            get {
+                return ResourceManager.GetString("TotalProducto", resourceCulture);
             }
         }
         
@@ -264,6 +327,15 @@ namespace TFITest4.Resources {
         public static string UsuarioExistenteOK {
             get {
                 return ResourceManager.GetString("UsuarioExistenteOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El usuario no se encuentra habilitado para ingresar al sistema.
+        /// </summary>
+        public static string UsuarioNoHabilitado {
+            get {
+                return ResourceManager.GetString("UsuarioNoHabilitado", resourceCulture);
             }
         }
     }

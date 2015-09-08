@@ -99,6 +99,7 @@ namespace TFITest4.Controllers
             public string Nombre { get; set; }
             public double Precio { get; set; }
             public int IDPrecioDetalle { get; set; }
+            public int stock { get; set; }
         }
 
         public class ModelPedido
@@ -428,6 +429,7 @@ namespace TFITest4.Controllers
         public ActionResult CargarPedidoViejo(string PrePed)
         {
             try {
+
                 int IDPrePedido = int.Parse(PrePed);
                 //aca cargo los datos del Prepedido en la sesion
                 DAL.DALDocumento DALDoc = new DAL.DALDocumento();
@@ -514,8 +516,50 @@ namespace TFITest4.Controllers
             return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
         }
 
+        //public  class stockCarrito {
+        //    public stockCarrito()
+        //    {
+        //        this.Productos = new List<modelCarrito>();
+        //    }
+        //    public int IDCarrito;
+        //    public List<modelCarrito> Productos { get; set; }
+        //}
 
+        public ActionResult SubmitPedido()
+        {
+            string devolver = "";
+            try
+            {
+                 //primero tengo q ver por cada producto del carrito si hay stock.
+                 //cargo el carrito q está en sesion.
+                var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
+                //stockCarrito Stock = new stockCarrito();
 
+                Boolean TodoOK = false;
+                if (ListCarrito.Productos.Count != 0)
+                {
+                    TodoOK = true;
+                    foreach (var p in ListCarrito.Productos)
+                   {
+                       p.stock = 1; // aca me traería el stock del producto
+                        if (p.Cant > p.stock) {
+                            TodoOK = false;
+                        }
+                 }
+                    if (TodoOK)
+                    {
+                        //aca hago el submit del pedido
+                        devolver = @Language.OKNormal;
+                    }
+                    else //algun producto no tiene stock. Lo veo con JS.
+                    {
+                        return Json(new { Result = devolver, CarritoStock = ListCarrito }, JsonRequestBehavior.AllowGet);
+                    }
+             }
+                }
+            catch (Exception ex) { devolver = @Language.ErrorLogInAgain; }
+            return Json(new { Result = devolver }, JsonRequestBehavior.AllowGet);
+        }
 
 
 

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using TFITest4.Models;
+using TFITest4.Resources;
 
 namespace TFITest4.Controllers
 {
@@ -112,14 +113,11 @@ namespace TFITest4.Controllers
             return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
         }
 
-
-
         public ActionResult Error()
         {
             ViewBag.AlertError = "no podes entrar aca borrar";
             return View();
         }
-
 
         //menu reload test
         [HttpPost]
@@ -149,11 +147,17 @@ namespace TFITest4.Controllers
                 Session["SUsuario"] = _usuario;
 
                 return PartialView("~/Views/Shared/Menu.cshtml");
-
             }
             else
             {
-                return Json(new { status = "error", message = "Please Check Username/Password" });
+               // if (_usuario.IDEstado != 13)
+               // {
+               //     return Json(new { status = "error", message = @Language.UsuarioNoHabilitado });
+               // }
+               // else
+              //  {
+                    return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
+               // }
             }
         }
 

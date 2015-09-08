@@ -120,6 +120,12 @@
   <data name="Atencion" xml:space="preserve">
     <value>Atención!</value>
   </data>
+  <data name="cantidad" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="disponible" xml:space="preserve">
+    <value>disponible</value>
+  </data>
   <data name="ErrorLogInAgain" xml:space="preserve">
     <value>La operación no se pudo completar. Por favor logueese nuevamente</value>
   </data>
@@ -131,6 +137,9 @@
   </data>
   <data name="Home_Title" xml:space="preserve">
     <value>Pagina de Inicio</value>
+  </data>
+  <data name="Lenguaje" xml:space="preserve">
+    <value>esp</value>
   </data>
   <data name="MailValidationLink" xml:space="preserve">
     <value>Bienvenido {0}, &lt;p&gt;Por favor verifica tu cuenta de usuario con el siguiente link:&lt;/p&gt;{1}</value>
@@ -162,8 +171,14 @@
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
   </data>
+  <data name="precioUnitario" xml:space="preserve">
+    <value>Precio Unitario</value>
+  </data>
   <data name="PrePedidoActualizado" xml:space="preserve">
     <value>Alguno/s precios de su prepedido han sido actualizados a los nuevos valores vigentes</value>
+  </data>
+  <data name="producto" xml:space="preserve">
+    <value>Producto</value>
   </data>
   <data name="ProvinciaTitle" xml:space="preserve">
     <value>Provincia</value>
@@ -177,13 +192,22 @@
   <data name="Required" xml:space="preserve">
     <value>El campo "{0}" no puede estar vacío</value>
   </data>
+  <data name="RevisarUsuarioContra" xml:space="preserve">
+    <value>Por favor verifique Usuario/Contraseña</value>
+  </data>
   <data name="Telefono" xml:space="preserve">
     <value>Teléfono</value>
+  </data>
+  <data name="TotalProducto" xml:space="preserve">
+    <value>Total Producto</value>
   </data>
   <data name="UsuarioExistente" xml:space="preserve">
     <value>Error, el nombre de usuario no se encuentra disponible</value>
   </data>
   <data name="UsuarioExistenteOK" xml:space="preserve">
     <value>El usuario se encuentra disponible</value>
+  </data>
+  <data name="UsuarioNoHabilitado" xml:space="preserve">
+    <value>El usuario no se encuentra habilitado para ingresar al sistema</value>
   </data>
 </root>
