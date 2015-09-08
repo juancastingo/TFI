@@ -15,7 +15,6 @@ namespace BIZ
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaDesde { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public byte[] TimeStamp { get; set; }
 
         public virtual ICollection<BIZDocumentoDetalle> DocumentoDetalle { get; set; }
        // public virtual  ListaPrecio { get; set; }

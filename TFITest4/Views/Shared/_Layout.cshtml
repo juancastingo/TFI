@@ -24,7 +24,8 @@
 </head>
 <body>
     <div id="preload">
-        <img src="~/content/images/loader.gif" alt="Load Image" />
+        @*<img src="~/content/images/loader.gif" alt="Load Image" />*@
+        <div class="loader">Loading...</div>
     </div>
 
 
@@ -170,7 +171,11 @@
     <script type="text/javascript" src="~/Scripts/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/Scripts/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="~/Scripts/buttons.flash.min.js"></script>
-
+    
+    @*datetimepicker*@
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    
 
 
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -314,6 +319,7 @@
 
 
         function limpiarCarrito() {
+            mostrarGIF();
             $('.popover').toggle();
             $.ajax({
                 type: "POST",
@@ -327,25 +333,30 @@
                 },
                 error: function () {
                     toastr["error"]("Error while trying to clean the cart", "Error!")
-                }
+                },
+                complete: ocultarGIF
             });
         }
 
         function SaveCarritoPrePedido() {
-            $.ajax({
-                type: "POST",
-                url: "/Pedido/GuardarCarrito",
-                data: param = "",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function () {
-                    GetInit();
-                    toastr["success"]("The Cart has been saved", "Success!")
-                },
-                error: function () {
-                    toastr["error"]("Error while trying to save the cart", "Error!")
-                }
-            });
+            if ($('#carritoModal table > tbody tr').length > 0) {
+                mostrarGIF();
+                $.ajax({
+                    type: "POST",
+                    url: "/Pedido/GuardarCarrito",
+                    data: param = "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        GetInit();
+                        toastr["success"]("The Cart has been saved", "Success!")
+                    },
+                    error: function () {
+                        toastr["error"]("Error while trying to save the cart", "Error!")
+                    },
+                    complete: ocultarGIF
+                });
+            }
         }
 
         function keepSessionAlive() {
@@ -445,24 +456,37 @@
                 //urlDTLang = '/Scripts/Spanish.json';
                 urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
             }
-            $('.tableJquery').DataTable({
-                
-                @*"oLanguage": {
-                   "sSearch": "@Language.FiltrarTabla"*@
+            try {
+                $('.tableJquery').DataTable({
+                    language: {
+                        url: urlDTLang
+                    }
+                    //,
+                    //   dom: 'Bfrtip',
+                    //   buttons: [
+                    //{
+                    //    extend: 'colvis',
+                    //    collectionLayout: 'fixed two-column'
+                    //}
+                    //   ]
+                });
 
-                language: {
-                    url: urlDTLang
+            } catch (err) { console.log("dt is not perfect") }
+
+            $(function () {
+                PickerIdioma = "en";
+                if ($('#ActualCulture').val() == "esp") {
+                    PickerIdioma = "es";
                 }
-                //,
-                //   dom: 'Bfrtip',
-                //   buttons: [
-                //{
-                //    extend: 'colvis',
-                //    collectionLayout: 'fixed two-column'
-                //}
-                //   ]
-            });
+                var dateNow = new Date();
+                $('#datetimepicker1').datetimepicker({
+                    locale: PickerIdioma,
+                    format: 'YYYY-MM-DD HH:mm',
+                    defaultDate: dateNow
 
+                });
+            });
+            $('.transparente').removeClass('sorting')
 
 
             $('#login-modal').on('shown.bs.modal', function () {
@@ -526,6 +550,7 @@
             })
 
             $('#NuevoCarrito').click(function () {
+                mostrarGIF();
                 $.ajax({
                     type: "POST",
                     url: "/Pedido/NuevoPrePedido",
@@ -538,12 +563,14 @@
                     },
                     error: function () {
                         toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                    }
+                    },
+                    complete: ocultarGIF
                 });
 
             });
 
             $('#SubmitPedido').click(function () {
+                mostrarGIF();
                 $.ajax({
                     type: "POST",
                     url: "/Pedido/SubmitPedido",
@@ -568,7 +595,7 @@
                                 if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
                                 $('#carritoModal table > tbody').append('<tr class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
                             });
-                            setTimeout(function () { $('.blink').removeClass('blink'); }, 3000);
+                            setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
                             $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
                             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                             if (subt == 0) {
@@ -598,7 +625,8 @@
                     },
                     error: function () {
                         toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                    }
+                    },
+                    complete: ocultarGIF
                 });
             });
 

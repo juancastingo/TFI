@@ -31,9 +31,13 @@ namespace TFITest4
             Mapper.CreateMap<BIZClienteEmpresa, ModelClienteEmpresa>();
             Mapper.CreateMap<ModelClienteEmpresa, BIZClienteEmpresa>();
 
-            Mapper.CreateMap<BIZEstado, BIZEstado>();
+            // Mapper.CreateMap<BIZEstado, BIZEstado>();
 
-
+            //precios
+            Mapper.CreateMap<BIZPrecioDetalle, ModelPrecioDetalle>();
+            Mapper.CreateMap<BIZListaPrecio, ModelListaPrecio>();
+            Mapper.CreateMap<ModelPrecioDetalle, BIZPrecioDetalle>();
+            Mapper.CreateMap<ModelListaPrecio, BIZListaPrecio>();
             
 
         }

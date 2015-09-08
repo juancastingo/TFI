@@ -43,7 +43,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Imagen)
             </th>
-            <th colspan="2" style="width:100px;">
+            <th class="transparente"></th>
+            <th style="width:100px;">
                 @Html.DisplayNameFor(model => model.PrecioActual)
             </th>
             <th>Cantidad
@@ -72,7 +73,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Imagen)
             </th>
-            <th colspan="2" style="width:100px;">
+            <th class="transparente"></th>
+            <th style="width:100px;">
                 @Html.DisplayNameFor(model => model.PrecioActual)
             </th>
             <th>Cantidad
@@ -175,6 +177,7 @@
 
 
         function executeAjaxPedido(datos) {
+            mostrarGIF();
             console.log("executeAjaxPedido");
             var dataToSend = datos;
             var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
@@ -185,7 +188,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: successFunc,
-                error: errorFunc2
+                error: errorFunc2,
+                complete: ocultarGIF
             });
             //comento successFunc y errorFunc de aca porque uso las de Layout asi no repito
             function successFunc2(data, status) {
@@ -218,11 +222,8 @@
         }
 
 
-
         $(document).ready(function () {
-
             toastr["info"]("You can drag and drop item images to add it to the cart!", "Psss")
-
             $(".fancybox").fancybox({
                 openEffect: 'elastic',
                 closeEffect: 'elastic',
@@ -287,8 +288,11 @@
             if (cantidad == 0) {
                 cantidad = 1;
             }
-            var DatosPedido = { id: id, cantidad: cantidad }
-            executeAjaxPedido(DatosPedido);
+            if (cantidad < 999) {
+                var DatosPedido = { id: id, cantidad: cantidad }
+                executeAjaxPedido(DatosPedido);
+
+            }
 
         });
         $('.borrar').click(function () {
@@ -299,9 +303,11 @@
             if (cantidad == 0) {
                 cantidad = 1;
             }
-            cantidad *= -1;
-            var DatosPedido = { id: id, cantidad: cantidad }
-            executeAjaxPedido(DatosPedido);
+            if (cantidad < 999 && cantidad > -999) {
+                cantidad *= -1;
+                var DatosPedido = { id: id, cantidad: cantidad }
+                executeAjaxPedido(DatosPedido);
+            }
         });
     </script>
 

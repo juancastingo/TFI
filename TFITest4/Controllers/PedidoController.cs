@@ -325,13 +325,15 @@ namespace TFITest4.Controllers
                                 carri.Precio = p.PrecioActual;
                                 carri.Nombre = p.Nombre;
                                 carri.IDPrecioDetalle = p.IDPrecioDetalle;
+                                break;
                             }
                         }
+                        ListCarrito.Productos.Add(carri);
+                        Session["ListCarrito"] = ListCarrito;
                     }
                     //carri.Precio = 100;
                     //var cartObjects = (Session["CartObjects"] as List<carrito>) ?? new List<carrito>();
-                    ListCarrito.Productos.Add(carri);
-                    Session["ListCarrito"] = ListCarrito;
+
                 }
                 else
                 {

@@ -55,6 +55,12 @@ namespace DAL
             AutoMapper.Mapper.CreateMap<BIZDocumentoTipo, DocumentoTipo>();
             AutoMapper.Mapper.CreateMap<BIZDocumentoDetalle, DocumentoDetalle>();
 
+            //precio
+            AutoMapper.Mapper.CreateMap<ListaPrecio, BIZListaPrecio>();
+            AutoMapper.Mapper.CreateMap<BIZListaPrecio, ListaPrecio>();
+                //al reves
+                AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
+                AutoMapper.Mapper.CreateMap<BIZPrecioDetalle, PrecioDetalle>();
         }
     }
 }

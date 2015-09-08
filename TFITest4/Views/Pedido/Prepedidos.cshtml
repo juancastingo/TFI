@@ -10,7 +10,7 @@
 
 <h2>Prepedidos - @ViewBag.Empresa</h2>
 
-<table id="tableJqueryPedido" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>NR Prepedido
@@ -21,7 +21,8 @@
             <th>
                 <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
             </th>
-            <th colspan="2" style="width:100px;">
+            <th class="transparente"></th>
+            <th style="width:100px;">
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>Estado
@@ -113,7 +114,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data, status) {
-                        toastr["success"]("The cart has been removed", "Success!")
+                        toastr["success"]("@Language.OKNormal", "Success!")
                         location.reload();
                     },
                     error: function (status) {

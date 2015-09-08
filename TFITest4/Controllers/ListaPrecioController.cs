@@ -1,120 +1,110 @@
-﻿using System;
+﻿using AutoMapper;
+using BIZ;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.ORM;
 
-namespace TFITest4.Controllers
+namespace TFITest4.Models
 {
     public class ListaPrecioController : Controller
     {
-        private IIDTest2Entities db = new IIDTest2Entities();
-
         //
-        // GET: /Default1/
+        // GET: /ListaPrecio2/
 
         public ActionResult Index()
         {
-            return View(db.ListaPrecio.ToList());
+            DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
+            var lista = PrecioWorker.getAllListaPrecio();
+            var rList = Mapper.Map<List<BIZListaPrecio>, List<ModelListaPrecio>>(lista);
+            return View(rList);
         }
 
         //
-        // GET: /Default1/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            ListaPrecio listaprecio = db.ListaPrecio.Find(id);
-            if (listaprecio == null)
-            {
-                return HttpNotFound();
-            }
-            return View(listaprecio);
-        }
-
-        //
-        // GET: /Default1/Create
+        // GET: /ListaPrecio2/Create
 
         public ActionResult Create()
+        {
+
+            return View();
+        }
+
+        //
+        // POST: /ListaPrecio2/Create
+
+        [HttpPost]
+        public ActionResult Create(BIZListaPrecio ListaPrecio)
+        {
+            try
+            {
+                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
+                ListaPrecio.FechaUltimaMod = DateTime.Now;
+                PrecioWorker.CreateListaPrecio(ListaPrecio);
+                TempData["OKNormal"] = Resources.Language.OKNormal;
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /ListaPrecio2/Edit/5
+
+        public ActionResult Edit(int id)
+        {
+            DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
+            var Lista = PrecioWorker.GetByID(id);
+            var rList = Mapper.Map<BIZListaPrecio, ModelListaPrecio>(Lista);
+            return View(rList);
+        }
+
+        //
+        // POST: /ListaPrecio2/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(int id, BIZListaPrecio collection)
+        {
+            try
+            {
+                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
+                PrecioWorker.UpdateListaPrecio(collection);
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /ListaPrecio2/Delete/5
+
+        public ActionResult Delete(int id)
         {
             return View();
         }
 
         //
-        // POST: /Default1/Create
+        // POST: /ListaPrecio2/Delete/5
 
         [HttpPost]
-        public ActionResult Create(ListaPrecio listaprecio)
+        public ActionResult Delete(int id, FormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.ListaPrecio.Add(listaprecio);
-                db.SaveChanges();
+                // TODO: Add delete logic here
+
                 return RedirectToAction("Index");
             }
-
-            return View(listaprecio);
-        }
-
-        //
-        // GET: /Default1/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            ListaPrecio listaprecio = db.ListaPrecio.Find(id);
-            if (listaprecio == null)
+            catch
             {
-                return HttpNotFound();
+                return View();
             }
-            return View(listaprecio);
-        }
-
-        //
-        // POST: /Default1/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(ListaPrecio listaprecio)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(listaprecio).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(listaprecio);
-        }
-
-        //
-        // GET: /Default1/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            ListaPrecio listaprecio = db.ListaPrecio.Find(id);
-            if (listaprecio == null)
-            {
-                return HttpNotFound();
-            }
-            return View(listaprecio);
-        }
-
-        //
-        // POST: /Default1/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ListaPrecio listaprecio = db.ListaPrecio.Find(id);
-            db.ListaPrecio.Remove(listaprecio);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
