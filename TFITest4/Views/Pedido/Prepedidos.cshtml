@@ -4,10 +4,12 @@
 @{
     ViewBag.Title = "Prepedidos";
 }
-<head>
-    <link href="~/Content/simptip.min.css" rel="stylesheet" />
-</head>
+@section headSection {
 
+    <link href="~/Content/simptip.min.css" rel="stylesheet" />
+
+    
+}
 <h2>Prepedidos - @ViewBag.Empresa</h2>
 
 <table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
@@ -88,7 +90,7 @@
                 dataType: "json",
                 success: successFunc,
                 error: errorFunc,
-                complete: ocultarGIF
+                complete: Doscosas
             });
             function successFunc(data, status) {
                 console.log(data);
@@ -98,8 +100,11 @@
             function errorFunc(status) {
                 toastr["error"]("@Language.ErrorLogInAgain", "Error")
             }
+            function Doscosas() {
+                GetInit();
+                ocultarGIF();
+            }
             
-            GetInit();
         });
 
         $('.DescartarPrePedido').click(function () {
