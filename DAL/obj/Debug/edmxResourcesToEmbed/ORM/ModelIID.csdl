@@ -169,6 +169,9 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="StockCheck" ReturnType="Collection(Int32)">
+      <Parameter Name="IDProd" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Bitacora">
     <Key>
@@ -496,7 +499,7 @@
     <Property Name="FechaAlta" Type="DateTime" Precision="3" />
     <Property Name="Idioma" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
     <Property Name="IDTipoUsuario" Type="Int32" />
-    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Bitacora" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Usuario" ToRole="Bitacora" />
     <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="Usuario" ToRole="ClienteEmpresa" />
     <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_Usuario1" FromRole="Usuario" ToRole="Documento" />

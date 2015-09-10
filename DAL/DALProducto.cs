@@ -54,5 +54,16 @@ namespace DAL
             return ListaP;
 
         }
+
+        public int CheckStockProd(int IDProd)
+        {
+            System.Nullable<int> iReturnValue = db.StockCheck(IDProd).SingleOrDefault();
+            if (iReturnValue == null)
+            {
+                iReturnValue = 0;
+            }
+            return (int)iReturnValue;
+        }
+
     }
 }

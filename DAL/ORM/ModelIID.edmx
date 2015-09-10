@@ -421,7 +421,7 @@
           <Property Name="FechaAlta" Type="datetime" />
           <Property Name="Idioma" Type="varchar" MaxLength="10" />
           <Property Name="IDTipoUsuario" Type="int" />
-          <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+          <Property Name="FechaUltimaMod" Type="datetime" />
         </EntityType>
         <Association Name="FK_Bitacora_Usuario">
           <End Role="Usuario" Type="IIDTest2Model.Store.Usuario" Multiplicity="0..1" />
@@ -790,6 +790,9 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StockCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProd" Type="int" Mode="In" />
+        </Function>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -964,6 +967,9 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="StockCheck" ReturnType="Collection(Int32)">
+            <Parameter Name="IDProd" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Bitacora">
           <Key>
@@ -1291,7 +1297,7 @@
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <Property Name="Idioma" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="IDTipoUsuario" Type="Int32" />
-          <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Bitacora" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Usuario" ToRole="Bitacora" />
           <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="Usuario" ToRole="ClienteEmpresa" />
           <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_Usuario1" FromRole="Usuario" ToRole="Documento" />
@@ -1980,6 +1986,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IIDTest2Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IIDTest2Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="StockCheck" FunctionName="IIDTest2Model.Store.StockCheck" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

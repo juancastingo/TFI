@@ -157,5 +157,14 @@ namespace DAL.ORM
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<Nullable<int>> StockCheck(Nullable<int> iDProd)
+        {
+            var iDProdParameter = iDProd.HasValue ?
+                new ObjectParameter("IDProd", iDProd) :
+                new ObjectParameter("IDProd", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("StockCheck", iDProdParameter);
+        }
     }
 }

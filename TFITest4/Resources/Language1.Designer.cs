@@ -259,6 +259,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Puedes arrastrar las fotos del producto para agregarlas al carrito.
+        /// </summary>
+        public static string pss {
+            get {
+                return ResourceManager.GetString("pss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirmar contraseña.
         /// </summary>
         public static string RepeatPassword {

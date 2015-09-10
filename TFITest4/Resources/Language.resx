@@ -210,4 +210,7 @@
   <data name="UsuarioNoHabilitado" xml:space="preserve">
     <value>El usuario no se encuentra habilitado para ingresar al sistema</value>
   </data>
+  <data name="pss" xml:space="preserve">
+    <value>Puedes arrastrar las fotos del producto para agregarlas al carrito</value>
+  </data>
 </root>

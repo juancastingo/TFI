@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using DAL.ORM;
 using BIZ;
 using TFITest4.Resources;
+using System.Data.Objects;
+using System.Data.SqlClient;
 
 namespace TFITest4.Controllers
 {
@@ -532,9 +534,19 @@ namespace TFITest4.Controllers
             string devolver = "";
             try
             {
+                //prueba stock
+                //db.
+                //db.Database.<"Exec StockCheck @IDProd",1>();
+                //int StockProdCant = db.Database.ExecuteSqlCommand("Exec StockCheck @IDProd= " + 1);
+                //int StockProdCant = db.Database.SqlQuery<int>("Exec StockCheck @IDProd", 1);
+              
+
+                //int StockProdCant = db.StockCheck(idParam);
+                //System.Nullable<int> iReturnValue = db.StockCheck(3).SingleOrDefault();
                  //primero tengo q ver por cada producto del carrito si hay stock.
                  //cargo el carrito q está en sesion.
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
+                DAL.DALProducto ProdWorker = new DAL.DALProducto();
                 //stockCarrito Stock = new stockCarrito();
 
                 Boolean TodoOK = false;
@@ -543,7 +555,8 @@ namespace TFITest4.Controllers
                     TodoOK = true;
                     foreach (var p in ListCarrito.Productos)
                    {
-                       p.stock = 1; // aca me traería el stock del producto
+                       //p.stock = 1; // aca me traería el stock del producto
+                       p.stock = ProdWorker.CheckStockProd(p.id);
                         if (p.Cant > p.stock) {
                             TodoOK = false;
                         }

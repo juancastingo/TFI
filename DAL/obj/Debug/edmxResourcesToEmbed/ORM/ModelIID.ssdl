@@ -416,7 +416,7 @@
     <Property Name="FechaAlta" Type="datetime" />
     <Property Name="Idioma" Type="varchar" MaxLength="10" />
     <Property Name="IDTipoUsuario" Type="int" />
-    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <Association Name="FK_Bitacora_Usuario">
     <End Role="Usuario" Type="IIDTest2Model.Store.Usuario" Multiplicity="0..1" />
@@ -785,4 +785,7 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StockCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDProd" Type="int" Mode="In" />
+  </Function>
 </Schema>
