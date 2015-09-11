@@ -911,7 +911,6 @@
     <Content Include="Views\PrecioDetalle\Create.cshtml" />
     <Content Include="Views\PrecioDetalle\Edit.cshtml" />
     <Content Include="Views\PrecioDetalle\Delete.cshtml" />
-    <Content Include="Views\Pedido\Pedido.cshtml" />
     <Content Include="Views\DocumentoORM\Index.cshtml" />
     <Content Include="Views\DocumentoORM\Details.cshtml" />
     <Content Include="Views\DocumentoORM\Create.cshtml" />
@@ -926,6 +925,7 @@
     <Content Include="Views\ListaPrecio\Index.cshtml" />
     <Content Include="Views\ListaPrecio\Create.cshtml" />
     <Content Include="Views\ListaPrecio\Edit.cshtml" />
+    <Content Include="Views\Pedido\Pedido.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

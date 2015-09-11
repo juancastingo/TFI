@@ -579,6 +579,72 @@ namespace TFITest4.Controllers
 
 
 
+        [Authorize]
+        public ActionResult Pedido()
+        {
+            try
+            {
+                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                var docs = DALDoc.getDocsByEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 3, -1); //3 es el tipo de documento. Acá pedido. -1 es para traer todos
+                float monto;
+                foreach (var doc in docs)
+                {
+                    monto = 0;
+                    foreach (var det in doc.DocumentoDetalle)
+                    {
+                        monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
+                    }
+                    doc.Monto = monto;
+                }
+
+                ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
+                return View(docs);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("CerrarSesion", "Login");
+            }
+        }
+
+
+
+
+        public ActionResult VerPedido(string Pedido)
+        {
+            try
+            {
+
+                int IDPedido = int.Parse(Pedido);
+                //aca cargo los datos del Prepedido en la sesion
+                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
+                var PrePedido = DALDoc.getDocByID(IDPedido);
+                ListCarrito carritoPedido = new ListCarrito();
+                carritoPedido.IDDocumento = PrePedido.IDDocumento;
+                modelCarrito item;
+                foreach (var p in PrePedido.DocumentoDetalle)
+                {
+                    item = new modelCarrito();
+                    item.id = p.PrecioDetalle.Producto.IDProducto;
+                    item.Nombre = p.PrecioDetalle.Producto.Nombre;
+                    item.IDPrecioDetalle = p.IDPrecioDetalle;
+                    item.Cant = p.Cantidad;
+                    item.Precio = (double)p.PrecioDetalle.Precio;
+                    carritoPedido.Productos.Add(item);
+                }
+                
+
+                //Session["CarritoPedido"] = carritoPedido;
+                ViewBag.NrPedido = carritoPedido.IDDocumento;
+                return Json(new { Result = "", Pedido = carritoPedido }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("CerrarSesion", "Login");
+            }
+
+        }
+
 
 
         protected override void Dispose(bool disposing)

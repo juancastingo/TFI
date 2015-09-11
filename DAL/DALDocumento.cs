@@ -26,9 +26,9 @@ namespace DAL
                 .Where(b => b.IDClienteEmpresa == IDEmpresa); //aca tengo q traer de sesion
             if (tipoDoc != null)
             {
-                     Daldocs = db.Documento
-                    .Where(b => b.IDClienteEmpresa == IDEmpresa)
-                    .Where(b => b.IDDocumentoTipo == tipoDoc);
+                Daldocs = db.Documento
+               .Where(b => b.IDClienteEmpresa == IDEmpresa)
+               .Where(b => b.IDDocumentoTipo == tipoDoc);
             }
             var Ddocs = Daldocs.ToList();
             var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
@@ -40,13 +40,24 @@ namespace DAL
 
             var Daldocs = db.Documento
                 .Where(b => b.IDClienteEmpresa == IDEmpresa);
+
             if (tipoDoc != null)
             {
-                Daldocs = db.Documento
-               .Where(b => b.IDClienteEmpresa == IDEmpresa)
-               .Where(b => b.IDDocumentoTipo == tipoDoc)
-               .Where(b => b.IDEstado == IdEstado); //aca tengo q traer de sesion
+                if (IdEstado == -1)
+                {
+                    Daldocs = db.Documento
+                   .Where(b => b.IDClienteEmpresa == IDEmpresa)
+                   .Where(b => b.IDDocumentoTipo == tipoDoc);
+                }
+                else
+                {
+                    Daldocs = db.Documento
+                   .Where(b => b.IDClienteEmpresa == IDEmpresa)
+                   .Where(b => b.IDDocumentoTipo == tipoDoc)
+                   .Where(b => b.IDEstado == IdEstado); //aca tengo q traer de sesion
+                }
             }
+
             var Ddocs = Daldocs.ToList();
             var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
             return documentos;
@@ -55,7 +66,7 @@ namespace DAL
         public BIZDocumento getDocByID(int IDDocATrear)
         {
             var Daldoc = db.Documento
-                .Where(b => b.IDDocumento == IDDocATrear ).FirstOrDefault(); //aca tengo q traer de sesion
+                .Where(b => b.IDDocumento == IDDocATrear).FirstOrDefault(); //aca tengo q traer de sesion
 
             var documento = Mapper.Map<Documento, BIZDocumento>(Daldoc);
             return documento;
@@ -71,7 +82,8 @@ namespace DAL
 
 
 
-        public int SaveDocumento(BIZDocumento _Documento) {
+        public int SaveDocumento(BIZDocumento _Documento)
+        {
             //Documento SaveDoc = Mapper.Map<BIZDocumento, Documento>(_Documento); //no se puede mappear aca?
             Documento OtroDoc = new Documento();
             OtroDoc.CodigoExterno = _Documento.CodigoExterno;
@@ -106,12 +118,12 @@ namespace DAL
 
         public void UpdateDocumento(BIZDocumento _Documento)
         {
-            
+
             //Documento SaveDoc = Mapper.Map<BIZDocumento, Documento>(_Documento); //no se puede mappear aca?
             Documento BaseDoc = new Documento();
             DateTime fecha = (DateTime)_Documento.FechaUltimaModificacion;
 
-            string query = "UPDATE Documento SET FechaUltimaModificacion='" + fecha.ToString("yyyy-MM-dd HH:mm:ss") +"',IDUsuarioUltimaModificacion=" + _Documento.IDUsuarioUltimaModificacion + "  WHERE IDDocumento = " + _Documento.IDDocumento;
+            string query = "UPDATE Documento SET FechaUltimaModificacion='" + fecha.ToString("yyyy-MM-dd HH:mm:ss") + "',IDUsuarioUltimaModificacion=" + _Documento.IDUsuarioUltimaModificacion + "  WHERE IDDocumento = " + _Documento.IDDocumento;
             db.Database.ExecuteSqlCommand(query);
             DocumentoDetalle detalle;
             foreach (var d in _Documento.DocumentoDetalle)
@@ -127,15 +139,15 @@ namespace DAL
 
 
 
-//var original = db.Documento.Find(_Documento.IDDocumento);
+            //var original = db.Documento.Find(_Documento.IDDocumento);
 
             //if (original != null)
             //{
-                //db.Documento
+            //db.Documento
             //((IObjectContextAdapter)db).ObjectContext.Detach(SaveDoc);
 
-                //db.Entry(SaveDoc).State = EntityState.Modified;
-               // db.SaveChanges();
+            //db.Entry(SaveDoc).State = EntityState.Modified;
+            // db.SaveChanges();
             //}
 
 
@@ -169,7 +181,7 @@ namespace DAL
             //    OtroDoc.DocumentoDetalle.Add(DocDetalle);
             //}
             //db.Entry(SaveDoc).State = EntityState.Modified;
-            
+
             //db.SaveChanges();
             //db.Entry(OtroDoc).State = EntityState.Modified;
             //db.SaveChanges();

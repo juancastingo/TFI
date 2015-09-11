@@ -1,93 +1,76 @@
-﻿@model IEnumerable<BIZ.BIZProducto>
-
+﻿@model IEnumerable<BIZ.BIZDocumento>
+@using TFITest4.Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pedidos";
 }
 
-<head>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="~/Content/Pedido.css" rel="stylesheet" />
-    </style>
-</head>
+@section headSection {
+    <link href="~/Content/simptip.min.css" rel="stylesheet" />
+}
+
+<h2>Pedidos - @ViewBag.Empresa</h2>
 
 
-
-
-<h2>Pedido</h2>
-
-<div id="cart" style="display: none">
-    <h1 class="ui-widget-header">Shopping Cart</h1>
-    <div class="ui-widget-content">
-        <ol>
-        <span class="glyphicon glyphicon-shopping-cart" style="font-size: 68px;"></span>
-            <li class="placeholder">Add your items here</li>
-        </ol>
-    </div>
-</div>
-
-<table class="table tableJqueryNormal table-bordered table-striped" cellspacing="0" width="100%">
+<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
-            @*            <th>
-                @Html.DisplayNameFor(model => model.IDProducto)
-            </th>*@
-            <th>Producto
-                @*@Html.DisplayNameFor(model => model.Nombre)*@
+            <th>NR
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
-            </th>*@
-            @*            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
+                @Html.DisplayNameFor(model => model.FechaEmision)
             </th>
-             <th>
-                @Html.DisplayNameFor(model => model.PrecioActual)
+            <th>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
             </th>
-            <th>Cantidad
+            <th class="transparente"></th>
+            <th style="width: 100px;">
+                @Html.DisplayNameFor(model => model.Monto)
             </th>
-           
-            @*        <th>
-            @Html.DisplayNameFor(model => model.UnidadMedida)
-        </th>*@
-        <th style="width: auto"></th>
+            <th>Estado
+            </th>
+            <th>Usuario Creacion
+            </th>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Usuario Ultima modificacion">UUM</span>
+            </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr id="@item.IDProducto">
-
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.ProductoCategoria.Detalle)
-                </td>*@
-                @*                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>*@
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Imagen)*@
-                    <a class="fancybox" href="@item.Imagen">
-                        <img class="PImage" src="@item.Imagen" alt="" /></a>
+                    @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    $@Html.DisplayFor(modelItem => item.PrecioActual)
+                    @Html.DisplayFor(modelItem => item.FechaEmision)
                 </td>
                 <td>
-                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />
+                    @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
                 </td>
-                @*        <td>
-            @Html.DisplayFor(modelItem => item.UnidadMedida)
-        </td>*@
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero">
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
+                </td>
                 <td>
-                    <a href="#" class="agregar">Agregar</a>
-                    <a href="#" class="borrar">Borrar</a>
-                    @* @Html.ActionLink("Agregar", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                 @*   @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario1.Nombre)
+                </td>
+                <td>
+                    <p>
+                        <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >ver</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="CargarPedidos btn btn-primary btn-sm" >Imprimir</button>
+                        @{if (item.EstadoMisc.Detalle != "Facturado")
+                          {
+                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Cancelar</button>
+                          }
+                        }
+                    </p>
                 </td>
             </tr>
         }
@@ -96,219 +79,99 @@
 
 
 
-<div class="col-md-4 col-xs-12 column">
-    <h2>Carrito</h2>
-    <div id="carrito">
-        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Prod</th>
-                    <th>Cant</th>
-                    <th>$</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+<div class="modal fade" id="PedidoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">Pedido</h3>
+                <span class="field-validation-error" id="TextoCarritoPedidoModal"></span>
+            </div>
+            <div class="modal-body" id="PedidoModalBody">
+                <h5 class="text-center">Pedido nr# <span id="NrPedido"></span></h5>
+                <table class="table table-striped">
+                    <thead id="tblHead">
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th colspan="2">Unit Price</th>
+                            <th colspan="2">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div id="PedidoDiv">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+            </div>
 
-    <div id="PostDiv">
-        <h4>Subtotal= @ViewBag.subtotal</h4>
+        </div>
+        <!-- /.modal-content -->
     </div>
-
+    <!-- /.modal-dialog -->
 </div>
-
-<div class="row"></div>
-<hr />
-<hr />
-<hr />
-
-
-
-<div id="popover_content_carrito" style="display: none">
-    <div>
-        <p>aca algo</p>
-
-    </div>
-</div>
-
-
+<!-- /.modal -->
 
 @section EndScript{
 
-
-
-    <script type="text/javascript">
-
-
-        $(function () {
-            $('.tableJqueryNormal img').draggable({
-                appendTo: "body",
-                helper: "clone",
-                start: function () {
-                    $('#cart').show("blind");
-                    
-                    //console.log("start");
+    <script>
+        //.attr('data-val') 
+        $('.VerPedidos').click(function () {
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("VerPedido", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ Pedido: $(this).attr('data-val') }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    //toastr["success"]("@Language.OKNormal", "Success!")
+                    console.log(data);
+                    //location.reload();
+                    list = data.Pedido.Productos;
+                    //console.log("lista:");
+                    console.log(list);
+                    $('#NrPedido').text(data.Pedido.IDDocumento);
+                    var subt = 0;
+                    var count = 0;
+                    $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                    $('#PedidoModalBody table > tbody').html('');
+                    list.forEach(function (elem) {
+                        //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                        subt += (elem.Precio * elem.Cant);
+                        thisSubtotal = (elem.Precio * elem.Cant);
+                        $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                    });
+                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= 21 % </h4><h4 class="text-right">Total= $ ' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
+                    //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                    $('#PedidoModal').modal('toggle');
                 },
-                stop: function () {
-                    $('#cart').hide("blind");
-                    //console.log("stop");
-                }
-
-            });
-            $("#cart ol").droppable({
-                activeClass: "ui-state-default",
-                hoverClass: "ui-state-hover",
-                accept: ":not(.ui-sortable-helper)",
-                drop: function (event, ui) {
-                    //$(this).find(".placeholder").remove();
-                    //$("<li></li>").text(ui.draggable.closest('td').prev('td').prev('td').text()).appendTo(this);
-                    id = ui.draggable.closest('tr').attr('id');
-                    cantidad = ui.draggable.closest('tr').find('td').eq(3).children().val()
-                    ui.draggable.closest('tr').find('td').eq(3).children().val('');
-                    if (cantidad == "") {
-                        cantidad = 1;
-                    }
-                    console.log("atroden " + id + " " + cantidad);
-                    var DatosPedido = { id: id, cantidad: cantidad }
-                    executeAjaxPedido(DatosPedido);
-
-                }
-            }).sortable({
-                items: "li:not(.placeholder)",
-                sort: function () {
-                    // gets added unintentionally by droppable interacting with sortable
-                    // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-                    $(this).removeClass("ui-state-default");
-
-                }
-            });
-        });
-
-
-        function executeAjaxPedido(datos) {
-            console.log("executeAjaxPedido");
-            var dataToSend = datos;
-            var serviceURL = '@Url.Action("PedidoAjax", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify(dataToSend),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFunc,
-                error: errorFunc
+                error: function (status) {
+                    toastr["error"]("@Language.ErrorLogInAgain", "Error")
+                },
+                complete: ocultarGIF
             });
 
-            function successFunc(data, status) {
-                console.log(typeof (data));
-                console.log(data);
-                list = data;
-                var subt = 0;
-                $('#carrito table > tbody').html('');
-                list.forEach(function (elem) {
-                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
-                });
-                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
-
-                $('.CarritoSubtotal').html("$ " + subt);
-                if (subt == 0) {
-                    $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
-                } else {
-                    $('#popover_content_wrapper').find("p:first").html("");
-                }
-                //alert(data);
-            }
-
-            function errorFunc() {
-                //alert('error');
-                toastr["error"]("Please log in again", "Error")
-
-            }
-        }
-
-
-
-        $(document).ready(function () {
-
-            toastr["info"]("You can drag and drop item images to add it to the cart!","Psss")
-
-            $(".fancybox").fancybox({
-                openEffect: 'elastic',
-                closeEffect: 'elastic',
-                nextEffect: 'fade',
-                padding: 0,
-                closeBtn: false,
-
-            });
-
-
-            var serviceURL = '@Url.Action("GetInit", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: param = "",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFuncInit,
-                error: errorFuncInit
-            });
-
-            function successFuncInit(data, status) {
-                console.log(data);
-                list = data;
-                var subt = 0;
-                $('#carrito table > tbody').html('');
-                list.forEach(function (elem) {
-                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
-                });
-
-
-                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
-
-
-            }
-
-            function errorFuncInit() {
-                //alert('error');
-                toastr["error"]("Please log in again", "Error")
-            }
-
-
-        });
-
-        var list;
-
-        $('.agregar').click(function () {
-            var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
-            console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
-            if (cantidad == 0) {
-                cantidad = 1;
-            } 
-                var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido);
             
-        });
-        $('.borrar').click(function () {
-            var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
-            console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
-            if (cantidad == 0) {
-                cantidad = 1;
-            }
-            cantidad *= -1;
-            var DatosPedido = { id: id, cantidad: cantidad }
-            executeAjaxPedido(DatosPedido);
-        });
-    </script>
 
-    @*jquery UI*@
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        });
+
+
+            //$(document).ready(function () {
+            //    $('.MontoPrePedido').each(function (index) {
+            //        esto = $(this).text();
+
+            //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+            //    });
+            //});
+    </script>
 }
