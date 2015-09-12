@@ -210,6 +210,12 @@
   <data name="UsuarioNoHabilitado" xml:space="preserve">
     <value>The User is not Enabled to access the system</value>
   </data>
+  <data name="action" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="nuevo" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="pss" xml:space="preserve">
     <value>You can drag and drop item images to add it to the cart!</value>
   </data>

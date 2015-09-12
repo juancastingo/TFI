@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelListaPrecio>
+@using TFITest4.Resources;
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
 </p>
 <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
@@ -21,7 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Activo)
             </th>
-            <th></th>
+            <th>
+                @TFITest4.Resources.Language.action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +43,9 @@
                     @item.Activo
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IDListaPrecio })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
+                   <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >Copy</button>
+
                 </td>
             </tr>
         }

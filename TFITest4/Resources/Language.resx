@@ -213,4 +213,10 @@
   <data name="pss" xml:space="preserve">
     <value>Puedes arrastrar las fotos del producto para agregarlas al carrito</value>
   </data>
+  <data name="action" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="nuevo" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
 </root>

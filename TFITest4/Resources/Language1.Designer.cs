@@ -61,6 +61,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Acciones.
+        /// </summary>
+        public static string action {
+            get {
+                return ResourceManager.GetString("action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Atención!.
         /// </summary>
         public static string Atencion {
@@ -192,6 +201,15 @@ namespace TFITest4.Resources {
         public static string NombreUsuario {
             get {
                 return ResourceManager.GetString("NombreUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nuevo.
+        /// </summary>
+        public static string nuevo {
+            get {
+                return ResourceManager.GetString("nuevo", resourceCulture);
             }
         }
         

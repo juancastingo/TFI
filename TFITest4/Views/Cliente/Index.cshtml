@@ -45,6 +45,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDTipoIVA)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -90,6 +93,10 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                 <td>
+                    <span>@item.TipoIVA.Detalle - </span><span>@item.TipoIVA.Valor.ToString().Substring(2, @item.TipoIVA.Valor.ToString().Length-2)%</span>
+                     @*@Html.DisplayFor(modelItem => item.TipoIVA.Detalle)*@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.IDClienteEmpresa }, new { @class = "btn btn-primary", @style = "color:white" })
