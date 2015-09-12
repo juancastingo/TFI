@@ -69,7 +69,7 @@ namespace DAL
             TSave.Password = oUsuario.Password;
             TSave.Telefono = oUsuario.Telefono;
             TSave.Usuario1 = oUsuario.Usuario1;
-            TSave.IDClienteEmpresa = null;
+            TSave.IDClienteEmpresa = oUsuario.IDClienteEmpresa;
             TSave.Documento = null;
             TSave.Documento1 = null;
             TSave.Bitacora = null;

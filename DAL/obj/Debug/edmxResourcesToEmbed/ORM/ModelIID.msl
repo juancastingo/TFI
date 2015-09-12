@@ -32,7 +32,7 @@
           <ScalarProperty Name="CUIT" ColumnName="CUIT" />
           <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
           <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
-          <ScalarProperty Name="TipoIVA" ColumnName="TipoIVA" />
+          <ScalarProperty Name="IDTipoIVA" ColumnName="IDTipoIVA" />
           <ScalarProperty Name="IDDireccion" ColumnName="IDDireccion" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Email" ColumnName="Email" />

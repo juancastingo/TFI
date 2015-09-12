@@ -175,7 +175,7 @@
           <Property Name="CUIT" Type="varchar" MaxLength="50" />
           <Property Name="RazonSocial" Type="varchar(max)" />
           <Property Name="NombreFantasia" Type="varchar(max)" />
-          <Property Name="TipoIVA" Type="int" />
+          <Property Name="IDTipoIVA" Type="int" />
           <Property Name="IDDireccion" Type="int" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
@@ -467,7 +467,7 @@
               <PropertyRef Name="IDTipoIVA" />
             </Principal>
             <Dependent Role="ClienteEmpresa">
-              <PropertyRef Name="TipoIVA" />
+              <PropertyRef Name="IDTipoIVA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,14 +1002,14 @@
           <Property Name="CUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="RazonSocial" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="NombreFantasia" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="TipoIVA" Type="Int32" />
+          <Property Name="IDTipoIVA" Type="Int32" />
           <Property Name="IDDireccion" Type="Int32" />
           <Property Name="Telefono" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="ClienteEmpresa" ToRole="Direccion" />
           <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc" FromRole="ClienteEmpresa" ToRole="EstadoMisc" />
-          <NavigationProperty Name="TipoIVA1" Relationship="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" FromRole="ClienteEmpresa" ToRole="TipoIVA" />
+          <NavigationProperty Name="TipoIVA" Relationship="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" FromRole="ClienteEmpresa" ToRole="TipoIVA" />
           <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="ClienteEmpresa" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Cuenta">
@@ -1349,7 +1349,7 @@
               <PropertyRef Name="IDTipoIVA" />
             </Principal>
             <Dependent Role="ClienteEmpresa">
-              <PropertyRef Name="TipoIVA" />
+              <PropertyRef Name="IDTipoIVA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1689,7 +1689,7 @@
                 <ScalarProperty Name="CUIT" ColumnName="CUIT" />
                 <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
-                <ScalarProperty Name="TipoIVA" ColumnName="TipoIVA" />
+                <ScalarProperty Name="IDTipoIVA" ColumnName="IDTipoIVA" />
                 <ScalarProperty Name="IDDireccion" ColumnName="IDDireccion" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

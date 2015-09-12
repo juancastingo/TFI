@@ -18,7 +18,7 @@ namespace TFITest4.Controllers
 
         public ActionResult Index()
         {
-            var clienteempresa = db.ClienteEmpresa.Include(c => c.Direccion).Include(c => c.TipoIVA1);
+            var clienteempresa = db.ClienteEmpresa.Include(c => c.Direccion).Include(c => c.TipoIVA);
             return View(clienteempresa.ToList());
         }
 

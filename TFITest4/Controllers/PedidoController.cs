@@ -23,40 +23,7 @@ namespace TFITest4.Controllers
         public ActionResult Index()
         {
            
-            //var ListaPrecio = db.Database.SqlQuery<int>("select TOP 1 IDListaPrecio from ListaPrecio where FechaDesde < GETDATE() and Activo = 1 order by FechaDesde Desc");
-            //int IDListaPrecioActual = ListaPrecio.FirstOrDefault();
-            //var ListaPrecios = db.PrecioDetalle
-            //    .Where(b => b.IDListaPrecio == IDListaPrecioActual);
-            //var productos = db.Producto.Include(p => p.EstadoMisc).Include(p => p.ProductoCategoria)
-            //    .Where(b => b.IDEstado == 3);
-            //List<BIZProducto> ListaP = new List<BIZProducto>();
-            //BIZProducto Prod;
-            //foreach (var p in productos)
-            //{
-            //    Prod = new BIZProducto();
-            //    Prod.IDProducto = p.IDProducto;
-            //    Prod.Nombre = p.Nombre;
-            //    Prod.Imagen = p.Imagen;
-            //    Prod.Descripcion = p.Descripcion;
-            //    Prod.ProductoCategoria.Detalle = p.ProductoCategoria.Detalle;
-            //    Prod.ProductoCategoria.IDProductoCategoria = p.ProductoCategoria.IDProductoCategoria;
-            //    foreach (var precioDetalle in p.PrecioDetalle)
-            //    {
-            //        if (precioDetalle.IDListaPrecio == IDListaPrecioActual)
-            //        {
-            //            if ((bool)precioDetalle.Activo)
-            //            {
-            //                Prod.PrecioActual = (double)precioDetalle.Precio;
-            //                Prod.IDPrecioDetalle = precioDetalle.IDPrecioDetalle;
-
-            //            }
-            //        }
-            //    }
-            //    if (Prod.PrecioActual != 0)
-            //    {
-            //        ListaP.Add(Prod);
-            //    }
-            //}
+          
 
             DAL.DALProducto DalWorker = new DAL.DALProducto();
             var ListaP = DalWorker.getProductosConPrecio();
@@ -92,6 +59,7 @@ namespace TFITest4.Controllers
             }
             public List<modelCarrito> Productos { get; set; }
             public int IDDocumento { get; set; }
+
         }
 
         public class modelCarrito
@@ -111,107 +79,7 @@ namespace TFITest4.Controllers
         }
 
 
-        //viejo pedido ajax sin ID en la lista
-        [HttpPost]
-        public ActionResult PedidoAjax(ModelPedido item)
-        {
-            try
-            {
-                var productosSesion = Session["productosSesion"];
-                var ListaP = (List<BIZProducto>)productosSesion;
-                var ListCarrito = (Session["ListCarrito"] as List<modelCarrito>) ?? new List<modelCarrito>();
-                int id = Convert.ToInt32(item.id);
-                int cantidad = Convert.ToInt32(item.Cantidad);
-                if (ListCarrito.Count == 0)
-                {
-
-                    modelCarrito carri = new modelCarrito();
-                    carri.id = id;
-                    //carri. = b.Name;
-                    carri.Cant = cantidad;
-                    // carri.Precio = Convert.ToInt32(item.);
-                    if (cantidad > 0) //evitamos negativos
-                    {
-                        foreach (var p in ListaP)
-                        {
-                            if (carri.id == p.IDProducto)
-                            {
-                                carri.Precio = p.PrecioActual;
-                                carri.Nombre = p.Nombre;
-                                carri.IDPrecioDetalle = p.IDPrecioDetalle;
-                            }
-                        }
-                    }
-                    //carri.Precio = 100;
-                    //var cartObjects = (Session["CartObjects"] as List<carrito>) ?? new List<carrito>();
-                    ListCarrito.Add(carri);
-                    Session["ListCarrito"] = ListCarrito;
-                }
-                else
-                {
-                    bool existe = false;
-
-                    for (int i = ListCarrito.Count - 1; i >= 0; i--)
-                    {
-                        //  foreach (carrito elem in cartObjects)
-                        // {
-
-                        if (id == ListCarrito[i].id)
-                        {
-                            ListCarrito[i].Cant += cantidad;
-                            existe = true;
-                        }
-                        if (ListCarrito[i].Cant <= 0)
-                        {
-                            ListCarrito.RemoveAt(i);
-                        }
-
-                    }
-
-                    if (!existe)
-                    {
-                        modelCarrito carri = new modelCarrito();
-                        carri.id = id;
-                        //carri.Name = b.Name;
-                        carri.Cant = cantidad;
-                        foreach (var p in ListaP)
-                        {
-                            if (carri.id == p.IDProducto)
-                            {
-                                carri.Precio = p.PrecioActual;
-                                carri.Nombre = p.Nombre;
-                                carri.IDPrecioDetalle = p.IDPrecioDetalle;
-                            }
-                        }
-                        if (carri.Cant > 0)  // esto para evitar cantidades negativas
-                        {
-                            ListCarrito.Add(carri);
-                        }
-                        //Session["CartObjects"] = cartObjects;
-
-                    }
-                }
-
-                Session["ListCarrito"] = ListCarrito;
-
-
-
-                double Subtotal = 0;
-
-                foreach (modelCarrito elem in ListCarrito)
-                {
-                    Subtotal += (double)elem.Precio * (int)elem.Cant;
-                }
-
-                return Json(ListCarrito, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception er)
-            {
-                ViewBag.AlertError = "Please reload the page";
-                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
+      
 
         [HttpPost]
         [ActionName("GetInit")]
@@ -222,8 +90,11 @@ namespace TFITest4.Controllers
             //nuevo
             var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
             ViewBag.NrPedido = ListCarrito.IDDocumento;
-           
-            return Json(ListCarrito, JsonRequestBehavior.AllowGet);
+            BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+            double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+            string rIVA = IVA.ToString();
+
+            return Json(new { ListCarrito, rIVA}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult LimpiarCarrito()
@@ -255,7 +126,7 @@ namespace TFITest4.Controllers
                     PrePedido.FechaEmision = DateTime.Now;
                     PrePedido.FechaUltimaModificacion = PrePedido.FechaEmision;
                     PrePedido.IDClienteEmpresa = UsuarioIN.IDClienteEmpresa;
-                    PrePedido.IDEstado = 15; //estado activo de PrePedido 16 es "Cancelado"
+                    PrePedido.IDEstado = 15; //estado activo de PrePedido 15
                     PrePedido.IDUsuarioCreacion = UsuarioIN.IDUsuario;
                     PrePedido.IDUsuarioUltimaModificacion = UsuarioIN.IDUsuario;
                     //DocumentoDetalle detalle;
@@ -305,6 +176,7 @@ namespace TFITest4.Controllers
         {
             try
             {
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
                 var productosSesion = Session["productosSesion"];
                 var ListaP = (List<BIZProducto>)productosSesion;
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
@@ -392,8 +264,9 @@ namespace TFITest4.Controllers
                 {
                     Subtotal += (double)elem.Precio * (int)elem.Cant;
                 }
-
-                return Json(ListCarrito, JsonRequestBehavior.AllowGet);
+                double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                string rIVA = IVA.ToString();
+                return Json(new { ListCarrito, rIVA }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception er)
             {
@@ -402,7 +275,6 @@ namespace TFITest4.Controllers
             }
         }
 
-        [Authorize]
         public ActionResult Prepedidos()
         {
             try
@@ -534,15 +406,7 @@ namespace TFITest4.Controllers
             string devolver = "";
             try
             {
-                //prueba stock
-                //db.
-                //db.Database.<"Exec StockCheck @IDProd",1>();
-                //int StockProdCant = db.Database.ExecuteSqlCommand("Exec StockCheck @IDProd= " + 1);
-                //int StockProdCant = db.Database.SqlQuery<int>("Exec StockCheck @IDProd", 1);
-              
-
-                //int StockProdCant = db.StockCheck(idParam);
-                //System.Nullable<int> iReturnValue = db.StockCheck(3).SingleOrDefault();
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"]; //q usuario?
                  //primero tengo q ver por cada producto del carrito si hay stock.
                  //cargo el carrito q está en sesion.
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
@@ -563,8 +427,28 @@ namespace TFITest4.Controllers
                  }
                     if (TodoOK)
                     {
+                        DAL.DALDocumento DalWorker = new DAL.DALDocumento();
                         //aca hago el submit del pedido
+                        BIZDocumento pedido = new BIZDocumento();
+                        pedido.IDDocumentoTipo = 3; //tipo 3 es pedido
+                        pedido.FechaEmision = DateTime.Now;
+                        pedido.FechaUltimaModificacion = pedido.FechaEmision;
+                        pedido.IDClienteEmpresa = UsuarioIN.IDClienteEmpresa;
+                        pedido.IDEstado = 5; //estado activo de pedido 5 es "Pendiente de aprobacion"
+                        pedido.IDUsuarioCreacion = UsuarioIN.IDUsuario;
+                        pedido.IDUsuarioUltimaModificacion = UsuarioIN.IDUsuario;
+                        BIZDocumentoDetalle detalle;
+                        foreach (modelCarrito ItemCarrito in ListCarrito.Productos)
+                        {
+                            detalle = new BIZDocumentoDetalle();
+                            detalle.Cantidad = ItemCarrito.Cant;
+                            detalle.IDPrecioDetalle = ItemCarrito.IDPrecioDetalle;
+                            pedido.DocumentoDetalle.Add(detalle);
+                        }
+                        int IDDocNuevo = DalWorker.SaveDocumento(pedido);
+
                         devolver = @Language.OKNormal;
+                        return Json(new { Result = devolver, CarritoStock = "ir" }, JsonRequestBehavior.AllowGet);
                     }
                     else //algun producto no tiene stock. Lo veo con JS.
                     {
@@ -573,13 +457,12 @@ namespace TFITest4.Controllers
              }
                 }
             catch (Exception ex) { devolver = @Language.ErrorLogInAgain; }
-            return Json(new { Result = devolver }, JsonRequestBehavior.AllowGet);
+            return Json(new { Result = devolver, CarritoStock = "" }, JsonRequestBehavior.AllowGet);
         }
 
 
 
 
-        [Authorize]
         public ActionResult Pedido()
         {
             try
@@ -595,9 +478,9 @@ namespace TFITest4.Controllers
                     {
                         monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
                     }
-                    doc.Monto = monto;
+                    doc.Monto = monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 }
-
+                ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }

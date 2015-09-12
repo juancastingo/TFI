@@ -17,14 +17,13 @@ namespace BIZ
         public string CUIT { get; set; }
         public string RazonSocial { get; set; }
         public string NombreFantasia { get; set; }
-        //public Nullable<int> TipoIVA { get; set; }
+        public Nullable<int> IDTipoIVA { get; set; }
         public Nullable<int> IDDireccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
 
         public BIZDireccion Direccion { get; set; }
         public BIZEstado EstadoMisc { get; set; }
-
-        //public virtual TipoIVA TipoIVA1 { get; set; }
+        public BIZTipoIVA TipoIVA { get; set; }
     }
 }

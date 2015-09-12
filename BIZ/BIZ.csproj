@@ -57,6 +57,7 @@
     <Compile Include="BIZProducto.cs" />
     <Compile Include="BIZProductoCategoria.cs" />
     <Compile Include="BIZProvincia.cs" />
+    <Compile Include="BIZTipoIVA.cs" />
     <Compile Include="BIZTipoUsuario.cs" />
     <Compile Include="BIZUsuario.cs" />
     <Compile Include="BIZLocalidad.cs" />

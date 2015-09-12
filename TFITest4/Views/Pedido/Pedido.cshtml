@@ -138,6 +138,8 @@
                     console.log(data);
                     //location.reload();
                     list = data.Pedido.Productos;
+                    IVA = $('#IvaCliente').val().substring(2);
+                    IVACalc = parseFloat($('#IvaCliente').val().replace(',', '.'));
                     //console.log("lista:");
                     console.log(list);
                     $('#NrPedido').text(data.Pedido.IDDocumento);
@@ -151,7 +153,7 @@
                         thisSubtotal = (elem.Precio * elem.Cant);
                         $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
                     });
-                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= 21 % </h4><h4 class="text-right">Total= $ ' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
+                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $ ' + (subt * IVACalc).format(2, 3, '.', ',') + '</h4>');
                     //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                     $('#PedidoModal').modal('toggle');
                 },

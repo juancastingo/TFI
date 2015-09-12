@@ -170,7 +170,7 @@
     <Property Name="CUIT" Type="varchar" MaxLength="50" />
     <Property Name="RazonSocial" Type="varchar(max)" />
     <Property Name="NombreFantasia" Type="varchar(max)" />
-    <Property Name="TipoIVA" Type="int" />
+    <Property Name="IDTipoIVA" Type="int" />
     <Property Name="IDDireccion" Type="int" />
     <Property Name="Telefono" Type="varchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
@@ -462,7 +462,7 @@
         <PropertyRef Name="IDTipoIVA" />
       </Principal>
       <Dependent Role="ClienteEmpresa">
-        <PropertyRef Name="TipoIVA" />
+        <PropertyRef Name="IDTipoIVA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

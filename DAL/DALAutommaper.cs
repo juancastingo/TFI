@@ -25,12 +25,15 @@ namespace DAL
             AutoMapper.Mapper.CreateMap<BIZLocalidad, Localidad>();
             AutoMapper.Mapper.CreateMap<BIZProvincia, Provincia>();
             AutoMapper.Mapper.CreateMap<BIZPais, Pais>();
+            AutoMapper.Mapper.CreateMap<Direccion, BIZDireccion>();
+            AutoMapper.Mapper.CreateMap<BIZDireccion, Direccion>();
+
             AutoMapper.Mapper.CreateMap<EstadoMisc, BIZEstado>();
             AutoMapper.Mapper.CreateMap<BIZEstado, EstadoMisc>();
             AutoMapper.Mapper.CreateMap<ClienteEmpresa, BIZClienteEmpresa>();
             AutoMapper.Mapper.CreateMap<BIZClienteEmpresa, ClienteEmpresa>();
-            AutoMapper.Mapper.CreateMap<Direccion, BIZDireccion>();
-            AutoMapper.Mapper.CreateMap<BIZDireccion, Direccion>();
+            AutoMapper.Mapper.CreateMap<TipoIVA, BIZTipoIVA>();
+            AutoMapper.Mapper.CreateMap<BIZTipoIVA, TipoIVA>();
 
             //precios
             AutoMapper.Mapper.CreateMap<ListaPrecio, BIZListaPrecio>();

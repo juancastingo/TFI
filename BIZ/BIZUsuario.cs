@@ -20,7 +20,7 @@ namespace BIZ
         public string Usuario1 { get; set; }
         public string Password { get; set; }
         public int IDEstado { get; set; }
-        public int IDClienteEmpresa { get; set; }
+        public Nullable<int> IDClienteEmpresa { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
         public DateTime FechaAlta { get; set; }

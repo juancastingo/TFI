@@ -236,6 +236,8 @@
     }
 
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
+    <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
+
      <script>
          // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
          if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
@@ -288,11 +290,9 @@
 
 
         function successFunc(data, status) {
-            //console.log("success general");
-            list = data.Productos;
-            //console.log("lista:");
-            //console.log(list);
-            $('#NrPrePedido').text(data.IDDocumento);
+            list = data.ListCarrito.Productos;
+            var PreIVA = data.rIVA;
+            $('#NrPrePedido').text(data.ListCarrito.IDDocumento);
             var subt = 0;
             var count = 0;
             $('#carritoModal table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
@@ -301,9 +301,12 @@
                 //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
                 subt += (elem.Precio * elem.Cant);
                 thisSubtotal = (elem.Precio * elem.Cant);
+              
                 $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
             });
-            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= 21 % </h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
+            IVA = PreIVA.substring(2);
+            IVACalc = parseFloat(PreIVA.replace(',', '.'));
+            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= '+ IVA +'% </h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt * IVACalc).format(2, 3, '.', ',') + '</h4>');
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
             if (subt == 0) {
                 $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
@@ -579,7 +582,10 @@
                     dataType: "json",
                     success: function (data) {
                         //console.log(data);
-                        if (data.devolver != "") {
+                        if (data.CarritoStock == "ir") {
+                            window.location = "/Pedido/Pedido";
+                        }
+                        if (data.devolver != "" && data.CarritoStock != "ir") {
                             list = data.CarritoStock.Productos;
                             $('#NrPrePedido').text(data.IDDocumento);
                             var subt = 0;
@@ -603,7 +609,7 @@
                             } else {
                                 $('#popover_content_wrapper').find("p:first").html("");
                             }
-                            $('#TextoCarritoPedido').text("No hay stock");
+                            //$('#TextoCarritoPedido').text("No hay stock");
                             //console.log(data);
                             //$('#TextoCarritoPedido').text("No hay stock");
                             //i = 0;

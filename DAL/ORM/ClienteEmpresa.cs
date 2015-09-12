@@ -28,7 +28,7 @@ namespace DAL.ORM
         public string CUIT { get; set; }
         public string RazonSocial { get; set; }
         public string NombreFantasia { get; set; }
-        public Nullable<int> TipoIVA { get; set; }
+        public Nullable<int> IDTipoIVA { get; set; }
         public Nullable<int> IDDireccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
@@ -36,7 +36,7 @@ namespace DAL.ORM
     
         public virtual Direccion Direccion { get; set; }
         public virtual EstadoMisc EstadoMisc { get; set; }
-        public virtual TipoIVA TipoIVA1 { get; set; }
+        public virtual TipoIVA TipoIVA { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

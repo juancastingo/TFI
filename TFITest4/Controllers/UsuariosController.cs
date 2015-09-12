@@ -57,6 +57,7 @@ namespace TFITest4.Controllers
                 BIZUsuario User = new BIZUsuario();
                 User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(_user);
                 User.IDEstado = 13;
+                User.IDClienteEmpresa = null;
                 DAL.DALUsuario DALUser = new DAL.DALUsuario();
                 DALUser.InsertUsuario(User);
                 TempData["OKNormal"] = Resources.Language.OKNormal;
