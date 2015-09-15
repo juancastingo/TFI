@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelListaPrecio>
 @using TFITest4.Resources;
 
-@{
-    ViewBag.Title = "Index";
+@section headSection {
+      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 }
 
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
+    @Html.ActionLink(@Language.nuevo, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
 </p>
 <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
@@ -37,17 +35,108 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaDesde)
                 </td>
-                
+
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Activo)*@
                     @item.Activo
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
-                   <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >Copy</button>
+                    <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >Copy</button>
 
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
+<div class="modal fade" id="ModalPrecio">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title"></h3>
+                <span class="field-validation-error" id="TextoCarritoPedido"></span>
+            </div>
+            <div class="modal-body" id="ModalPrecioBody">
+                <h5 class="text-center"></h5>
+                <form>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Detalle</th>
+                                <th>Fecha Desde</th>
+                                <th>Factor de multiplicación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" id="CopiaText" required /></td>
+                                <td style="width: 40%;">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input name="FechaDesde" type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" id="CopiaFactor" step="0.1" value="1" required /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="copiarPrecio" type="button" class="btn btn-success">Copy</button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+@section EndScript{
+    <script type="text/javascript">
+        var IDLista;
+        $('.CopyListaPrecio').click(function () {
+            IDLista = $(this).attr('data-val');
+            $('#ModalPrecio').modal('toggle');
+        });
+        $('#copiarPrecio').click(function () {
+            //console.log(IDPedido);
+            CopiaText = $('#CopiaText').val();
+            CopiaFactor = $('#CopiaFactor').val();
+            FechaDesde = $('#datetimepicker1 input').val();
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("CopiarLista", "ListaPrecio")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ IDLista: IDLista, CopiaText: CopiaText, CopiaFactor: CopiaFactor, FechaDesde: FechaDesde }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    console.log(data);
+                },
+                error: errorFunc,
+                complete: ocultarGIF
+            });
+        });
+
+
+    </script>
+}

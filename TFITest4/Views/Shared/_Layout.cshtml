@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>IID</title>
     <link rel="icon" type="image/ico" href="~/Content/images/Logo.ico">
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
@@ -316,7 +316,7 @@
         }
         function errorFunc(status) {
             //alert('error ' + status);
-            toastr["error"]("Please log in again", "Error")
+            toastr["error"]("@Language.ErrorLogInAgain", "Error")
 
         }
 

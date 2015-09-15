@@ -58,5 +58,39 @@ namespace DAL
             }
             catch (Exception ex) {  }
         }
+
+        public void CopyList(BIZListaPrecio ListaPrecionueva, double factor)
+        {
+            try
+            {
+                ListaPrecio ListaT = new ListaPrecio();
+                ListaT.Activo = ListaPrecionueva.Activo;
+                ListaT.Detalle = ListaPrecionueva.Detalle;
+                ListaT.FechaDesde = ListaPrecionueva.FechaDesde;
+                ListaT.FechaUltimaMod = DateTime.Now;
+                PrecioDetalle pd;
+                var ListaACopiar = db.ListaPrecio.SingleOrDefault(x => x.IDListaPrecio == ListaPrecionueva.IDListaPrecio);
+                foreach (var d in ListaACopiar.PrecioDetalle)
+                {
+                    if ((bool)d.Activo)
+                    {
+                        pd = new PrecioDetalle();
+                        pd.FechaAlta = DateTime.Now;
+                        pd.ListaPrecio = null;
+                        pd.Producto = null;
+                        pd.DocumentoDetalle = null;
+                        pd.IDPrecioDetalle = d.IDPrecioDetalle;
+                        pd.IDProducto = d.IDProducto;
+                        pd.Precio = d.Precio * factor;
+                        pd.Activo = true;
+                        pd.FechaUltimaMod = DateTime.Now;
+                        ListaT.PrecioDetalle.Add(pd);
+                    }
+                }
+                db.ListaPrecio.Add(ListaT);
+                db.SaveChanges();
+            }
+            catch (Exception ex) { }
+        }
     }
 }

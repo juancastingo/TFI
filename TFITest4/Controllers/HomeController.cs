@@ -20,15 +20,15 @@ namespace TFITest4.Controllers
         public ActionResult Index()
         {
             //var sequenceQueryResult = db.Database.SqlQuery<string>("select * from Producto").FirstOrDefault();
-           // var ProductList = db.Producto.SqlQuery("select * from Producto where IDProductoCategoria = 3");
-           // var Producto = db.Database.SqlQuery<int>(
-           //            "SELECT count(*) FROM dbo.Producto");
-            
-           // int cant = Producto.Count();
-           // foreach (Producto p in ProductList)
-           // {
-           //     Console.WriteLine(p.Nombre);
-           // }
+            // var ProductList = db.Producto.SqlQuery("select * from Producto where IDProductoCategoria = 3");
+            // var Producto = db.Database.SqlQuery<int>(
+            //            "SELECT count(*) FROM dbo.Producto");
+
+            // int cant = Producto.Count();
+            // foreach (Producto p in ProductList)
+            // {
+            //     Console.WriteLine(p.Nombre);
+            // }
             // lo de arriba anda todo creo...
 
 
@@ -37,6 +37,18 @@ namespace TFITest4.Controllers
 
             ViewBag.url = Request.Url.Host.ToLower();
             ViewBag.numero = "3".PadLeft(8, '0'); //para la factura
+
+            
+            string VisitorsIPAddr = string.Empty;
+            if (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+            {
+                VisitorsIPAddr = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+            }
+            else if (System.Web.HttpContext.Current.Request.UserHostAddress.Length != 0)
+            {
+                //VisitorsIPAddr = System.Web.HttpContext.Current.Request.UserHostAddress;
+            }
+            ViewBag.ip = "Your IP is: " + VisitorsIPAddr; 
 
 
             ////traer productos con precios
@@ -153,6 +165,9 @@ namespace TFITest4.Controllers
             return Json(b, JsonRequestBehavior.AllowGet);
 
         }
+
+
+    
 
 
     }

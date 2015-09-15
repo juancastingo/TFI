@@ -81,30 +81,29 @@ namespace TFITest4.Models
             }
         }
 
-        //
-        // GET: /ListaPrecio2/Delete/5
 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /ListaPrecio2/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult CopiarLista(string IDLista, string CopiaText, string CopiaFactor,string FechaDesde)
         {
             try
             {
-                // TODO: Add delete logic here
+                BIZ.BIZListaPrecio ListaACopiar = new BIZListaPrecio();
+                ListaACopiar.IDListaPrecio = Convert.ToInt32(IDLista); //esto lo pongo acá aunq sea la lista a copiar
+                ListaACopiar.Activo = false;
+                ListaACopiar.Detalle = CopiaText;
+                double factor = Convert.ToDouble(CopiaFactor);
+                ListaACopiar.FechaDesde = Convert.ToDateTime(FechaDesde);
+                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
 
-                return RedirectToAction("Index");
+                PrecioWorker.CopyList(ListaACopiar,factor);
+                return Json(new { Result = "algo"}, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("CerrarSesion", "Login");
             }
+
         }
+
+
     }
 }
