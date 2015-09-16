@@ -130,7 +130,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data, status) {
-                    console.log(data);
+                    if (data.Result == "") {
+                        window.location.reload();
+                        toastr["success"]("@Language.OKNormal", "OK!")
+                    } else {
+                        errorFunc;
+                    }
                 },
                 error: errorFunc,
                 complete: ocultarGIF

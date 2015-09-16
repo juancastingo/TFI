@@ -225,15 +225,9 @@
         });
 
     </script>*@
+ 
 
-    @if (Session["usuario"] != null)
-    {
-        <input id="LoginExiste" type="hidden" value="1" />   
-    }
-    else
-    {
-        <input id="LoginExiste" type="hidden" value="0" />   
-    }
+   
 
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
     <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
@@ -313,6 +307,7 @@
             } else {
                 $('#popover_content_wrapper').find("p:first").html("");
             }
+
         }
         function errorFunc(status) {
             //alert('error ' + status);
@@ -393,9 +388,12 @@
 
 
             if ($('#LoginExiste').val() == 1) {
-                $('#CarritoMenuBoton').removeClass('oculto');
-                //traigo data de la sesion y lleno el "carrito"
-                GetInit();
+                console.log($('#LoginExiste').attr("data-val"));
+                if ($('#LoginExiste').attr("data-val") == "Externo") {
+                        $('#CarritoMenuBoton').removeClass('oculto');
+                    //traigo data de la sesion y lleno el "carrito"
+                        GetInit();
+                }
             }
 
 
@@ -533,7 +531,10 @@
                             $("#MainMenu").html(result);
                             $('#MainMenu').fadeTo("slow", 1);
                             $('#login-modal').modal('hide');
-                            $('#CarritoMenuBoton').removeClass('oculto');
+                            if ($('#LoginExiste').attr("data-val") == "Externo") {
+                                $('#CarritoMenuBoton').removeClass('oculto');
+                            }
+                            //$('#CarritoMenuBoton').removeClass('oculto');
                             GetInit();
                             $('#cart-popover').popover({
                                 html: true,
@@ -547,9 +548,12 @@
                     },
                     error: function () {
                         $('#login-modal span').text("Please check Username or Password");
+                    },
+                    complete: function () {
+                        $('#LoginImgLoader').addClass("oculto");
                     }
                 });
-                setTimeout(function () { $('#LoginImgLoader').addClass("oculto"); }, 100);
+
             })
 
             $('#NuevoCarrito').click(function () {

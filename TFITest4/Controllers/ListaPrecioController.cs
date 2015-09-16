@@ -95,11 +95,11 @@ namespace TFITest4.Models
                 DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
 
                 PrecioWorker.CopyList(ListaACopiar,factor);
-                return Json(new { Result = "algo"}, JsonRequestBehavior.AllowGet);
+                return Json(new { Result = ""}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return RedirectToAction("CerrarSesion", "Login");
+                return Json(new { Result = "error" }, JsonRequestBehavior.AllowGet);
             }
 
         }

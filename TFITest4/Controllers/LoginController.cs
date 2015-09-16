@@ -145,7 +145,8 @@ namespace TFITest4.Controllers
                 Session.Timeout = 9999;
                 Session["usuario"] = _usuario.Usuario1;
                 Session["SUsuario"] = _usuario;
-
+                ViewBag.UserGroup = _usuario.TipoUsuario.Tipo;
+                Session["grupo"] = _usuario.TipoUsuario.Tipo;
                 return PartialView("~/Views/Shared/Menu.cshtml");
             }
             else

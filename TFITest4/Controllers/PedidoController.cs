@@ -91,8 +91,16 @@ namespace TFITest4.Controllers
             var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
             ViewBag.NrPedido = ListCarrito.IDDocumento;
             BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-            double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
-            string rIVA = IVA.ToString();
+            string rIVA = "";
+            if (UsuarioIN.TipoUsuario.IDTipoUsuario == 2)
+            {
+                double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                rIVA = IVA.ToString();
+            }
+            else
+            {
+                rIVA = "0";
+            }
 
             return Json(new { ListCarrito, rIVA}, JsonRequestBehavior.AllowGet);
         }

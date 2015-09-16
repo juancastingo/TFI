@@ -38,6 +38,11 @@ namespace TFITest4.Controllers
             ViewBag.url = Request.Url.Host.ToLower();
             ViewBag.numero = "3".PadLeft(8, '0'); //para la factura
 
+            if (Session["SUsuario"] != null)
+            {
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                ViewBag.UserGroup = UsuarioIN.TipoUsuario.Tipo;
+            }
             
             string VisitorsIPAddr = string.Empty;
             if (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
