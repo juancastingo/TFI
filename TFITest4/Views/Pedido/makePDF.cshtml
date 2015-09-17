@@ -31,7 +31,9 @@
         }
 
         td,th {
-            border: none;
+            border: none !important;
+            border-right: none !important;
+            border-left: none !important;
         }
 
         #tablaTotal {
@@ -155,16 +157,16 @@
                 @foreach (var item in Model.DocumentoDetalle)
                 {
                     <tr>
-                        <td>
+                        <td style="border-right: none !important;border-left: none !important;">
                             @Html.DisplayFor(modelItem => item.PrecioDetalle.Producto.Nombre)
                         </td>
-                        <td class="tdNumero">
+                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
-                        <td style="width: 150px !important;" class="tdNumero">
+                        <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
                             <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
-                        </td>
-                        <td class="tdNumero">
+                        </td >
+                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
                             @{double DetalleSubt = 0;}
 
                             @{

@@ -86,6 +86,7 @@
           <ScalarProperty Name="IDUsuarioUltimaModificacion" ColumnName="IDUsuarioUltimaModificacion" />
           <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
           <ScalarProperty Name="IPUltimaModificacion" ColumnName="IPUltimaModificacion" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

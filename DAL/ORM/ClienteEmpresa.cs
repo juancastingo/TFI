@@ -16,6 +16,7 @@ namespace DAL.ORM
     {
         public ClienteEmpresa()
         {
+            this.Documento = new HashSet<Documento>();
             this.Usuario = new HashSet<Usuario>();
         }
     
@@ -37,6 +38,7 @@ namespace DAL.ORM
         public virtual Direccion Direccion { get; set; }
         public virtual EstadoMisc EstadoMisc { get; set; }
         public virtual TipoIVA TipoIVA { get; set; }
+        public virtual ICollection<Documento> Documento { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

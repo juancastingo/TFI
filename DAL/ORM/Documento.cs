@@ -37,7 +37,9 @@ namespace DAL.ORM
         public Nullable<int> IDUsuarioUltimaModificacion { get; set; }
         public Nullable<System.DateTime> FechaUltimaModificacion { get; set; }
         public string IPUltimaModificacion { get; set; }
+        public string Detalle { get; set; }
     
+        public virtual ClienteEmpresa ClienteEmpresa { get; set; }
         public virtual DocumentoTipo DocumentoTipo { get; set; }
         public virtual EmpresaLocal EmpresaLocal { get; set; }
         public virtual EstadoMisc EstadoMisc { get; set; }

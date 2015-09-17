@@ -59,6 +59,10 @@
       <End Role="Localidad" EntitySet="Localidad" />
       <End Role="Direccion" EntitySet="Direccion" />
     </AssociationSet>
+    <AssociationSet Name="FK_Documento_ClienteEmpresa" Association="IIDTest2Model.Store.FK_Documento_ClienteEmpresa">
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
     <AssociationSet Name="FK_Documento_DocumentoTipo" Association="IIDTest2Model.Store.FK_Documento_DocumentoTipo">
       <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
       <End Role="Documento" EntitySet="Documento" />
@@ -225,6 +229,7 @@
     <Property Name="IDUsuarioUltimaModificacion" Type="int" />
     <Property Name="FechaUltimaModificacion" Type="datetime" />
     <Property Name="IPUltimaModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="Detalle" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="DocumentoDetalle">
     <Key>
@@ -515,6 +520,18 @@
       </Principal>
       <Dependent Role="Direccion">
         <PropertyRef Name="IDLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_ClienteEmpresa">
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.Store.ClienteEmpresa" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClienteEmpresa">
+        <PropertyRef Name="IDClienteEmpresa" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDClienteEmpresa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

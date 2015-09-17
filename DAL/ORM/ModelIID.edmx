@@ -64,6 +64,10 @@
             <End Role="Localidad" EntitySet="Localidad" />
             <End Role="Direccion" EntitySet="Direccion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Documento_ClienteEmpresa" Association="IIDTest2Model.Store.FK_Documento_ClienteEmpresa">
+            <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Documento_DocumentoTipo" Association="IIDTest2Model.Store.FK_Documento_DocumentoTipo">
             <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
             <End Role="Documento" EntitySet="Documento" />
@@ -230,6 +234,7 @@
           <Property Name="IDUsuarioUltimaModificacion" Type="int" />
           <Property Name="FechaUltimaModificacion" Type="datetime" />
           <Property Name="IPUltimaModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="Detalle" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="DocumentoDetalle">
           <Key>
@@ -520,6 +525,18 @@
             </Principal>
             <Dependent Role="Direccion">
               <PropertyRef Name="IDLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documento_ClienteEmpresa">
+          <End Role="ClienteEmpresa" Type="IIDTest2Model.Store.ClienteEmpresa" Multiplicity="0..1" />
+          <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteEmpresa">
+              <PropertyRef Name="IDClienteEmpresa" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="IDClienteEmpresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -857,6 +874,10 @@
             <End Role="TipoIVA" EntitySet="TipoIVA" />
             <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Documento_ClienteEmpresa" Association="IIDTest2Model.FK_Documento_ClienteEmpresa">
+            <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_ClienteEmpresa" Association="IIDTest2Model.FK_Usuario_ClienteEmpresa">
             <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1030,6 +1051,7 @@
           <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="ClienteEmpresa" ToRole="Direccion" />
           <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc" FromRole="ClienteEmpresa" ToRole="EstadoMisc" />
           <NavigationProperty Name="TipoIVA" Relationship="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" FromRole="ClienteEmpresa" ToRole="TipoIVA" />
+          <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_ClienteEmpresa" FromRole="ClienteEmpresa" ToRole="Documento" />
           <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Usuario_ClienteEmpresa" FromRole="ClienteEmpresa" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Cuenta">
@@ -1086,6 +1108,8 @@
           <Property Name="IDUsuarioUltimaModificacion" Type="Int32" />
           <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IPUltimaModificacion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_Documento_ClienteEmpresa" FromRole="Documento" ToRole="ClienteEmpresa" />
           <NavigationProperty Name="DocumentoTipo" Relationship="IIDTest2Model.FK_Documento_DocumentoTipo" FromRole="Documento" ToRole="DocumentoTipo" />
           <NavigationProperty Name="EmpresaLocal" Relationship="IIDTest2Model.FK_Documento_EmpresaLocal" FromRole="Documento" ToRole="EmpresaLocal" />
           <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_Documento_EstadoMisc" FromRole="Documento" ToRole="EstadoMisc" />
@@ -1372,6 +1396,18 @@
             </Principal>
             <Dependent Role="ClienteEmpresa">
               <PropertyRef Name="IDTipoIVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documento_ClienteEmpresa">
+          <End Role="ClienteEmpresa" Type="IIDTest2Model.ClienteEmpresa" Multiplicity="0..1" />
+          <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteEmpresa">
+              <PropertyRef Name="IDClienteEmpresa" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="IDClienteEmpresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1777,6 +1813,7 @@
                 <ScalarProperty Name="IDUsuarioUltimaModificacion" ColumnName="IDUsuarioUltimaModificacion" />
                 <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
                 <ScalarProperty Name="IPUltimaModificacion" ColumnName="IPUltimaModificacion" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
