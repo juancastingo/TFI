@@ -63,6 +63,10 @@
       <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
       <End Role="Documento" EntitySet="Documento" />
     </AssociationSet>
+    <AssociationSet Name="FK_Documento_EmpresaLocal" Association="IIDTest2Model.Store.FK_Documento_EmpresaLocal">
+      <End Role="EmpresaLocal" EntitySet="EmpresaLocal" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
     <AssociationSet Name="FK_Documento_EstadoMisc" Association="IIDTest2Model.Store.FK_Documento_EstadoMisc">
       <End Role="EstadoMisc" EntitySet="EstadoMisc" />
       <End Role="Documento" EntitySet="Documento" />
@@ -523,6 +527,18 @@
       </Principal>
       <Dependent Role="Documento">
         <PropertyRef Name="IDDocumentoTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_EmpresaLocal">
+    <End Role="EmpresaLocal" Type="IIDTest2Model.Store.EmpresaLocal" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpresaLocal">
+        <PropertyRef Name="IDEmpresaLocal" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDEmpresaLocal" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

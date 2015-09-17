@@ -10,13 +10,16 @@ using BIZ;
 using TFITest4.Resources;
 using System.Data.Objects;
 using System.Data.SqlClient;
+using SL;
+using Rotativa;
 
 namespace TFITest4.Controllers
 {
     public class PedidoController : Controller
     {
         private IIDTest2Entities db = new IIDTest2Entities();
-
+        public static int gIdPedido;
+        
         //
         // GET: /Pedido/
         [Authorize]
@@ -88,21 +91,28 @@ namespace TFITest4.Controllers
             //viejo
             //var ListCarrito = (Session["ListCarrito"] as List<modelCarrito>) ?? new List<modelCarrito>();
             //nuevo
-            var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
-            ViewBag.NrPedido = ListCarrito.IDDocumento;
-            BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-            string rIVA = "";
-            if (UsuarioIN.TipoUsuario.IDTipoUsuario == 2)
+            try
             {
-                double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
-                rIVA = IVA.ToString();
-            }
-            else
-            {
-                rIVA = "0";
-            }
+                var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
+                ViewBag.NrPedido = ListCarrito.IDDocumento;
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                string rIVA = "";
+                if (UsuarioIN.TipoUsuario.IDTipoUsuario == 2)
+                {
+                    double IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                    rIVA = IVA.ToString();
+                }
+                else
+                {
+                    rIVA = "0";
+                }
 
-            return Json(new { ListCarrito, rIVA}, JsonRequestBehavior.AllowGet);
+                return Json(new { ListCarrito, rIVA }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = "error" }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult LimpiarCarrito()
@@ -486,7 +496,7 @@ namespace TFITest4.Controllers
                     {
                         monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
                     }
-                    doc.Monto = monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                    doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor/100);
                 }
                 ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
@@ -499,6 +509,30 @@ namespace TFITest4.Controllers
         }
 
 
+        public ActionResult PedidoPDF(string NrPedido)
+        {
+            //var model = new GeneratePDFModel();
+            //Code to get content
+            // return new Rotativa.ViewAsPdf("GeneratePDF", model){FileName = "TestViewAsPdf.pdf"}
+            gIdPedido = Convert.ToInt32(NrPedido);
+            return new ActionAsPdf("makePDF")  {  FileName = "invoice" + gIdPedido + ".pdf" };
+            // return new ActionAsPdf("Index") { FileName = "Test.pdf" };
+        }
+
+        public ActionResult makePDF()
+        {
+            DAL.DALDocumento docWorker = new DAL.DALDocumento();
+            DAL.DALGeneral generalWorker = new DAL.DALGeneral();
+            var empresaLocal = generalWorker.getClienteEmpresa();
+            var doc = docWorker.getDocByID(gIdPedido);
+            //Utils utils = new Utils();
+            //string codigo = "123456";
+            //utils.generaCodigoBarras(codigo);
+
+            
+            //ViewBag.Barcode = codigo + ".jpg";
+            return View(doc);
+        }
 
 
         public ActionResult VerPedido(string Pedido)

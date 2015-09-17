@@ -29,6 +29,7 @@
     top: 0px;
 }
 
+
     #preload img, #preload div {
         position: absolute;
         top: 25%;
@@ -287,7 +288,7 @@ Main components
     width: 40px;
     position: fixed;
     bottom: 40px;
-    right: 10px;
+    right: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     /* image replacement properties */
     overflow: hidden;
@@ -325,7 +326,7 @@ Main components
 
 @media only screen and (min-width: 768px) {
     .cd-top {
-        right: 20px;
+        right: 5px;
         bottom: 20px;
     }
 }
@@ -334,7 +335,7 @@ Main components
     .cd-top {
         height: 60px;
         width: 60px;
-        right: 30px;
+        right: 5px;
         bottom: 30px;
     }
 }

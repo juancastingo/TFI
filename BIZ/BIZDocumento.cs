@@ -34,6 +34,7 @@ namespace BIZ
         public  BIZDocumentoTipo DocumentoTipo { get; set; }
         public virtual BIZEstado EstadoMisc { get; set; }
         //public virtual Proveedor Proveedor { get; set; }
+        public BIZEmpresaLocal EmpresaLocal { get; set; }
         public BIZUsuario Usuario { get; set; }
         public BIZUsuario Usuario1 { get; set; }
         public ICollection<BIZDocumentoDetalle> DocumentoDetalle { get; set; }

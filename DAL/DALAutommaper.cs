@@ -38,14 +38,14 @@ namespace DAL
             //precios
             AutoMapper.Mapper.CreateMap<ListaPrecio, BIZListaPrecio>();
             AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
-                //al reves
+            //al reves
             AutoMapper.Mapper.CreateMap<BIZListaPrecio, ListaPrecio>();
             AutoMapper.Mapper.CreateMap<BIZPrecioDetalle, PrecioDetalle>();
 
             //producto
             AutoMapper.Mapper.CreateMap<Producto, BIZProducto>();
             AutoMapper.Mapper.CreateMap<ProductoCategoria, BIZProductoCategoria>();
-                //al reves
+            //al reves
             AutoMapper.Mapper.CreateMap<BIZProducto, Producto>();
             AutoMapper.Mapper.CreateMap<BIZProductoCategoria, ProductoCategoria>();
 
@@ -53,7 +53,7 @@ namespace DAL
             AutoMapper.Mapper.CreateMap<Documento, BIZDocumento>();
             AutoMapper.Mapper.CreateMap<DocumentoTipo, BIZDocumentoTipo>();
             AutoMapper.Mapper.CreateMap<DocumentoDetalle, BIZDocumentoDetalle>();
-                //al reves
+            //al reves
             AutoMapper.Mapper.CreateMap<BIZDocumento, Documento>();
             AutoMapper.Mapper.CreateMap<BIZDocumentoTipo, DocumentoTipo>();
             AutoMapper.Mapper.CreateMap<BIZDocumentoDetalle, DocumentoDetalle>();
@@ -61,9 +61,13 @@ namespace DAL
             //precio
             AutoMapper.Mapper.CreateMap<ListaPrecio, BIZListaPrecio>();
             AutoMapper.Mapper.CreateMap<BIZListaPrecio, ListaPrecio>();
-                //al reves
-                AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
-                AutoMapper.Mapper.CreateMap<BIZPrecioDetalle, PrecioDetalle>();
+            //al reves
+            AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
+            AutoMapper.Mapper.CreateMap<BIZPrecioDetalle, PrecioDetalle>();
+
+            //empresa local
+            AutoMapper.Mapper.CreateMap<EmpresaLocal, BIZEmpresaLocal>();
+            AutoMapper.Mapper.CreateMap<BIZEmpresaLocal, EmpresaLocal>();
         }
     }
 }

@@ -133,6 +133,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Imprimir.
+        /// </summary>
+        public static string Imprimir {
+            get {
+                return ResourceManager.GetString("Imprimir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a esp.
         /// </summary>
         public static string Lenguaje {

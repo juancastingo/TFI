@@ -4,6 +4,13 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
+        window.location = "/"
+    }
+</script>
+
+
 <h2>Index</h2>
 
 <p>

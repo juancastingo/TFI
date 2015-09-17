@@ -39,6 +39,7 @@ namespace DAL.ORM
         public string IPUltimaModificacion { get; set; }
     
         public virtual DocumentoTipo DocumentoTipo { get; set; }
+        public virtual EmpresaLocal EmpresaLocal { get; set; }
         public virtual EstadoMisc EstadoMisc { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual Usuario Usuario { get; set; }

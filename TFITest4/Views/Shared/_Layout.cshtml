@@ -21,12 +21,14 @@
     <link href="~/Content/toastr.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/general.css" rel="stylesheet" type="text/css" />
     @RenderSection("headSection", false)
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
 </head>
 <body>
     <div id="preload">
         @*<img src="~/content/images/loader.gif" alt="Load Image" />*@
         <div class="loader">Loading...</div>
     </div>
+
 
 
     @Html.Partial("~/Views/Shared/Menu.cshtml")
@@ -65,7 +67,7 @@
     }
 
 
-    <div style="width:98%; padding: 0px 1%;">
+    <div id="bodyRender" style="width:98%; padding: 0px 1%;">
     @RenderBody()
     </div>
 
@@ -181,53 +183,7 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/hideShowPassword.min.js"></script>
     <script type="text/javascript" src="~/Scripts/toastr.min.js"></script>
-
-
-   @* <link href="~/Content/flavr/css/animate.css" rel="stylesheet" />
-    <link href="~/Content/flavr/css/flavr.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/scripts/flavr.min.js"></script>
-    <script>
-
-        var Loginhtml =
-                '   <div class="form-row">' +
-                '       <input type="text" name="username" ' +
-                '       placeholder="Username" />' +
-                '   </div>' +
-                '   <div class="form-row">' +
-                '       <input type="password" name="password" ' +
-                '       placeholder="Password" />' +
-                '   </div>' +
-                '   <div class="form-row">' +
-                '       <input type="checkbox" name="remember" ' +
-                '       id="check"/>' +
-                '       <label for="check">Remember me</label>' +
-                '   </div>';
-
-        new $.flavr({
-            title: 'Form',
-            iconPath: 'Content/flavr/images/icons/',
-            icon: 'email.png',
-            content: 'HTML form example',
-            dialog: 'form',
-            form: { content: Loginhtml, method: 'post' },
-            onSubmit: function ($container, $form) {
-
-                var User = values.substr(values.indexOf("&") - 1)
-                var Pass = values.substr(values.indexOf("&") + 1)
-                var MyUser = User.substr(User.indexOf("="))
-                var MyPass = Pass.substr(Pass.indexOf("=") +1)
-                alert(User + " " + Pass);
-
-
-                 return false;
-
-            }
-        });
-
-    </script>*@
- 
-
-   
+       
 
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
     <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
@@ -236,6 +192,7 @@
          // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
          if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
              //console.log("dif from invitado");
+             $('#bodyRender').hide()
              $.ajax({
                  cache: false,
                  type: 'post',
@@ -245,6 +202,8 @@
                  success: function (response) {
                      if (response.Result == "NO") {
                          document.location.href = "/Login/CerrarSesion";
+                     } else {
+                         $('#bodyRender').show()
                      }
                  }
              });
@@ -298,9 +257,9 @@
               
                 $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
             });
-            IVA = PreIVA.substring(2);
-            IVACalc = parseFloat(PreIVA.replace(',', '.'));
-            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= '+ IVA +'% </h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt * IVACalc).format(2, 3, '.', ',') + '</h4>');
+            IVA = PreIVA;
+            IVACalc = parseFloat(PreIVA);
+            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= '+ IVA +'% </h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt+(subt * IVACalc/100)).format(2, 3, '.', ',') + '</h4>');
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
             if (subt == 0) {
                 $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
@@ -388,7 +347,7 @@
 
 
             if ($('#LoginExiste').val() == 1) {
-                console.log($('#LoginExiste').attr("data-val"));
+                //console.log($('#LoginExiste').attr("data-val"));
                 if ($('#LoginExiste').attr("data-val") == "Externo") {
                         $('#CarritoMenuBoton').removeClass('oculto');
                     //traigo data de la sesion y lleno el "carrito"
@@ -396,45 +355,6 @@
                 }
             }
 
-
-
-            //para el login viejo
-            //$('.fancybox-dany').fancybox(
-            //    {
-            //        padding: '0px',
-            //        fitToView: true,
-            //        preload: true,
-            //        //autoSize: true,
-            //        autoSize: true,
-            //        height: 480,
-            //        width: 500
-            //    }
-            //);
-
-            @*            $('.mail').click(function () {
-                console.log("primero");
-                var serviceURL = '@Url.Action("AjaxRequest", "Home")';
-            var dataToSend = { name: "juan" }
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify(dataToSend),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFunc,
-                error: errorFunc
-            });
-
-            function successFunc(data, status) {
-                console.log(data);
-                console.log("bien");
-            }
-            function errorFunc(data, status) {
-                console.log("mal");
-                console.log(status);
-            }
-
-             })*@
 
 
 
@@ -639,7 +559,6 @@
                     complete: ocultarGIF
                 });
             });
-
             $("#preload").addClass("oculto");
             //OJO veo si NO es IE
             var ua = window.navigator.userAgent;

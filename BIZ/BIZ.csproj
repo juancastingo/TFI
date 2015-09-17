@@ -50,6 +50,7 @@
     <Compile Include="BIZDocumento.cs" />
     <Compile Include="BIZDocumentoDetalle.cs" />
     <Compile Include="BIZDocumentoTipo.cs" />
+    <Compile Include="BIZEmpresaLocal.cs" />
     <Compile Include="BIZEstado.cs" />
     <Compile Include="BIZListaPrecio.cs" />
     <Compile Include="BIZPais.cs" />

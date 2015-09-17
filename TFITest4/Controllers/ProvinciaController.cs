@@ -8,6 +8,7 @@ using SL;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class ProvinciaController : Controller
     {
         //

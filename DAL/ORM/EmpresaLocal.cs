@@ -14,6 +14,11 @@ namespace DAL.ORM
     
     public partial class EmpresaLocal
     {
+        public EmpresaLocal()
+        {
+            this.Documento = new HashSet<Documento>();
+        }
+    
         public int IDEmpresaLocal { get; set; }
         public string RazonSocial { get; set; }
         public string NombreFantasia { get; set; }
@@ -22,5 +27,6 @@ namespace DAL.ORM
         public Nullable<System.DateTime> FechaAlta { get; set; }
     
         public virtual Direccion Direccion { get; set; }
+        public virtual ICollection<Documento> Documento { get; set; }
     }
 }

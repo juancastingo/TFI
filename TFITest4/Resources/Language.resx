@@ -219,4 +219,7 @@
   <data name="nuevo" xml:space="preserve">
     <value>Nuevo</value>
   </data>
+  <data name="Imprimir" xml:space="preserve">
+    <value>Imprimir</value>
+  </data>
 </root>

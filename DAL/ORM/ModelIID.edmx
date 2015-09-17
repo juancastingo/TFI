@@ -68,6 +68,10 @@
             <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
             <End Role="Documento" EntitySet="Documento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Documento_EmpresaLocal" Association="IIDTest2Model.Store.FK_Documento_EmpresaLocal">
+            <End Role="EmpresaLocal" EntitySet="EmpresaLocal" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Documento_EstadoMisc" Association="IIDTest2Model.Store.FK_Documento_EstadoMisc">
             <End Role="EstadoMisc" EntitySet="EstadoMisc" />
             <End Role="Documento" EntitySet="Documento" />
@@ -531,6 +535,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Documento_EmpresaLocal">
+          <End Role="EmpresaLocal" Type="IIDTest2Model.Store.EmpresaLocal" Multiplicity="0..1" />
+          <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaLocal">
+              <PropertyRef Name="IDEmpresaLocal" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="IDEmpresaLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Documento_EstadoMisc">
           <End Role="EstadoMisc" Type="IIDTest2Model.Store.EstadoMisc" Multiplicity="0..1" />
           <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
@@ -881,6 +897,10 @@
             <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
             <End Role="Documento" EntitySet="Documento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Documento_EmpresaLocal" Association="IIDTest2Model.FK_Documento_EmpresaLocal">
+            <End Role="EmpresaLocal" EntitySet="EmpresaLocal" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Documento_EstadoMisc" Association="IIDTest2Model.FK_Documento_EstadoMisc">
             <End Role="EstadoMisc" EntitySet="EstadoMisc" />
             <End Role="Documento" EntitySet="Documento" />
@@ -1067,6 +1087,7 @@
           <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IPUltimaModificacion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="DocumentoTipo" Relationship="IIDTest2Model.FK_Documento_DocumentoTipo" FromRole="Documento" ToRole="DocumentoTipo" />
+          <NavigationProperty Name="EmpresaLocal" Relationship="IIDTest2Model.FK_Documento_EmpresaLocal" FromRole="Documento" ToRole="EmpresaLocal" />
           <NavigationProperty Name="EstadoMisc" Relationship="IIDTest2Model.FK_Documento_EstadoMisc" FromRole="Documento" ToRole="EstadoMisc" />
           <NavigationProperty Name="Proveedor" Relationship="IIDTest2Model.FK_Documento_Proveedor" FromRole="Documento" ToRole="Proveedor" />
           <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Documento_Usuario1" FromRole="Documento" ToRole="Usuario" />
@@ -1115,6 +1136,7 @@
           <Property Name="CUIT" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Direccion" Relationship="IIDTest2Model.FK_EmpresaLocal_Direccion" FromRole="EmpresaLocal" ToRole="Direccion" />
+          <NavigationProperty Name="Documento" Relationship="IIDTest2Model.FK_Documento_EmpresaLocal" FromRole="EmpresaLocal" ToRole="Documento" />
         </EntityType>
         <EntityType Name="EstadoMisc">
           <Key>
@@ -1470,6 +1492,18 @@
             </Principal>
             <Dependent Role="Documento">
               <PropertyRef Name="IDDocumentoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documento_EmpresaLocal">
+          <End Role="EmpresaLocal" Type="IIDTest2Model.EmpresaLocal" Multiplicity="0..1" />
+          <End Role="Documento" Type="IIDTest2Model.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmpresaLocal">
+              <PropertyRef Name="IDEmpresaLocal" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="IDEmpresaLocal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

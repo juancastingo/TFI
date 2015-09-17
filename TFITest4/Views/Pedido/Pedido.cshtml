@@ -64,7 +64,7 @@
                 <td>
                     <p>
                         <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >ver</button>
-                        <button data-val="@item.IDDocumento"  value=""  class="CargarPedidos btn btn-primary btn-sm" >Imprimir</button>
+                        @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                         @{if (item.EstadoMisc.Detalle != "Facturado")
                           {
                             <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Cancelar</button>
@@ -138,8 +138,8 @@
                     console.log(data);
                     //location.reload();
                     list = data.Pedido.Productos;
-                    IVA = $('#IvaCliente').val().substring(2);
-                    IVACalc = parseFloat($('#IvaCliente').val().replace(',', '.'));
+                    IVA = $('#IvaCliente').val();
+                    IVACalc = parseFloat($('#IvaCliente').val());
                     //console.log("lista:");
                     console.log(list);
                     $('#NrPedido').text(data.Pedido.IDDocumento);
@@ -153,7 +153,7 @@
                         thisSubtotal = (elem.Precio * elem.Cant);
                         $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
                     });
-                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $ ' + (subt * IVACalc).format(2, 3, '.', ',') + '</h4>');
+                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $ ' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
                     //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                     $('#PedidoModal').modal('toggle');
                 },
@@ -163,7 +163,7 @@
                 complete: ocultarGIF
             });
 
-            
+
 
         });
 

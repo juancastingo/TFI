@@ -95,7 +95,7 @@ namespace DAL
             OtroDoc.IDDocumento = _Documento.IDDocumento;
             OtroDoc.IDDocumentoRef = _Documento.IDDocumentoRef;
             OtroDoc.IDDocumentoTipo = _Documento.IDDocumentoTipo;
-            OtroDoc.IDEmpresaLocal = _Documento.IDEmpresaLocal;
+            OtroDoc.IDEmpresaLocal = 1;
             OtroDoc.IDEstado = _Documento.IDEstado;
             OtroDoc.IDProveedor = _Documento.IDProveedor;
             OtroDoc.IDUsuarioCreacion = _Documento.IDUsuarioCreacion;

@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="Controllers\ListaPrecioController.cs" />
+    <Compile Include="Models\ImpresionModel.cs" />
     <Compile Include="Models\ModelClienteEmpresa.cs" />
     <Compile Include="Models\ModelDireccion.cs" />
     <Compile Include="Models\ModelLocalidad.cs" />
@@ -926,6 +927,7 @@
     <Content Include="Views\ListaPrecio\Create.cshtml" />
     <Content Include="Views\ListaPrecio\Edit.cshtml" />
     <Content Include="Views\Pedido\Pedido.cshtml" />
+    <Content Include="Views\Pedido\makePDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
