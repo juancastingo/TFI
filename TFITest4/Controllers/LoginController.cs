@@ -17,15 +17,14 @@ namespace TFITest4.Controllers
         // GET: /Login/
         BLLBitacora Bita = new BLLBitacora();
         BLLUsuario UsuarioWorker = new BLLUsuario();
-        DAL.DALDocumento DocWorker = new DAL.DALDocumento();
+        BLLDocumento DocWorker = new BLLDocumento();
+
 
         public ActionResult Index()
         {
             return View();
         }
-
-
-
+        
         public ActionResult CerrarSesion()
         {
             try
@@ -68,7 +67,7 @@ namespace TFITest4.Controllers
                 {
                     if (Session["grupo"].ToString() == "Creditos y Cobranzas")
                     {
-                        pendientes = DocWorker.getPendingDocs(3, 5);
+                        pendientes = DocWorker.ObtenerDocPendientes(3, 5);
                     }
                 }
 
@@ -82,6 +81,17 @@ namespace TFITest4.Controllers
 
         public ActionResult Error()
         {
+            Nullable<int> idUser = null;
+            string ip = "Uknown";
+            try
+            {
+                idUser = (int)Session["userID"];
+            } 
+            catch (Exception ex) {}
+            try {
+                 ip = Session["_ip"].ToString();
+            } catch (Exception ex) {}
+            Bita.guardarBitacora(new BIZBitacora("Advertencia", "Inento de acceso indebido", idUser, ip));
             ViewBag.AlertError = @Language.AccesoError;
             return View();
         }
@@ -155,8 +165,7 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALUsuario userWorker = new DAL.DALUsuario();
-                BIZUsuario user = userWorker.getUserByUsuario(NombreUsuario);
+                BIZUsuario user = UsuarioWorker.ObtenerUserByUsuario(NombreUsuario);
                 if (user != null)
                 {
                     SL.Utils util = new SL.Utils();
@@ -188,9 +197,8 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALUsuario userWorker = new DAL.DALUsuario();
                 var UserToReset = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(k));
-                string newPass = userWorker.ResetPassword(UserToReset);
+                string newPass =  UsuarioWorker.ResetPassword(UserToReset);
                 if (newPass != "")
                 {
                     ViewBag.pass = newPass;

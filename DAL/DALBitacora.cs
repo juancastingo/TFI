@@ -43,6 +43,7 @@ namespace DAL
                 rBit.IDBitacora = b.IDBitacora;
                 rBit.IDUsuario = b.IDUsuario;
                 rBit.Tipo = b.Tipo;
+                rBit.IP = b.IP;
                 if (b.IDUsuario != null)
                 {
                     rBit.Usuario = Mapper.Map<Usuario, BIZUsuario>(b.Usuario);

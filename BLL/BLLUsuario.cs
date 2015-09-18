@@ -44,5 +44,15 @@ namespace BLL
             return D_User.ValidateLogin(UserCheck);
         }
 
+
+        public BIZUsuario ObtenerUserByUsuario(string NombreUsuario)
+        {
+            return D_User.getUserByUsuario(NombreUsuario);
+        }
+
+        public string ResetPassword(string UserToReset)
+        {
+            return D_User.ResetPassword(UserToReset);
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 <h2>Bitácora</h2>
 
-<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table class="table tableJquery table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             @*        <th>
@@ -11,7 +11,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Fecha)
             </th>
-                        <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
@@ -19,6 +19,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IP)
             </th>
         </tr>
     </thead>
@@ -51,6 +54,9 @@
                         @Html.DisplayFor(modelItem => item.Usuario.Nombre)
                     }
                 </td>
+                      <td>
+                    @Html.DisplayFor(modelItem => item.IP)
+                </td>
             </tr>
         }
     </tbody>
@@ -62,10 +68,12 @@
 
     $('.Informativo').css("color", "green");
     $('.Error').css("color", "red");
+    $('.Advertencia').css("color","orange");
 
     $('.tableJquery').on( 'draw.dt', function () {
         $('.Informativo').css("color", "green");
         $('.Error').css("color", "red");
+        $('.Advertencia').css("color","orange");
 } );
 }
 

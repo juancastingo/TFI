@@ -203,28 +203,31 @@
     </script>
      <script type="text/javascript">
          // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
-         if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
-             //console.log("dif from invitado");
-             $('#bodyRender').hide()
-             $.ajax({
-                 cache: false,
-                 type: 'post',
-                 url: "/Login/ControlSesion",
-                 data: $(this).serialize(),
-                 dataType: "json",
-                 success: function (response) {
-                     console.log(response);
-                     if (response.Result == "NO") {
-                         document.location.href = "/Login/CerrarSesion";
-                     } else {
-                         if (response.Pendientes != -1) {
-                             $('.docPendientes a').append(" (" + response.Pendientes + ")");
+         var controlSession = function() {
+             if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
+                 //console.log("dif from invitado");
+                 $('#bodyRender').hide()
+                 $.ajax({
+                     cache: false,
+                     type: 'post',
+                     url: "/Login/ControlSesion",
+                     data: $(this).serialize(),
+                     dataType: "json",
+                     success: function (response) {
+                         console.log(response);
+                         if (response.Result == "NO") {
+                             document.location.href = "/Login/CerrarSesion";
+                         } else {
+                             if (response.Pendientes != -1) {
+                                 $('.docPendientes a').append(" (" + response.Pendientes + ")");
+                             }
+                             $('#bodyRender').show()
                          }
-                         $('#bodyRender').show()
                      }
-                 }
-             });
+                 });
+             }
          }
+         controlSession();
     </script>
     <script type="text/javascript">
 
@@ -480,7 +483,7 @@
                                     return $('#popover_content_wrapper').html();
                                 }
                             });
-
+                            controlSession();
                         }
                     },
                     error: function () {
