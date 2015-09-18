@@ -82,7 +82,7 @@ namespace TFITest4.Controllers
         public ActionResult Error()
         {
             Nullable<int> idUser = null;
-            string ip = "Uknown";
+            string ip = "Unknown";
             try
             {
                 idUser = (int)Session["userID"];
