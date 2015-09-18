@@ -16,18 +16,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaEmision)
             </th>
-            <th>
-                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
-            </th>
             <th class="transparente"></th>
             <th style="width: 100px;">
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>Estado
             </th>
-            <th>Usuario Creacion
+            <th>Empresa
             </th>
-            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Usuario Ultima modificacion">UUM</span>
+            <th>Limite
+            </th>
+            <th>CC
             </th>
             <th>Actions</th>
         </tr>
@@ -42,9 +41,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaEmision)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
-                </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
                     <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
@@ -53,20 +49,20 @@
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    @Html.DisplayFor(modelItem => item.Usuario.ClienteEmpresa.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Usuario1.Nombre)
+                    @Html.DisplayFor(modelItem => item.Usuario.ClienteEmpresa.Limite)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.CCStatus)
                 </td>
                 <td>
                     <p>
-                        <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >ver</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="AprobarPedido btn btn-success btn-sm" >Aprobar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="RechazarPedido btn btn-danger btn-sm" >Rechazar</button>
+
                         @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
-                        @{if (item.EstadoMisc.Detalle != "Facturado")
-                          {
-                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Cancelar</button>
-                          }
-                        }
                     </p>
                 </td>
             </tr>
@@ -114,6 +110,21 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+@section readyEnding {
+        tabla
+        .order([1, 'asc'])
+        .draw();
+
+    $('.Informativo').css("color", "green");
+    $('.Error').css("color", "red");
+
+    $('.tableJquery').on( 'draw.dt', function () {
+        $('.Informativo').css("color", "green");
+        $('.Error').css("color", "red");
+} );
+}
+
 
 @section EndScript{
 

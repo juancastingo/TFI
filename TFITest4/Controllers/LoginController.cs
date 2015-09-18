@@ -17,6 +17,7 @@ namespace TFITest4.Controllers
         // GET: /Login/
         BLLBitacora Bita = new BLLBitacora();
         BLLUsuario UsuarioWorker = new BLLUsuario();
+        DAL.DALDocumento DocWorker = new DAL.DALDocumento();
 
         public ActionResult Index()
         {
@@ -56,13 +57,27 @@ namespace TFITest4.Controllers
 
         public ActionResult ControlSesion()
         {
+            try
+            {
+                int pendientes = -1;
+                if (Session["usuario"] == null)
+                {
+                    return Json(new { Result = "NO" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (Session["grupo"].ToString() == "Creditos y Cobranzas")
+                    {
+                        pendientes = DocWorker.getPendingDocs(3, 5);
+                    }
+                }
 
-            if (Session["usuario"] == null)
+                return Json(new { Result = "", Pendientes = pendientes }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
             {
                 return Json(new { Result = "NO" }, JsonRequestBehavior.AllowGet);
             }
-
-            return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Error()

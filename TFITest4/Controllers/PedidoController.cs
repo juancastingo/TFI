@@ -20,16 +20,19 @@ namespace TFITest4.Controllers
     {
         private IIDTest2Entities db = new IIDTest2Entities();
         public static int gIdPedido;
+        DAL.DALProducto ProdWorker = new DAL.DALProducto();
+        DAL.DALDocumento DocWorker = new DAL.DALDocumento();
+
+
         
         //
         // GET: /Pedido/
         public ActionResult Index()
         {
-           
-          
 
-            DAL.DALProducto DalWorker = new DAL.DALProducto();
-            var ListaP = DalWorker.getProductosConPrecio();
+
+
+            var ListaP = ProdWorker.getProductosConPrecio();
             // guardo todo en sesion
             Session["productosSesion"] = ListaP;
 
@@ -132,7 +135,6 @@ namespace TFITest4.Controllers
             {
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito);
                 BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-                DAL.DALDocumento DalWorker = new DAL.DALDocumento();
                 BIZDocumentoDetalle detalle;
                 if (ListCarrito.IDDocumento == 0) //es un PrePedido Nuevo
                 {
@@ -155,15 +157,15 @@ namespace TFITest4.Controllers
                         detalle.IDPrecioDetalle = ItemCarrito.IDPrecioDetalle;
                         PrePedido.DocumentoDetalle.Add(detalle);
                     }
-                    int IDDocNuevo = DalWorker.SaveDocumento(PrePedido);
+                    int IDDocNuevo = DocWorker.SaveDocumento(PrePedido);
                     ListCarrito.IDDocumento = IDDocNuevo;
                     //db.Documento.Add(PrePedido);
                     //db.SaveChanges();
                 }
                 else //Es un PrePedido modificado
                 {
-                    DalWorker.RemoveDetalleDoc(ListCarrito.IDDocumento);
-                    BIZDocumento PrePedido = DalWorker.getDocByID(ListCarrito.IDDocumento);
+                    DocWorker.RemoveDetalleDoc(ListCarrito.IDDocumento);
+                    BIZDocumento PrePedido = DocWorker.getDocByID(ListCarrito.IDDocumento);
                     PrePedido.FechaUltimaModificacion = DateTime.Now;
                     PrePedido.IDUsuarioUltimaModificacion = UsuarioIN.IDUsuario;
                     foreach (modelCarrito ItemCarrito in ListCarrito.Productos)
@@ -173,7 +175,7 @@ namespace TFITest4.Controllers
                         detalle.IDPrecioDetalle = ItemCarrito.IDPrecioDetalle;
                         PrePedido.DocumentoDetalle.Add(detalle);
                     }
-                    DalWorker.UpdateDocumento(PrePedido);
+                    DocWorker.UpdateDocumento(PrePedido);
                     //tengo q recargar la sesion del carrito
                     //db.Entry(documento).State = EntityState.Modified;
                     //db.SaveChanges();
@@ -297,9 +299,8 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
                 BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-                var docs = DALDoc.getDocsByEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 7, 15); //7 es el tipo de documento. Acá PrePedido. 15 es el estado aca Activo de prepedido
+                var docs = DocWorker.getDocsByEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 7, 15); //7 es el tipo de documento. Acá PrePedido. 15 es el estado aca Activo de prepedido
                 float monto;
                 foreach (var doc in docs)
                 {
@@ -326,8 +327,7 @@ namespace TFITest4.Controllers
 
                 int IDPrePedido = int.Parse(PrePed);
                 //aca cargo los datos del Prepedido en la sesion
-                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
-                var PrePedido = DALDoc.getDocByID(IDPrePedido);
+                var PrePedido = DocWorker.getDocByID(IDPrePedido);
                 ListCarrito carrito = new ListCarrito();
                 carrito.IDDocumento = PrePedido.IDDocumento;
                 modelCarrito item;
@@ -343,8 +343,7 @@ namespace TFITest4.Controllers
                 }
                 //ya tengo el carrito. Acá tengo q verificar los precios y actualizarlo.
                 //agarro los productos con precios.
-                DAL.DALProducto DALProductoWorker = new DAL.DALProducto();
-                var ListaP = DALProductoWorker.getProductosConPrecio();
+                var ListaP = ProdWorker.getProductosConPrecio();
                 Boolean PrePedidoActualizado  = false;
                 foreach (var prodCarr in carrito.Productos)
                 {
@@ -384,9 +383,8 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALDocumento DalWorker = new DAL.DALDocumento();
                 int NrPrePedido = Convert.ToInt32(PrePed);
-                DalWorker.UpdateStatusDoc(NrPrePedido, 16); //16 es cancelado de PrePedido
+                DocWorker.UpdateStatusDoc(NrPrePedido, 16); //16 es cancelado de PrePedido
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
                 if (ListCarrito.IDDocumento == NrPrePedido)
                 {
@@ -428,7 +426,6 @@ namespace TFITest4.Controllers
                  //primero tengo q ver por cada producto del carrito si hay stock.
                  //cargo el carrito q está en sesion.
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
-                DAL.DALProducto ProdWorker = new DAL.DALProducto();
                 //stockCarrito Stock = new stockCarrito();
 
                 Boolean TodoOK = false;
@@ -445,7 +442,6 @@ namespace TFITest4.Controllers
                  }
                     if (TodoOK)
                     {
-                        DAL.DALDocumento DalWorker = new DAL.DALDocumento();
                         //aca hago el submit del pedido
                         BIZDocumento pedido = new BIZDocumento();
                         pedido.IDDocumentoTipo = 3; //tipo 3 es pedido
@@ -463,7 +459,7 @@ namespace TFITest4.Controllers
                             detalle.IDPrecioDetalle = ItemCarrito.IDPrecioDetalle;
                             pedido.DocumentoDetalle.Add(detalle);
                         }
-                        int IDDocNuevo = DalWorker.SaveDocumento(pedido);
+                        int IDDocNuevo = DocWorker.SaveDocumento(pedido);
 
                         devolver = @Language.OKNormal;
                         return Json(new { Result = devolver, CarritoStock = "ir" }, JsonRequestBehavior.AllowGet);
@@ -485,9 +481,8 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
                 BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-                var docs = DALDoc.getDocsByEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 3, -1); //3 es el tipo de documento. Acá pedido. -1 es para traer todos
+                var docs = DocWorker.getDocsByEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 3, -1); //3 es el tipo de documento. Acá pedido. -1 es para traer todos
                 float monto;
                 foreach (var doc in docs)
                 {
@@ -512,11 +507,11 @@ namespace TFITest4.Controllers
         {
             try
             {
-                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
-                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
-                var docs = DALDoc.getDocsByEstado(3,5); //3 es el tipo del documento documento. Acá pedido. 5 es el estado del doc. acá pendiente de aprobación
+                var docs = DocWorker.getDocsByEstado(3, 5); //3 es el tipo del documento documento. Acá pedido. 5 es el estado del doc. acá pendiente de aprobación
                //var docs = DALDoc.ge
                 float monto;
+                int IDEmpresa;
+                
                 foreach (var doc in docs)
                 {
                     monto = 0;
@@ -524,10 +519,12 @@ namespace TFITest4.Controllers
                     {
                         monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
                     }
-                    doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor / 100);
+                    doc.Monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
+                    IDEmpresa = (int)doc.IDClienteEmpresa;
+                    doc.CCStatus = DocWorker.CheckCCStatus(IDEmpresa);
                 }
-                ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
-                ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
+                //ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }
             catch (Exception ex)
@@ -549,8 +546,7 @@ namespace TFITest4.Controllers
 
         public ActionResult makePDF()
         {
-            DAL.DALDocumento docWorker = new DAL.DALDocumento();
-            var doc = docWorker.getDocByID(gIdPedido);
+            var doc = DocWorker.getDocByID(gIdPedido);
             //Utils utils = new Utils();
             //string codigo = "123456";
             //utils.generaCodigoBarras(codigo);
@@ -568,8 +564,7 @@ namespace TFITest4.Controllers
 
                 int IDPedido = int.Parse(Pedido);
                 //aca cargo los datos del Prepedido en la sesion
-                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
-                var PrePedido = DALDoc.getDocByID(IDPedido);
+                var PrePedido = DocWorker.getDocByID(IDPedido);
                 ListCarrito carritoPedido = new ListCarrito();
                 carritoPedido.IDDocumento = PrePedido.IDDocumento;
                 modelCarrito item;

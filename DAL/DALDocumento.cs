@@ -114,6 +114,7 @@ namespace DAL
             OtroDoc.IPCreacion = _Documento.IPCreacion;
             OtroDoc.IPUltimaModificacion = _Documento.IPUltimaModificacion;
             OtroDoc.Monto = _Documento.Monto;
+            OtroDoc.Detalle = _Documento.Detalle;
             OtroDoc.IDUsuarioUltimaModificacion = OtroDoc.IDUsuarioCreacion; //porq lo estoy creando
             DocumentoDetalle DocDetalle;
             foreach (var Detalle in _Documento.DocumentoDetalle)
@@ -204,5 +205,23 @@ namespace DAL
             db.Database.ExecuteSqlCommand(query);
         }
 
+
+        public double CheckCCStatus(int IDClienteEmp)
+        {
+            System.Nullable<double> iReturnValue = db.CCCheck(IDClienteEmp).SingleOrDefault();
+            if (iReturnValue == null)
+            {
+                iReturnValue = 0;
+            }
+            return (double)iReturnValue;
+        }
+
+
+        public int getPendingDocs(int tipoDoc, int EstadoDoc)
+        {
+            int pend = db.Database.SqlQuery<int>("Select count(*) from Documento Where IDDocumentoTipo = " + tipoDoc + " and IDEstado = " + EstadoDoc).FirstOrDefault();
+
+            return pend;
+        }
     }
 }

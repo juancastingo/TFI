@@ -213,9 +213,13 @@
                  data: $(this).serialize(),
                  dataType: "json",
                  success: function (response) {
+                     console.log(response);
                      if (response.Result == "NO") {
                          document.location.href = "/Login/CerrarSesion";
                      } else {
+                         if (response.Pendientes != -1) {
+                             $('.docPendientes a').append(" (" + response.Pendientes + ")");
+                         }
                          $('#bodyRender').show()
                      }
                  }

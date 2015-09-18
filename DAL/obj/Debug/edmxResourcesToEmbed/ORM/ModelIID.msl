@@ -308,6 +308,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CCCheck" FunctionName="IIDTest2Model.Store.CCCheck" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IIDTest2Model.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IIDTest2Model.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IIDTest2Model.Store.sp_dropdiagram" />

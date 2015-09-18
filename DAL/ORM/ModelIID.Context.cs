@@ -55,6 +55,15 @@ namespace DAL.ORM
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
     
+        public virtual ObjectResult<Nullable<double>> CCCheck(Nullable<int> iDCliEmp)
+        {
+            var iDCliEmpParameter = iDCliEmp.HasValue ?
+                new ObjectParameter("IDCliEmp", iDCliEmp) :
+                new ObjectParameter("IDCliEmp", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("CCCheck", iDCliEmpParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?

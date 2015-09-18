@@ -21,6 +21,7 @@ namespace BIZ
         public Nullable<int> IDProveedor { get; set; }
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
         public Nullable<double> Monto { get; set; }
+        public double CCStatus { get; set; }
         public Nullable<int> IDEstado { get; set; }
         public Nullable<int> IDUsuarioCreacion { get; set; }
         public Nullable<int> IDDocumentoRef { get; set; }
@@ -30,6 +31,7 @@ namespace BIZ
         public Nullable<int> IDUsuarioUltimaModificacion { get; set; }
         public Nullable<System.DateTime> FechaUltimaModificacion { get; set; }
         public string IPUltimaModificacion { get; set; }
+        public string Detalle { get; set; }
 
         public  BIZDocumentoTipo DocumentoTipo { get; set; }
         public virtual BIZEstado EstadoMisc { get; set; }

@@ -147,6 +147,9 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
+    <FunctionImport Name="CCCheck" ReturnType="Collection(Double)">
+      <Parameter Name="IDCliEmp" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
