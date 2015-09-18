@@ -18,6 +18,8 @@ namespace DAL.ORM
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> IDUsuario { get; set; }
+        public string Tipo { get; set; }
+        public string IP { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TFITest4;
 using BIZ;
 using TFITest4.Resources;
+using BLL;
 
 
 namespace TFITest4.Controllers
@@ -14,12 +15,16 @@ namespace TFITest4.Controllers
     {
         // register get
 
+        BLLUsuario UsuarioWorker = new BLLUsuario();
+        BLLCliente ClienteWorker = new BLLCliente();
+        BLLBitacora Bita = new BLLBitacora();
+
         public ActionResult Register()
         {
-            DAL.DALUsuario D_User = new DAL.DALUsuario();
-            DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-            ViewBag.IDLocalidad = new SelectList(D_Direccion.getAllLocalidades(), "IDLocalidad", "Nombre");
-            ViewBag.IDTipoUsuario = new SelectList(D_User.GetAllTipoUsuario(), "IDTipoUsuario", "Tipo");
+            //DAL.DALUsuario D_User = new DAL.DALUsuario();
+            //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
+            ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+            ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
             return View();
         }
 
@@ -36,27 +41,27 @@ namespace TFITest4.Controllers
                 }
                 else
                 {
-                    DAL.DALUsuario D_User = new DAL.DALUsuario();
-                    DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-                    ViewBag.IDLocalidad = new SelectList(D_Direccion.getAllLocalidades(), "IDLocalidad", "Nombre");
-                    ViewBag.IDTipoUsuario = new SelectList(D_User.GetAllTipoUsuario(), "IDTipoUsuario", "Tipo");
+                    //DAL.DALUsuario D_User = new DAL.DALUsuario();
+                    //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
+                    ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+                    ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                     return View();
                 }
             }
             catch
             {
-                DAL.DALUsuario D_User = new DAL.DALUsuario();
-                DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-                ViewBag.IDLocalidad = new SelectList(D_Direccion.getAllLocalidades(), "IDLocalidad", "Nombre");
-                ViewBag.IDTipoUsuario = new SelectList(D_User.GetAllTipoUsuario(), "IDTipoUsuario", "Tipo");
+                //DAL.DALUsuario D_User = new DAL.DALUsuario();
+               // DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
+                ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+                ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                 return View();
             }
         }
 
         public ActionResult RegisterOut()
         {
-            DAL.DALCliente DCliente = new DAL.DALCliente();
-            ViewBag.IDClienteEmpresa = new SelectList(DCliente.getAllClienteEmpresa(), "IDClienteEmpresa", "Nombre");
+            //DAL.DALCliente DCliente = new DAL.DALCliente();
+            ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
             return View();
         }
 
@@ -71,8 +76,8 @@ namespace TFITest4.Controllers
                     User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(U);
                     User.IDEstado = 12;
                     User.IDTipoUsuario = 2;
-                    DAL.DALUsuario DALUser = new DAL.DALUsuario();
-                    DALUser.InsertUsuario(User);
+                    UsuarioWorker.InsertarUsuario(User);
+                    //DALUser.InsertUsuario(User);
                     TempData["OKNormal"] = Resources.Language.OKNormal;
                     SL.Utils util = new SL.Utils();
                     var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
@@ -84,19 +89,18 @@ namespace TFITest4.Controllers
                     //correo.Body = "Hi " + User.Nombre + ", <p>Plese validate your IID account with the following link</p> <a href='http://" + Request.Url.Host.ToLower() +":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
                     correo.Body = body;
                     util.sendMail(correo);
+                    string _ip = "Unknown";
+                    try
+                    {
+                        _ip = (string)Session["_ip"];
+                    } catch(Exception) {}
 
-                    DAL.ORM.Bitacora bitacora = new DAL.ORM.Bitacora();
-                    DAL.DALBitacora Dbit = new DAL.DALBitacora();
-                    bitacora.Fecha = DateTime.Now;
-                    bitacora.Descripcion = "Se ha creado el usuario " + User.Usuario1;
-                    bitacora.Usuario = null;
-                    Dbit.saveBitacora(bitacora);
+                    Bita.guardarBitacora(new BIZBitacora("Informativo","Se ha creado el usuario " + User.Usuario1, null,_ip));
                     return RedirectToAction("EmailConfirm");
-
                 }
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
-                DAL.DALCliente DCliente = new DAL.DALCliente();
-                ViewBag.IDClienteEmpresa = new SelectList(DCliente.getAllClienteEmpresa(), "IDClienteEmpresa", "Nombre");
+                //DAL.DALCliente DCliente = new DAL.DALCliente();
+                ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
                 return View(U);
             //}
             //catch(Exception err)
@@ -120,8 +124,8 @@ namespace TFITest4.Controllers
         {
             BIZUsuario User = new BIZUsuario();
             User.Usuario1 = b.name;
-            DAL.DALUsuario Duser = new DAL.DALUsuario();
-            b.existe = Duser.CheckByName(User);
+            BLLUsuario DUser = new BLLUsuario();
+            b.existe = DUser.CheckByName(User);
             return Json(b, JsonRequestBehavior.AllowGet);
         }
 
@@ -140,8 +144,7 @@ namespace TFITest4.Controllers
                 //aca tengo q poner al usuario activo
                 BIZ.BIZUsuario User = new BIZUsuario();
                 User.Usuario1 = UserToValidate;
-                DAL.DALUsuario Duser = new DAL.DALUsuario();
-                Duser.ValidateUser(User);
+                UsuarioWorker.ValidarUsuario(User);
                 TempData["OKNormal"] = Resources.Language.OKNormal;
             }
             catch
@@ -149,12 +152,6 @@ namespace TFITest4.Controllers
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             }
             return View();
-        }
-        //
-        // GET: /Account/
-
-
-   
-      
+        }  
     }
 }

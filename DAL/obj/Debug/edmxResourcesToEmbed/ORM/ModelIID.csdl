@@ -189,6 +189,8 @@
     <Property Name="Fecha" Type="DateTime" Precision="3" />
     <Property Name="Descripcion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="IDUsuario" Type="Int32" />
+    <Property Name="Tipo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="IP" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Bitacora" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="CierreContable">

@@ -11,10 +11,26 @@ namespace DAL
     public class DALBitacora
     {
         private IIDTest2Entities db = new IIDTest2Entities();
-        public void saveBitacora(Bitacora bitacora)
+        //public void saveBitacora(Bitacora bitacora)
+        //{
+        //    db.Bitacora.Add(bitacora);
+        //    db.SaveChanges();
+        //}
+        public DALBitacora()
         {
-            db.Bitacora.Add(bitacora);
+            DALAutommaper automapper = new DALAutommaper();
+        }
+
+        public void saveBitacora(BIZBitacora b)
+        {
+            var Tb = AutoMapper.Mapper.Map<BIZBitacora, Bitacora>(b);
+            db.Bitacora.Add(Tb);
             db.SaveChanges();
+        }
+
+        public List<BIZBitacora> getBitacora()
+        {
+            return AutoMapper.Mapper.Map<List<Bitacora>, List<BIZBitacora>>(db.Bitacora.ToList());
         }
     }
 }

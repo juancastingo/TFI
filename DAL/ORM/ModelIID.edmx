@@ -161,6 +161,8 @@
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="IDUsuario" Type="int" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="IP" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CierreContable">
           <Key>
@@ -1020,6 +1022,8 @@
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="IDUsuario" Type="Int32" />
+          <Property Name="Tipo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IP" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Bitacora" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="CierreContable">
@@ -1735,6 +1739,8 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

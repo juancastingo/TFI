@@ -68,6 +68,10 @@ namespace DAL
             //empresa local
             AutoMapper.Mapper.CreateMap<EmpresaLocal, BIZEmpresaLocal>();
             AutoMapper.Mapper.CreateMap<BIZEmpresaLocal, EmpresaLocal>();
+
+            //general
+            AutoMapper.Mapper.CreateMap<BIZBitacora, Bitacora>();
+            AutoMapper.Mapper.CreateMap<Bitacora, BIZBitacora>();
         }
     }
 }

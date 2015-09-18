@@ -189,6 +189,10 @@
       <Project>{eadebb5c-f9b1-4463-8bb5-10d306d25c40}</Project>
       <Name>BIZ</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SL\SL.csproj">
+      <Project>{8ef6b166-6cef-429c-b8bd-304ab9dcba7c}</Project>
+      <Name>SL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

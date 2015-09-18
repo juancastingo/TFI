@@ -11,10 +11,12 @@
     font-weight: bolder;
 }
 
-.SiStock {
-    color: green;
+.SiStock, Informativo {
+    color: green !important;
 }
-
+.Error {
+    color: red !important;
+}
 .ElStock {
     color: blue;
 }

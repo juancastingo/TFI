@@ -522,8 +522,6 @@ namespace TFITest4.Controllers
         public ActionResult makePDF()
         {
             DAL.DALDocumento docWorker = new DAL.DALDocumento();
-            DAL.DALGeneral generalWorker = new DAL.DALGeneral();
-            var empresaLocal = generalWorker.getClienteEmpresa();
             var doc = docWorker.getDocByID(gIdPedido);
             //Utils utils = new Utils();
             //string codigo = "123456";

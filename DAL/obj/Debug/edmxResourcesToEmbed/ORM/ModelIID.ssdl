@@ -156,6 +156,8 @@
     <Property Name="Fecha" Type="datetime" />
     <Property Name="Descripcion" Type="varchar(max)" />
     <Property Name="IDUsuario" Type="int" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" />
+    <Property Name="IP" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CierreContable">
     <Key>

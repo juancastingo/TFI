@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using TFITest4.Models;
 using TFITest4.Resources;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -14,72 +15,23 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Login/
+        BLLBitacora Bita = new BLLBitacora();
+        BLLUsuario UsuarioWorker = new BLLUsuario();
 
         public ActionResult Index()
         {
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Index(LoginModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //BIZ.Usuario _usuario = new BIZ.Usuario();
-        //_usuario = BLL.Negocio.SeleccionarUnUsuario(model.UserName, model.Password);
-        //string _usuario = "juan";
-
-        //if (model.UserName != null && model.UserName != "b")
-        //{
-        //    FormsAuthentication.SetAuthCookie(model.UserName, false);
-        //    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //    Response.Cache.SetAllowResponseInBrowserHistory(false);
-        //    Response.Cache.SetNoStore();
-
-        //BIZ.Bitacora _unaBitacora = new BIZ.Bitacora();
-        //_unaBitacora._fecha = DateTime.Now;
-        //_unaBitacora._descripcion = "Usuario " + model.UserName + " inicio sesion";
-        //_unaBitacora._origen = "UI Session";
-        //_unaBitacora._tipo = "Informativo";
-        //BLL.Bitacora.InsetarBitacora(_unaBitacora);
-
-        ////Session["Perfil"] = _usuario._idTipoUsuario._tipo;
-        //Session["usuario"] = model.UserName;
-
-
-
-
-
-        //ViewBag.controlPostLogin = "parent.document.location.reload()";
-        //ViewBag.controlPostLogin = "parent.$.fancybox.close();";  //esto funciona para cerrar el fancy
-        //    return View(model);
-        //}
-        //else {
-        //BIZ.Bitacora _unaBitacora = new BIZ.Bitacora();
-        //_unaBitacora._fecha = DateTime.Now;
-        //_unaBitacora._descripcion = "Usuario o Contraseña inválidos," + model.UserName;
-        //_unaBitacora._origen = "UI Session";
-        //_unaBitacora._tipo = "Informativo";
-        //BLL.Bitacora.InsetarBitacora(_unaBitacora);
-        //        ModelState.AddModelError("", "Usuario o Contraseña inválidos");
-        //        return View(model);
-        //    }
-        //    //return RedirectToAction("index", "home");
-        //}
-
-        //    return View(model);
-        //}
-
 
 
         public ActionResult CerrarSesion()
         {
-            //BIZ.Bitacora _unaBitacora = new BIZ.Bitacora();
-            //_unaBitacora._fecha = DateTime.Now;
-            //_unaBitacora._descripcion = "El usuario" + Session["usuario"] + " cerro sesion";
-            //_unaBitacora._origen = "UI Session";
-            //_unaBitacora._tipo = "Informativo";
-            //BLL.Bitacora.InsetarBitacora(_unaBitacora);
+            try
+            {
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + Session["usuario"] + "\" cerró sesión", (int)Session["userID"], Session["_ip"].ToString()));
+            }
+            catch (Exception ex) { }
 
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             //Response.Cache.SetAllowResponseInBrowserHistory(false);
@@ -115,7 +67,7 @@ namespace TFITest4.Controllers
 
         public ActionResult Error()
         {
-            ViewBag.AlertError = "no podes entrar aca borrar";
+            ViewBag.AlertError = "Access denied";
             return View();
         }
 
@@ -126,8 +78,10 @@ namespace TFITest4.Controllers
             BIZUsuario UserCheck = new BIZUsuario();
             UserCheck.Usuario1 = UserName;
             UserCheck.Password = Password;
-            DAL.DALUsuario DalWorker = new DAL.DALUsuario();
-            BIZUsuario _usuario = DalWorker.ValidateLogin(UserCheck);
+            BIZUsuario _usuario = UsuarioWorker.validarLogin(UserCheck);
+            //ip
+            
+
             if (_usuario != null && _usuario.IDEstado == 13)
             {
                 FormsAuthentication.SetAuthCookie(UserName, false);
@@ -135,15 +89,15 @@ namespace TFITest4.Controllers
                 Response.Cache.SetAllowResponseInBrowserHistory(false);
                 Response.Cache.SetNoStore();
 
-                //BIZ.Bitacora _unaBitacora = new BIZ.Bitacora();
-                //_unaBitacora._fecha = DateTime.Now;
-                //_unaBitacora._descripcion = "Usuario " + model.UserName + " inicio sesion";
-                //_unaBitacora._origen = "UI Session";
-                //_unaBitacora._tipo = "Informativo";
-                //BLL.Bitacora.InsetarBitacora(_unaBitacora);
-                //Session["Perfil"] = _usuario._idTipoUsuario._tipo;
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + _usuario.Usuario1 + "\" inició sesión", _usuario.IDUsuario, Session["_ip"].ToString()));
+                }
+
+                catch (Exception ex) { }
                 Session.Timeout = 9999;
                 Session["usuario"] = _usuario.Usuario1;
+                Session["userID"] = _usuario.IDUsuario;
                 Session["SUsuario"] = _usuario;
                 ViewBag.UserGroup = _usuario.TipoUsuario.Tipo;
                 Session["grupo"] = _usuario.TipoUsuario.Tipo;
@@ -157,6 +111,7 @@ namespace TFITest4.Controllers
                // }
                // else
               //  {
+
                     return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
                // }
             }

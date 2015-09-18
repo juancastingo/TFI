@@ -38,5 +38,6 @@ namespace BIZ
         public BIZUsuario Usuario { get; set; }
         public BIZUsuario Usuario1 { get; set; }
         public ICollection<BIZDocumentoDetalle> DocumentoDetalle { get; set; }
+        public BIZClienteEmpresa ClienteEmpresa { get; set; }
     }
 }

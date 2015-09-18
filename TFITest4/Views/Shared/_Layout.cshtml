@@ -188,7 +188,20 @@
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
     <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
 
-     <script>
+
+
+    <script type="text/javascript">
+        $.ajax({
+            cache: false,
+            type: 'post',
+            url: "/Home/siempre",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+            }
+        });
+    </script>
+     <script type="text/javascript">
          // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
          if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
              //console.log("dif from invitado");
@@ -331,7 +344,7 @@
                 }
             });
         }
-
+        
         $(document).ready(function () {
             ok = $('#AlertOk').val();
             if (ok != undefined) { toastr["success"](ok, "Success") }
@@ -378,7 +391,7 @@
                 urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
             }
             try {
-                $('.tableJquery').DataTable({
+                 var tabla = $('.tableJquery').DataTable({
                     language: {
                         url: urlDTLang
                     }
@@ -620,7 +633,7 @@
             $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
 
 
-
+            @RenderSection("readyEnding", false)
         }); // END Document Ready
 
         $('body').on('click', '#LimpiarCarrito', function () {

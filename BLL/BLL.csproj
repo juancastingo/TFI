@@ -39,8 +39,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BLLBitacora.cs" />
+    <Compile Include="BLLCliente.cs" />
+    <Compile Include="BLLDireccion.cs" />
+    <Compile Include="BLLDocumento.cs" />
+    <Compile Include="BLLGeneral.cs" />
+    <Compile Include="BLLPrecio.cs" />
+    <Compile Include="BLLProducto.cs" />
+    <Compile Include="BLLUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BIZ\BIZ.csproj">
+      <Project>{eadebb5c-f9b1-4463-8bb5-10d306d25c40}</Project>
+      <Name>BIZ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{9b8fae9f-e4b8-478f-8725-aedb41f024d3}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -15,22 +16,15 @@ namespace TFITest4.Controllers
         private IIDTest2Entities db = new IIDTest2Entities();
         //
         // GET: /Home/
+        BLLBitacora Bita = new BLLBitacora();
+
 
 
         public ActionResult Index()
         {
-            //var sequenceQueryResult = db.Database.SqlQuery<string>("select * from Producto").FirstOrDefault();
-            // var ProductList = db.Producto.SqlQuery("select * from Producto where IDProductoCategoria = 3");
-            // var Producto = db.Database.SqlQuery<int>(
-            //            "SELECT count(*) FROM dbo.Producto");
-
-            // int cant = Producto.Count();
-            // foreach (Producto p in ProductList)
-            // {
-            //     Console.WriteLine(p.Nombre);
-            // }
-            // lo de arriba anda todo creo...
-
+           
+              //BIZBitacora bitacora = new BIZBitacora("Bitacora test2",null);
+            //Bita.guardarBitacora(new BIZBitacora("Bitacora test3", null));
 
             if (TempData["Resultado"] != null)
                 @ViewBag.AlertOK = TempData["Resultado"].ToString();
@@ -43,17 +37,8 @@ namespace TFITest4.Controllers
                 BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
                 ViewBag.UserGroup = UsuarioIN.TipoUsuario.Tipo;
             }
+
             
-            string VisitorsIPAddr = string.Empty;
-            if (System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
-            {
-                VisitorsIPAddr = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
-            }
-            else if (System.Web.HttpContext.Current.Request.UserHostAddress.Length != 0)
-            {
-                //VisitorsIPAddr = System.Web.HttpContext.Current.Request.UserHostAddress;
-            }
-            ViewBag.ip = "Your IP is: " + VisitorsIPAddr; 
 
 
             ////traer productos con precios
@@ -172,6 +157,23 @@ namespace TFITest4.Controllers
         }
 
 
+        public ActionResult siempre()
+        {
+            try
+            {
+                string userIpAddress = this.Request.ServerVariables["REMOTE_ADDR"];
+                if (userIpAddress == "::1")
+                    Session["_ip"] = "127.0.0.1";
+                else
+                    Session["_ip"] = userIpAddress;
+            }
+            catch (Exception ex)
+            {
+                Session["_ip"] = "Unknown";
+            }
+
+            return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+        }
     
 
 
