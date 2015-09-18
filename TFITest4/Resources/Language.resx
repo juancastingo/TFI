@@ -222,4 +222,7 @@
   <data name="Imprimir" xml:space="preserve">
     <value>Imprimir</value>
   </data>
+  <data name="AccesoError" xml:space="preserve">
+    <value>Acceso denegado</value>
+  </data>
 </root>

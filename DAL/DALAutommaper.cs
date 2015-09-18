@@ -72,6 +72,11 @@ namespace DAL
             //general
             AutoMapper.Mapper.CreateMap<BIZBitacora, Bitacora>();
             AutoMapper.Mapper.CreateMap<Bitacora, BIZBitacora>();
+                //.ForMember(dest => dest.Usuario,
+                //opt => opt.Condition(src => !srs.IsSourceValueNull));
+                //.ForAllMembers(opt => opt.Condition(srs => !srs.IsSourceValueNull));
+     //.ForMember(dest => dest.Bar, opt => opt.ResolveUsing(src => src.Bar == null ? new Bar() : Mapper.Map<Bar,Bar2>(src.Bar)))
+
         }
     }
 }

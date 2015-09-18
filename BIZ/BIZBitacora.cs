@@ -19,9 +19,10 @@ namespace BIZ
             this.IP = _ip;
             this.Fecha = DateTime.Now;
         }
+
+
         public int IDBitacora { get; set; }
         public System.DateTime Fecha { get; set; }
-        //public string Modulo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> IDUsuario { get; set; }
         public string Tipo { get; set; }

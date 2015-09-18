@@ -942,6 +942,7 @@
     <Content Include="Views\Pedido\Pedido.cshtml" />
     <Content Include="Views\Pedido\makePDF.cshtml" />
     <Content Include="Views\Bitacora\Index.cshtml" />
+    <Content Include="Views\Pedido\Controlar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

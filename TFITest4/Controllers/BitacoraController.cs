@@ -7,6 +7,7 @@ using BLL;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class BitacoraController : Controller
     {
         BLLBitacora Bita = new BLLBitacora();

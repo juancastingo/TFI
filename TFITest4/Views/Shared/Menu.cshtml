@@ -20,7 +20,6 @@
                             }
                             else
                             {
-                                // <a href="/Login/Index" class="fancybox-dany fancybox.iframe">Login</a>
                                 <a id="aLogin" href="" data-toggle="modal" data-target="#login-modal">Login</a>
                             }
                         </li>
@@ -30,10 +29,6 @@
                                 @Html.ActionLink("Register", "RegisterOut", "Account")
                             </li>
                         }
-@*                        <li>
-                            @Html.ActionLink("Cliente", "Index", "ClienteEmpresaORM")
-
-                        </li>*@
                         @if (Session["usuario"] != null)
                         {
                             if (Session["grupo"].ToString() == "Externo")
@@ -53,10 +48,10 @@
                                 </ul>
                             </li>
                             }
-                            if (Session["grupo"].ToString() == "Comercial")
+                            if (Session["grupo"].ToString() == "Creditos y Cobranzas")
                             {
                             <li>
-                                @Html.ActionLink("Controlar Pedidos", "Controlar", "Pedido")
+                                @Html.ActionLink("Analizar Pedidos", "Controlar", "Pedido")
                             </li>
                             }
                         }
@@ -113,23 +108,14 @@
                                     </ul>
                                 </li>
 
+                                <li>
+                                    @Html.ActionLink("Bitacora", "Index", "Bitacora")
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
-                    @*                        <div class="navbar-form navbar-left" role="search">
 
-                            @using (Html.BeginForm("Search", "Alimento"))
-                            {
-                               @Html.TextBox("busqueda")                            
-						
-                                <input type="submit" value="Search" class="btn btn-default" />
-                            }
-                            @using (Html.BeginForm("Search", "Alimento"))
-                            {
-                                @Html.TextBox("busqueda")
-                                <input type="submit" value="Search" class="btn btn-default" />
-                            }
-                             </div>*@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li id="CarritoMenuBoton" class="oculto">

@@ -61,6 +61,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Acceso denegado.
+        /// </summary>
+        public static string AccesoError {
+            get {
+                return ResourceManager.GetString("AccesoError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Acciones.
         /// </summary>
         public static string action {

@@ -67,7 +67,7 @@ namespace TFITest4.Controllers
 
         public ActionResult Error()
         {
-            ViewBag.AlertError = "Access denied";
+            ViewBag.AlertError = @Language.AccesoError;
             return View();
         }
 

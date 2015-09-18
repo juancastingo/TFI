@@ -54,9 +54,21 @@ namespace DAL
                     Daldocs = db.Documento
                    .Where(b => b.IDClienteEmpresa == IDEmpresa)
                    .Where(b => b.IDDocumentoTipo == tipoDoc)
-                   .Where(b => b.IDEstado == IdEstado); //aca tengo q traer de sesion
+                   .Where(b => b.IDEstado == IdEstado);
                 }
             }
+
+            var Ddocs = Daldocs.ToList();
+            var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
+            return documentos;
+        }
+
+        public List<BIZDocumento> getDocsByEstado(int tipoDoc, int IDEstado)
+        {
+
+            var Daldocs = db.Documento
+                .Where(b => b.IDDocumentoTipo == tipoDoc)
+                .Where(b => b.IDEstado == IDEstado);
 
             var Ddocs = Daldocs.ToList();
             var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);

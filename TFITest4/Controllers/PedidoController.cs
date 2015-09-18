@@ -15,6 +15,7 @@ using Rotativa;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class PedidoController : Controller
     {
         private IIDTest2Entities db = new IIDTest2Entities();
@@ -22,7 +23,6 @@ namespace TFITest4.Controllers
         
         //
         // GET: /Pedido/
-        [Authorize]
         public ActionResult Index()
         {
            
@@ -497,6 +497,34 @@ namespace TFITest4.Controllers
                         monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
                     }
                     doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor/100);
+                }
+                ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
+                return View(docs);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("CerrarSesion", "Login");
+            }
+        }
+
+        public ActionResult Controlar()
+        {
+            try
+            {
+                DAL.DALDocumento DALDoc = new DAL.DALDocumento();
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                var docs = DALDoc.getDocsByEstado(3,5); //3 es el tipo del documento documento. Acá pedido. 5 es el estado del doc. acá pendiente de aprobación
+               //var docs = DALDoc.ge
+                float monto;
+                foreach (var doc in docs)
+                {
+                    monto = 0;
+                    foreach (var det in doc.DocumentoDetalle)
+                    {
+                        monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
+                    }
+                    doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor / 100);
                 }
                 ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
