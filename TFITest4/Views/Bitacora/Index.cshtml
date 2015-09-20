@@ -30,15 +30,13 @@
         {   
             
                  <tr class="@item.Tipo">
-             
-                
                 @*        <td>
             @Html.DisplayFor(modelItem => item.IDBitacora)
         </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
+                    @item.Fecha.ToString("MM/dd/yyyy HH:mm")
                 </td>
-                                <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
                 </td>
                 <td>

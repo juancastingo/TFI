@@ -46,9 +46,13 @@ namespace BLL
             DocWorker.UpdateDocumento(_Documento);
         }
 
-        public void ActualizarStatusDoc(int IdDoc, int IdStatus)
+        public void ActualizarStatusDoc(int IdDoc, int IdStatus, int IDUpdate)
         {
-            DocWorker.UpdateStatusDoc(IdDoc, IdStatus);
+            DocWorker.UpdateStatusDoc(IdDoc, IdStatus, IDUpdate);
+        }
+        public void ActualizarStatusDoc(int IdDoc, int IdStatus, int IDUpdate, string just)
+        {
+            DocWorker.UpdateStatusDoc(IdDoc, IdStatus, IDUpdate, just);
         }
 
         public double verCCEstado(int IDClienteEmp)

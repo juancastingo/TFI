@@ -133,9 +133,7 @@ namespace DAL
         {
 
             //Documento SaveDoc = Mapper.Map<BIZDocumento, Documento>(_Documento); //no se puede mappear aca?
-            Documento BaseDoc = new Documento();
             DateTime fecha = (DateTime)_Documento.FechaUltimaModificacion;
-
             string query = "UPDATE Documento SET FechaUltimaModificacion='" + fecha.ToString("yyyy-MM-dd HH:mm:ss") + "',IDUsuarioUltimaModificacion=" + _Documento.IDUsuarioUltimaModificacion + "  WHERE IDDocumento = " + _Documento.IDDocumento;
             db.Database.ExecuteSqlCommand(query);
             DocumentoDetalle detalle;
@@ -199,9 +197,14 @@ namespace DAL
             //db.Entry(OtroDoc).State = EntityState.Modified;
             //db.SaveChanges();
         }
-        public void UpdateStatusDoc(int IdDoc, int IdStatus)
+        public void UpdateStatusDoc(int IdDoc, int IdStatus,int IdUserLastMod)
         {
-            string query = "UPDATE Documento SET IDEstado=" + IdStatus + "  WHERE IDDocumento = " + IdDoc;
+            string query = "UPDATE Documento SET IDEstado=" + IdStatus + ", IDUsuarioUltimaModificacion=" + IdUserLastMod + ",FechaUltimaModificacion='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'  WHERE IDDocumento = " + IdDoc;
+            db.Database.ExecuteSqlCommand(query);
+        }
+        public void UpdateStatusDoc(int IdDoc, int IdStatus,int IdUserLastMod,string just)
+        {
+            string query = "UPDATE Documento SET IDEstado=" + IdStatus + ", IDUsuarioUltimaModificacion=" + IdUserLastMod + ",FechaUltimaModificacion='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',Detalle='" + just + "'  WHERE IDDocumento = " + IdDoc;
             db.Database.ExecuteSqlCommand(query);
         }
 

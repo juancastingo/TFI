@@ -7,9 +7,9 @@
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
 }
-
-<h2>Pedidos - @ViewBag.Empresa</h2>
-
+<div class="titulo">
+    <h2 >Pedidos - @ViewBag.Empresa</h2>
+</div>
 
 <table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
@@ -43,10 +43,10 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaEmision)
+                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
+                    @item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
@@ -65,7 +65,7 @@
                     <p>
                         <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >ver</button>
                         @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
-                        @{if (item.EstadoMisc.Detalle != "Facturado")
+                        @{if (item.EstadoMisc.Detalle != "Facturado" && item.EstadoMisc.Detalle != "Rechazado" && item.EstadoMisc.Detalle != "Cancelado")
                           {
                             <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Cancelar</button>
                           }
@@ -94,8 +94,8 @@
                         <tr>
                             <th>Product</th>
                             <th>Quantity</th>
-                            <th colspan="2">Unit Price</th>
-                            <th colspan="2">Total Price</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -145,20 +145,20 @@
                     $('#NrPedido').text(data.Pedido.IDDocumento);
                     var subt = 0;
                     var count = 0;
-                    $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                    $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th>@Language.precioUnitario</th><th>@Language.TotalProducto</th>');
                     $('#PedidoModalBody table > tbody').html('');
                     list.forEach(function (elem) {
                         //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
                         subt += (elem.Precio * elem.Cant);
                         thisSubtotal = (elem.Precio * elem.Cant);
-                        $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                        $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td class="numero">' + accounting.formatMoney(elem.Precio) + '</td><td class="numero">' + accounting.formatMoney(thisSubtotal) + '</td></tr>');
                     });
-                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= $ ' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $ ' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
+                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= ' + accounting.formatMoney(subt) + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total=  ' + accounting.formatMoney((subt + (subt * IVACalc / 100))) + '</h4>');
                     //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                     $('#PedidoModal').modal('toggle');
                 },
                 error: function (status) {
-                    toastr["error"]("@Language.ErrorLogInAgain", "Error")
+                    errorFunc;
                 },
                 complete: ocultarGIF
             });

@@ -2,6 +2,10 @@
     background-color: #F9F9F9;
 }
 
+.titulo {
+    text-align: center;
+}
+
 .field-validation-error {
     color: red;
 }
@@ -11,10 +15,10 @@
     font-weight: bolder;
 }
 
-.SiStock, Informativo {
+.SiStock, .Informativo, .bien {
     color: green !important;
 }
-.Error {
+.Error, .mal {
     color: red !important;
 }
 .ElStock {

@@ -15,8 +15,8 @@ namespace BIZ
         public int IDDocumento { get; set; }
         public Nullable<int> NrDocumento { get; set; }
         public Nullable<int> IDDocumentoTipo { get; set; }
-        public Nullable<System.DateTime> FechaEmision { get; set; }
-        public Nullable<System.DateTime> FechaContable { get; set; }
+        public DateTime FechaEmision { get; set; }
+        public Nullable<DateTime> FechaContable { get; set; }
         public Nullable<int> IDClienteEmpresa { get; set; }
         public Nullable<int> IDProveedor { get; set; }
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
@@ -29,7 +29,7 @@ namespace BIZ
         public Nullable<int> CodigoExterno { get; set; }
         public string IPCreacion { get; set; }
         public Nullable<int> IDUsuarioUltimaModificacion { get; set; }
-        public Nullable<System.DateTime> FechaUltimaModificacion { get; set; }
+        public DateTime FechaUltimaModificacion { get; set; }
         public string IPUltimaModificacion { get; set; }
         public string Detalle { get; set; }
 

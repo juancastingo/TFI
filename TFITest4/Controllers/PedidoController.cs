@@ -12,6 +12,7 @@ using System.Data.Objects;
 using System.Data.SqlClient;
 using SL;
 using Rotativa;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -22,9 +23,9 @@ namespace TFITest4.Controllers
         public static int gIdPedido;
         DAL.DALProducto ProdWorker = new DAL.DALProducto();
         DAL.DALDocumento DocWorker = new DAL.DALDocumento();
+        BLLBitacora Bita = new BLLBitacora();
 
 
-        
         //
         // GET: /Pedido/
         public ActionResult Index()
@@ -85,12 +86,12 @@ namespace TFITest4.Controllers
         }
 
 
-      
+
 
         [HttpPost]
         [ActionName("GetInit")]
         public ActionResult GetInit(string a)
-        { 
+        {
             //viejo
             //var ListCarrito = (Session["ListCarrito"] as List<modelCarrito>) ?? new List<modelCarrito>();
             //nuevo
@@ -149,6 +150,8 @@ namespace TFITest4.Controllers
                     PrePedido.IDEstado = 15; //estado activo de PrePedido 15
                     PrePedido.IDUsuarioCreacion = UsuarioIN.IDUsuario;
                     PrePedido.IDUsuarioUltimaModificacion = UsuarioIN.IDUsuario;
+                    PrePedido.FechaContable = null;
+                    PrePedido.FechaVencimiento = null;
                     //DocumentoDetalle detalle;
                     foreach (modelCarrito ItemCarrito in ListCarrito.Productos)
                     {
@@ -182,7 +185,9 @@ namespace TFITest4.Controllers
                     //todavia nada....
                 }
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
-            } catch(Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ViewBag.AlertError = Language.ErrorLogInAgain;
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
@@ -323,7 +328,8 @@ namespace TFITest4.Controllers
 
         public ActionResult CargarPedidoViejo(string PrePed)
         {
-            try {
+            try
+            {
 
                 int IDPrePedido = int.Parse(PrePed);
                 //aca cargo los datos del Prepedido en la sesion
@@ -344,7 +350,7 @@ namespace TFITest4.Controllers
                 //ya tengo el carrito. Acá tengo q verificar los precios y actualizarlo.
                 //agarro los productos con precios.
                 var ListaP = ProdWorker.getProductosConPrecio();
-                Boolean PrePedidoActualizado  = false;
+                Boolean PrePedidoActualizado = false;
                 foreach (var prodCarr in carrito.Productos)
                 {
                     foreach (var prodBase in ListaP)
@@ -370,7 +376,7 @@ namespace TFITest4.Controllers
                 Session["ListCarrito"] = carrito;
                 ViewBag.NrPedido = carrito.IDDocumento;
                 return Json(new { Result = msgReturn }, JsonRequestBehavior.AllowGet);
-                }
+            }
             catch (Exception ex)
             {
                 return RedirectToAction("CerrarSesion", "Login");
@@ -383,8 +389,10 @@ namespace TFITest4.Controllers
         {
             try
             {
+
+                int idUser = (int)Session["userID"];
                 int NrPrePedido = Convert.ToInt32(PrePed);
-                DocWorker.UpdateStatusDoc(NrPrePedido, 16); //16 es cancelado de PrePedido
+                DocWorker.UpdateStatusDoc(NrPrePedido, 16, idUser); //16 es cancelado de PrePedido
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
                 if (ListCarrito.IDDocumento == NrPrePedido)
                 {
@@ -423,8 +431,8 @@ namespace TFITest4.Controllers
             try
             {
                 BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"]; //q usuario?
-                 //primero tengo q ver por cada producto del carrito si hay stock.
-                 //cargo el carrito q está en sesion.
+                //primero tengo q ver por cada producto del carrito si hay stock.
+                //cargo el carrito q está en sesion.
                 var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
                 //stockCarrito Stock = new stockCarrito();
 
@@ -433,13 +441,14 @@ namespace TFITest4.Controllers
                 {
                     TodoOK = true;
                     foreach (var p in ListCarrito.Productos)
-                   {
-                       //p.stock = 1; // aca me traería el stock del producto
-                       p.stock = ProdWorker.CheckStockProd(p.id);
-                        if (p.Cant > p.stock) {
+                    {
+                        //p.stock = 1; // aca me traería el stock del producto
+                        p.stock = ProdWorker.CheckStockProd(p.id);
+                        if (p.Cant > p.stock)
+                        {
                             TodoOK = false;
                         }
-                 }
+                    }
                     if (TodoOK)
                     {
                         //aca hago el submit del pedido
@@ -468,8 +477,8 @@ namespace TFITest4.Controllers
                     {
                         return Json(new { Result = devolver, CarritoStock = ListCarrito }, JsonRequestBehavior.AllowGet);
                     }
-             }
                 }
+            }
             catch (Exception ex) { devolver = @Language.ErrorLogInAgain; }
             return Json(new { Result = devolver, CarritoStock = "" }, JsonRequestBehavior.AllowGet);
         }
@@ -491,7 +500,7 @@ namespace TFITest4.Controllers
                     {
                         monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
                     }
-                    doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor/100);
+                    doc.Monto = monto + (monto * UsuarioIN.ClienteEmpresa.TipoIVA.Valor / 100);
                 }
                 ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
@@ -508,10 +517,10 @@ namespace TFITest4.Controllers
             try
             {
                 var docs = DocWorker.getDocsByEstado(3, 5); //3 es el tipo del documento documento. Acá pedido. 5 es el estado del doc. acá pendiente de aprobación
-               //var docs = DALDoc.ge
+                //var docs = DALDoc.ge
                 float monto;
                 int IDEmpresa;
-                
+
                 foreach (var doc in docs)
                 {
                     monto = 0;
@@ -521,7 +530,8 @@ namespace TFITest4.Controllers
                     }
                     doc.Monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
                     IDEmpresa = (int)doc.IDClienteEmpresa;
-                    doc.CCStatus = DocWorker.CheckCCStatus(IDEmpresa);
+                    double TCCstatus = DocWorker.CheckCCStatus(IDEmpresa);
+                    doc.CCStatus = (TCCstatus + (TCCstatus * doc.ClienteEmpresa.TipoIVA.Valor / 100));
                 }
                 //ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
                 //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
@@ -540,7 +550,7 @@ namespace TFITest4.Controllers
             //Code to get content
             // return new Rotativa.ViewAsPdf("GeneratePDF", model){FileName = "TestViewAsPdf.pdf"}
             gIdPedido = Convert.ToInt32(NrPedido);
-            return new ActionAsPdf("makePDF")  {  FileName = "invoice" + gIdPedido + ".pdf" };
+            return new ActionAsPdf("makePDF") { FileName = "invoice" + gIdPedido + ".pdf" };
             // return new ActionAsPdf("Index") { FileName = "Test.pdf" };
         }
 
@@ -551,7 +561,7 @@ namespace TFITest4.Controllers
             //string codigo = "123456";
             //utils.generaCodigoBarras(codigo);
 
-            
+
             //ViewBag.Barcode = codigo + ".jpg";
             return View(doc);
         }
@@ -578,7 +588,7 @@ namespace TFITest4.Controllers
                     item.Precio = (double)p.PrecioDetalle.Precio;
                     carritoPedido.Productos.Add(item);
                 }
-                
+
 
                 //Session["CarritoPedido"] = carritoPedido;
                 ViewBag.NrPedido = carritoPedido.IDDocumento;
@@ -592,6 +602,49 @@ namespace TFITest4.Controllers
         }
 
 
+        public ActionResult AprobarRechazarPedido(string Pedido, string tipoActualizacion, string justif)
+        {
+            try
+            {
+
+                int IDPedido = int.Parse(Pedido);
+                int idUser = (int)Session["userID"];
+                int Tstatus = int.Parse(tipoActualizacion);
+                int status;
+                if (Tstatus == 1)
+                {
+                    status = 6;
+                }
+                else
+                {
+                    status = 22;
+                }
+                
+
+                BIZDocumento doc = new BIZDocumento();
+                DocWorker.UpdateStatusDoc(IDPedido,status,idUser,justif);
+
+                Nullable<int> idU = null;
+                string ip = "Unknown";
+                try { idU = (int)Session["userID"]; } catch (Exception ex) { }
+                try { ip = Session["_ip"].ToString(); }  catch (Exception ex) { }
+                string inf = "";
+                if (status == 6)
+                    inf = "Se ha aprobado el pedido nr ";
+                else
+                    inf = "Se ha rechazado el pedido nr ";
+
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", inf + IDPedido, idU, ip));
+
+                return Json(new { Result = ""}, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
         protected override void Dispose(bool disposing)
         {

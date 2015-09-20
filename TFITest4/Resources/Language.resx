@@ -225,4 +225,49 @@
   <data name="AccesoError" xml:space="preserve">
     <value>Acceso denegado</value>
   </data>
+  <data name="analizar" xml:space="preserve">
+    <value>Analizar Pedidos</value>
+  </data>
+  <data name="CambiarPass" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="clientes" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="compre" xml:space="preserve">
+    <value>Compre</value>
+  </data>
+  <data name="inicioSesion" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+  <data name="Invitado" xml:space="preserve">
+    <value>Invitado</value>
+  </data>
+  <data name="listaDetalle" xml:space="preserve">
+    <value>Detalles de precios</value>
+  </data>
+  <data name="listaPrecios" xml:space="preserve">
+    <value>Lista de Precios</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="lugares" xml:space="preserve">
+    <value>Lugares</value>
+  </data>
+  <data name="pedido" xml:space="preserve">
+    <value>Pedido</value>
+  </data>
+  <data name="precio" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="precios" xml:space="preserve">
+    <value>Precios</value>
+  </data>
+  <data name="registro" xml:space="preserve">
+    <value>Registrese</value>
+  </data>
+  <data name="usuario" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
 </root>
