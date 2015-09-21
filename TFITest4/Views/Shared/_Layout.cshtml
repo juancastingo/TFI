@@ -331,7 +331,7 @@
                 dataType: "json",
                 success: function () {
                     GetInit();
-                    toastr["success"]("The Cart has been cleaned", "Success!")
+                    toastr["success"]("The Cart has been cleaned", "OK!")
                 },
                 error: function () {
                     toastr["error"]("Error while trying to clean the cart", "Error!")
@@ -351,7 +351,7 @@
                         dataType: "json",
                         success: function () {
                             GetInit();
-                            toastr["success"]("The Cart has been saved", "Success!")
+                            toastr["success"]("The Cart has been saved", "OK!")
                         },
                         error: function () {
                             toastr["error"]("Error while trying to save the cart", "Error!")
@@ -379,7 +379,7 @@
         
             $(document).ready(function () {
                 ok = $('#AlertOk').val();
-                if (ok != undefined) { toastr["success"](ok, "Success") }
+                if (ok != undefined) { toastr["success"](ok, "OK!") }
                 if ($('#AlertError').val() != undefined) { toastr["error"]($('#AlertError').val(), "Error") }
                 //para el carrito
                 $('#cart-popover').popover({
@@ -531,7 +531,7 @@
                         dataType: "json",
                         success: function () {
                             GetInit();
-                            toastr["success"]("Done!", "Success!")
+                            toastr["success"]("@Language.OKNormal", "OK!");
                         },
                         error: function () {
                             toastr["error"]("@Language.ErrorLogInAgain", "Error!")
@@ -595,7 +595,7 @@
 
                             } else {
 
-                                toastr["success"](data.Result, "Success!")
+                                toastr["success"](data.Result, "OK!")
                             }
                         },
                         error: function () {

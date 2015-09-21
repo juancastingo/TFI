@@ -622,7 +622,11 @@ namespace TFITest4.Controllers
                 
 
                 BIZDocumento doc = new BIZDocumento();
-                DocWorker.UpdateStatusDoc(IDPedido,status,idUser,justif);
+                if (justif != "")
+                    DocWorker.UpdateStatusDoc(IDPedido, status, idUser, justif);
+                else
+                    DocWorker.UpdateStatusDoc(IDPedido, status, idUser);
+
 
                 Nullable<int> idU = null;
                 string ip = "Unknown";
