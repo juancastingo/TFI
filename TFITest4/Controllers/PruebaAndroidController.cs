@@ -97,7 +97,7 @@ namespace TFITest4.Controllers
             modelDetalle det;
             docR.detalles = new List<modelDetalle>();
             foreach (var d in doc.DocumentoDetalle)
-            {
+            { 
                 det = new modelDetalle();
                 det.producto = d.PrecioDetalle.Producto.Nombre;
                 det.cantidad = d.Cantidad;
