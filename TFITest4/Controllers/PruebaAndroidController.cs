@@ -39,7 +39,27 @@ namespace TFITest4.Controllers
             public string IPUltimaModificacion { get; set; }
         }
 
-        public ActionResult Pedidos(string empresa)
+        private class modelDetalle
+        {
+            public string producto { get; set; }
+            public int cantidad { get; set; }
+            public double valor { get; set; }
+        }
+
+        private class modelDoc2
+        {
+            public int IDDocumento { get; set; }
+            //public Nullable<int> NrDocumento { get; set; }
+            //public Nullable<int> IDDocumentoTipo { get; set; }
+            public string FechaEmision { get; set; }
+            public double Monto { get; set; }
+            public string Estado { get; set; }
+            public List<modelDetalle> detalles { get; set; }
+            public double IVA { get; set; }
+        
+        }
+
+        public ActionResult Pedidos(string empresa,string password)
         {
             DALDocumento docWorker = new DALDocumento();
             int empresaID = Convert.ToInt32(empresa);
@@ -48,29 +68,74 @@ namespace TFITest4.Controllers
             List<modelDoc> listDoc = new List<modelDoc>();
             foreach (var d in docs)
             {
-                mdoc = new modelDoc();
-                mdoc.IDDocumento = d.IDDocumento;
-                mdoc.EmpresaLocal = d.ClienteEmpresa.NombreFantasia;
-                mdoc.Monto = 0;
-                foreach (var detalle in d.DocumentoDetalle)
+                if (d.IDEstado == 5)
                 {
-                    mdoc.Monto += (double)(detalle.Cantidad * detalle.PrecioDetalle.Precio);
+                    mdoc = new modelDoc();
+                    mdoc.IDDocumento = d.IDDocumento;
+                    mdoc.EmpresaLocal = d.ClienteEmpresa.NombreFantasia;
+                    mdoc.Monto = 0;
+                    foreach (var detalle in d.DocumentoDetalle)
+                    {
+                        mdoc.Monto += (double)(detalle.Cantidad * detalle.PrecioDetalle.Precio);
+                    }
+                    listDoc.Add(mdoc);
                 }
-                listDoc.Add(mdoc);
             }
-            var p = new persona();
-            p.id = 3;
-            p.nombre = empresa;
-            var list = new List<persona>();
-            list.Add(p);
-            p = new persona();
-            p.id = 4;
-            p.nombre = "pepe";
-            list.Add(p);
-            //ViewData["CantidadPedido"] = BLL.Pedido.CantidadEnPedido(pSession, 1);
-            //ViewData["precioTotal"] = BLL.Pedido.PrecioTodosPedido(pSession);
+
             return Json(new { listDoc }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Detalle(string idDoc, string password)
+        {
+            DALDocumento docWorker = new DALDocumento();
+            int IdocID = Convert.ToInt32(idDoc);
+            var doc = docWorker.getDocByID(IdocID);
+            var docR = new modelDoc2();
+            docR.Estado = doc.EstadoMisc.Detalle;
+            docR.FechaEmision = doc.FechaEmision.ToString();
+            docR.IDDocumento = doc.IDDocumento;
+            modelDetalle det;
+            docR.detalles = new List<modelDetalle>();
+            foreach (var d in doc.DocumentoDetalle)
+            {
+                det = new modelDetalle();
+                det.producto = d.PrecioDetalle.Producto.Nombre;
+                det.cantidad = d.Cantidad;
+                det.valor = (double)d.PrecioDetalle.Precio;
+                docR.detalles.Add(det);
+                docR.Monto += (double)(d.Cantidad * d.PrecioDetalle.Precio);
+            }
+            return Json(new { docR }, JsonRequestBehavior.AllowGet);
+        }
+
+        private class modelCliente
+        {
+            public int idCliente {get; set;}
+            public string nombre {get; set;}
+        }
+
+        public ActionResult Clientes(string idDoc, string password)
+        {
+            List<modelCliente> listaR = new List<modelCliente>();
+            BLL.BLLCliente ClienteWorker = new BLL.BLLCliente();
+            var clientes = ClienteWorker.ObtenerClienteEmpresas();
+            modelCliente cli;
+            foreach (var c in clientes)
+            {
+                cli = new modelCliente();
+                cli.idCliente = c.IDClienteEmpresa;
+                cli.nombre = c.Nombre;
+                listaR.Add(cli);
+            }
+            return Json(new { listaR }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
 
         //asi lo agarro con jquery
         //var a = "";
