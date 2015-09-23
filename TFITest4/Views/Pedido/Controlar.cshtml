@@ -197,62 +197,6 @@ tabla
             $('#JustModal').on('shown.bs.modal', function () {
                 $('#JustModal input').focus();
             })
-            var list = [];
-            var list2 = [];
-
-            $('.valor1').each(function () {
-                list.push($(this).html())
-            });
-            var i = 0;
-            $('.valor1').each(function () {
-                list2 = accounting.formatColumn(list, "$       ");
-                console.log(list2);
-                $(this).html(list2[i]);
-                i++;
-            })
-            var list = [];
-            var list2 = [];
-
-            $('.valor2').each(function () {
-                list.push($(this).html())
-            });
-            var i = 0;
-            $('.valor2').each(function () {
-                list2 = accounting.formatColumn(list, "$       ");
-                console.log(list2);
-                $(this).html(list2[i]);
-                i++;
-            })
-            var list = [];
-            var list2 = [];
-
-            $('.valor3').each(function () {
-                list.push($(this).html())
-            });
-            var i = 0;
-            $('.valor3').each(function () {
-                list2 = accounting.formatColumn(list, "$       ");
-                console.log(list2);
-                $(this).html(list2[i]);
-                i++;
-            })
-
-
-
-
-
-
-
-            //list.every(console.log($(this)))
-            // $('.valor').each(function () {
-
-            // });
-
-            // accounting.formatColumn([123.5, 3456.49, 777888.99, 12345678, -5432], "$ ");
-            //$(this).html(accounting.formatMoney($(this).html()))
-
-
-            //accounting.formatColumn([123.5, 3456.49, 777888.99, 12345678, -5432], "$ ");
         });
         //    $('.MontoPrePedido').each(function (index) {
         //        esto = $(this).text();
@@ -261,4 +205,49 @@ tabla
         //    });
         //});
     </script>
+}
+
+
+@section numerosScript{
+    var list = [];
+            var list2 = [];
+
+            $('.valor1').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor1').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+            var list = [];
+            var list2 = [];
+
+            $('.valor2').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor2').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+            var list = [];
+            var list2 = [];
+
+            $('.valor3').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor3').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+
+    
 }
