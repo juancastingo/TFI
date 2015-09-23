@@ -12,8 +12,8 @@
 @*<p>User= @Session["usuario"]</p> *@
 @*<h2>@ViewBag.numero</h2> Esto va bien para la factura y la numeracion*@
 @*<h2>@ViewBag.url</h2>*@
-  <h2>@ViewBag.ip</h2>
-  <h2>@ViewBag.UserGroup</h2>
+<h2>@ViewBag.ip</h2>
+<h2>@ViewBag.UserGroup</h2>
 @*<script src="/Scripts/jquery-1.9.1.js"></script>*@
 
 @*@foreach (var p in ViewBag.productos)
@@ -41,7 +41,7 @@
                                     <span>@item.Nombre</span>
                                 </p>
                                 <p class="precio">
-                                    <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual.ToString().Replace(",",".")</span>
+                                    <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual.ToString().Replace(",", ".")</span>
                                 </p>
                                 @*                            <p>
                                 <span>@item.Descripcion</span>
@@ -116,9 +116,17 @@
         }*@
 
 
+
+
+
+
 @section EndScript{
     <script type="text/javascript">
         $(document).ready(function () {
+
+            
+
+
             $(".fancybox").fancybox({
                 openEffect: 'elastic',
                 closeEffect: 'elastic',

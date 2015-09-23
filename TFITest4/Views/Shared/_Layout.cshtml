@@ -234,6 +234,10 @@
     </script>
     <script type="text/javascript">
 
+
+
+
+
         //number format
         Number.prototype.format = function (n, x, s, c) {
             var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
@@ -259,7 +263,7 @@
         }
 
 
-
+        
         //number format end
         //mostrar sacar gif
         var ocultarGIF = function () {
@@ -269,6 +273,72 @@
             $('#preload').removeClass("oculto");
         }
         //mostrar sacar gif
+
+
+        // sppech
+
+        function removeAcento(text) {
+            var acentos = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
+            var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
+            for (var i = 0; i < acentos.length; i++) {
+                text = text.replace(acentos.charAt(i), original.charAt(i));
+            }
+            return text;
+        }
+
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Your browser cannot support speech, bro.. upgrade...');
+        } else {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "es-AR"
+        }
+        recognition.onerror = function (event) {
+            toastr["warning"]("No se pudo reconocer la voz", "info")
+            $('#start_img').attr('src', '/Content/images/mic.gif');
+        }
+        recognition.onresult = function (e) {
+            try {
+                $('#start_img').attr('src', '/Content/images/mic.gif');
+                for (var i = e.resultIndex; i < e.results.length; ++i) {
+                    if (e.results[i].isFinal) {
+                        //assert(e.results[i][0].transcript);
+                        var tmpSpeech = removeAcento(e.results[i][0].transcript);
+                        //assert(tmpSpeech);
+                        if (tmpSpeech.toLowerCase() == "registrese") {
+                            window.location = "/Account/RegisterOut";
+                        }
+                        var newLoc = "";
+                        switch (tmpSpeech) {
+                            case "registrese":
+                                newLoc = "/Account/RegisterOut";
+                                break;
+                            case "iniciar":
+                            case "iniciar sesion":
+                            case "login":
+                                $('#login-modal').modal('show');
+                                break;
+                            case "espanol":
+                                $('.language_ES').children()[0].click()
+                                break;
+                            case "ingles":
+                                $('.language_EN').children()[0].click()
+                                break;
+                            //case "":
+                            //    newLoc = ""
+                                //    break;
+                            default:
+                                toastr["warning"]("Comando '" + tmpSpeech + "' no reconocido", "info");
+                        }
+                        if (newLoc != "") {
+                            window.location = newLoc;
+                        }
+                    }
+                }
+            } catch (ex) { }
+        }
+
+
+
 
         function GetInit() {
             var serviceURL = '@Url.Action("GetInit", "Pedido")';
@@ -390,6 +460,12 @@
                     }
                 });
 
+                $('#start_img').click(function () {
+                    try {
+                        recognition.start()
+                        $('#start_img').attr('src', '/Content/images/mic-animate.gif');
+                    } catch (ex) { }
+                });
            
                 if ($('#LoginExiste').val() == 1) {
                     //console.log($('#LoginExiste').attr("data-val"));
@@ -454,10 +530,10 @@
                 });
                 $('.transparente').removeClass('sorting')
 
-
                 $('#login-modal').on('shown.bs.modal', function () {
                     $('#UserName').focus();
-                })
+                });
+
                 $('#loginModal').click(function () {
                     $('#login-modal span').text("");
                     if ($('#UserName').val() == "" || $('#LoginPassword').val() == "") {

@@ -284,6 +284,8 @@
     <Content Include="Content\images\loader2.gif" />
     <Content Include="Content\images\Logo.ico" />
     <Content Include="Content\images\Logo2.png" />
+    <Content Include="Content\images\mic-animate.gif" />
+    <Content Include="Content\images\mic.gif" />
     <Content Include="Content\images\wink.svg" />
     <Content Include="Content\Pedido.css" />
     <Content Include="Content\simptip.min.css" />
