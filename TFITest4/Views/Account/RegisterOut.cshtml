@@ -4,6 +4,14 @@
 @{
     ViewBag.Title = "Registro";
 }
+
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "" && document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
+        window.location = "/"
+    }
+</script>
+
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)

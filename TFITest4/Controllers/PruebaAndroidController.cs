@@ -28,6 +28,7 @@ namespace TFITest4.Controllers
             public Nullable<int> IDProveedor { get; set; }
             public Nullable<System.DateTime> FechaVencimiento { get; set; }
             public double Monto { get; set; }
+            public double IVA { get; set; }
             public Nullable<int> IDEstado { get; set; }
             public Nullable<int> IDUsuarioCreacion { get; set; }
             public Nullable<int> IDDocumentoRef { get; set; }
@@ -74,6 +75,7 @@ namespace TFITest4.Controllers
                     mdoc.IDDocumento = d.IDDocumento;
                     mdoc.EmpresaLocal = d.ClienteEmpresa.NombreFantasia;
                     mdoc.Monto = 0;
+                    mdoc.IVA = d.ClienteEmpresa.TipoIVA.Valor;
                     foreach (var detalle in d.DocumentoDetalle)
                     {
                         mdoc.Monto += (double)(detalle.Cantidad * detalle.PrecioDetalle.Precio);
@@ -94,6 +96,7 @@ namespace TFITest4.Controllers
             docR.Estado = doc.EstadoMisc.Detalle;
             docR.FechaEmision = doc.FechaEmision.ToString();
             docR.IDDocumento = doc.IDDocumento;
+            docR.IVA = doc.ClienteEmpresa.TipoIVA.Valor;
             modelDetalle det;
             docR.detalles = new List<modelDetalle>();
             foreach (var d in doc.DocumentoDetalle)

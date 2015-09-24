@@ -287,55 +287,75 @@
         }
 
         if (!('webkitSpeechRecognition' in window)) {
-            alert('Your browser cannot support speech, bro.. upgrade...');
+            console.log('Your browser cannot support speech, bro.. upgrade...');
+            $('#start_img').hide()
         } else {
             var recognition = new webkitSpeechRecognition();
             recognition.lang = "es-AR"
-        }
-        recognition.onerror = function (event) {
-            toastr["warning"]("No se pudo reconocer la voz", "info")
-            $('#start_img').attr('src', '/Content/images/mic.gif');
-        }
-        recognition.onresult = function (e) {
-            try {
+            recognition.onerror = function (event) {
+                toastr["warning"]("No se pudo reconocer la voz", "info")
                 $('#start_img').attr('src', '/Content/images/mic.gif');
-                for (var i = e.resultIndex; i < e.results.length; ++i) {
-                    if (e.results[i].isFinal) {
-                        //assert(e.results[i][0].transcript);
-                        var tmpSpeech = removeAcento(e.results[i][0].transcript);
-                        //assert(tmpSpeech);
-                        if (tmpSpeech.toLowerCase() == "registrese") {
-                            window.location = "/Account/RegisterOut";
-                        }
-                        var newLoc = "";
-                        switch (tmpSpeech) {
-                            case "registrese":
-                                newLoc = "/Account/RegisterOut";
-                                break;
-                            case "iniciar":
-                            case "iniciar sesion":
-                            case "login":
-                                $('#login-modal').modal('show');
-                                break;
-                            case "espanol":
-                                $('.language_ES').children()[0].click()
-                                break;
-                            case "ingles":
-                                $('.language_EN').children()[0].click()
-                                break;
-                            //case "":
-                            //    newLoc = ""
-                                //    break;
-                            default:
-                                toastr["warning"]("Comando '" + tmpSpeech + "' no reconocido", "info");
-                        }
-                        if (newLoc != "") {
-                            window.location = newLoc;
+            }
+            recognition.onend = function () {
+                $('#start_img').attr('src', '/Content/images/mic.gif');
+            }
+            recognition.onresult = function (e) {
+                try {
+                    $('#start_img').attr('src', '/Content/images/mic.gif');
+                    for (var i = e.resultIndex; i < e.results.length; ++i) {
+                        if (e.results[i].isFinal) {
+                            //assert(e.results[i][0].transcript);
+                            var tmpSpeech = removeAcento(e.results[i][0].transcript);
+                            console.log(tmpSpeech);
+                            if (tmpSpeech.toLowerCase() == "registrese") {
+                                window.location = "/Account/RegisterOut";
+                            }
+                            var newLoc = "";
+                            switch (tmpSpeech) {
+                                case "registrese":
+                                    newLoc = "/Account/RegisterOut";
+                                    break;
+                                case "iniciar":
+                                case "iniciar sesion":
+                                case "login":
+                                    if (document.getElementById('nombre_usuario').getAttribute("data-val") == "Invitado")
+                                        $('#login-modal').modal('show');
+                                    break;
+                                case "espanol":
+                                case "spanish":
+                                    $('.es-AR')[0].click()
+                                    $('.es-AR')[0].click()
+                                    break;
+                                case "ingles":
+                                case "english":
+                                    $('.en-GB')[0].click()
+                                    $('.en-GB')[0].click()
+                                    break;
+                                case "configuracion":
+                                case "configuration":
+                                    $('#configuracion').click();
+                                    break;
+                                case "comprar":
+                                case "buy":
+                                    if (document.getElementById('nombre_usuario').getAttribute("data-val") != "Invitado")
+                                        newLoc = "/Pedido";
+                                    break;
+                                    //case "":
+                                    //    newLoc = ""
+                                    //    break;
+                                default:
+                                    toastr["warning"]("Comando '" + tmpSpeech + "' no reconocido", "info");
+                            }
+                            if (newLoc != "") {
+                                window.location = newLoc;
+                            }
                         }
                     }
-                }
-            } catch (ex) { }
+                } catch (ex) { }
+            }
         }
+        
+        
 
 
 
@@ -540,7 +560,19 @@
 
                     });
                 });
-                $('.transparente').removeClass('sorting')
+                $('.tableJquery').on('draw.dt', function () {
+                    $('.transparente').removeClass('sorting')
+                });
+                $('.transparente').removeClass('sorting');
+                var ttnewTitle = $('.titulo').html();
+                if (typeof ttnewTitle != "undefined") {
+                    var tnewTitle = $('.titulo').html().split("");
+                    var newTitle = "";
+                    for (i = 0; i < tnewTitle.length ; i++) {
+                        newTitle += "<span>" + tnewTitle[i] + "</span>";
+                    }
+                    $('.titulo').html(newTitle)
+                }
 
                 $('#login-modal').on('shown.bs.modal', function () {
                     $('#UserName').focus();
@@ -580,6 +612,8 @@
                                     fullURL = window.location.href.split("/")[0] + "//" + window.location.href.split("/")[2] + "/" + RetUrl;
                                     //console.log(fullURL);
                                     window.location = fullURL
+                                } else {
+                                    window.location.reload();
                                 }
                                 $("#MainMenu").html(result);
                                 $('#MainMenu').fadeTo("slow", 1);
@@ -604,6 +638,7 @@
                         },
                         complete: function () {
                             $('#LoginImgLoader').addClass("oculto");
+
                         }
                     });
 
@@ -785,7 +820,27 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
+
+        //efectos
+            var map = { 18: false, 71: false};
+            $(document).keydown(function (e) {
+                if (e.keyCode in map) {
+                    map[e.keyCode] = true;
+                    if (map[18] && map[71]) {
+                        $('body').addClass("giro");
+                        setTimeout(function () { $('body').removeClass("giro"); }, 3500);
+                    }
+                }
+            }).keyup(function (e) {
+                if (e.keyCode in map) {
+                    map[e.keyCode] = false;
+                }
+            });
+
+        
     </script>
+
+
 
 
     @RenderSection("EndScript", false)

@@ -238,6 +238,10 @@
                     "sSearch": "@Language.FiltrarTabla"
                 }
             });
+            $('.transparente').removeClass('sorting');
+            $('#tableJqueryPedido').on('draw.dt', function () {
+                $('.transparente').removeClass('sorting');
+            });
 
 
            @* var serviceURL = '@Url.Action("GetInit", "Pedido")';

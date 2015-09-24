@@ -6,6 +6,47 @@
     text-align: center;
 }
 
+.titulo span {
+      -webkit-transition: all 0.9s ease;
+      -moz-transition:    all 0.9s ease;
+      -o-transition:      all 0.9s ease;
+      transition:         all 0.9s ease;
+    }
+
+.titulo span:hover {
+      text-shadow: 0 0 7px black;
+      color: transparent;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition:    all 0.2s ease;
+      -o-transition:      all 0.2s ease;
+      transition:         all 0.2s ease;
+    }
+
+@-webkit-keyframes roll {
+from { -webkit-transform: rotate(0deg) }
+to   { -webkit-transform: rotate(360deg) }
+}
+
+@-moz-keyframes roll {
+from { -moz-transform: rotate(0deg) }
+to   { -moz-transform: rotate(360deg) }
+}
+
+@keyframes roll {
+from { transform: rotate(0deg) }
+to   { transform: rotate(360deg) }
+}
+
+
+.giro {
+-moz-animation-name: roll;
+-moz-animation-duration: 4s;
+-moz-animation-iteration-count: 1;
+-webkit-animation-name: roll;
+-webkit-animation-duration: 4s;
+-webkit-animation-iteration-count: 1;
+}
+
 .field-validation-error {
     color: red;
 }

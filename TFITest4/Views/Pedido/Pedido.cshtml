@@ -7,8 +7,14 @@
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
 }
-<div class="titulo">
-    <h2 >Pedidos - @ViewBag.Empresa</h2>
+
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "Externo") {
+        window.location = "/Login/Error"
+    }
+</script>
+<div>
+    <h2 class="titulo">Pedidos - @ViewBag.Empresa</h2>
 </div>
 
 <table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
