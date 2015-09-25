@@ -16,8 +16,8 @@ namespace BIZ
         public Nullable<System.DateTime> FechaDesde { get; set; }
         public Nullable<bool> Activo { get; set; }
 
-        public virtual ICollection<BIZDocumentoDetalle> DocumentoDetalle { get; set; }
-       // public virtual  ListaPrecio { get; set; }
-        public virtual BIZProducto Producto { get; set; }
+        public ICollection<BIZDocumentoDetalle> DocumentoDetalle { get; set; }
+        public BIZListaPrecio ListaPrecio { get; set; }
+        public BIZProducto Producto { get; set; }
     }
 }

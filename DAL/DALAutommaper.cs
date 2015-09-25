@@ -40,7 +40,7 @@ namespace DAL
             AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
             //al reves
             AutoMapper.Mapper.CreateMap<BIZListaPrecio, ListaPrecio>();
-            AutoMapper.Mapper.CreateMap<BIZPrecioDetalle, PrecioDetalle>();
+            AutoMapper.Mapper.CreateMap<PrecioDetalle, BIZPrecioDetalle>();
 
             //producto
             AutoMapper.Mapper.CreateMap<Producto, BIZProducto>();

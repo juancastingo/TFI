@@ -35,4 +35,29 @@
 
 
 
-  
+
+
+.classname {
+    transition: All 1.9746s ease-in;
+    -webkit-transition: All 1.9746s ease-in;
+    -moz-transition: All 1.9746s ease-in;
+    -o-transition: All 1.9746s ease-in;
+    transform: rotate(1deg) scale(1) skew(1deg) translate(0px);
+    -webkit-transform: rotate(1deg) scale(1) skew(1deg) translate(10px);
+    -moz-transform: rotate(2deg) scale(1) skew(1deg) translate(0px);
+    -o-transform: rotate(4deg) scale(1) skew(1deg) translate(0px);
+    -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(0px);
+}
+
+    .classname:hover {
+        transform: rotate(360deg) scale(3) skew(0deg) translate(-200px,50px);
+        -webkit-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px,50px);
+        -moz-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px);
+        -o-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px);
+        -ms-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px);
+    }
+
+h1 {
+    font-family: Magneto;
+    font-size: 80px;
+}

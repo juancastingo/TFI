@@ -184,6 +184,7 @@
     <Compile Include="Controllers\PaisTest2Controller.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\PrecioDetalleController.cs" />
+    <Compile Include="Controllers\PrecioDetalleORMController.cs" />
     <Compile Include="Controllers\ProductoCategoriaORMController.cs" />
     <Compile Include="Controllers\ProductoORMController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
@@ -280,6 +281,7 @@
     <Content Include="Content\images\cd-top-arrow.svg" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\home.jpg" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\images\loader2.gif" />
     <Content Include="Content\images\Logo.ico" />
@@ -288,6 +290,7 @@
     <Content Include="Content\images\mic.gif" />
     <Content Include="Content\images\wink.svg" />
     <Content Include="Content\Pedido.css" />
+    <Content Include="Content\responsive-full-background-image.css" />
     <Content Include="Content\simptip.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -923,11 +926,11 @@
     <Content Include="Views\ListaPrecioORM\Edit.cshtml" />
     <Content Include="Views\ListaPrecioORM\Delete.cshtml" />
     <Content Include="Views\Pedido\Index.cshtml" />
-    <Content Include="Views\PrecioDetalle\Index.cshtml" />
-    <Content Include="Views\PrecioDetalle\Details.cshtml" />
-    <Content Include="Views\PrecioDetalle\Create.cshtml" />
-    <Content Include="Views\PrecioDetalle\Edit.cshtml" />
-    <Content Include="Views\PrecioDetalle\Delete.cshtml" />
+    <Content Include="Views\PrecioDetalleORM\Index.cshtml" />
+    <Content Include="Views\PrecioDetalleORM\Details.cshtml" />
+    <Content Include="Views\PrecioDetalleORM\Create.cshtml" />
+    <Content Include="Views\PrecioDetalleORM\Edit.cshtml" />
+    <Content Include="Views\PrecioDetalleORM\Delete.cshtml" />
     <Content Include="Views\DocumentoORM\Index.cshtml" />
     <Content Include="Views\DocumentoORM\Details.cshtml" />
     <Content Include="Views\DocumentoORM\Create.cshtml" />
@@ -946,6 +949,9 @@
     <Content Include="Views\Pedido\makePDF.cshtml" />
     <Content Include="Views\Bitacora\Index.cshtml" />
     <Content Include="Views\Pedido\Controlar.cshtml" />
+    <Content Include="Views\PrecioDetalle\Index.cshtml" />
+    <Content Include="Views\PrecioDetalle\Edit.cshtml" />
+    <Content Include="Views\PrecioDetalle\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,6 +4,9 @@
 @section headSection {
       <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 }
+<div class="container">
+
+<h2 class="titulo">@Language.listaPrecios</h2>
 
 <p>
     @Html.ActionLink(@Language.nuevo, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
@@ -33,7 +36,7 @@
                     @Html.DisplayFor(modelItem => item.Detalle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                    @item.FechaDesde.ToString("MM/dd/yyyy HH:mm")
                 </td>
 
                 <td>
@@ -49,7 +52,7 @@
         }
     </tbody>
 </table>
-
+    </div>
 
 
 <div class="modal fade" id="ModalPrecio">

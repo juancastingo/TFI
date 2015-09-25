@@ -20,7 +20,7 @@ namespace DAL
         public List<BIZListaPrecio> getAllListaPrecio()
         {
             try {
-            var list = db.ListaPrecio.ToList();
+            //var list = db.ListaPrecio.ToList();
             var lista = Mapper.Map<List<ListaPrecio>, List<BIZListaPrecio>>(db.ListaPrecio.ToList());
             return lista;
             } catch (Exception ex) { return null; }
@@ -91,6 +91,36 @@ namespace DAL
                 db.SaveChanges();
             }
             catch (Exception ex) { }
+        }
+
+
+        public List<BIZPrecioDetalle> geAlltListaDetalle() {
+            try
+            {
+                var lista = Mapper.Map<List<PrecioDetalle>, List<BIZPrecioDetalle>>(db.PrecioDetalle.ToList());
+                return lista;
+            }
+            catch (Exception ex) { return null; }
+        }
+
+        public BIZPrecioDetalle getPrecioDetalle(int IDPD)
+        {
+            try
+            {
+                var TLista = db.PrecioDetalle
+                    .SingleOrDefault(x => x.IDPrecioDetalle == IDPD);
+                var ListaRet = Mapper.Map<PrecioDetalle, BIZPrecioDetalle>(TLista);
+                return ListaRet;
+            }
+            catch (Exception ex) { return null; }
+        }
+
+
+
+        public void UpdatePrecioDetalle(int id, bool Activo)
+        {
+            string query = "UPDATE PrecioDetalle SET Activo='" + Activo + "' WHERE IDPrecioDetalle = " + id;
+            db.Database.ExecuteSqlCommand(query);
         }
     }
 }

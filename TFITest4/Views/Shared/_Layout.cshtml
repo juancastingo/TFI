@@ -506,6 +506,7 @@
 
                 $(".editor-field input").addClass("form-control");
                 $("table input").addClass("form-control");
+                $("select option[value='']").remove()
                 $('select').addClass("show-tick");
                 $('select').attr("data-live-search", "true");
                 $('select').selectpicker();

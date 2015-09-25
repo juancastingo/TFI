@@ -1,32 +1,60 @@
-﻿@model DAL.ORM.PrecioDetalle
+﻿@model BIZ.BIZPrecioDetalle
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>PrecioDetalle</legend>
+        <legend class="titulo">PrecioDetalle</legend>
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <tr>
+                <td class="editor-label">
+                    Nr# @Model.IDPrecioDetalle
+                    @Html.HiddenFor(model => model.IDPrecioDetalle)
+                </td>
+            </tr>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IDPrecioDetalle)
-            @Html.HiddenFor(model => model.IDPrecioDetalle)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Activo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Activo)
-            @Html.ValidationMessageFor(model => model.Activo)
-        </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
+            <tr>
+                <td class="editor-label">
+                    
+                    @Html.LabelFor(model => model.ListaPrecio.Detalle)
+                    @Model.ListaPrecio.Detalle
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    
+                    @Html.LabelFor(model => model.Producto)
+                    @Model.Producto.Nombre
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    
+                    @Html.LabelFor(model => model.Precio)
+                    @Model.Precio
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-field">
+                    @Html.LabelFor(model => model.Activo)
+                    @Html.EditorFor(model => model.Activo)
+                    @Html.ValidationMessageFor(model => model.Activo)
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <input class="btn btn-primary " type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
     </fieldset>
 }
 

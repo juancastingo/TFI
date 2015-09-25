@@ -1,43 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.ORM;
+using BLL;
 
 namespace TFITest4.Controllers
 {
     public class PrecioDetalleController : Controller
     {
-        private IIDTest2Entities db = new IIDTest2Entities();
-
         //
         // GET: /PrecioDetalle/
+        BLLPrecio precioWorker = new BLLPrecio();
 
         public ActionResult Index()
         {
-            var preciodetalle = db.PrecioDetalle.Include(p => p.ListaPrecio).Include(p => p.Producto);
-            return View(preciodetalle.ToList());
+            var lista = precioWorker.traerPrecioDetalles();
+            return View(lista);
         }
 
-        //
-        // GET: /PrecioDetalle/Details/5
-
-        public ActionResult Details(int id = 0)
+        public ActionResult Edit(int id)
         {
-            PrecioDetalle preciodetalle = db.PrecioDetalle.Find(id);
-            if (preciodetalle == null)
+            var precio = precioWorker.traerPrecioDetalle(id);
+            if (precio == null)
             {
                 return HttpNotFound();
             }
-            return View(preciodetalle);
+            //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
+            return View(precio);
         }
 
-        //
-        // GET: /PrecioDetalle/Create
 
+
+        private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities(); //borrar
         public ActionResult Create()
         {
             ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
@@ -49,84 +44,64 @@ namespace TFITest4.Controllers
         // POST: /PrecioDetalle/Create
 
         [HttpPost]
-        public ActionResult Create(PrecioDetalle preciodetalle)
+        public ActionResult Create(FormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                preciodetalle.FechaAlta = DateTime.Now;
-                preciodetalle.FechaUltimaMod = (DateTime)preciodetalle.FechaAlta;
-                db.PrecioDetalle.Add(preciodetalle);
-                db.SaveChanges();
+                // TODO: Add insert logic here
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
-            ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre", preciodetalle.IDProducto);
-            return View(preciodetalle);
-        }
-
-        //
-        // GET: /PrecioDetalle/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            PrecioDetalle preciodetalle = db.PrecioDetalle.Find(id);
-            if (preciodetalle == null)
+            catch
             {
-                return HttpNotFound();
+                return View();
             }
-            ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
-            ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre", preciodetalle.IDProducto);
-            return View(preciodetalle);
         }
+
 
         //
         // POST: /PrecioDetalle/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(PrecioDetalle preciodetalle)
+        public ActionResult Edit(int id, bool Activo)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //preciodetalle.FechaUltimaMod = DateTime.Now;
-                db.Entry(preciodetalle).State = EntityState.Modified;
-                db.SaveChanges();
+                precioWorker.ActualizarPrecioDetalle(id, Activo);
+                // TODO: Add update logic here
+
                 return RedirectToAction("Index");
             }
-            ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
-            ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre", preciodetalle.IDProducto);
-            return View(preciodetalle);
+            catch
+            {
+                return View();
+            }
         }
 
         //
         // GET: /PrecioDetalle/Delete/5
 
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(int id)
         {
-            PrecioDetalle preciodetalle = db.PrecioDetalle.Find(id);
-            if (preciodetalle == null)
-            {
-                return HttpNotFound();
-            }
-            return View(preciodetalle);
+            return View();
         }
 
         //
         // POST: /PrecioDetalle/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
         {
-            PrecioDetalle preciodetalle = db.PrecioDetalle.Find(id);
-            db.PrecioDetalle.Remove(preciodetalle);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            try
+            {
+                // TODO: Add delete logic here
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

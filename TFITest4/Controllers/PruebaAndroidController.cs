@@ -133,32 +133,5 @@ namespace TFITest4.Controllers
             return Json(new { listaR }, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
-
-        //asi lo agarro con jquery
-        //var a = "";
-//       $.ajax({
-    //       type: "GET",
-    //       url: 'http://192.168.2.112/PruebaAndroid/pedidos',
-    //       data: "asd",
-    //       contentType: 'application/json; charset=utf-8',
-    //       success: function (data) {
-    //           a = data;
-    //           console.log(data);
-    //      },
-    //      error: function(e) {
-    //          console.log(e)
-    //      }
-//      });
-        //a.list.forEach(function(element, index, array) {
-        //     console.log(element['id'] + " " + element['nombre'])
-        //})
-
-
     }
 }

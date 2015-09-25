@@ -1,9 +1,14 @@
-﻿@model IEnumerable<BIZ.BIZPrecioDetalle>
-@using TFITest4.Resources;
+﻿@model IEnumerable<DAL.ORM.PrecioDetalle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
 <div class="container">
-<h2 class="titulo">@TFITest4.Resources.Language.listaDetalle</h2>
+<h2>Index</h2>
+
 <p>
-    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
+    @Html.ActionLink("Create New", "Create")
 </p>
     <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">  
         <thead>
@@ -22,9 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Precio)
         </th>
-@*        <th>
+        <th>
             @Html.DisplayNameFor(model => model.FechaAlta)
-        </th>*@
+        </th>
 
         <th>
             @Html.DisplayNameFor(model => model.Activo)
@@ -47,14 +52,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
-@*        <td>
+        <td>
             @Html.DisplayFor(modelItem => item.FechaAlta)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Activo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IDPrecioDetalle }, new { @class = "btn btn-primary", @style = "color:white" })
+            @Html.ActionLink("Edit", "Edit", new {  id=item.IDPrecioDetalle  })
         </td>
     </tr>
 }

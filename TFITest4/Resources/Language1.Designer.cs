@@ -97,6 +97,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Bienvenido!.
+        /// </summary>
+        public static string bienvenido {
+            get {
+                return ResourceManager.GetString("bienvenido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cambiar contraseña.
         /// </summary>
         public static string CambiarPass {

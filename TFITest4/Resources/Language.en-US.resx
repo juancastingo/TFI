@@ -270,4 +270,7 @@
   <data name="usuario" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="bienvenido" xml:space="preserve">
+    <value>Welcome!</value>
+  </data>
 </root>

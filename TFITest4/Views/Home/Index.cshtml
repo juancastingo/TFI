@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<DAL.ORM.Producto>
+@using TFITest4.Resources
 
 @section headSection{
     <link href="~/Content/Home.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style>
-          .carousel-inner > .item > img,
-          .carousel-inner > .item > a > img {
-              width: 70%;
-              margin: auto;
-              max-height: 300px;
-          }
-    </style>
+    <link href="~/Content/responsive-full-background-image.css" rel="stylesheet" />
+
 }
 @{
     ViewBag.Title = "Index";
 }
-<img style="right: 0px; position: absolute;" width="100px" height="100px" src="~/Content/images/Logo2.png" alt="logo" />
-<h1 class="titulo">Welcome!</h1>
+<img class="classname" style="right: 14px;top:55px; width:150px;height:150px; position: absolute;" src="~/Content/images/Logo2.png" alt="logo" />
+<h1 style="text-align:left;margin-right:10%;" class="titulo">@Language.bienvenido</h1>
+
+
+
 @*<p>User= @Session["usuario"]</p> *@
 @*<h2>@ViewBag.numero</h2> Esto va bien para la factura y la numeracion*@
 @*<h2>@ViewBag.url</h2>*@
@@ -31,16 +29,14 @@
 
 
 
-<div class="container">
+@*<div class="container">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
@@ -60,7 +56,6 @@
       </div>
 
 
-    <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
@@ -71,14 +66,14 @@
     </a>
   </div>
 </div>
-    </div>
+    </div>*@
 
 
 
 
 
 
-
+@*  
 
 @foreach (var cat in ViewBag.categorias2)
 {
@@ -100,9 +95,7 @@
                                 <p class="precio">
                                     <span class="valor">$</span><span class="valor MontoPrePedido">@item.PrecioActual.ToString().Replace(",", ".")</span>
                                 </p>
-                                @*                            <p>
-                                <span>@item.Descripcion</span>
-                            </p>*@
+
                             </div>
                         </div>
                     </form>
@@ -113,7 +106,7 @@
     </div>
 }
 
-
+*@
 
 @*
 
