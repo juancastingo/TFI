@@ -23,6 +23,7 @@ namespace TFITest4.Controllers
         public static int gIdPedido;
         DAL.DALProducto ProdWorker = new DAL.DALProducto();
         DAL.DALDocumento DocWorker = new DAL.DALDocumento();
+        BLLDocumento docWorker2 = new BLLDocumento();
         BLLBitacora Bita = new BLLBitacora();
 
 
@@ -65,6 +66,8 @@ namespace TFITest4.Controllers
                 this.Productos = new List<modelCarrito>();
             }
             public List<modelCarrito> Productos { get; set; }
+            public string estado { get; set; }
+            public string comentario { get; set; }
             public int IDDocumento { get; set; }
 
         }
@@ -574,11 +577,11 @@ namespace TFITest4.Controllers
 
                 int IDPedido = int.Parse(Pedido);
                 //aca cargo los datos del Prepedido en la sesion
-                var PrePedido = DocWorker.getDocByID(IDPedido);
+                var RPedido = DocWorker.getDocByID(IDPedido);
                 ListCarrito carritoPedido = new ListCarrito();
-                carritoPedido.IDDocumento = PrePedido.IDDocumento;
+                carritoPedido.IDDocumento = RPedido.IDDocumento;
                 modelCarrito item;
-                foreach (var p in PrePedido.DocumentoDetalle)
+                foreach (var p in RPedido.DocumentoDetalle)
                 {
                     item = new modelCarrito();
                     item.id = p.PrecioDetalle.Producto.IDProducto;
@@ -588,6 +591,9 @@ namespace TFITest4.Controllers
                     item.Precio = (double)p.PrecioDetalle.Precio;
                     carritoPedido.Productos.Add(item);
                 }
+                carritoPedido.estado = RPedido.EstadoMisc.Detalle;
+                carritoPedido.comentario = RPedido.Detalle;
+               
 
 
                 //Session["CarritoPedido"] = carritoPedido;
@@ -648,6 +654,23 @@ namespace TFITest4.Controllers
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
+        }
+
+
+        public ActionResult CancelarPedido(string Pedido)
+        {
+            try
+            {
+                int IDPedido = int.Parse(Pedido);
+                int idUser = (int)Session["userID"];
+                docWorker2.ActualizarStatusDoc(IDPedido, 23, idUser); //23 es cancelado de pedido
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

@@ -172,7 +172,7 @@
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\BitacoraORMController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
-    <Compile Include="Controllers\ClienteEmpresaORMController.cs" />
+    <Compile Include="Controllers\ClienteORMController.cs" />
     <Compile Include="Controllers\DocumentoORMController.cs" />
     <Compile Include="Controllers\ListaPrecioORMController.cs" />
     <Compile Include="Controllers\ExampleLayoutsController.cs" />
@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PrecioDetalleController.cs" />
     <Compile Include="Controllers\PrecioDetalleORMController.cs" />
     <Compile Include="Controllers\ProductoCategoriaORMController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProductoORMController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\PruebaAndroidController.cs" />
@@ -889,11 +890,6 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Test.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\ClienteEmpresaORM\Index.cshtml" />
-    <Content Include="Views\ClienteEmpresaORM\Details.cshtml" />
-    <Content Include="Views\ClienteEmpresaORM\Create.cshtml" />
-    <Content Include="Views\ClienteEmpresaORM\Edit.cshtml" />
-    <Content Include="Views\ClienteEmpresaORM\Delete.cshtml" />
     <Content Include="Views\Provincia\Delete.cshtml" />
     <Content Include="Views\Provincia\Edit.cshtml" />
     <Content Include="Views\Localidad\Index.cshtml" />
@@ -952,6 +948,13 @@
     <Content Include="Views\PrecioDetalle\Index.cshtml" />
     <Content Include="Views\PrecioDetalle\Edit.cshtml" />
     <Content Include="Views\PrecioDetalle\Create.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\ClienteORM\Index.cshtml" />
+    <Content Include="Views\ClienteORM\Details.cshtml" />
+    <Content Include="Views\ClienteORM\Create.cshtml" />
+    <Content Include="Views\ClienteORM\Edit.cshtml" />
+    <Content Include="Views\ClienteORM\Delete.cshtml" />
+    <Content Include="Views\Cliente\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,6 @@
-﻿using DAL.ORM;
+﻿using AutoMapper;
+using BIZ;
+using DAL.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,13 @@ namespace DAL
 
             var emp = AutoMapper.Mapper.Map<EmpresaLocal, BIZ.BIZEmpresaLocal>(empresa);
             return emp;
+        }
+
+        public List<BIZEstado> getEstadoMisc(string p)
+        {
+            var list = db.EstadoMisc.Where(b => b.Tipo == p);
+            var rList = Mapper.Map<List<EstadoMisc>, List<BIZEstado>>(list.ToList());
+            return rList;
         }
     }
 }

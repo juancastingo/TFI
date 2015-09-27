@@ -19,6 +19,22 @@
     padding: 1em 0 1em 3em;
 }
 
+.Rechazado {
+    color: red;
+}
+.Aprobado {
+    color: green;
+}
+.Facturado {
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.Cancelado {
+    text-decoration:line-through;
+    color: orange;
+}
+
 
 
 /*.minipost {

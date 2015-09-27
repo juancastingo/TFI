@@ -24,10 +24,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Estado)
+         @Html.DisplayNameFor(model => model.EstadoMisc.Tipo)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Estado)
+        @Html.DisplayFor(model => model.EstadoMisc.Tipo)
     </div>
 
     <div class="display-label">
@@ -73,10 +73,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.TipoIVA1.Detalle)
+         @Html.DisplayNameFor(model => model.TipoIVA.Detalle)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.TipoIVA1.Detalle)
+        @Html.DisplayFor(model => model.TipoIVA.Detalle)
     </div>
 
     <div class="display-label">
@@ -98,6 +98,13 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FechaUltimaMod)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaUltimaMod)
     </div>
 </fieldset>
 <p>

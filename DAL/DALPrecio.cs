@@ -122,5 +122,12 @@ namespace DAL
             string query = "UPDATE PrecioDetalle SET Activo='" + Activo + "' WHERE IDPrecioDetalle = " + id;
             db.Database.ExecuteSqlCommand(query);
         }
+
+        public void createDetallePrecio(BIZPrecioDetalle PrecioDetalle)
+        {
+            var tPrecio = Mapper.Map<BIZPrecioDetalle, PrecioDetalle>(PrecioDetalle);
+            db.PrecioDetalle.Add(tPrecio);
+            db.SaveChanges();
+        }
     }
 }

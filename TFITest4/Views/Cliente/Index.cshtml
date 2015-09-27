@@ -1,17 +1,22 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelClienteEmpresa>
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Index";
 }
 
+@section headSection {
+    
+}
+
 <script type="text/javascript">
-    if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
-        window.location = "/Login/Error"
-    }
+    //if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
+    //    window.location = "/Login/Error"
+    //}
 </script>
 
 
-<h2>Index</h2>
+<h2 class="titulo">@Language.clientes</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
@@ -27,9 +32,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaAlta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaUltimaOperacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Limite)
@@ -70,13 +72,10 @@
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaAlta)
+                    @item.FechaAlta.ToString("MM/dd/yyyy")
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaUltimaOperacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Limite)
+                <td class="valor1" nowrap>
+                    @item.Limite.ToString().Replace(",", ".")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CUIT)
@@ -101,9 +100,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                 <td>
-                    <span>@item.TipoIVA.Detalle - </span><span>@item.TipoIVA.Valor.ToString().Substring(2, @item.TipoIVA.Valor.ToString().Length-2)%</span>
-                     @*@Html.DisplayFor(modelItem => item.TipoIVA.Detalle)*@
+                <td nowrap>
+                    <span>@item.TipoIVA.Detalle - </span><span>@item.TipoIVA.Valor%</span>
+                    @*@Html.DisplayFor(modelItem => item.TipoIVA.Detalle)*@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.IDClienteEmpresa }, new { @class = "btn btn-primary", @style = "color:white" })
@@ -128,3 +127,19 @@
         });
     </script>
 }
+
+
+
+@section numerosScript{
+    var list = [];
+    $('.valor1').each(function () {
+            list.push($(this).html())
+    });
+            var i = 0;
+            $('.valor1').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+    }

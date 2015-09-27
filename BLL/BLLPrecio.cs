@@ -12,6 +12,13 @@ namespace BLL
     {
         private DALPrecio precioWorker = new DALPrecio();
 
+        public List<BIZListaPrecio> TraerAllListaPrecio()
+        {
+            return precioWorker.getAllListaPrecio();
+        }
+
+
+
         public List<BIZPrecioDetalle> traerPrecioDetalles() {
             return precioWorker.geAlltListaDetalle();
         }
@@ -23,6 +30,13 @@ namespace BLL
         public void ActualizarPrecioDetalle(int id, bool Activo)
         {
             precioWorker.UpdatePrecioDetalle(id,Activo);
+        }
+
+        public void CrearDetallePrecio(BIZPrecioDetalle PrecioDetalle)
+        {
+            PrecioDetalle.FechaAlta = DateTime.Now;
+            PrecioDetalle.FechaUltimaMod = DateTime.Now;
+            precioWorker.createDetallePrecio(PrecioDetalle);
         }
     }
 }

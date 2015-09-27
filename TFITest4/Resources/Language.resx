@@ -273,4 +273,25 @@
   <data name="bienvenido" xml:space="preserve">
     <value>Bienvenido!</value>
   </data>
+  <data name="crear" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="volver" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="estado" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="limite" xml:space="preserve">
+    <value>Limite</value>
+  </data>
+  <data name="nombreFantasia" xml:space="preserve">
+    <value>Nombre de Fantasía</value>
+  </data>
+  <data name="razonSocial" xml:space="preserve">
+    <value>Razón social</value>
+  </data>
+  <data name="tipoIVA" xml:space="preserve">
+    <value>Tipo IVA</value>
+  </data>
 </root>

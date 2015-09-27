@@ -25,7 +25,7 @@ namespace DAL.ORM
         public Nullable<double> Precio { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public System.DateTime FechaUltimaMod { get; set; }
+        public Nullable<System.DateTime> FechaUltimaMod { get; set; }
     
         public virtual ICollection<DocumentoDetalle> DocumentoDetalle { get; set; }
         public virtual ListaPrecio ListaPrecio { get; set; }

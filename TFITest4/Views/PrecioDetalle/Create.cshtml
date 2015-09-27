@@ -1,18 +1,16 @@
-﻿@model DAL.ORM.PrecioDetalle
+﻿@model BIZ.BIZPrecioDetalle
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2 class="titulo">@Language.crear</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
     <fieldset>
-        <legend>PrecioDetalle</legend>
-
-
+        <legend>@Language.listaDetalle</legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.IDListaPrecio, "ListaPrecio")
         </div>
@@ -30,7 +28,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Precio)
+            <label>@Language.precio</label>
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Precio)
@@ -43,7 +41,6 @@
             @Html.EditorFor(model => model.Activo)
             @Html.ValidationMessageFor(model => model.Activo)
         </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -51,7 +48,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-primary", @style = "color:white" })
 </div>
 
 @section Scripts {

@@ -9,21 +9,21 @@ using DAL.ORM;
 
 namespace TFITest4.Controllers
 {
-    public class ClienteEmpresaORMController : Controller
+    public class ClienteORMController : Controller
     {
         private IIDTest2Entities db = new IIDTest2Entities();
 
         //
-        // GET: /ClienteEmpresaORM/
+        // GET: /ClienteORM/
 
         public ActionResult Index()
         {
-            var clienteempresa = db.ClienteEmpresa.Include(c => c.Direccion).Include(c => c.TipoIVA);
+            var clienteempresa = db.ClienteEmpresa.Include(c => c.Direccion).Include(c => c.EstadoMisc).Include(c => c.TipoIVA);
             return View(clienteempresa.ToList());
         }
 
         //
-        // GET: /ClienteEmpresaORM/Details/5
+        // GET: /ClienteORM/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -36,17 +36,18 @@ namespace TFITest4.Controllers
         }
 
         //
-        // GET: /ClienteEmpresaORM/Create
+        // GET: /ClienteORM/Create
 
         public ActionResult Create()
         {
             ViewBag.IDDireccion = new SelectList(db.Direccion, "IDDireccion", "Calle");
-            ViewBag.TipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle");
+            ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo");
+            ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle");
             return View();
         }
 
         //
-        // POST: /ClienteEmpresaORM/Create
+        // POST: /ClienteORM/Create
 
         [HttpPost]
         public ActionResult Create(ClienteEmpresa clienteempresa)
@@ -59,12 +60,13 @@ namespace TFITest4.Controllers
             }
 
             ViewBag.IDDireccion = new SelectList(db.Direccion, "IDDireccion", "Calle", clienteempresa.IDDireccion);
-            ViewBag.TipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.TipoIVA);
+            ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo", clienteempresa.IDEstado);
+            ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.IDTipoIVA);
             return View(clienteempresa);
         }
 
         //
-        // GET: /ClienteEmpresaORM/Edit/5
+        // GET: /ClienteORM/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -74,12 +76,13 @@ namespace TFITest4.Controllers
                 return HttpNotFound();
             }
             ViewBag.IDDireccion = new SelectList(db.Direccion, "IDDireccion", "Calle", clienteempresa.IDDireccion);
-            ViewBag.TipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.TipoIVA);
+            ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo", clienteempresa.IDEstado);
+            ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.IDTipoIVA);
             return View(clienteempresa);
         }
 
         //
-        // POST: /ClienteEmpresaORM/Edit/5
+        // POST: /ClienteORM/Edit/5
 
         [HttpPost]
         public ActionResult Edit(ClienteEmpresa clienteempresa)
@@ -91,12 +94,13 @@ namespace TFITest4.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IDDireccion = new SelectList(db.Direccion, "IDDireccion", "Calle", clienteempresa.IDDireccion);
-            ViewBag.TipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.TipoIVA);
+            ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo", clienteempresa.IDEstado);
+            ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.IDTipoIVA);
             return View(clienteempresa);
         }
 
         //
-        // GET: /ClienteEmpresaORM/Delete/5
+        // GET: /ClienteORM/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -109,7 +113,7 @@ namespace TFITest4.Controllers
         }
 
         //
-        // POST: /ClienteEmpresaORM/Delete/5
+        // POST: /ClienteORM/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

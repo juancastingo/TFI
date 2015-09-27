@@ -1,4 +1,5 @@
-﻿using BIZ;
+﻿using AutoMapper;
+using BIZ;
 using DAL.ORM;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,10 @@ namespace DAL
     public class DALProducto
     {
         private IIDTest2Entities db = new IIDTest2Entities();
+        public DALProducto()
+        {
+            DALAutommaper automapper = new DALAutommaper();
+        }
 
         public List<BIZProducto> getProductosConPrecio() {
 
@@ -53,6 +58,17 @@ namespace DAL
             }
             return ListaP;
 
+        }
+
+        public List<BIZProducto> getAllProductos()
+        {
+            try
+            {
+                //var list = db.ListaPrecio.ToList();
+                var lista = Mapper.Map<List<Producto>, List<BIZProducto>>(db.Producto.ToList());
+                return lista;
+            }
+            catch (Exception ex) { return null; }
         }
 
         public int CheckStockProd(int IDProd)

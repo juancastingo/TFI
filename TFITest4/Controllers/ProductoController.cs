@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL;
-using AutoMapper;
-using BIZ;
-using TFITest4.Models;
 using BLL;
 
-namespace TFITest4.Models
+namespace TFITest4.Controllers
 {
-    public class ClienteController : Controller
+    public class ProductoController : Controller
     {
         //
-        // GET: /Cliente/
-        private BLLGeneral generalWorker = new BLLGeneral();
-
+        // GET: /Producto/
+        private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
+        private BLLProducto productoWorker = new BLLProducto();
         public ActionResult Index()
         {
-            DALCliente DCli = new DALCliente();
-            var clientes = Mapper.Map<List<BIZClienteEmpresa>,List<ModelClienteEmpresa>>(DCli.getAllClienteEmpresa());
-            return View(clientes);
+            var prod = productoWorker.traerAllProductos();
+            return View(prod.ToList());
+            //var producto = db.Producto;
+            //return View(producto.ToList());
         }
 
         //
-        // GET: /Cliente/Details/5
+        // GET: /Producto/Details/5
 
         public ActionResult Details(int id)
         {
@@ -33,22 +30,18 @@ namespace TFITest4.Models
         }
 
         //
-        // GET: /Cliente/Create
+        // GET: /Producto/Create
 
         public ActionResult Create()
         {
-            DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
-            ViewBag.IDDireccion = new SelectList(db.Direccion, "IDDireccion", "Calle");
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
-            ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle");
             return View();
         }
 
         //
-        // POST: /Cliente/Create
+        // POST: /Producto/Create
 
         [HttpPost]
-        public ActionResult Create( ModelClienteEmpresa cliente)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
@@ -63,7 +56,7 @@ namespace TFITest4.Models
         }
 
         //
-        // GET: /Cliente/Edit/5
+        // GET: /Producto/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -71,7 +64,7 @@ namespace TFITest4.Models
         }
 
         //
-        // POST: /Cliente/Edit/5
+        // POST: /Producto/Edit/5
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -89,7 +82,7 @@ namespace TFITest4.Models
         }
 
         //
-        // GET: /Cliente/Delete/5
+        // GET: /Producto/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -97,7 +90,7 @@ namespace TFITest4.Models
         }
 
         //
-        // POST: /Cliente/Delete/5
+        // POST: /Producto/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

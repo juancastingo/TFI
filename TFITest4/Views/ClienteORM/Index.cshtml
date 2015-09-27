@@ -9,13 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-bordered table-striped" cellspacing="0" width="100%">
+<table>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDClienteEmpresa)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estado)
+            @Html.DisplayNameFor(model => model.EstadoMisc.Tipo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaAlta)
@@ -36,7 +39,7 @@
             @Html.DisplayNameFor(model => model.NombreFantasia)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TipoIVA1.Detalle)
+            @Html.DisplayNameFor(model => model.TipoIVA.Detalle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Direccion.Calle)
@@ -47,16 +50,22 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaUltimaMod)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.IDClienteEmpresa)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @Html.DisplayFor(modelItem => item.EstadoMisc.Tipo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaAlta)
@@ -77,14 +86,10 @@
             @Html.DisplayFor(modelItem => item.NombreFantasia)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TipoIVA1.Detalle)
+            @Html.DisplayFor(modelItem => item.TipoIVA.Detalle)
         </td>
-         <td>
-             <a class="fancybox-media" href="http://maps.google.com/maps?q=@item.Direccion.Calle+@item.Direccion.Numero+@item.Direccion.Localidad.Nombre+@item.Direccion.Localidad.Provincia.Nombre+@item.Direccion.Localidad.Provincia.Pais.Nombre&t=h&z=17">
+        <td>
             @Html.DisplayFor(modelItem => item.Direccion.Calle)
-             @Html.DisplayFor(modelItem => item.Direccion.Numero)
-             @Html.DisplayFor(modelItem => item.Direccion.Localidad.Nombre)
-             </a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Telefono)
@@ -93,7 +98,10 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  /* id=item.PrimaryKey */ }) |
+            @Html.DisplayFor(modelItem => item.FechaUltimaMod)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>

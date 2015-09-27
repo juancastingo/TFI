@@ -6,6 +6,7 @@
 
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
+    <link href="~/Content/Pedido.css" rel="stylesheet" />
 }
 
 <script type="text/javascript">
@@ -44,7 +45,8 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+
+                <tr class="@item.EstadoMisc.Detalle">
                 <td>
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
@@ -94,7 +96,9 @@
                 <span class="field-validation-error" id="TextoCarritoPedidoModal"></span>
             </div>
             <div class="modal-body" id="PedidoModalBody">
-                <h5 class="text-center">Pedido nr# <span id="NrPedido"></span></h5>
+                <h5 class="text-center">@Language.pedido nr# <span id="NrPedido"></span></h5>
+                <h5 class="text-center">Estado: <span id="EstadoPedido"></span></h5>
+                <h5 class="text-center">Comentario: <span id="ComentarioPedido"></span></h5>
                 <table class="table table-striped">
                     <thead id="tblHead">
                         <tr>
@@ -149,6 +153,8 @@
                     //console.log("lista:");
                     console.log(list);
                     $('#NrPedido').text(data.Pedido.IDDocumento);
+                    $('#EstadoPedido').text(data.Pedido.estado);
+                    $('#ComentarioPedido').text(data.Pedido.comentario);
                     var subt = 0;
                     var count = 0;
                     $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th>@Language.precioUnitario</th><th>@Language.TotalProducto</th>');
@@ -171,6 +177,33 @@
 
 
 
+        });
+
+
+        $('.DescartarPrePedido').click(function () {
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("CancelarPedido", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ Pedido: $(this).attr('data-val') }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    if (data.Result == "") {
+                        toastr["success"]("@Language.OKNormal", "OK!");
+                        location.reload();
+                    } else {
+                        errorFunc;
+                    }
+                },
+                error: function (status) {
+                    errorFunc;
+                },
+                complete: ocultarGIF
+            });
         });
 
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using BIZ;
 
 namespace TFITest4.Controllers
 {
@@ -12,6 +13,7 @@ namespace TFITest4.Controllers
         //
         // GET: /PrecioDetalle/
         BLLPrecio precioWorker = new BLLPrecio();
+        BLLProducto productoWorker = new BLLProducto();
 
         public ActionResult Index()
         {
@@ -35,8 +37,10 @@ namespace TFITest4.Controllers
         private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities(); //borrar
         public ActionResult Create()
         {
-            ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
-            ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre");
+            ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
+            //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
+            ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
+            //ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre");
             return View();
         }
 
@@ -44,16 +48,18 @@ namespace TFITest4.Controllers
         // POST: /PrecioDetalle/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(BIZPrecioDetalle PrecioDetalle)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                precioWorker.CrearDetallePrecio(PrecioDetalle);
                 return RedirectToAction("Index");
             }
             catch
             {
+                ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
+                //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
+                ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
                 return View();
             }
         }

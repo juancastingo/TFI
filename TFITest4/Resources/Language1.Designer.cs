@@ -142,6 +142,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Crear.
+        /// </summary>
+        public static string crear {
+            get {
+                return ResourceManager.GetString("crear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a disponible.
         /// </summary>
         public static string disponible {
@@ -165,6 +174,15 @@ namespace TFITest4.Resources {
         public static string ErrorNormal {
             get {
                 return ResourceManager.GetString("ErrorNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Estado.
+        /// </summary>
+        public static string estado {
+            get {
+                return ResourceManager.GetString("estado", resourceCulture);
             }
         }
         
@@ -219,6 +237,15 @@ namespace TFITest4.Resources {
         public static string Lenguaje {
             get {
                 return ResourceManager.GetString("Lenguaje", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Limite.
+        /// </summary>
+        public static string limite {
+            get {
+                return ResourceManager.GetString("limite", resourceCulture);
             }
         }
         
@@ -309,6 +336,15 @@ namespace TFITest4.Resources {
         public static string Nombre {
             get {
                 return ResourceManager.GetString("Nombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre de Fantasía.
+        /// </summary>
+        public static string nombreFantasia {
+            get {
+                return ResourceManager.GetString("nombreFantasia", resourceCulture);
             }
         }
         
@@ -430,6 +466,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Razón social.
+        /// </summary>
+        public static string razonSocial {
+            get {
+                return ResourceManager.GetString("razonSocial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Registrese.
         /// </summary>
         public static string registro {
@@ -484,6 +529,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tipo IVA.
+        /// </summary>
+        public static string tipoIVA {
+            get {
+                return ResourceManager.GetString("tipoIVA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Total Producto.
         /// </summary>
         public static string TotalProducto {
@@ -525,6 +579,15 @@ namespace TFITest4.Resources {
         public static string UsuarioNoHabilitado {
             get {
                 return ResourceManager.GetString("UsuarioNoHabilitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Volver.
+        /// </summary>
+        public static string volver {
+            get {
+                return ResourceManager.GetString("volver", resourceCulture);
             }
         }
     }
