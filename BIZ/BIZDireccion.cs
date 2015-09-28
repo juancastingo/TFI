@@ -15,7 +15,6 @@ namespace BIZ
         public string Dpto { get; set; }
         public string Detalle { get; set; }
         public int IDLocalidad { get; set; }
-        public byte[] TimeStamp { get; set; }
 
         public virtual ICollection<BIZClienteEmpresa> ClienteEmpresa { get; set; }
         public virtual BIZLocalidad Localidad { get; set; }

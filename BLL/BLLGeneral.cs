@@ -15,5 +15,10 @@ namespace BLL
         {
             return generalWorker.getEstadoMisc(p);
         }
+
+        public List<BIZTipoIVA> TrearTiposIVA()
+        {
+            return generalWorker.getTipoIVA();
+        }
     }
 }

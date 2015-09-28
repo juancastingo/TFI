@@ -294,4 +294,7 @@
   <data name="tipoIVA" xml:space="preserve">
     <value>IVA Type</value>
   </data>
+  <data name="editar" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

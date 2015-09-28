@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EstadoMisc.Detalle)
+                @Html.DisplayNameFor(model => model.EstadoMisc)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaAlta)
@@ -101,7 +101,7 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td nowrap>
-                    <span>@item.TipoIVA.Detalle - </span><span>@item.TipoIVA.Valor%</span>
+                    <span>@item.TipoIVA.Detalle</span>
                     @*@Html.DisplayFor(modelItem => item.TipoIVA.Detalle)*@
                 </td>
                 <td>

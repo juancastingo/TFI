@@ -9,10 +9,26 @@ namespace BLL
 {
     public class BLLCliente
     {
-        DAL.DALCliente D_Cliente = new DAL.DALCliente();
+        DAL.DALCliente clienteWorker = new DAL.DALCliente();
+
         public List<BIZClienteEmpresa> ObtenerClienteEmpresas()
         {
-            return D_Cliente.getAllClienteEmpresa();
+            return clienteWorker.getAllClienteEmpresa();
+        }
+
+        public void agregarCliente(BIZClienteEmpresa cliente)
+        {
+            clienteWorker.AddCliente(cliente);
+        }
+
+        public BIZClienteEmpresa ObtenerCliente(int id)
+        {
+            return clienteWorker.getCliente(id);
+        }
+
+        public void updateCliente(BIZClienteEmpresa c)
+        {
+            clienteWorker.updateCliente(c);
         }
     }
 }

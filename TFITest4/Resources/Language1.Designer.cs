@@ -160,6 +160,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Editar.
+        /// </summary>
+        public static string editar {
+            get {
+                return ResourceManager.GetString("editar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La operación no se pudo completar. Por favor logueese nuevamente.
         /// </summary>
         public static string ErrorLogInAgain {

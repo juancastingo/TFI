@@ -28,7 +28,7 @@ namespace DAL.ORM
         public string Dpto { get; set; }
         public string Detalle { get; set; }
         public Nullable<int> IDLocalidad { get; set; }
-        public System.DateTime FechaUltimaMod { get; set; }
+        public Nullable<System.DateTime> FechaUltimaMod { get; set; }
     
         public virtual ICollection<ClienteEmpresa> ClienteEmpresa { get; set; }
         public virtual Localidad Localidad { get; set; }

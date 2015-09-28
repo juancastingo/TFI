@@ -38,6 +38,8 @@ namespace TFITest4.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        public int IDLocalidad { get; set; }
+
         public BIZDireccion Direccion { get; set; }
         [Required]
         public string Calle { get; set; }

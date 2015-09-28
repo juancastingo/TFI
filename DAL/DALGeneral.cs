@@ -33,5 +33,12 @@ namespace DAL
             var rList = Mapper.Map<List<EstadoMisc>, List<BIZEstado>>(list.ToList());
             return rList;
         }
+
+        public List<BIZTipoIVA> getTipoIVA()
+        {
+            var list = db.TipoIVA;
+            var rList = Mapper.Map<List<TipoIVA>, List<BIZTipoIVA>>(list.ToList());
+            return rList;
+        }
     }
 }
