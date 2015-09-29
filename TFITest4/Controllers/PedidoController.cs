@@ -74,6 +74,10 @@ namespace TFITest4.Controllers
 
         public class modelCarrito
         {
+            public modelCarrito()
+            {
+                conPrecio = true;
+            }
             public int id { get; set; }
             public int Cant { get; set; }
             public string Nombre { get; set; }
