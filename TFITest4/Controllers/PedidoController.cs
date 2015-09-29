@@ -80,6 +80,7 @@ namespace TFITest4.Controllers
             public double Precio { get; set; }
             public int IDPrecioDetalle { get; set; }
             public int stock { get; set; }
+            public bool conPrecio { get; set; }
         }
 
         public class ModelPedido
@@ -356,10 +357,12 @@ namespace TFITest4.Controllers
                 Boolean PrePedidoActualizado = false;
                 foreach (var prodCarr in carrito.Productos)
                 {
+                    prodCarr.conPrecio = false;
                     foreach (var prodBase in ListaP)
                     {
                         if (prodCarr.id == prodBase.IDProducto)
                         {
+                            prodCarr.conPrecio = true;
                             if (prodCarr.IDPrecioDetalle != prodBase.IDPrecioDetalle)
                             {
                                 prodCarr.IDPrecioDetalle = prodBase.IDPrecioDetalle;

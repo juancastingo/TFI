@@ -387,7 +387,7 @@
                 subt += (elem.Precio * elem.Cant);
                 thisSubtotal = (elem.Precio * elem.Cant);
               
-                $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
             });
             IVA = PreIVA;
             IVACalc = parseFloat(PreIVA);
@@ -803,6 +803,10 @@
                 $('.popover').toggle();
                 $('#myModal').modal('toggle');
                 $('#cart-popover').click()
+            });
+            $('body').on('click', '.myTrash', function () {
+                //alert("borrar");
+                $(this).closest('tr').hide("slow");
             });
             toastr.options = {
                 "closeButton": true,
