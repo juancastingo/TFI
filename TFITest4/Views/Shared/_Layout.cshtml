@@ -337,7 +337,7 @@
                                     break;
                                 case "comprar":
                                 case "buy":
-                                    if (document.getElementById('nombre_usuario').getAttribute("data-val") != "Invitado")
+                                    if (document.getElementById('LoginExiste').getAttribute("data-val") == "Externo")
                                         newLoc = "/Pedido";
                                     break;
                                     //case "":
@@ -387,7 +387,7 @@
                 subt += (elem.Precio * elem.Cant);
                 thisSubtotal = (elem.Precio * elem.Cant);
               
-                $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
+                $('#carritoModal table > tbody').append('<tr data-val="'+elem.id+'"><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
             });
             IVA = PreIVA;
             IVACalc = parseFloat(PreIVA);
@@ -692,7 +692,7 @@
                                     thisSubtotal = (elem.Precio * elem.Cant);
                                     NoStockClass = "SiStock"; blink = "";
                                     if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
-                                    $('#carritoModal table > tbody').append('<tr class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td></tr>');
+                                    $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
                                 });
                                 setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
                                 $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
@@ -805,8 +805,34 @@
                 $('#cart-popover').click()
             });
             $('body').on('click', '.myTrash', function () {
-                //alert("borrar");
                 $(this).closest('tr').hide("slow");
+                console.log($(this));
+                mostrarGIF();
+                console.log("executeAjaxPedido");
+                var id = $(this).closest('tr').attr('data-val');
+                var cantidad = $(this).closest('tr').find('td').eq(1).html();
+                //console.log(id);
+                console.log(cantidad);
+                var cantidad = parseInt(cantidad);
+                cantidad *= -1;
+                console.log(cantidad);
+                var dataToSend = { id: id, Cantidad: cantidad }
+                var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify(dataToSend),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: GetInit,
+                    error: errorFunc,
+                    complete: ocultarGIF
+                });
+
+
+
+
+
             });
             toastr.options = {
                 "closeButton": true,

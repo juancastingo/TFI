@@ -188,37 +188,38 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: successFunc,
-                error: errorFunc2,
+                error: errorFunc,
                 complete: ocultarGIF
             });
-            //comento successFunc y errorFunc de aca porque uso las de Layout asi no repito
-            function successFunc2(data, status) {
-                console.log("success2");
-                console.log(data);
-                list = data.Productos;
-                $('#NrPrePedido').text(data.IDDocumento);
-                var subt = 0;
-                var count = 0;
-                $('#carritoModal table > tbody').html('');
-                list.forEach(function (elem) {
-                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    thisSubtotal = (elem.Precio * elem.Cant);
-                    $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>$' + elem.Precio + '</td><td>$' + thisSubtotal + '</td></tr>');
-                });
-                $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt + '</h4><h4 class="text-right">Total= $' + subt * 1.21 + '</h4>');
-                $('.CarritoSubtotal').html("$ " + subt);
-                if (subt == 0) {
-                    $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
-                } else {
-                    $('#popover_content_wrapper').find("p:first").html("");
-                }
-            }
 
-            function errorFunc2() {
+            //comento successFunc y errorFunc de aca porque uso las de Layout asi no repito
+            //function successFunc2(data, status) {
+            //    console.log("success2");
+            //    console.log(data);
+            //    list = data.Productos;
+            //    $('#NrPrePedido').text(data.IDDocumento);
+            //    var subt = 0;
+            //    var count = 0;
+            //    $('#carritoModal table > tbody').html('');
+            //    list.forEach(function (elem) {
+            //        console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+            //        subt += (elem.Precio * elem.Cant);
+            //        thisSubtotal = (elem.Precio * elem.Cant);
+            //        $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>$' + elem.Precio + '</td><td>$' + thisSubtotal + '</td></tr>');
+            //    });
+            //    $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt + '</h4><h4 class="text-right">Total= $' + subt * 1.21 + '</h4>');
+            //    $('.CarritoSubtotal').html("$ " + subt);
+            //    if (subt == 0) {
+            //        $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
+            //    } else {
+            //        $('#popover_content_wrapper').find("p:first").html("");
+            //    }
+            //}
+
+           @* function errorFunc2() {
                 //alert('error');
                 toastr["error"]("@Language.ErrorLogInAgain", "Error")
-            }
+            }*@
         }
 
 
@@ -286,7 +287,7 @@
 
         $('.agregar').click(function () {
             var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(4).children().val()
+            var cantidad = $(this).closest('tr').find('td').eq(4).children().val();
             console.log(id + " " + cantidad);
             $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {

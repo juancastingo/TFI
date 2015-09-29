@@ -449,7 +449,11 @@ namespace TFITest4.Controllers
                     foreach (var p in ListCarrito.Productos)
                     {
                         //p.stock = 1; // aca me traería el stock del producto
-                        p.stock = ProdWorker.CheckStockProd(p.id);
+                        if (!p.conPrecio)
+                            p.stock = 0;
+                        else
+                            p.stock = ProdWorker.CheckStockProd(p.id);
+
                         if (p.Cant > p.stock)
                         {
                             TodoOK = false;
