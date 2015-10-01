@@ -288,20 +288,20 @@
 
         if (!('webkitSpeechRecognition' in window)) {
             console.log('Your browser cannot support speech, bro.. upgrade...');
-            $('#start_img').hide()
+            $('#microfono').hide()
         } else {
             var recognition = new webkitSpeechRecognition();
             recognition.lang = "es-AR"
             recognition.onerror = function (event) {
                 toastr["warning"]("No se pudo reconocer la voz", "info")
-                $('#start_img').attr('src', '/Content/images/mic.gif');
+                $('#microfono').attr('src', '/Content/images/mic.gif');
             }
             recognition.onend = function () {
-                $('#start_img').attr('src', '/Content/images/mic.gif');
+                $('#microfono').attr('src', '/Content/images/mic.gif');
             }
             recognition.onresult = function (e) {
                 try {
-                    $('#start_img').attr('src', '/Content/images/mic.gif');
+                    $('#microfono').attr('src', '/Content/images/mic.gif');
                     for (var i = e.resultIndex; i < e.results.length; ++i) {
                         if (e.results[i].isFinal) {
                             //assert(e.results[i][0].transcript);
@@ -484,10 +484,10 @@
                     }
                 });
 
-                $('#start_img').click(function () {
+                $('#microfono').click(function () {
                     try {
                         recognition.start()
-                        $('#start_img').attr('src', '/Content/images/mic-animate.gif');
+                        $('#microfono').attr('src', '/Content/images/mic-animate.gif');
                     } catch (ex) { }
                 });
            
@@ -605,8 +605,9 @@
                         type: 'POST',
                         success: function (result) {
                             if (result.status == "error") {
-                                $('#login-modal span').text("Please check Username or Password");
+                                $('#login-modal span').text("@Language.RevisarUsuarioContra");
                                 $('#MainMenu').fadeTo("slow", 1);
+
                             } else {
                                 //console.log("recargando ");
                                 if (RetUrl != "") {
@@ -616,22 +617,22 @@
                                 } else {
                                     window.location.reload();
                                 }
-                                $("#MainMenu").html(result);
-                                $('#MainMenu').fadeTo("slow", 1);
-                                $('#login-modal').modal('hide');
-                                if ($('#LoginExiste').attr("data-val") == "Externo") {
-                                    $('#CarritoMenuBoton').removeClass('oculto');
-                                }
+                                //$("#MainMenu").html(result);
+                                //$('#MainMenu').fadeTo("slow", 1);
+                                //$('#login-modal').modal('hide');
+                                //if ($('#LoginExiste').attr("data-val") == "Externo") {
+                                 //   $('#CarritoMenuBoton').removeClass('oculto');
+                                //}
                                 //$('#CarritoMenuBoton').removeClass('oculto');
-                                GetInit();
-                                $('#cart-popover').popover({
-                                    html: true,
-                                    container: 'body',
-                                    content: function () {
-                                        return $('#popover_content_wrapper').html();
-                                    }
-                                });
-                                controlSession();
+                                //GetInit();
+                                //$('#cart-popover').popover({
+                                //    html: true,
+                                //    container: 'body',
+                                //    content: function () {
+                                //        return $('#popover_content_wrapper').html();
+                                //    }
+                                //});
+                                //controlSession();
                             }
                         },
                         error: function () {
@@ -674,7 +675,7 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            //console.log(data);
+                            console.log(data);
                             if (data.CarritoStock == "ir") {
                                 window.location = "/Pedido/Pedido";
                             }
@@ -695,7 +696,11 @@
                                     $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
                                 });
                                 setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
-                                $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">Total= $' + (subt * 1.21).format(2, 3, '.', ',') + '</h4>');
+                                var PreIVA = IVA;
+                                IVA = PreIVA;
+                                IVACalc = parseFloat(PreIVA);
+
+                                $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
                                 $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                                 if (subt == 0) {
                                     $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");

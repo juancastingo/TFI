@@ -338,7 +338,6 @@ namespace TFITest4.Controllers
         {
             try
             {
-
                 int IDPrePedido = int.Parse(PrePed);
                 //aca cargo los datos del Prepedido en la sesion
                 var PrePedido = DocWorker.getDocByID(IDPrePedido);
@@ -447,6 +446,7 @@ namespace TFITest4.Controllers
                 //stockCarrito Stock = new stockCarrito();
 
                 Boolean TodoOK = false;
+                
                 if (ListCarrito.Productos.Count != 0)
                 {
                     TodoOK = true;
@@ -489,12 +489,12 @@ namespace TFITest4.Controllers
                     }
                     else //algun producto no tiene stock. Lo veo con JS.
                     {
-                        return Json(new { Result = devolver, CarritoStock = ListCarrito }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Result = devolver, CarritoStock = ListCarrito, IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor }, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
             catch (Exception ex) { devolver = @Language.ErrorLogInAgain; }
-            return Json(new { Result = devolver, CarritoStock = "" }, JsonRequestBehavior.AllowGet);
+            return Json(new { Result = devolver, CarritoStock = "", IVA = 21 }, JsonRequestBehavior.AllowGet);
         }
 
 

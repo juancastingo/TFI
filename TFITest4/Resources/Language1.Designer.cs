@@ -520,7 +520,7 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Por favor verifique Usuario/Contraseña.
+        ///   Busca una cadena traducida similar a Por favor verifique Usuario/Contrasena.
         /// </summary>
         public static string RevisarUsuarioContra {
             get {

@@ -7,7 +7,7 @@
 </p>
     <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">  
         <thead>
-        <tr>
+        <tr>    
         <th>
             @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
             Nr
@@ -44,8 +44,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.Producto.Nombre)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
+        <td class="valor valor1">
+            @item.Precio.ToString().Replace(",", ".")
         </td>
 @*        <td>
             @Html.DisplayFor(modelItem => item.FechaAlta)
@@ -61,3 +61,24 @@
 </tbody>
 </table>
     </div>
+
+
+
+
+
+@section numerosScript{
+            var list = [];
+            var list2 = [];
+
+            $('.valor1').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor1').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+           
+}

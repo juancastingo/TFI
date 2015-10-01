@@ -193,7 +193,7 @@
     <value>El campo "{0}" no puede estar vacío</value>
   </data>
   <data name="RevisarUsuarioContra" xml:space="preserve">
-    <value>Por favor verifique Usuario/Contraseña</value>
+    <value>Por favor verifique Usuario/Contrasena</value>
   </data>
   <data name="Telefono" xml:space="preserve">
     <value>Teléfono</value>

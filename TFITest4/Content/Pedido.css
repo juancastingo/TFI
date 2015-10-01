@@ -35,6 +35,12 @@
     color: orange;
 }
 
+@media (max-width: 900px) {
+    .chicoNo {
+        display: none;
+    }
+}
+
 
 
 /*.minipost {

@@ -37,7 +37,12 @@
 
 
 
-.classname {
+.logoImg {
+    right: 14px;
+    top: 55px;
+    width: 150px;
+    height: 150px;
+    position: absolute;
     transition: All 1.9746s ease-in;
     -webkit-transition: All 1.9746s ease-in;
     -moz-transition: All 1.9746s ease-in;
@@ -49,7 +54,7 @@
     -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(0px);
 }
 
-    .classname:hover {
+    .logoImg:hover {
         transform: rotate(360deg) scale(3) skew(0deg) translate(-200px,50px);
         -webkit-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px,50px);
         -moz-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px);
@@ -57,7 +62,21 @@
         -ms-transform: rotate(360deg) scale(3) skew(0deg) translate(-200px);
     }
 
-h1 {
+#homeTitle {
+    text-align: left;
+    margin-right: 10%;
     font-family: Magneto;
     font-size: 80px;
+}
+
+@media (max-width: 900px) {
+    .logoImg {
+        display: none;
+    }
+
+    #homeTitle {
+        font-size: 40px;
+    }
+
+
 }
