@@ -81,5 +81,55 @@ namespace DAL
             return (int)iReturnValue;
         }
 
+
+        public BIZProducto getProdByID(int id)
+        {
+
+            BIZProducto oProducto = new BIZProducto();
+            var TProducto = db.Producto
+                .SingleOrDefault(x => x.IDProducto == id);
+            if (TProducto != null)
+            {
+                oProducto = Mapper.Map<Producto, BIZProducto>(TProducto);
+            }
+            else
+            {
+                return null;
+            }
+            return oProducto;
+
+        }
+
+        public List<BIZProductoCategoria> getAllProductoCat()
+        {
+            try
+            {
+                //var list = db.ListaPrecio.ToList();
+                var lista = Mapper.Map<List<ProductoCategoria>, List<BIZProductoCategoria>>(db.ProductoCategoria.ToList());
+                return lista;
+            }
+            catch (Exception ex) { return null; }
+        }
+
+        public void InsertProducto(BIZProducto producto)
+        {
+            var TProd = Mapper.Map<BIZProducto, Producto>(producto);
+            db.Producto.Add(TProd);
+            db.SaveChanges();
+        }
+
+        public void UpdateProducto(BIZProducto producto)
+        {
+            var Tproducto = Mapper.Map<BIZProducto, Producto>(producto);
+
+            var original = db.Producto.Find(producto.IDProducto);
+
+            if (original != null)
+            {
+
+                db.Entry(original).CurrentValues.SetValues(Tproducto);
+                db.SaveChanges();
+            }
+        }
     }
 }

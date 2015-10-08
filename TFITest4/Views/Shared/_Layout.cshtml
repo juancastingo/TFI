@@ -466,7 +466,7 @@
                     }
                 });
             }
-        
+            var tabla;
             $(document).ready(function () {
                 ok = $('#AlertOk').val();
                 if (ok != undefined) { toastr["success"](ok, "OK!") }
@@ -532,7 +532,7 @@
                     urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
                 }
                 try {
-                    var tabla = $('.tableJquery').DataTable({
+                    tabla = $('.tableJquery').DataTable({
                         language: {
                             url: urlDTLang
                         }
@@ -547,6 +547,8 @@
                     });
 
                 } catch (err) { console.log("dt is not perfect") }
+
+
 
                 $(function () {
                     PickerIdioma = "en";

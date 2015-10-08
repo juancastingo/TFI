@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,10 @@ namespace BIZ
         }
     
         public int IDProducto { get; set; }
+        [Required]
         public string Nombre { get; set; }
         public Nullable<int> IDProductoCategoria { get; set; }
+        [Required]
         public string Descripcion { get; set; }
         public string Imagen { get; set; }
         public Nullable<int> IDEstado { get; set; }

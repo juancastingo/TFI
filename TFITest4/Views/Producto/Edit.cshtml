@@ -1,0 +1,176 @@
+﻿@using TFITest4.Resources
+@model BIZ.BIZProducto
+
+
+<h2 class="titulo">@Language.editar</h2>
+
+@using (Html.BeginForm("Edit", "producto", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.ValidationSummary(true)
+
+    
+    <fieldset>
+        <legend>@Language.producto</legend>
+        <table  class="table  table-bordered table-striped" cellspacing="0" width="100%">
+            @Html.HiddenFor(model => model.IDProducto)
+          <input type="hidden" name="FechaAlta" id="FechaAlta" value="@Model.FechaAlta.ToString("MM/dd/yyyy HH:mm")" />
+            @Html.HiddenFor(model => model.FechaUltimaMod)
+            <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </td>
+</tr>
+            <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.IDProductoCategoria, "ProductoCategoria")
+        </td>
+        <td class="editor-field">
+            @Html.DropDownList("IDProductoCategoria", String.Empty)
+            @Html.ValidationMessageFor(model => model.IDProductoCategoria)
+        </td>
+</tr>
+            <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.Descripcion)
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </td>
+</tr>
+            <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.Imagen)
+        </td>
+        <td class="editor-field">
+                            <img width="120px" height="120px" src="@Model.Imagen" alt="" />
+            <input type="file" id="file" name="file" />
+            <span class="field-validation-error" id="spanfile"></span>
+            @Html.HiddenFor(model => model.Imagen)
+            @Html.ValidationMessageFor(model => model.Imagen)
+        </td>
+</tr>
+            <tr>
+          <td class="editor-label">
+            @Html.LabelFor(model => model.IDEstado, "EstadoMisc")
+        </td>
+      <td class="editor-field">
+            @Html.DropDownList("IDEstado", String.Empty)
+            @Html.ValidationMessageFor(model => model.IDEstado)
+        </td>
+</tr>
+
+        </table>
+        <p>
+            <input class="btn btn-primary" id="btnCreate" type="submit" value="@Language.editar" />
+        </p>
+    </fieldset>
+        
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@section endScript {
+
+    <script type="text/javascript">
+
+        $("#btnCreate").click(function () {
+            if ($('#file').val() == "") {
+                //$("#spanfile").html("Upload");
+                //return false;
+            }
+            else {
+                return checkfile();
+            }
+        });
+
+        //get file size
+        function GetFileSize(fileid) {
+            console.log(fileid);
+            console.log($("#" + fileid)[0].files[0].size)
+            try {
+                var fileSize = 0;
+                //for IE //lo saco por ahora
+                //if ($.browser.msie) {
+                //    //before making an object of ActiveXObject, 
+                //    //please make sure ActiveX is enabled in your IE browser
+                //    var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
+                //    var objFile = objFSO.getFile(filePath);
+                //    var fileSize = objFile.size; //size in kb
+                //    fileSize = fileSize / 1048576; //size in mb 
+                //}
+                    //for FF, Safari, Opeara and Others
+                ////else {
+                    fileSize = $("#" + fileid)[0].files[0].size //size in kb
+                    fileSize = fileSize / 1048576; //size in mb 
+                ////}
+                return fileSize;
+            }
+            catch (e) {
+               //alert("error javascript" + e);
+                toastr["error"]("Error JS "+ e, "Error")
+            }
+        }
+
+        //get file path from client system
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+
+            if (strName == null) {
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+
+        function checkfile() {
+            var file = getNameFromPath($("#file").val());
+            if (file != null) {
+                var extension = file.substr((file.lastIndexOf('.') + 1));
+                // alert(extension);
+                switch (extension) {
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'png':
+                    case 'gif':
+//                    case 'pdf':
+                        flag = true;
+                        break;
+                    default:
+                        flag = false;
+                }
+            }
+            if (flag == false) {
+                $("#spanfile").text("error extención");
+                return false;
+            }
+            else {
+                var size = GetFileSize('file');
+                if (size > 5) {
+                    $("#spanfile").text("Error tamaño");
+                    return false;
+                }
+                else {
+                    $("#spanfile").text("");
+                }
+            }
+        }
+
+            $("#file").change(function () {
+                console.log("Check");
+                checkfile();
+            });
+    </script>
+}

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using BIZ;
+using System.IO;
 
 namespace TFITest4.Controllers
 {
@@ -11,8 +13,10 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Producto/
-        private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
+        //private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
         private BLLProducto productoWorker = new BLLProducto();
+        private BLLGeneral generalWorker = new BLLGeneral();
+
         public ActionResult Index()
         {
             var prod = productoWorker.traerAllProductos();
@@ -34,6 +38,8 @@ namespace TFITest4.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle");
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
             return View();
         }
 
@@ -41,18 +47,24 @@ namespace TFITest4.Controllers
         // POST: /Producto/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(BIZProducto producto, HttpPostedFileBase file)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                Random rnd1 = new Random();
+                producto.Imagen = "/Pimages/" + Path.GetFileNameWithoutExtension(file.FileName) + rnd1.Next().ToString() + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                //var path = Path.Combine(Server.MapPath("/Pimages"), producto.Imagen);
+                var path = Server.MapPath(producto.Imagen);
+                file.SaveAs(path);
+                productoWorker.InsertarProducto(producto);
 
+                TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+            ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle");
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
+            return View(producto);
         }
 
         //
@@ -60,24 +72,39 @@ namespace TFITest4.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var prod = productoWorker.traerProdXId(id);
+            ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle",prod.IDProductoCategoria );
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle",prod.IDEstado);
+            //.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
+            
+            return View(prod);
         }
 
         //
         // POST: /Producto/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, BIZProducto producto, HttpPostedFileBase file)
         {
             try
             {
                 // TODO: Add update logic here
-
+                if (file != null)
+                {
+                    Random rnd1 = new Random();
+                    producto.Imagen = "/Pimages/" + Path.GetFileNameWithoutExtension(file.FileName) + rnd1.Next().ToString() + file.FileName.Substring(file.FileName.LastIndexOf('.'));
+                    //var path = Path.Combine(Server.MapPath("/Pimages"), producto.Imagen);
+                    var path = Server.MapPath(producto.Imagen);
+                    file.SaveAs(path);
+                }
+                productoWorker.ActualizarProducto(producto);
+                TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
             }
         }
 

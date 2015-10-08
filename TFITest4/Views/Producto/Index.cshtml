@@ -62,7 +62,7 @@
                         @item.FechaAlta.ToString("MM/dd/yyyy")
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new {}, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProducto }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                     </td>
                 </tr>
             }
