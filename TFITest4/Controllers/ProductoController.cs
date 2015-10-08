@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using BLL;
 using BIZ;
 using System.IO;
+using AutoMapper;
+using TFITest4.Models;
 
 namespace TFITest4.Controllers
 {
@@ -20,7 +22,8 @@ namespace TFITest4.Controllers
         public ActionResult Index()
         {
             var prod = productoWorker.traerAllProductos();
-            return View(prod.ToList());
+            var rprod = Mapper.Map<List<BIZProducto>,List<ModelProducto>>(prod);
+            return View(rprod);
             //var producto = db.Producto;
             //return View(producto.ToList());
         }
@@ -76,8 +79,8 @@ namespace TFITest4.Controllers
             ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle",prod.IDProductoCategoria );
             ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle",prod.IDEstado);
             //.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
-            
-            return View(prod);
+            var rprod = Mapper.Map<BIZProducto, ModelProducto>(prod);
+            return View(rprod);
         }
 
         //

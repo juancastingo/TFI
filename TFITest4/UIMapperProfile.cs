@@ -40,6 +40,9 @@ namespace TFITest4
             Mapper.CreateMap<ModelPrecioDetalle, BIZPrecioDetalle>();
             Mapper.CreateMap<ModelListaPrecio, BIZListaPrecio>();
             
+            //producto
+            Mapper.CreateMap<BIZProducto, ModelProducto>();
+            Mapper.CreateMap<ModelProducto, BIZProducto>();
 
         }
     }

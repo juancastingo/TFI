@@ -206,6 +206,7 @@
     <Compile Include="Models\ModelPais.cs" />
     <Compile Include="Models\ModelListaPrecio.cs" />
     <Compile Include="Models\ModelPrecioDetalle.cs" />
+    <Compile Include="Models\ModelProducto.cs" />
     <Compile Include="Models\ModelProvincia.cs" />
     <Compile Include="Models\ModelUsuario.cs" />
     <Compile Include="NavigationRouteFilterExamples\AdministrationRouteFilter.cs" />

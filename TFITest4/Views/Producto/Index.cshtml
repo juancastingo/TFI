@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BIZ.BIZProducto>
+﻿@model IEnumerable<TFITest4.Models.ModelProducto>
 @using TFITest4.Resources
 
 
@@ -18,7 +18,7 @@
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
+                    @Html.DisplayNameFor(model => model.ProductoCategoria)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Descripcion)
@@ -32,7 +32,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.FechaAlta)
                 </th>
-                <th></th>
+                <th>
+                    @Language.action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +64,7 @@
                         @item.FechaAlta.ToString("MM/dd/yyyy")
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProducto }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProducto }, new { @class = "btn btn-primary", @style = "color:white" })
                     </td>
                 </tr>
             }

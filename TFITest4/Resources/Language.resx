@@ -297,4 +297,16 @@
   <data name="editar" xml:space="preserve">
     <value>Editar</value>
   </data>
+  <data name="Categoria" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="descripcion" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="fechaAlta" xml:space="preserve">
+    <value>Fecha alta</value>
+  </data>
+  <data name="imagen" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
 </root>

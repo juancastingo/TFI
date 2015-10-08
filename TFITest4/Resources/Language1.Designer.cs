@@ -124,6 +124,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Categoría.
+        /// </summary>
+        public static string Categoria {
+            get {
+                return ResourceManager.GetString("Categoria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Clientes.
         /// </summary>
         public static string clientes {
@@ -147,6 +156,15 @@ namespace TFITest4.Resources {
         public static string crear {
             get {
                 return ResourceManager.GetString("crear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descripción.
+        /// </summary>
+        public static string descripcion {
+            get {
+                return ResourceManager.GetString("descripcion", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Fecha alta.
+        /// </summary>
+        public static string fechaAlta {
+            get {
+                return ResourceManager.GetString("fechaAlta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Filtrar:.
         /// </summary>
         public static string FiltrarTabla {
@@ -210,6 +237,15 @@ namespace TFITest4.Resources {
         public static string Home_Title {
             get {
                 return ResourceManager.GetString("Home_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Imagen.
+        /// </summary>
+        public static string imagen {
+            get {
+                return ResourceManager.GetString("imagen", resourceCulture);
             }
         }
         
