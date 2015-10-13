@@ -14,6 +14,7 @@ namespace TFITest4.Controllers
         // GET: /PrecioDetalle/
         BLLPrecio precioWorker = new BLLPrecio();
         BLLProducto productoWorker = new BLLProducto();
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {
@@ -63,6 +64,59 @@ namespace TFITest4.Controllers
                 return View();
             }
         }
+
+
+        private class PrecioDetalleM
+        {
+            public int IDPrecioDetalle { get; set; }
+            public double Precio { get; set; }
+            public bool Estado { get; set; }
+            public string Producto { get; set; }
+        }
+
+        public ActionResult DetallesLista(string IDLista)
+        {
+            
+            try
+            {
+                var id = Convert.ToInt32(IDLista);
+                var precio = precioWorker.TraerAllListaPrecio();
+                BIZListaPrecio Lista = new BIZListaPrecio();
+                foreach (var p in precio)
+                {
+                    if (p.IDListaPrecio == id)
+                    {
+                        Lista = p;
+                    }
+                }
+                var list = Lista.PrecioDetalle.ToList();
+                List<PrecioDetalleM> detalles = new List<PrecioDetalleM>();
+                PrecioDetalleM detalle;
+                
+                foreach (var d in list)
+                {
+                    detalle = new PrecioDetalleM();
+                    detalle.IDPrecioDetalle = d.IDPrecioDetalle;
+                    detalle.Precio = (double)d.Precio;
+                    detalle.Producto = d.Producto.Nombre;
+                    detalle.Estado = (bool)d.Activo;
+                    detalles.Add(detalle);
+                    //detalle = new PrecioDetalleM();
+                   
+                }
+                //return Json(new {  }, JsonRequestBehavior.AllowGet);
+                return Json(new { detalles, Lista.Detalle   }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Lista = "" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+
+
 
 
         //

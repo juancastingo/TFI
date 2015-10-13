@@ -45,5 +45,18 @@ namespace BLL
             producto.PrecioDetalle = null;
             productoWorker.UpdateProducto(producto);
         }
+
+        public List<BIZProducto> traerProductosConPrecio()
+        {
+            return productoWorker.getProductosConPrecio();
+        }
+
+
+
+
+        public int CheckStockProd(int p)
+        {
+            return productoWorker.CheckStockProd(p);
+        }
     }
 }

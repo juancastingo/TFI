@@ -121,10 +121,10 @@
           </div>
 		</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
-          <button id="SaveCarritoPrePedido" type="button" class="btn btn-primary">Save Changes</button>
-          <button id="NuevoCarrito" type="button" class="btn btn-warning">New Carrito</button>
-          <button id="SubmitPedido" type="button" class="btn btn-success">Submit Pedido</button>
+          <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cerrar</button>
+          <button id="SaveCarritoPrePedido" type="button" class="btn btn-primary">@Language.guardar</button>
+          <button id="NuevoCarrito" type="button" class="btn btn-warning">@Language.nuevo @Language.carrito</button>
+          <button id="SubmitPedido" type="button" class="btn btn-success">@Language.enviar @Language.pedido</button>
         </div>
 				
       </div><!-- /.modal-content -->
@@ -391,7 +391,8 @@
             });
             IVA = PreIVA;
             IVACalc = parseFloat(PreIVA);
-            $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= '+ IVA +'% </h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt+(subt * IVACalc/100)).format(2, 3, '.', ',') + '</h4>');
+            //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
+            $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
             if (subt == 0) {
                 $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
@@ -534,16 +535,8 @@
                 try {
                     tabla = $('.tableJquery').DataTable({
                         language: {
-                            url: urlDTLang
-                        }
-                        //,
-                        //   dom: 'Bfrtip',
-                        //   buttons: [
-                        //{
-                        //    extend: 'colvis',
-                        //    collectionLayout: 'fixed two-column'
-                        //}
-                        //   ]
+                            url: urlDTLang,
+                        },
                     });
 
                 } catch (err) { console.log("dt is not perfect") }

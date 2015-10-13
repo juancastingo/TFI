@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -11,6 +12,7 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /PruebaAndroid/
+        private BLLBitacora Bita = new BLLBitacora();
 
         public class persona
         {

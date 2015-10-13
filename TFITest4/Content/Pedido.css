@@ -9,6 +9,7 @@
     /*/float: right;*/
 }
 
+
 .ui-state-hover {
     color: blue !important;
 }
@@ -63,6 +64,7 @@
 
 
 
-th {
-    text-align: center;
+
+#PedidoModal th {
+    text-align: center !important;
 }

@@ -13,7 +13,7 @@
 
 
 
-<h2 class="titulo">Pedido</h2>
+<h2 class="titulo">@Language.pedido</h2>
 
 <div id="cart" style="display: none">
     <h1 class="ui-widget-header">Shopping Cart</h1>
@@ -25,61 +25,37 @@
     </div>
 </div>
 
-<table id="tableJqueryPedido" class="table table-bordered table-striped" cellspacing="0" width="100%">
+<table id="tableJqueryPedido" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
-            @*            <th>
-                @Html.DisplayNameFor(model => model.IDProducto)
-            </th>*@
-            <th>Producto
-                @*@Html.DisplayNameFor(model => model.Nombre)*@
+            <th>@Language.producto
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
-            </th>*@
-            @*            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
+                @Language.imagen
             </th>
             <th class="transparente"></th>
-            <th style="width:100px;">
-                @Html.DisplayNameFor(model => model.PrecioActual)
+            <th style="width: 100px;">
+                @Language.precio
             </th>
-            <th>Cantidad
+            <th>@Language.cantidad
             </th>
-
-            @*        <th>
-            @Html.DisplayNameFor(model => model.UnidadMedida)
-        </th>*@
-            <th style="width: auto">Actions</th>
+            <th style="width: auto">@Language.action</th>
         </tr>
     </thead>
     <tfoot>
-        <tr>
-            @*            <th>
-                @Html.DisplayNameFor(model => model.IDProducto)
-            </th>*@
-            <th>Producto
-                @*@Html.DisplayNameFor(model => model.Nombre)*@
+              <tr>
+            <th>@Language.producto
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
-            </th>*@
-            @*            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
+                @Language.imagen
             </th>
             <th class="transparente"></th>
-            <th style="width:100px;">
-                @Html.DisplayNameFor(model => model.PrecioActual)
+            <th style="width: 100px;">
+                @Language.precio
             </th>
-            <th>Cantidad
+            <th>@Language.cantidad
             </th>
-            <th style="width: auto">Actions</th>
+            <th style="width: auto">@Language.action</th>
         </tr>
     </tfoot>
     <tbody>
@@ -102,20 +78,20 @@
                         <img class="PImage" src="@item.Imagen" alt="" /></a>
                 </td>
                 <td class="SignoPesos">$</td>
-                <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual.ToString().Replace(",",".")</span>
+                <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual.ToString().Replace(",", ".")</span>
                 </td>
                 <td>
-                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />
+                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="@Language.cantidad" />
                 </td>
                 @*        <td>
             @Html.DisplayFor(modelItem => item.UnidadMedida)
         </td>*@
                 <td>
                     <p>
-                        <button class="agregar btn btn-primary " ><span class="glyphicon glyphicon-shopping-cart"><span class="chicoNo">Agregar</span></span></button>
-                        <button class="borrar btn btn-danger" ><span class="glyphicon glyphicon-trash"></span><span class="chicoNo">Borrar</span></button>
+                        <button class="agregar btn btn-primary "><span class="glyphicon glyphicon-shopping-cart"><span class="chicoNo">@Language.agregar</span></span></button>
+                        <button class="borrar btn btn-danger"><span class="glyphicon glyphicon-trash"></span><span class="chicoNo">@Language.borrar</span></button>
                     </p>
-@*                    <a href="#" class="agregar">Agregar</a>
+                    @*                    <a href="#" class="agregar">Agregar</a>
                     <a href="#" class="borrar">Borrar</a>*@
                 </td>
             </tr>
@@ -234,11 +210,12 @@
 
             });
 
-            $('#tableJqueryPedido').DataTable({
+            @*$('#tableJqueryPedido').DataTable({
                 "oLanguage": {
                     "sSearch": "@Language.FiltrarTabla"
                 }
-            });
+            });*@
+
             $('.transparente').removeClass('sorting');
             $('#tableJqueryPedido').on('draw.dt', function () {
                 $('.transparente').removeClass('sorting');

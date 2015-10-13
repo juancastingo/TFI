@@ -16,6 +16,26 @@
 }*/
 
 
+#tableJqueryPedido th {
+    text-align: center;
+}
+
+#carritoModal th {
+    text-align: center !important;
+}
+.tblHead th {
+text-align: center !important;
+}
+
+.cartTable {
+    float: right;
+    text-align: left;
+    padding: 5px;
+}
+.cartTable   td, .cartTable  th {
+        text-align: left;
+        padding-right: 21px;
+}
 
     .valor {
         white-space: pre;

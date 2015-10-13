@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BIZ;
+using BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace TFITest4.Models
     {
         //
         // GET: /ListaPrecio2/
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {

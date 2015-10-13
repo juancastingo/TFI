@@ -71,7 +71,7 @@
                 </td>
                 <td>
                     <p>
-                        <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >ver</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >@Language.ver</button>
                         @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                         @{if (item.EstadoMisc.Detalle != "Facturado" && item.EstadoMisc.Detalle != "Rechazado" && item.EstadoMisc.Detalle != "Cancelado")
                           {
@@ -92,12 +92,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title">Pedido</h3>
+                <h3 class="modal-title">@Language.pedido</h3>
                 <span class="field-validation-error" id="TextoCarritoPedidoModal"></span>
             </div>
             <div class="modal-body" id="PedidoModalBody">
                 <h5 class="text-center">@Language.pedido nr# <span id="NrPedido"></span></h5>
-                <h5 class="text-center">Estado: <span id="EstadoPedido"></span></h5>
+                <h5 class="text-center">@Language.estado: <span id="EstadoPedido"></span></h5>
                 <h5 class="text-center">Comentario: <span id="ComentarioPedido"></span></h5>
                 <table class="table table-striped">
                     <thead id="tblHead">
@@ -165,7 +165,8 @@
                         thisSubtotal = (elem.Precio * elem.Cant);
                         $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td class="numero">' + accounting.formatMoney(elem.Precio) + '</td><td class="numero">' + accounting.formatMoney(thisSubtotal) + '</td></tr>');
                     });
-                    $('#PedidoDiv').html('<h4 class="text-right">Subtotal= ' + accounting.formatMoney(subt) + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total=  ' + accounting.formatMoney((subt + (subt * IVACalc / 100))) + '</h4>');
+                    //$('#PedidoDiv').html('<h4 class="text-right">Subtotal= ' + accounting.formatMoney(subt) + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total=  ' + accounting.formatMoney((subt + (subt * IVACalc / 100))) + '</h4>');
+                    $('#PedidoDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
                     //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                     $('#PedidoModal').modal('toggle');
                 },

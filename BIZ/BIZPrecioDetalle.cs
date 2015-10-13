@@ -17,6 +17,8 @@ namespace BIZ
         public int IDPrecioDetalle { get; set; }
         public Nullable<int> IDListaPrecio { get; set; }
         public Nullable<int> IDProducto { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
         public Nullable<double> Precio { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public Nullable<bool> Activo { get; set; }

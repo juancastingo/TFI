@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,7 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Localidad/
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {

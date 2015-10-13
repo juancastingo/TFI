@@ -300,6 +300,12 @@
   <data name="Categoria" xml:space="preserve">
     <value>Categoría</value>
   </data>
+  <data name="cerrar" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="copiar" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
   <data name="descripcion" xml:space="preserve">
     <value>Descripción</value>
   </data>
@@ -308,5 +314,44 @@
   </data>
   <data name="imagen" xml:space="preserve">
     <value>Imagen</value>
+  </data>
+  <data name="ver" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="activo" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="falso" xml:space="preserve">
+    <value>Falso</value>
+  </data>
+  <data name="FechaDesde" xml:space="preserve">
+    <value>Fecha Desde</value>
+  </data>
+  <data name="guardar" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="verdadero" xml:space="preserve">
+    <value>Verdadero</value>
+  </data>
+  <data name="agregar" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="borrar" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="carrito" xml:space="preserve">
+    <value>Carrito</value>
+  </data>
+  <data name="carritoCompras" xml:space="preserve">
+    <value>Carrito de compras</value>
+  </data>
+  <data name="enviar" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="limpiar" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="vacio" xml:space="preserve">
+    <value>vacio</value>
   </data>
 </root>

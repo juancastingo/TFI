@@ -44,8 +44,9 @@
                     @item.Activo
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
-                    <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >Copy</button>
+                    <button data-val="@item.IDListaPrecio"  value=""  class="VerDetalles btn btn-info " >@Language.ver</button>
+                    @Html.ActionLink(@Language.editar, "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
+                    <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >@Language.copiar</button>
 
                 </td>
             </tr>
@@ -65,7 +66,6 @@
             </div>
             <div class="modal-body" id="ModalPrecioBody">
                 <h5 class="text-center"></h5>
-                <form>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -99,7 +99,53 @@
             </div>
 
             <div class="modal-footer">
-                <button id="copiarPrecio" type="button" class="btn btn-success">Copy</button>
+                <button id="copiarPrecio" type="button" class="btn btn-success">@Language.copiar</button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+
+
+
+<div class="modal fade" id="ModalDetalle">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">title</h3>
+            </div>
+            <div class="modal-body" id="ModalDetalleBody">
+                <h5 class="text-center"></h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Language.producto</th>
+                                <th>@Language.estado</th>
+                                <th>@Language.precio</th>
+                                <th>@Language.action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                 <a id="" role="button"  href="/PrecioDetalle/Create" class="btn btn-primary">@Language.nuevo</a>
+                <button id="" type="button"  data-dismiss="modal" class="btn btn-warning">@Language.cerar</button>
             </div>
 
         </div>
@@ -117,6 +163,8 @@
             IDLista = $(this).attr('data-val');
             $('#ModalPrecio').modal('toggle');
         });
+
+
         $('#copiarPrecio').click(function () {
             //console.log(IDPedido);
             CopiaText = $('#CopiaText').val();
@@ -144,6 +192,48 @@
                 complete: ocultarGIF
             });
         });
+
+
+
+
+        //ver detalles acá
+        var IDListaPrecio
+        $('.VerDetalles')
+        .click(function () {
+            IDListaPrecio = $(this).attr('data-val');
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("DetallesLista", "PrecioDetalle")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ IDLista: IDListaPrecio }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    //console.log(data);
+                    $('#ModalDetalle .modal-title').html(data.Detalle);
+                    $('#ModalDetalle .modal-body table > tbody').html("");
+                    data.detalles.forEach(function (elem) {
+                        //console.log(elem);
+                        cuerpo = "<tr><td>" + elem.Producto + "</td><td>" + elem.Estado + "</td><td>" + elem.Precio + "</td><td><a class='btn btn-xs btn-success' role='button' href=/PrecioDetalle/Edit/" + elem.IDPrecioDetalle + ">@Language.editar</a></td></tr>"
+                        $('#ModalDetalle .modal-body table > tbody').append(cuerpo);
+                    });
+                    //if (data.Result == "") {
+                     $('#ModalDetalle').modal('toggle');
+                    //} else {
+                    //    errorFunc;
+                    //}
+                },
+                error: function (status) 
+                {
+                    console.log(status);//errorFunc(),
+                },
+                complete: ocultarGIF
+            });
+            //$('#ModalDetalle').modal('toggle');
+        });
+
 
 
     </script>

@@ -16,7 +16,7 @@ namespace TFITest4.Controllers
         private IIDTest2Entities db = new IIDTest2Entities();
         //
         // GET: /Home/
-        BLLBitacora Bita = new BLLBitacora();
+        private BLLBitacora Bita = new BLLBitacora();
 
 
 

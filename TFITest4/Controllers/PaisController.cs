@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using TFITest4.Models;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -12,6 +13,7 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Pais/
+        private BLLBitacora Bita = new BLLBitacora();
 
         [Authorize]
         public ActionResult Index()

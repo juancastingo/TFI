@@ -1,4 +1,5 @@
 ﻿@model BIZ.BIZPrecioDetalle
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Edit";
@@ -10,13 +11,12 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend class="titulo">PrecioDetalle</legend>
+        <legend class="titulo">@Language.listaDetalle</legend>
         <table class="table table-bordered table-striped" cellspacing="0" width="100%">
             <tr>
-                <td class="editor-label">
+                <th class="editor-label">
                     Nr# @Model.IDPrecioDetalle
-                    @Html.HiddenFor(model => model.IDPrecioDetalle)
-                </td>
+                </th>
             </tr>
 
 
@@ -51,7 +51,7 @@
             <tr>
 
                 <td>
-                    <input class="btn btn-primary " type="submit" value="Save" />
+                    <input class="btn btn-primary " type="submit" style="max-width: 6%;" value="@Language.guardar" />
                 </td>
             </tr>
         </table>
@@ -59,7 +59,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+   @* @Html.ActionLink("Back to List", "Index")*@
 </div>
 
 @section Scripts {

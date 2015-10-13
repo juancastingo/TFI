@@ -137,6 +137,8 @@
         <div class="pedido">
             Pedido  <span>@Model.IDDocumento.ToString().PadLeft(8, '0')</span>
         </div>
+        <div>Fecha de Emisión: <span>@Model.FechaEmision</span></div>
+        <div>Estado: <span>@Model.EstadoMisc.Detalle</span></div>
         <div class="clear"></div>
         <hr />
         <table id="" class="table table-striped" cellspacing="0" width="100%">

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rotativa;
 using SL;
+using BLL;
 
 namespace TFITest4.Controllers
 {
@@ -13,6 +14,7 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Provincia/
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {

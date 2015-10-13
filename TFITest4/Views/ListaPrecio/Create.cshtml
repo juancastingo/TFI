@@ -1,4 +1,5 @@
 ﻿@model TFITest4.Models.ModelListaPrecio
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Create";
@@ -8,13 +9,13 @@
       <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 }
 
-<h2>Create</h2>
+<h2 class="titulo">@Language.crear</h2>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
         <fieldset>
-        <legend>ModelListaPrecio</legend>
+        <legend>@Language.listaPrecios</legend>
     <table class="table table-bordered table-striped" cellspacing="0" width="100%">
         <tr>
         <td class="editor-label">
@@ -47,8 +48,8 @@
         </td>
         <td class="editor-field">
             <select name="Activo">
-                <option value="true">True</option>
-                <option value="False">False</option>
+                <option value="true">@Language.verdadero</option>
+                <option value="False">@Language.falso</option>
             </select>
             @*            @Html.EditorFor(model => model.Activo)
             @Html.ValidationMessageFor(model => model.Activo)*@
@@ -57,14 +58,14 @@
                     </table>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="btn btn-primary" />
         </p>
 
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Language.volver, "Index")
 </div>
 
 @section Scripts {

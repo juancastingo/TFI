@@ -118,7 +118,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li id="CarritoMenuBoton" class="oculto">
-                            <a id="cart-popover" class="btn" data-placement="bottom" title="Carrito de Compras">
+                            <a id="cart-popover" class="btn" data-placement="bottom" title="@Language.carritoCompras">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                 <span class="CarritoSubtotal"></span>
                             </a>
@@ -175,15 +175,15 @@
 
 
 <div data-toggle="popover" id="popover_content_wrapper" style="display: none">
-    <p>Carrito vacio!</p>
+    <p>@Language.carrito @Language.vacio!</p>
     <div>
         <h5>Subtotal:  <span class="CarritoSubtotal"></span></h5>
 
         <a href="#" id="VerCarrito" class="btn btn-primary">
-            <span class="glyphicon glyphicon-shopping-cart"></span>Ver carrito
+            <span class="glyphicon glyphicon-shopping-cart"></span>@Language.ver @Language.carrito
         </a>
         <a href="#" id="LimpiarCarrito" class="btn btn-default">
-            <span class="glyphicon glyphicon-trash"></span>Limpiar
+            <span class="glyphicon glyphicon-trash"></span>@Language.limpiar
         </a>
 
     </div>

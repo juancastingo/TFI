@@ -18,6 +18,7 @@ namespace TFITest4.Models
         private BLLGeneral generalWorker = new BLLGeneral();
         private BLLDireccion dirWorker = new BLLDireccion();
         private BLLCliente clienteWorker = new BLLCliente();
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {

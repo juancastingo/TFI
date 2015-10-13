@@ -15,9 +15,9 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Login/
-        BLLBitacora Bita = new BLLBitacora();
         BLLUsuario UsuarioWorker = new BLLUsuario();
         BLLDocumento DocWorker = new BLLDocumento();
+        private BLLBitacora Bita = new BLLBitacora();
 
 
         public ActionResult Index()

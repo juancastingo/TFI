@@ -79,6 +79,24 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Activo.
+        /// </summary>
+        public static string activo {
+            get {
+                return ResourceManager.GetString("activo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar.
+        /// </summary>
+        public static string agregar {
+            get {
+                return ResourceManager.GetString("agregar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Analizar Pedidos.
         /// </summary>
         public static string analizar {
@@ -106,6 +124,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Borrar.
+        /// </summary>
+        public static string borrar {
+            get {
+                return ResourceManager.GetString("borrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cambiar contraseña.
         /// </summary>
         public static string CambiarPass {
@@ -124,11 +151,38 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Carrito.
+        /// </summary>
+        public static string carrito {
+            get {
+                return ResourceManager.GetString("carrito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Carrito de compras.
+        /// </summary>
+        public static string carritoCompras {
+            get {
+                return ResourceManager.GetString("carritoCompras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Categoría.
         /// </summary>
         public static string Categoria {
             get {
                 return ResourceManager.GetString("Categoria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar.
+        /// </summary>
+        public static string cerrar {
+            get {
+                return ResourceManager.GetString("cerrar", resourceCulture);
             }
         }
         
@@ -147,6 +201,15 @@ namespace TFITest4.Resources {
         public static string compre {
             get {
                 return ResourceManager.GetString("compre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Copiar.
+        /// </summary>
+        public static string copiar {
+            get {
+                return ResourceManager.GetString("copiar", resourceCulture);
             }
         }
         
@@ -187,6 +250,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Enviar.
+        /// </summary>
+        public static string enviar {
+            get {
+                return ResourceManager.GetString("enviar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La operación no se pudo completar. Por favor logueese nuevamente.
         /// </summary>
         public static string ErrorLogInAgain {
@@ -214,6 +286,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Falso.
+        /// </summary>
+        public static string falso {
+            get {
+                return ResourceManager.GetString("falso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha alta.
         /// </summary>
         public static string fechaAlta {
@@ -223,11 +304,29 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Desde.
+        /// </summary>
+        public static string FechaDesde {
+            get {
+                return ResourceManager.GetString("FechaDesde", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Filtrar:.
         /// </summary>
         public static string FiltrarTabla {
             get {
                 return ResourceManager.GetString("FiltrarTabla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Guardar.
+        /// </summary>
+        public static string guardar {
+            get {
+                return ResourceManager.GetString("guardar", resourceCulture);
             }
         }
         
@@ -291,6 +390,15 @@ namespace TFITest4.Resources {
         public static string limite {
             get {
                 return ResourceManager.GetString("limite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Limpiar.
+        /// </summary>
+        public static string limpiar {
+            get {
+                return ResourceManager.GetString("limpiar", resourceCulture);
             }
         }
         
@@ -624,6 +732,33 @@ namespace TFITest4.Resources {
         public static string UsuarioNoHabilitado {
             get {
                 return ResourceManager.GetString("UsuarioNoHabilitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a vacio.
+        /// </summary>
+        public static string vacio {
+            get {
+                return ResourceManager.GetString("vacio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ver.
+        /// </summary>
+        public static string ver {
+            get {
+                return ResourceManager.GetString("ver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verdadero.
+        /// </summary>
+        public static string verdadero {
+            get {
+                return ResourceManager.GetString("verdadero", resourceCulture);
             }
         }
         

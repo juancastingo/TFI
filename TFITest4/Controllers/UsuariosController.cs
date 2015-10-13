@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BIZ;
+using BLL;
 using DAL.ORM;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace TFITest4.Controllers
         private IIDTest2Entities db = new IIDTest2Entities(); //sacar
         //
         // GET: /Usuarios/
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {

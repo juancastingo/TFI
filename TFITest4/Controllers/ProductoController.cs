@@ -18,6 +18,7 @@ namespace TFITest4.Controllers
         //private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
         private BLLProducto productoWorker = new BLLProducto();
         private BLLGeneral generalWorker = new BLLGeneral();
+        private BLLBitacora Bita = new BLLBitacora();
 
         public ActionResult Index()
         {
@@ -42,7 +43,7 @@ namespace TFITest4.Controllers
         public ActionResult Create()
         {
             ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle");
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("Producto"), "IDEstado", "Detalle");
             return View();
         }
 
@@ -66,7 +67,7 @@ namespace TFITest4.Controllers
             }
             TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle");
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("Producto"), "IDEstado", "Detalle");
             return View(producto);
         }
 
@@ -77,7 +78,7 @@ namespace TFITest4.Controllers
         {
             var prod = productoWorker.traerProdXId(id);
             ViewBag.IDProductoCategoria = new SelectList(productoWorker.traerAllProductoCat(), "IDProductoCategoria", "Detalle",prod.IDProductoCategoria );
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle",prod.IDEstado);
+            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("Producto"), "IDEstado", "Detalle", prod.IDEstado);
             //.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
             var rprod = Mapper.Map<BIZProducto, ModelProducto>(prod);
             return View(rprod);
