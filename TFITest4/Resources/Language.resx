@@ -348,8 +348,23 @@
   <data name="enviar" xml:space="preserve">
     <value>Enviar</value>
   </data>
+  <data name="ingresar" xml:space="preserve">
+    <value>Ingresar</value>
+  </data>
   <data name="limpiar" xml:space="preserve">
     <value>Limpiar</value>
+  </data>
+  <data name="logIn" xml:space="preserve">
+    <value>Ingrese a su cuenta</value>
+  </data>
+  <data name="olvidoPass" xml:space="preserve">
+    <value>Olvidó su contraseña?</value>
+  </data>
+  <data name="olvidoPassText" xml:space="preserve">
+    <value>Por favor ingrese su usuario para recuperar su contraseña. Un link de recupero será enviado a su correo electrónico.</value>
+  </data>
+  <data name="suCarrito" xml:space="preserve">
+    <value>Su carrito de compras </value>
   </data>
   <data name="vacio" xml:space="preserve">
     <value>vacio</value>

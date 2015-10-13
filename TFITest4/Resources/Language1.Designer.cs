@@ -358,6 +358,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ingresar.
+        /// </summary>
+        public static string ingresar {
+            get {
+                return ResourceManager.GetString("ingresar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Iniciar Sesión.
         /// </summary>
         public static string inicioSesion {
@@ -417,6 +426,15 @@ namespace TFITest4.Resources {
         public static string listaPrecios {
             get {
                 return ResourceManager.GetString("listaPrecios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ingrese a su cuenta.
+        /// </summary>
+        public static string logIn {
+            get {
+                return ResourceManager.GetString("logIn", resourceCulture);
             }
         }
         
@@ -525,6 +543,24 @@ namespace TFITest4.Resources {
         public static string OKNormal {
             get {
                 return ResourceManager.GetString("OKNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Olvidó su contraseña?.
+        /// </summary>
+        public static string olvidoPass {
+            get {
+                return ResourceManager.GetString("olvidoPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor ingrese su usuario para recuperar su contraseña. Un link de recupero será enviado a su correo electrónico..
+        /// </summary>
+        public static string olvidoPassText {
+            get {
+                return ResourceManager.GetString("olvidoPassText", resourceCulture);
             }
         }
         
@@ -669,6 +705,15 @@ namespace TFITest4.Resources {
         public static string RevisarUsuarioContra {
             get {
                 return ResourceManager.GetString("RevisarUsuarioContra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Su carrito de compras .
+        /// </summary>
+        public static string suCarrito {
+            get {
+                return ResourceManager.GetString("suCarrito", resourceCulture);
             }
         }
         

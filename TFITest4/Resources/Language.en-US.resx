@@ -348,8 +348,23 @@
   <data name="enviar" xml:space="preserve">
     <value>Submit</value>
   </data>
+  <data name="ingresar" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="limpiar" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="logIn" xml:space="preserve">
+    <value>Login to Your Account</value>
+  </data>
+  <data name="olvidoPass" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="olvidoPassText" xml:space="preserve">
+    <value>Please enter your username to recover your password. A recover link will be sent to your registration email</value>
+  </data>
+  <data name="suCarrito" xml:space="preserve">
+    <value>Your shopping Cart</value>
   </data>
   <data name="vacio" xml:space="preserve">
     <value>Empty</value>

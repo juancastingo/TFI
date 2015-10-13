@@ -233,29 +233,29 @@
                 error: errorFuncInit
             });*@
 
-            function successFuncInit(data, status) {
-                //console.log(data);
-                list = data;
-                var subt = 0;
-                $('#carritoModal table > tbody').html('');
-                list.forEach(function (elem) {
-                    //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    thisSubtotal = (elem.Precio * elem.Cant);
-                    $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td><td>' + thisSubtotal + '</td></tr>');
-                });
+            //function successFuncInit(data, status) {
+            //    //console.log(data);
+            //    list = data;
+            //    var subt = 0;
+            //    $('#carritoModal table > tbody').html('');
+            //    list.forEach(function (elem) {
+            //        //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+            //        subt += (elem.Precio * elem.Cant);
+            //        thisSubtotal = (elem.Precio * elem.Cant);
+            //        $('#carritoModal table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td><td>' + thisSubtotal + '</td></tr>');
+            //    });
 
 
-                $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt + '</h4><h4 class="text-right">Total= $' + subt * 1.21 + '</h4>');
-                $('.CarritoSubtotal').html("$ " + subt);
+            //    $('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt + '</h4><h4 class="text-right">Total= $' + subt * 1.21 + '</h4>');
+            //    $('.CarritoSubtotal').html("$ " + subt);
 
 
-            }
+            //}
 
-            function errorFuncInit() {
-                //alert('error');
-                toastr["error"]("Please log in again", "Error")
-            }
+            //function errorFuncInit() {
+            //    //alert('error');
+            //    toastr["error"]("Please log in again", "Error")
+            //}
 
 
         });
