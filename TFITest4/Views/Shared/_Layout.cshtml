@@ -19,6 +19,8 @@
     <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" type="text/css" />
+
     <link href="~/Content/general.css" rel="stylesheet" type="text/css" />
     @RenderSection("headSection", false)
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
@@ -171,6 +173,7 @@
     <script type="text/javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/Scripts/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="~/Scripts/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="~/Scripts/buttons.flash.min.js"></script>
     
@@ -395,7 +398,7 @@
             $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
             if (subt == 0) {
-                $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
+                $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
             } else {
                 $('#popover_content_wrapper').find("p:first").html("");
             }
@@ -536,7 +539,7 @@
                     tabla = $('.tableJquery').DataTable({
                         language: {
                             url: urlDTLang,
-                        },
+                        }
                     });
 
                 } catch (err) { console.log("dt is not perfect") }
@@ -699,7 +702,7 @@
                                 $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
                                 $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                                 if (subt == 0) {
-                                    $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
+                                    $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
                                 } else {
                                     $('#popover_content_wrapper').find("p:first").html("");
                                 }

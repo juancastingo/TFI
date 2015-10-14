@@ -5,10 +5,6 @@
     ViewBag.Title = "Index";
 }
 
-@section headSection {
-    
-}
-
 <script type="text/javascript">
     //if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
     //    window.location = "/Login/Error"
@@ -19,11 +15,12 @@
 <h2 class="titulo">@Language.clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
+    @Html.ActionLink(@Language.crear, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
 </p>
-<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table class="table tableJquery table-bordered dt-responsive nowrap table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
+            <th>Nr#</th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -46,7 +43,7 @@
                 @Html.DisplayNameFor(model => model.NombreFantasia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IDDireccion)
+                @Html.DisplayNameFor(model => model.Direccion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefono)
@@ -57,14 +54,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.IDTipoIVA)
             </th>
-            <th></th>
+            <th>@Language.action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                @Html.HiddenFor(modelItem => item.IDClienteEmpresa)
+                <td>
+                     @Html.DisplayFor(modelItem => item.IDClienteEmpresa)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -74,7 +73,7 @@
                 <td>
                     @item.FechaAlta.ToString("MM/dd/yyyy")
                 </td>
-                <td class="valor1" nowrap>
+                <td class="valor1">
                     @item.Limite.ToString().Replace(",", ".")
                 </td>
                 <td>
@@ -92,7 +91,6 @@
                         @Html.DisplayFor(modelItem => item.Direccion.Numero)
                         @Html.DisplayFor(modelItem => item.Direccion.Localidad.Nombre)
                     </a>
-
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Telefono)
@@ -100,12 +98,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td nowrap>
+                <td>
                     <span>@item.TipoIVA.Detalle</span>
                     @*@Html.DisplayFor(modelItem => item.TipoIVA.Detalle)*@
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IDClienteEmpresa }, new { @class = "btn btn-primary", @style = "color:white" })
+                    @Html.ActionLink(@Language.editar, "Edit", new { id = item.IDClienteEmpresa }, new { @class = "btn btn-primary", @style = "color:white" })
                 </td>
             </tr>
         }
@@ -138,7 +136,6 @@
             var i = 0;
             $('.valor1').each(function () {
                 list2 = accounting.formatColumn(list, "$       ");
-                console.log(list2);
                 $(this).html(list2[i]);
                 i++;
             })

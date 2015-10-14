@@ -15,7 +15,7 @@
     }
 </script>
 <div>
-    <h2 class="titulo">Pedidos - @ViewBag.Empresa</h2>
+    <h2 class="titulo">@Language.pedido - @ViewBag.Empresa</h2>
 </div>
 
 <table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
@@ -24,22 +24,22 @@
             <th>NR
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaEmision)
+                @Language.fechaEmision
             </th>
             <th>
-                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.FUM">FUM</span>
             </th>
             <th class="transparente"></th>
             <th style="width: 100px;">
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
-            <th>Estado
+            <th>@Language.estado
             </th>
-            <th>Usuario Creacion
+            <th>@Language.usuarioCreacion
             </th>
-            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Usuario Ultima modificacion">UUM</span>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.UUM">UUM</span>
             </th>
-            <th>Actions</th>
+            <th>@Language.action</th>
         </tr>
     </thead>
     <tbody>
@@ -72,10 +72,10 @@
                 <td>
                     <p>
                         <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >@Language.ver</button>
-                        @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                         @{if (item.EstadoMisc.Detalle != "Facturado" && item.EstadoMisc.Detalle != "Rechazado" && item.EstadoMisc.Detalle != "Cancelado")
                           {
-                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Cancelar</button>
+                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >@Language.cancelar</button>
                           }
                         }
                     </p>
@@ -102,10 +102,10 @@
                 <table class="table table-striped">
                     <thead id="tblHead">
                         <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total Price</th>
+                            <th>@Language.producto</th>
+                            <th>@Language.cantidad</th>
+                            <th>@Language.precioUnitario</th>
+                            <th>@Language.TotalProducto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cerrar</button>
             </div>
 
         </div>

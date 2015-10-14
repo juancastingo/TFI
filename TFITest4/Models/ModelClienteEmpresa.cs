@@ -22,6 +22,7 @@ namespace TFITest4.Models
         public Nullable<double> Limite { get; set; }
         [Required]
         public string CUIT { get; set; }
+        [Display(Name = "fechaAlta", ResourceType = typeof(Language))]
         public System.DateTime FechaAlta { get; set; }
         [Required]
         [Display(Name = "razonSocial", ResourceType = typeof(Language))]
@@ -33,22 +34,26 @@ namespace TFITest4.Models
         public Nullable<int> IDTipoIVA { get; set; }
         public Nullable<int> IDDireccion { get; set; }
         [Required]
+        [Display(Name = "Telefono", ResourceType = typeof(Language))]
         public string Telefono { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         public int IDLocalidad { get; set; }
-
+        [Display(Name = "direccion", ResourceType = typeof(Language))]
         public BIZDireccion Direccion { get; set; }
         [Required]
+        [Display(Name = "calle", ResourceType = typeof(Language))]
         public string Calle { get; set; }
         [Required]
+        [Display(Name = "numero", ResourceType = typeof(Language))]
         public int Numero { get; set; }
-
+        [Display(Name = "piso", ResourceType = typeof(Language))]
         public int Piso { get; set; }
-
+        [Display(Name = "dpto", ResourceType = typeof(Language))]
         public string Dpto { get; set; }
+        [Display(Name = "detalle", ResourceType = typeof(Language))]
         public string Detalle { get; set; }
         [Display(Name = "estado", ResourceType = typeof(Language))]
         public BIZEstado EstadoMisc { get; set; }

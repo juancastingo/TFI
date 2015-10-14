@@ -336,8 +336,20 @@
   <data name="agregar" xml:space="preserve">
     <value>Agregar</value>
   </data>
+  <data name="aprobar" xml:space="preserve">
+    <value>Aprobar</value>
+  </data>
+  <data name="bitacora" xml:space="preserve">
+    <value>Bitácora</value>
+  </data>
   <data name="borrar" xml:space="preserve">
     <value>Borrar</value>
+  </data>
+  <data name="calle" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="cancelar" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="carrito" xml:space="preserve">
     <value>Carrito</value>
@@ -345,11 +357,38 @@
   <data name="carritoCompras" xml:space="preserve">
     <value>Carrito de compras</value>
   </data>
+  <data name="confirmar" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="cuentaCorriente" xml:space="preserve">
+    <value>Cuenta Corriente</value>
+  </data>
+  <data name="detalle" xml:space="preserve">
+    <value>Detalle</value>
+  </data>
+  <data name="direccion" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="dpto" xml:space="preserve">
+    <value>Departamento</value>
+  </data>
+  <data name="empresa" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
   <data name="enviar" xml:space="preserve">
     <value>Enviar</value>
   </data>
+  <data name="fechaEmision" xml:space="preserve">
+    <value>Fecha emisión</value>
+  </data>
+  <data name="FUM" xml:space="preserve">
+    <value>Fecha última modificación</value>
+  </data>
   <data name="ingresar" xml:space="preserve">
     <value>Ingresar</value>
+  </data>
+  <data name="justifacion" xml:space="preserve">
+    <value>Por favor ingresar un motivo para esta acción</value>
   </data>
   <data name="limpiar" xml:space="preserve">
     <value>Limpiar</value>
@@ -357,14 +396,32 @@
   <data name="logIn" xml:space="preserve">
     <value>Ingrese a su cuenta</value>
   </data>
+  <data name="monto" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="numero" xml:space="preserve">
+    <value>Número</value>
+  </data>
   <data name="olvidoPass" xml:space="preserve">
     <value>Olvidó su contraseña?</value>
   </data>
   <data name="olvidoPassText" xml:space="preserve">
     <value>Por favor ingrese su usuario para recuperar su contraseña. Un link de recupero será enviado a su correo electrónico.</value>
   </data>
+  <data name="piso" xml:space="preserve">
+    <value>Piso</value>
+  </data>
+  <data name="rechazar" xml:space="preserve">
+    <value>Rechazar</value>
+  </data>
   <data name="suCarrito" xml:space="preserve">
     <value>Su carrito de compras </value>
+  </data>
+  <data name="usuarioCreacion" xml:space="preserve">
+    <value>Creado por</value>
+  </data>
+  <data name="UUM" xml:space="preserve">
+    <value>Usuario última modificación</value>
   </data>
   <data name="vacio" xml:space="preserve">
     <value>vacio</value>

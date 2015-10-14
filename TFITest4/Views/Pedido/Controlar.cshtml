@@ -26,17 +26,17 @@
             </th>
             @*<th class="transparente"></th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Monto)
+                @Language.monto
             </th>
-            <th>Estado
+            <th>@Language.estado
             </th>
-            <th>Empresa
+            <th>@Language.empresa
             </th>
-            <th>Limite
+            <th>@Language.limite
             </th>
-            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Cuenta Corriente">CC</span>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.cuentaCorriente">CC</span>
             </th>
-            <th>Actions</th>
+            <th>@Language.action</th>
         </tr>
     </thead>
     <tbody>
@@ -82,10 +82,10 @@
                 </td>
                 <td>
                     <p>
-                        <button data-val="@item.IDDocumento"  value=""  class="AprobarPedido btn btn-success btn-sm" >Aprobar</button>
-                        <button data-val="@item.IDDocumento"  value=""  class="RechazarPedido btn btn-danger btn-sm" >Rechazar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="AprobarPedido btn btn-success btn-sm" >@Language.aprobar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="RechazarPedido btn btn-danger btn-sm" >@Language.rechazar</button>
 
-                        @Html.ActionLink("Imprimir", "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                     </p>
                 </td>
             </tr>
@@ -100,15 +100,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title">Please provide justification for this Action</h3>
+                <h3 class="modal-title">@Language.justificacion</h3>
             </div>
             <div class="modal-body" id="PedidoModalBody">
                 <input type="text" style="width:100%;" id="justifText" required />
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="AprobarRechazar btn btn-warning " data-dismiss="modal">Confirmar</button>
-                <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                <button type="button" class="AprobarRechazar btn btn-warning " data-dismiss="modal">@Language.confirmar</button>
+                <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cancelar</button>
             </div>
 
         </div>

@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelUsuario>
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Users</h2>
+<h2 class="title">@Language.usuario</h2>
 
 <p>
     @Html.ActionLink("Create New", "RegisterIn", new {} ,new { @class = "btn btn-primary", @style = "color:white" }) 
 </p>
-<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table class="table tableJquery table-bordered nowrap dt-responsive table-striped" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>
@@ -42,7 +43,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TipoUsuario.Tipo)
         </th>
-        <th></th>
+        <th>@Language.action</th>
     </tr>
         </thead>
     <tbody>
@@ -84,7 +85,7 @@
             @Html.DisplayFor(modelItem => item.TipoUsuario.Tipo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IDUsuario })
+            @Html.ActionLink(@Language.editar, "Edit", new {  id=item.IDUsuario },  new { @class = "btn btn-primary", @style = "color:white" })
         </td>
     </tr>
 }

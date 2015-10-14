@@ -99,7 +99,7 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Piso)
-            @Html.ValidationMessageFor(model => model.Piso)
+            @*@Html.ValidationMessageFor(model => model.Piso)*@
         </div>
 
         <div class="editor-label">
@@ -118,13 +118,6 @@
             @Html.ValidationMessageFor(model => model.Detalle)
         </div>
 
-
-
-
-
-
-
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Telefono)
         </div>
@@ -140,15 +133,15 @@
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
         </div>
-
+        <br />
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="btn btn-primary" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Language.volver, "Index")
 </div>
 
 @section Scripts {

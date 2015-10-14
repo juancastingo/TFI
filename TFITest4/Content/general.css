@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-#carritoModal th {
+#carritoModal #tblHead th {
     text-align: center !important;
 }
 .tblHead th {
@@ -33,7 +33,7 @@ text-align: center !important;
     padding: 5px;
 }
 .cartTable   td, .cartTable  th {
-        text-align: left;
+        text-align: left !important;
         padding-right: 21px;
 }
 
