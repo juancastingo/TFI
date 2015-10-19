@@ -1,0 +1,139 @@
+﻿@model IEnumerable<BIZ.BIZDocumento>
+@using TFITest4.Resources
+
+@{
+    ViewBag.Title = "Prepedidos";
+}
+@section headSection {
+    <link href="~/Content/simptip.min.css" rel="stylesheet" />
+}
+<h2>Prepedidos - @ViewBag.Empresa</h2>
+
+<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>NR Prepedido
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEmision)
+            </th>
+            <th>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
+            </th>
+            <th class="transparente"></th>
+            <th style="width:100px;">
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>Estado
+            </th>
+            <th>Usuario Creacion
+            </th>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Usuario Ultima modificacion">UUM</span>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDDocumento)
+                </td>
+                <td>
+                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                </td>
+                <td>
+                    @item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")
+                </td>
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero">
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",",".")</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario1.Nombre)
+                </td>
+                <td>
+                    <p>
+                        <button data-val="@item.IDDocumento"  value=""  class="CargarPedidos btn btn-primary btn-sm" >cargar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Descartar</button>
+                    </p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section EndScript{
+
+    <script>
+        //.attr('data-val') 
+        $('.CargarPedidos').click(function () {
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("CargarPedidoViejo", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc,
+                complete: Doscosas
+            });
+            function successFunc(data, status) {
+                console.log(data);
+                toastr["success"]("The Cart has been loaded", "Success!")
+                if (data.Result != "") toastr["warning"](data.Result, "@Language.Atencion")
+            }
+            function errorFunc(status) {
+                toastr["error"]("@Language.ErrorLogInAgain", "Error")
+            }
+            function Doscosas() {
+                GetInit();
+                ocultarGIF();
+            }
+            
+        });
+
+        $('.DescartarPrePedido').click(function () {
+                mostrarGIF();
+                //var dataToSend = { CargarPedidoViejo: "juan" }
+                var serviceURL = '@Url.Action("DescartarPrePedido", "Pedido")';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
+                    dataType: 'text',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        toastr["success"]("@Language.OKNormal", "Success!")
+                        location.reload();
+                    },
+                    error: function (status) {
+                        toastr["error"]("@Language.ErrorLogInAgain", "Error")
+                    },
+                    complete: ocultarGIF
+            });
+
+                GetInit();
+            });
+
+            //$(document).ready(function () {
+            //    $('.MontoPrePedido').each(function (index) {
+            //        esto = $(this).text();
+
+            //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+            //    });
+            //});
+    </script>
+}

@@ -1,18 +1,13 @@
-﻿@model IEnumerable<DAL.ORM.PrecioDetalle>
-
-@{
-    ViewBag.Title = "Index";
-}
-
+﻿@model IEnumerable<BIZ.BIZPrecioDetalle>
+@using TFITest4.Resources;
 <div class="container">
-<h2>Index</h2>
-
+<h2 class="titulo">@TFITest4.Resources.Language.listaDetalle</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
 </p>
     <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">  
         <thead>
-        <tr>
+        <tr>    
         <th>
             @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
             Nr
@@ -27,9 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Precio)
         </th>
-        <th>
+@*        <th>
             @Html.DisplayNameFor(model => model.FechaAlta)
-        </th>
+        </th>*@
 
         <th>
             @Html.DisplayNameFor(model => model.Activo)
@@ -49,20 +44,41 @@
         <td>
             @Html.DisplayFor(modelItem => item.Producto.Nombre)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
+        <td class="valor valor1">
+            @item.Precio.ToString().Replace(",", ".")
         </td>
-        <td>
+@*        <td>
             @Html.DisplayFor(modelItem => item.FechaAlta)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Activo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.IDPrecioDetalle  })
+            @Html.ActionLink("Edit", "Edit", new { id = item.IDPrecioDetalle }, new { @class = "btn btn-primary", @style = "color:white" })
         </td>
     </tr>
 }
 </tbody>
 </table>
     </div>
+
+
+
+
+
+@section numerosScript{
+            var list = [];
+            var list2 = [];
+
+            $('.valor1').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor1').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                console.log(list2);
+                $(this).html(list2[i]);
+                i++;
+            })
+           
+}

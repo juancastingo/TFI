@@ -1,314 +1,226 @@
-﻿@model IEnumerable<BIZ.BIZProducto>
-
+﻿@model IEnumerable<BIZ.BIZDocumento>
+@using TFITest4.Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pedidos";
 }
 
-<head>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+@section headSection {
+    <link href="~/Content/simptip.min.css" rel="stylesheet" />
     <link href="~/Content/Pedido.css" rel="stylesheet" />
-    </style>
-</head>
+}
 
-
-
-
-<h2>Pedido</h2>
-
-<div id="cart" style="display: none">
-    <h1 class="ui-widget-header">Shopping Cart</h1>
-    <div class="ui-widget-content">
-        <ol>
-        <span class="glyphicon glyphicon-shopping-cart" style="font-size: 68px;"></span>
-            <li class="placeholder">Add your items here</li>
-        </ol>
-    </div>
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "Externo") {
+        window.location = "/Login/Error"
+    }
+</script>
+<div>
+    <h2 class="titulo">@Language.pedido - @ViewBag.Empresa</h2>
 </div>
 
-<table class="table tableJqueryNormal table-bordered table-striped" cellspacing="0" width="100%">
+<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
-            @*            <th>
-                @Html.DisplayNameFor(model => model.IDProducto)
-            </th>*@
-            <th>Producto
-                @*@Html.DisplayNameFor(model => model.Nombre)*@
+            <th>NR
             </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.ProductoCategoria.Detalle)
-            </th>*@
-            @*            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
+                @Language.fechaEmision
             </th>
-             <th>
-                @Html.DisplayNameFor(model => model.PrecioActual)
+            <th>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.FUM">FUM</span>
             </th>
-            <th>Cantidad
+            <th class="transparente"></th>
+            <th style="width: 100px;">
+                @Html.DisplayNameFor(model => model.Monto)
             </th>
-           
-            @*        <th>
-            @Html.DisplayNameFor(model => model.UnidadMedida)
-        </th>*@
-        <th style="width: auto"></th>
+            <th>@Language.estado
+            </th>
+            <th>@Language.usuarioCreacion
+            </th>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.UUM">UUM</span>
+            </th>
+            <th>@Language.action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr id="@item.IDProducto">
 
+                <tr class="@item.EstadoMisc.Detalle">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.ProductoCategoria.Detalle)
-                </td>*@
-                @*                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>*@
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Imagen)*@
-                    <a class="fancybox" href="@item.Imagen">
-                        <img class="PImage" src="@item.Imagen" alt="" /></a>
+                    @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    $@Html.DisplayFor(modelItem => item.PrecioActual)
+                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
                 </td>
                 <td>
-                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="cantidad" />
+                    @item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")
                 </td>
-                @*        <td>
-            @Html.DisplayFor(modelItem => item.UnidadMedida)
-        </td>*@
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero">
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
+                </td>
+                          <td>
+                            @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                          </td>
                 <td>
-                    <a href="#" class="agregar">Agregar</a>
-                    <a href="#" class="borrar">Borrar</a>
-                    @* @Html.ActionLink("Agregar", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                 @*   @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario1.Nombre)
+                </td>
+                <td>
+                    <p>
+                        <button data-val="@item.IDDocumento"  value=""  class="VerPedidos btn btn-success btn-sm" >@Language.ver</button>
+                        @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @{if (item.EstadoMisc.Detalle != "Facturado" && item.EstadoMisc.Detalle != "Rechazado" && item.EstadoMisc.Detalle != "Cancelado")
+                          {
+                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >@Language.cancelar</button>
+                          }
+                        }
+                        @{if (item.EstadoMisc.Detalle == "Facturado")
+                          {
+                              @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumentoRef }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
+                          }
+                              
+                        }
+                    </p>
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
 
 
 
-<div class="col-md-4 col-xs-12 column">
-    <h2>Carrito</h2>
-    <div id="carrito">
-        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th>Prod</th>
-                    <th>Cant</th>
-                    <th>$</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+<div class="modal fade" id="PedidoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">@Language.pedido</h3>
+                <span class="field-validation-error" id="TextoCarritoPedidoModal"></span>
+            </div>
+            <div class="modal-body" id="PedidoModalBody">
+                <h5 class="text-center">@Language.pedido nr# <span id="NrPedido"></span></h5>
+                <h5 class="text-center">@Language.estado: <span id="EstadoPedido"></span></h5>
+                <h5 class="text-center">Comentario: <span id="ComentarioPedido"></span></h5>
+                <table class="table table-striped">
+                    <thead id="tblHead">
+                        <tr>
+                            <th>@Language.producto</th>
+                            <th>@Language.cantidad</th>
+                            <th>@Language.precioUnitario</th>
+                            <th>@Language.TotalProducto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div id="PedidoDiv">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cerrar</button>
+            </div>
 
-    <div id="PostDiv">
-        <h4>Subtotal= @ViewBag.subtotal</h4>
+        </div>
+        <!-- /.modal-content -->
     </div>
-
+    <!-- /.modal-dialog -->
 </div>
-
-<div class="row"></div>
-<hr />
-<hr />
-<hr />
-
-
-
-<div id="popover_content_carrito" style="display: none">
-    <div>
-        <p>aca algo</p>
-
-    </div>
-</div>
-
-
+<!-- /.modal -->
 
 @section EndScript{
 
-
-
-    <script type="text/javascript">
-
-
-        $(function () {
-            $('.tableJqueryNormal img').draggable({
-                appendTo: "body",
-                helper: "clone",
-                start: function () {
-                    $('#cart').show("blind");
-                    
-                    //console.log("start");
+    <script>
+        //.attr('data-val') 
+        $('.VerPedidos').click(function () {
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("VerPedido", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ Pedido: $(this).attr('data-val') }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    //toastr["success"]("@Language.OKNormal", "Success!")
+                    console.log(data);
+                    //location.reload();
+                    list = data.Pedido.Productos;
+                    IVA = $('#IvaCliente').val();
+                    IVACalc = parseFloat($('#IvaCliente').val());
+                    //console.log("lista:");
+                    console.log(list);
+                    $('#NrPedido').text(data.Pedido.IDDocumento);
+                    $('#EstadoPedido').text(data.Pedido.estado);
+                    $('#ComentarioPedido').text(data.Pedido.comentario);
+                    var subt = 0;
+                    var count = 0;
+                    $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th>@Language.precioUnitario</th><th>@Language.TotalProducto</th>');
+                    $('#PedidoModalBody table > tbody').html('');
+                    list.forEach(function (elem) {
+                        //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                        subt += (elem.Precio * elem.Cant);
+                        thisSubtotal = (elem.Precio * elem.Cant);
+                        $('#PedidoModalBody table > tbody').append('<tr><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td class="numero">' + accounting.formatMoney(elem.Precio) + '</td><td class="numero">' + accounting.formatMoney(thisSubtotal) + '</td></tr>');
+                    });
+                    //$('#PedidoDiv').html('<h4 class="text-right">Subtotal= ' + accounting.formatMoney(subt) + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total=  ' + accounting.formatMoney((subt + (subt * IVACalc / 100))) + '</h4>');
+                    $('#PedidoDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
+                    //$('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                    $('#PedidoModal').modal('toggle');
                 },
-                stop: function () {
-                    $('#cart').hide("blind");
-                    //console.log("stop");
-                }
-
+                error: function (status) {
+                    errorFunc;
+                },
+                complete: ocultarGIF
             });
-            $("#cart ol").droppable({
-                activeClass: "ui-state-default",
-                hoverClass: "ui-state-hover",
-                accept: ":not(.ui-sortable-helper)",
-                drop: function (event, ui) {
-                    //$(this).find(".placeholder").remove();
-                    //$("<li></li>").text(ui.draggable.closest('td').prev('td').prev('td').text()).appendTo(this);
-                    id = ui.draggable.closest('tr').attr('id');
-                    cantidad = ui.draggable.closest('tr').find('td').eq(3).children().val()
-                    ui.draggable.closest('tr').find('td').eq(3).children().val('');
-                    if (cantidad == "") {
-                        cantidad = 1;
+
+
+
+        });
+
+
+        $('.DescartarPrePedido').click(function () {
+            mostrarGIF();
+            //var dataToSend = { CargarPedidoViejo: "juan" }
+            var serviceURL = '@Url.Action("CancelarPedido", "Pedido")';
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ Pedido: $(this).attr('data-val') }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    if (data.Result == "") {
+                        toastr["success"]("@Language.OKNormal", "OK!");
+                        location.reload();
+                    } else {
+                        errorFunc;
                     }
-                    console.log("atroden " + id + " " + cantidad);
-                    var DatosPedido = { id: id, cantidad: cantidad }
-                    executeAjaxPedido(DatosPedido);
-
-                }
-            }).sortable({
-                items: "li:not(.placeholder)",
-                sort: function () {
-                    // gets added unintentionally by droppable interacting with sortable
-                    // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
-                    $(this).removeClass("ui-state-default");
-
-                }
+                },
+                error: function (status) {
+                    errorFunc;
+                },
+                complete: ocultarGIF
             });
         });
 
 
-        function executeAjaxPedido(datos) {
-            console.log("executeAjaxPedido");
-            var dataToSend = datos;
-            var serviceURL = '@Url.Action("PedidoAjax", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify(dataToSend),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFunc,
-                error: errorFunc
-            });
+        //$(document).ready(function () {
+        //    $('.MontoPrePedido').each(function (index) {
+        //        esto = $(this).text();
 
-            function successFunc(data, status) {
-                console.log(typeof (data));
-                console.log(data);
-                list = data;
-                var subt = 0;
-                $('#carrito table > tbody').html('');
-                list.forEach(function (elem) {
-                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
-                });
-                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
-
-                $('.CarritoSubtotal').html("$ " + subt);
-                if (subt == 0) {
-                    $('#popover_content_wrapper').find("p:first").html("Carrito Vacio");
-                } else {
-                    $('#popover_content_wrapper').find("p:first").html("");
-                }
-                //alert(data);
-            }
-
-            function errorFunc() {
-                //alert('error');
-                toastr["error"]("Please log in again", "Error")
-
-            }
-        }
-
-
-
-        $(document).ready(function () {
-
-            toastr["info"]("You can drag and drop item images to add it to the cart!","Psss")
-
-            $(".fancybox").fancybox({
-                openEffect: 'elastic',
-                closeEffect: 'elastic',
-                nextEffect: 'fade',
-                padding: 0,
-                closeBtn: false,
-
-            });
-
-
-            var serviceURL = '@Url.Action("GetInit", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: param = "",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFuncInit,
-                error: errorFuncInit
-            });
-
-            function successFuncInit(data, status) {
-                console.log(data);
-                list = data;
-                var subt = 0;
-                $('#carrito table > tbody').html('');
-                list.forEach(function (elem) {
-                    console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                    subt += (elem.Precio * elem.Cant);
-                    $('#carrito table > tbody').append('<tr><td>' + elem.Nombre + '</td><td>' + elem.Cant + '</td><td>' + elem.Precio + '</td></tr>');
-                });
-
-
-                $('#PostDiv').html('<h4>Subtotal= ' + subt + '</h4');
-
-
-            }
-
-            function errorFuncInit() {
-                //alert('error');
-                toastr["error"]("Please log in again", "Error")
-            }
-
-
-        });
-
-        var list;
-
-        $('.agregar').click(function () {
-            var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
-            console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
-            if (cantidad == 0) {
-                cantidad = 1;
-            } 
-                var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido);
-            
-        });
-        $('.borrar').click(function () {
-            var id = $(this).closest('tr').attr('id');
-            var cantidad = $(this).closest('tr').find('td').eq(3).children().val()
-            console.log(id + " " + cantidad);
-            $(this).closest('tr').find('td').eq(3).children().val('');
-            if (cantidad == 0) {
-                cantidad = 1;
-            }
-            cantidad *= -1;
-            var DatosPedido = { id: id, cantidad: cantidad }
-            executeAjaxPedido(DatosPedido);
-        });
+        //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+        //    });
+        //});
     </script>
-
-    @*jquery UI*@
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 }

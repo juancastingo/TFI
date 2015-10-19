@@ -1,0 +1,139 @@
+﻿@model DAL.ORM.ClienteEmpresa
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ClienteEmpresa</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDClienteEmpresa)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDClienteEmpresa)
+            @Html.ValidationMessageFor(model => model.IDClienteEmpresa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDEstado, "EstadoMisc")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IDEstado", String.Empty)
+            @Html.ValidationMessageFor(model => model.IDEstado)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaAlta)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaAlta)
+            @Html.ValidationMessageFor(model => model.FechaAlta)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaUltimaOperacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaUltimaOperacion)
+            @Html.ValidationMessageFor(model => model.FechaUltimaOperacion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Limite)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Limite)
+            @Html.ValidationMessageFor(model => model.Limite)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CUIT)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CUIT)
+            @Html.ValidationMessageFor(model => model.CUIT)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RazonSocial)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RazonSocial)
+            @Html.ValidationMessageFor(model => model.RazonSocial)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NombreFantasia)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NombreFantasia)
+            @Html.ValidationMessageFor(model => model.NombreFantasia)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDTipoIVA, "TipoIVA")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IDTipoIVA", String.Empty)
+            @Html.ValidationMessageFor(model => model.IDTipoIVA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDDireccion, "Direccion")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IDDireccion", String.Empty)
+            @Html.ValidationMessageFor(model => model.IDDireccion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telefono)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telefono)
+            @Html.ValidationMessageFor(model => model.Telefono)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaUltimaMod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaUltimaMod)
+            @Html.ValidationMessageFor(model => model.FechaUltimaMod)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -8,7 +8,7 @@
             <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="/">IID &nbsp<span class="glyphicon glyphicon-home"></span></a>
+                    <a class="navbar-brand" href="/">IID &nbsp;<span class="glyphicon glyphicon-home"></span></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -16,43 +16,62 @@
                         <li>
                             @if (Session["usuario"] != null)
                             {
-                                <a href="/Login/CerrarSesion" class="">Logout</a>
+                                <a href="/Login/CerrarSesion" class="">@Language.logout</a>
                             }
                             else
                             {
-                                // <a href="/Login/Index" class="fancybox-dany fancybox.iframe">Login</a>
-                                <a id="aLogin" href="" data-toggle="modal" data-target="#login-modal">Login</a>
+                                <a id="aLogin" href="" data-toggle="modal" data-target="#login-modal">@Language.inicioSesion</a>
                             }
                         </li>
                         @if (Session["usuario"] == null)
                         {
                             <li>
-                                @Html.ActionLink("Register", "RegisterOut", "Account")
+                                @Html.ActionLink(@Language.registro, "RegisterOut", "Account")
                             </li>
                         }
-                        <li>
-                            @Html.ActionLink("Usuario", "Index", "UsuarioORM")
-                        </li>
-                        <li>
-                            @Html.ActionLink("Cliente", "Index", "ClienteEmpresaORM")
-                        </li>
-                        <li>
-                            @Html.ActionLink("Pedido", "Index", "Pedido")
-                        </li>
+                        @if (Session["usuario"] != null)
+                        {
+                            if (Session["grupo"].ToString() == "Externo")
+                            {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Language.pedido<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink(@Language.compre, "Index", "Pedido")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(@Language.pedido+"s", "Pedido", "Pedido")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Pre" + @Language.pedido+"s", "Prepedidos", "Pedido")
+                                    </li>
+                                </ul>
+                            </li>
+                            }
+                            if (Session["grupo"].ToString() == "Creditos y Cobranzas")
+                            {
+                            <li class="docPendientes">
+                                @Html.ActionLink(@Language.analizar, "Controlar", "Pedido")
+                            </li>   
+                            }
+                            <li class="docPendientes">
+                                @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
+                            </li>
+                        }
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Language.MenuConfiguracion<strong class="caret"></strong></a>
+                            <a href="#" id="configuracion" class="dropdown-toggle" data-toggle="dropdown">@Language.MenuConfiguracion<strong class="caret"></strong></a>
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    @Html.ActionLink("Clientes", "Index", "Cliente")
+                                    @Html.ActionLink(@Language.clientes, "Index", "Cliente")
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Producto", "Index", "ProductoORM")
+                                    @Html.ActionLink(@Language.producto+"s", "Index", "producto")
                                 </li>
                                 <li class="dropdown-submenu">
 
 
-                                    <a tabindex="-1" href="#">Lugares</a>
+                                    <a tabindex="-1" href="#">@Language.lugares</a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             @Html.ActionLink("Pais", "Index", "Pais")
@@ -73,85 +92,66 @@
 
                                     </ul>
                                 </li>
+                                <li>
+                                    @Html.ActionLink(@Language.usuario+"s", "Index", "Usuarios")
+                                </li>
+
                                 <li class="dropdown-submenu">
 
 
-                                    <a tabindex="-1" href="#">Usuarios</a>
+                                    <a tabindex="-1" href="#">@Language.precios</a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            @Html.ActionLink("List", "Index", "Usuarios")
+                                            @Html.ActionLink(@Language.listaPrecios, "Index", "ListaPrecio")
                                         </li>
                                         <li>
-                                            @Html.ActionLink("Edit", "Index", "Usuarios")
+                                            @Html.ActionLink(@Language.listaDetalle, "Index", "PrecioDetalle")
                                         </li>
-                                        <li>
-                                            @Html.ActionLink("Create", "Create", "Usuarios")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("RegisterIN", "Register", "Account")
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#">Even More..</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">3rd level</a></li>
-                                                <li><a href="#">3rd level</a></li>
-                                            </ul>
-                                        </li>
-
                                     </ul>
                                 </li>
-                                <li class="dropdown-submenu">
 
-
-                                    <a tabindex="-1" href="#">Precios</a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            @Html.ActionLink("Lista Precios", "Index", "ListaPrecio")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("Precio Detalle", "Index", "PrecioDetalle")
-                                        </li>
-
-                                    </ul>
+                                <li>
+                                    @Html.ActionLink(@Language.bitacora, "Index", "Bitacora")
                                 </li>
 
                             </ul>
                         </li>
                     </ul>
-                    @*                        <div class="navbar-form navbar-left" role="search">
 
-                            @using (Html.BeginForm("Search", "Alimento"))
-                            {
-                               @Html.TextBox("busqueda")                            
-						
-                                <input type="submit" value="Search" class="btn btn-default" />
-                            }
-                            @using (Html.BeginForm("Search", "Alimento"))
-                            {
-                                @Html.TextBox("busqueda")
-                                <input type="submit" value="Search" class="btn btn-default" />
-                            }
-                             </div>*@
+
                     <ul class="nav navbar-nav navbar-right">
                         <li id="CarritoMenuBoton" class="oculto">
-                            <a id="cart-popover" class="btn" data-placement="bottom" title="Carrito de Compras">
+                            <a id="cart-popover" class="btn" data-placement="bottom" title="@Language.carritoCompras">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                 <span class="CarritoSubtotal"></span>
                             </a>
                         </li>
-                        <li>
+                        <li class="dropdown">
                             @if (Session["usuario"] != null)
-                                {
-                                    <a id="nombre_usuario" data-val="@Session["usuario"]">Usuario: @Session["usuario"]</a>
-                                }
-                                else
-                                {
-                                   <a id="nombre_usuario" data-val="Invitado">Usuario: Invitado</a>
-                                }
-                                    
+                            {
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="nombre_usuario" data-val="@Session["usuario"]">@Language.usuario: @Session["usuario"]</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a>Tipo Usuario: <span>@Session["grupo"].ToString()</span></a>
+                                    </li>
+                                    @if (Session["_ip"] != null)
+                                    {
+                                        <li>
+                                            <a href="#">IP: @Session["_ip"].ToString()</a>
+                                        </li>
+                                    }
+                                    <li>
+                                        @Html.ActionLink(@Language.CambiarPass, "ChangePass", "Account")
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a href="#" id="nombre_usuario" data-val="Invitado">@Language.usuario: @Language.Invitado</a>
+                            }
                         </li>
-                          <li class="dropdown" id="i18n-options-container">
-                            <a class="dropdown-toggle" data-toggle="dropdown">@Language.MenuIdioma<b class="caret"></b></a>
+                        <li class="dropdown" style="width:150px;" id="i18n-options-container">
+                            <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">@Language.MenuIdioma<b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <div class="language language_ES">
@@ -159,15 +159,14 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div></div>
-                                </li>
-
-                                <li>
                                     <div class="language language_EN">
                                         <a title="English" class="en-GB" href="#">English</a>
                                     </div>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a><img id="microfono" alt="Start"  src="/Content/images/mic.gif"></a>
                         </li>
                     </ul>
                 </div>
@@ -177,17 +176,28 @@
     </div>
 </div>
 
+
 <div data-toggle="popover" id="popover_content_wrapper" style="display: none">
-    <p>Carrito vacio!</p>
+    <p>@Language.carrito @Language.vacio!</p>
     <div>
-        <h5>Total:  <span class="CarritoSubtotal"></span></h5>
+        <h5>Subtotal:  <span class="CarritoSubtotal"></span></h5>
 
         <a href="#" id="VerCarrito" class="btn btn-primary">
-            <span class="glyphicon glyphicon-shopping-cart"></span >Ver carrito
+            <span class="glyphicon glyphicon-shopping-cart"></span>@Language.ver @Language.carrito
         </a>
         <a href="#" id="LimpiarCarrito" class="btn btn-default">
-            <span class="glyphicon glyphicon-trash"></span>Limpiar
+            <span class="glyphicon glyphicon-trash"></span>@Language.limpiar
         </a>
 
     </div>
 </div>
+
+@if (Session["usuario"] != null)
+{
+    <input id="LoginExiste"  data-val="@Session["grupo"].ToString()" type="hidden" value="1" /> 
+}
+else
+{
+    <input id="LoginExiste" data-val="" type="hidden" value="0" />   
+}
+

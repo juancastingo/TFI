@@ -61,3 +61,11 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Rel
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Release\en-US\TFITest4.resources.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Release\TFITest4.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Release\TFITest4.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\BLL.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.Cors.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Owin.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\System.Web.Cors.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\BLL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.xml
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.Cors.xml

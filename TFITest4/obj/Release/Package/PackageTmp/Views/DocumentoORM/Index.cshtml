@@ -1,0 +1,147 @@
+﻿@model IEnumerable<DAL.ORM.Documento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NrDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentoTipo.NombreDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaContable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDClienteEmpresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proveedor.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDEstado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDDocumentoRef)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDEmpresaLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoExterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IPCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioUltimaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaUltimaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IPUltimaModificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDDocumento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NrDocumento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentoTipo.NombreDocumento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEmision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaContable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDClienteEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proveedor.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaVencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDEstado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDDocumentoRef)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDEmpresaLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoExterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IPCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioUltimaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaUltimaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IPUltimaModificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioCreacion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

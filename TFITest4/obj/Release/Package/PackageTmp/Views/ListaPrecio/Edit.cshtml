@@ -1,43 +1,61 @@
-﻿@model DAL.ORM.ListaPrecio
+﻿@model TFITest4.Models.ModelListaPrecio
 
 @{
     ViewBag.Title = "Edit";
 }
+@section headSection {
+      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+}
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>ListaPrecio</legend>
+        <legend>ModelListaPrecio</legend>
+        @Html.HiddenFor(model => model.IDListaPrecio)
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Detalle)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Detalle)
+                    @Html.ValidationMessageFor(model => model.Detalle)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.FechaDesde, new { @id = "FechaLoca", @value = Model.FechaDesde.ToString("yyy-MM-dd HH:mm") })
+                </td>
+                <td class="editor-field">
+                    @*@Html.HiddenFor(model => model.FechaDesde, new { @Value = Model.FechaDesde.ToString("yyy-MM-dd HH:mm") })*@
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IDListaPrecio)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IDListaPrecio)
-            @Html.ValidationMessageFor(model => model.IDListaPrecio)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Detalle)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Detalle)
-            @Html.ValidationMessageFor(model => model.Detalle)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaDesde)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaDesde)
-            @Html.ValidationMessageFor(model => model.FechaDesde)
-        </div>
-
+                    @*@Html.EditorFor(model => model.FechaDesde)*@
+                    @*.ToString("yyyy-MM-dd HH:mm")*@
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input name="FechaDesde" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.FechaDesde)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Activo)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.Activo)
+                    @*@Html.DropDownListFor(model => model.Activo, new[] { new SelectListItem { Text = "True", Value = "True" }, new SelectListItem { Text = "False", Value = "False" } })*@
+                </td>
+            </tr>
+        </table>
         <p>
-            <input type="submit" value="Save" />
+            <input class="btn btn-primary" type="submit" value="Save" />
         </p>
     </fieldset>
 }
@@ -46,6 +64,27 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@section EndScript {
+    <script type="text/javascript">
+        $(function () {
+            PickerIdioma = "en";
+            if ($('#ActualCulture').val() == "esp") {
+                PickerIdioma = "es";
+            }
+            var dateNow = $('#FechaLoca').attr('value')
+            console.log(dateNow);
+            $('#datetimepicker2').datetimepicker({
+                locale: PickerIdioma,
+                format: 'YYYY-MM-DD HH:mm',
+                defaultDate: dateNow
+            });
+        });
+    </script>
 }

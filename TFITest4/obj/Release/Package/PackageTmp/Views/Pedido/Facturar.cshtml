@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BIZ.BIZDocumento>
+@using TFITest4.Resources
+
+
+<h2>Facturar</h2>
+
+
+
+<table id="" class="tabla table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>NR
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEmision)
+            </th>
+            @*<th class="transparente"></th>*@
+            <th>@Language.monto</th>
+            <th>@Language.estado
+            </th>
+            <th>@Language.empresa
+            </th>
+            <th>@Language.action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDDocumento)
+                </td>
+                <td>
+                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                </td>
+                @*  <td class="SignoPesos">$</td>
+                <td class="tdNumero">
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
+                </td>*@
+                <td class="valor valor1">@item.Monto.ToString().Replace(",", ".")</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.ClienteEmpresa.Nombre)
+                </td>
+
+                <td>
+                    <p>
+                        <button data-val="@item.IDDocumento"  value=""  class="FacturarPedido btn btn-success btn-sm" >@Language.facturar</button>
+                        @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                    </p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section EndScript{
+
+    <script>
+        $('.FacturarPedido').click(function () {
+            pedidoNr = $(this).attr('data-val');
+            mostrarGIF();
+            var serviceURL = '@Url.Action("facturarPedido", "Pedido")';
+           $.ajax({
+               type: "POST",
+               url: serviceURL,
+               data: JSON.stringify({ Pedido: pedidoNr }),
+               dataType: 'text',
+               contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               success: function (data, status) {
+                   //console.log(data);
+                   if (data.Result == "") {
+                        //toastr["success"]("@Language.OKNormal", "OK!");
+                        location.reload();
+                    } else {
+                        errorFunc;
+                    }
+                    },
+                    error: errorFunc
+                });
+        });
+
+    </script>
+        
+}
+
+
+@section numerosScript{
+            var list = [];
+            var list2 = [];
+
+            $('.valor1').each(function () {
+                list.push($(this).html())
+            });
+            var i = 0;
+            $('.valor1').each(function () {
+                list2 = accounting.formatColumn(list, "$       ");
+                $(this).html(list2[i]);
+                i++;
+            })
+}

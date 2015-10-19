@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TFITest4.Models.ModelProducto>
+@using TFITest4.Resources
+
+
+<h2 class="titulo">@Language.producto</h2>
+
+<p>
+    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
+
+</p>
+    <table class="table tableJquery table-bordered dt-responsive table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    NR#
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductoCategoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Imagen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoMisc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaAlta)
+                </th>
+                <th>
+                    @Language.action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductoCategoria.Detalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        <a class="fancybox" rel="group" href="@item.Imagen">
+                            <img width="60px" height="60px" src="@item.Imagen" alt="" /></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                    </td>
+                    <td>
+                        @item.FechaAlta.ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        @Html.ActionLink(Language.editar, "Edit", new { id = item.IDProducto }, new { @class = "btn btn-primary", @style = "color:white" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@section EndScript{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: 'elastic',
+                closeEffect: 'elastic',
+                nextEffect: 'fade',
+                padding: 0,
+                closeBtn: false,
+                helpers: {
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    },
+                    buttons: {}
+                }
+            });
+        });
+    </script>
+
+}
+

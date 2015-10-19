@@ -1,82 +1,59 @@
-﻿@model DAL.ORM.PrecioDetalle
+﻿@model BIZ.BIZPrecioDetalle
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2 class="titulo">@Language.crear</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
     <fieldset>
-        <legend>PrecioDetalle</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IDPrecioDetalle)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IDPrecioDetalle)
-            @Html.ValidationMessageFor(model => model.IDPrecioDetalle)
-        </div>
-
-        <div class="editor-label">
+        <legend>@Language.listaDetalle</legend>
+        <table class="table table-bordered">
+            <tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.IDListaPrecio, "ListaPrecio")
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.DropDownList("IDListaPrecio", String.Empty)
             @Html.ValidationMessageFor(model => model.IDListaPrecio)
-        </div>
-
-        <div class="editor-label">
+        </td>
+            </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.IDProducto, "Producto")
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.DropDownList("IDProducto", String.Empty)
             @Html.ValidationMessageFor(model => model.IDProducto)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Precio)
-        </div>
-        <div class="editor-field">
+        </td>
+            </tr><tr>
+        <td class="editor-label">
+            <label>@Language.precio</label>
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Precio)
             @Html.ValidationMessageFor(model => model.Precio)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaAlta)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaAlta)
-            @Html.ValidationMessageFor(model => model.FechaAlta)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaDesde)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaDesde)
-            @Html.ValidationMessageFor(model => model.FechaDesde)
-        </div>
-
-        <div class="editor-label">
+        </td>    
+            </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Activo)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Activo)
             @Html.ValidationMessageFor(model => model.Activo)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        </td>
+         </tr>
+        
+        </table>
     </fieldset>
 }
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+            <input type="submit" class="btn btn-primary" value="@Language.crear" />
+        @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-warning", @style = "color:white" })
+
+        </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

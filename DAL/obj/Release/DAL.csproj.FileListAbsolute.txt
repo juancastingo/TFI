@@ -11,3 +11,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\obj\Release\DAL.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\obj\Release\DAL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\SL.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\BarcodeLib.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\SL.pdb

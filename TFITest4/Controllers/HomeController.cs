@@ -89,47 +89,48 @@ namespace TFITest4.Controllers
             //    }
             //}
 
-            DAL.DALProducto DalWorker = new DAL.DALProducto();
-            var ListaP = DalWorker.getProductosConPrecio();
-            //esto es para limpiar categorias repetidas
-            List<BIZProductoCategoria> AuxcatList = new List<BIZProductoCategoria>();
-            foreach (var p in ListaP.Select(x => x.ProductoCategoria).Distinct())
-            {
-                AuxcatList.Add(p);
-            }
-            List<BIZProductoCategoria> catList = new List<BIZProductoCategoria>();
-            foreach (var c in AuxcatList)
-            {
-                bool existe = false;
-                foreach (var h in catList)
-                {
-                    if (h.IDProductoCategoria == c.IDProductoCategoria)
-                    {
-                        existe = true;
-                    }
-                }
-                if (!existe)
-                {
-                    catList.Add(c);
-                }
-            }
-            //agrego los productos a la categoria
-            foreach (var c in catList)
-            {
-                foreach (var prod in ListaP)
-                {
-                    if (prod.ProductoCategoria.IDProductoCategoria == c.IDProductoCategoria)
-                    {
-                        c.Producto.Add(prod);
-                    }
-                }
-            }
+            //DAL.DALProducto DalWorker = new DAL.DALProducto();
+            //var ListaP = DalWorker.getProductosConPrecio();
+            ////esto es para limpiar categorias repetidas
+            //List<BIZProductoCategoria> AuxcatList = new List<BIZProductoCategoria>();
+            //foreach (var p in ListaP.Select(x => x.ProductoCategoria).Distinct())
+            //{
+            //    AuxcatList.Add(p);
+            //}
+            //List<BIZProductoCategoria> catList = new List<BIZProductoCategoria>();
+            //foreach (var c in AuxcatList)
+            //{
+            //    bool existe = false;
+            //    foreach (var h in catList)
+            //    {
+            //        if (h.IDProductoCategoria == c.IDProductoCategoria)
+            //        {
+            //            existe = true;
+            //        }
+            //    }
+            //    if (!existe)
+            //    {
+            //        catList.Add(c);
+            //    }
+            //}
+            ////agrego los productos a la categoria
+            //foreach (var c in catList)
+            //{
+            //    foreach (var prod in ListaP)
+            //    {
+            //        if (prod.ProductoCategoria.IDProductoCategoria == c.IDProductoCategoria)
+            //        {
+            //            c.Producto.Add(prod);
+            //        }
+            //    }
+            //}
 
 
-            ViewBag.categorias2 = catList;
+            //ViewBag.categorias2 = catList;
 
-            var categorias = db.ProductoCategoria;
-            ViewBag.categorias = categorias.ToList();
+            //var categorias = db.ProductoCategoria;
+            //ViewBag.categorias = categorias.ToList();
+
             return View();
         }
 

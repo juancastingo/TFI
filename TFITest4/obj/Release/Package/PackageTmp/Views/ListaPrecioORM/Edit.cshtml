@@ -1,0 +1,51 @@
+﻿@model DAL.ORM.ListaPrecio
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ListaPrecio</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDListaPrecio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDListaPrecio)
+            @Html.ValidationMessageFor(model => model.IDListaPrecio)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Detalle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Detalle)
+            @Html.ValidationMessageFor(model => model.Detalle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaDesde)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaDesde)
+            @Html.ValidationMessageFor(model => model.FechaDesde)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

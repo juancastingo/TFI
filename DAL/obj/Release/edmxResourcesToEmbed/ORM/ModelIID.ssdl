@@ -59,20 +59,40 @@
       <End Role="Localidad" EntitySet="Localidad" />
       <End Role="Direccion" EntitySet="Direccion" />
     </AssociationSet>
+    <AssociationSet Name="FK_Documento_ClienteEmpresa" Association="IIDTest2Model.Store.FK_Documento_ClienteEmpresa">
+      <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
     <AssociationSet Name="FK_Documento_DocumentoTipo" Association="IIDTest2Model.Store.FK_Documento_DocumentoTipo">
       <End Role="DocumentoTipo" EntitySet="DocumentoTipo" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_EmpresaLocal" Association="IIDTest2Model.Store.FK_Documento_EmpresaLocal">
+      <End Role="EmpresaLocal" EntitySet="EmpresaLocal" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_EstadoMisc" Association="IIDTest2Model.Store.FK_Documento_EstadoMisc">
+      <End Role="EstadoMisc" EntitySet="EstadoMisc" />
       <End Role="Documento" EntitySet="Documento" />
     </AssociationSet>
     <AssociationSet Name="FK_Documento_Proveedor" Association="IIDTest2Model.Store.FK_Documento_Proveedor">
       <End Role="Proveedor" EntitySet="Proveedor" />
       <End Role="Documento" EntitySet="Documento" />
     </AssociationSet>
+    <AssociationSet Name="FK_Documento_Usuario1" Association="IIDTest2Model.Store.FK_Documento_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documento_Usuario2" Association="IIDTest2Model.Store.FK_Documento_Usuario2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Documento" EntitySet="Documento" />
+    </AssociationSet>
     <AssociationSet Name="FK_DocumentoDetalle_Documento" Association="IIDTest2Model.Store.FK_DocumentoDetalle_Documento">
       <End Role="Documento" EntitySet="Documento" />
       <End Role="DocumentoDetalle" EntitySet="DocumentoDetalle" />
     </AssociationSet>
-    <AssociationSet Name="FK_DocumentoDetalle_Producto" Association="IIDTest2Model.Store.FK_DocumentoDetalle_Producto">
-      <End Role="Producto" EntitySet="Producto" />
+    <AssociationSet Name="FK_DocumentoDetalle_PrecioDetalle" Association="IIDTest2Model.Store.FK_DocumentoDetalle_PrecioDetalle">
+      <End Role="PrecioDetalle" EntitySet="PrecioDetalle" />
       <End Role="DocumentoDetalle" EntitySet="DocumentoDetalle" />
     </AssociationSet>
     <AssociationSet Name="FK_DocumentoTipo_Cuenta" Association="IIDTest2Model.Store.FK_DocumentoTipo_Cuenta">
@@ -91,7 +111,7 @@
       <End Role="Provincia" EntitySet="Provincia" />
       <End Role="Localidad" EntitySet="Localidad" />
     </AssociationSet>
-    <AssociationSet Name="FK_PrecioDetalle_ListaPrecio" Association="IIDTest2Model.Store.FK_PrecioDetalle_ListaPrecio">
+    <AssociationSet Name="FK_PrecioDetalle_ListaPrecio1" Association="IIDTest2Model.Store.FK_PrecioDetalle_ListaPrecio1">
       <End Role="ListaPrecio" EntitySet="ListaPrecio" />
       <End Role="PrecioDetalle" EntitySet="PrecioDetalle" />
     </AssociationSet>
@@ -134,9 +154,10 @@
     </Key>
     <Property Name="IDBitacora" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Fecha" Type="datetime" />
-    <Property Name="Modulo" Type="varchar" MaxLength="50" />
     <Property Name="Descripcion" Type="varchar(max)" />
     <Property Name="IDUsuario" Type="int" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" />
+    <Property Name="IP" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CierreContable">
     <Key>
@@ -159,10 +180,11 @@
     <Property Name="CUIT" Type="varchar" MaxLength="50" />
     <Property Name="RazonSocial" Type="varchar(max)" />
     <Property Name="NombreFantasia" Type="varchar(max)" />
-    <Property Name="TipoIVA" Type="int" />
+    <Property Name="IDTipoIVA" Type="int" />
     <Property Name="IDDireccion" Type="int" />
     <Property Name="Telefono" Type="varchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <EntityType Name="Cuenta">
     <Key>
@@ -185,7 +207,7 @@
     <Property Name="Dpto" Type="varchar" MaxLength="10" />
     <Property Name="Detalle" Type="varchar(max)" />
     <Property Name="IDLocalidad" Type="int" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <EntityType Name="Documento">
     <Key>
@@ -198,21 +220,18 @@
     <Property Name="FechaContable" Type="datetime" />
     <Property Name="IDClienteEmpresa" Type="int" />
     <Property Name="IDProveedor" Type="int" />
-    <Property Name="IDComprobante" Type="int" />
     <Property Name="FechaVencimiento" Type="datetime" />
     <Property Name="Monto" Type="float" />
     <Property Name="IDEstado" Type="int" />
-    <Property Name="IDUsuario" Type="int" />
+    <Property Name="IDUsuarioCreacion" Type="int" />
     <Property Name="IDDocumentoRef" Type="int" />
     <Property Name="IDEmpresaLocal" Type="int" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
     <Property Name="CodigoExterno" Type="int" />
-    <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="IPCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="UsuarioUltimaModificacion" Type="int" />
+    <Property Name="IDUsuarioUltimaModificacion" Type="int" />
     <Property Name="FechaUltimaModificacion" Type="datetime" />
-    <Property Name="IPUltimaModificacion" Type="nchar" MaxLength="10" />
-    <Property Name="UsuarioCreacion" Type="int" />
+    <Property Name="IPUltimaModificacion" Type="varchar" MaxLength="50" />
+    <Property Name="Detalle" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="DocumentoDetalle">
     <Key>
@@ -220,10 +239,8 @@
     </Key>
     <Property Name="IDDocumentoDetalle" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="IDDocumento" Type="int" />
-    <Property Name="IDPPrecioDetalle" Type="int" />
-    <Property Name="PrecioUnitario" Type="float" />
+    <Property Name="IDPrecioDetalle" Type="int" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Activo" Type="bit" />
   </EntityType>
   <EntityType Name="DocumentoTipo">
     <Key>
@@ -239,8 +256,8 @@
     <Property Name="Debito" Type="int" />
     <Property Name="AfectaContabilidad" Type="int" />
     <Property Name="Credito" Type="int" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
     <Property Name="UltimoNumeroManual" Type="int" />
+    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="EmpresaLocal">
     <Key>
@@ -268,7 +285,8 @@
     <Property Name="IDListaPrecio" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Detalle" Type="varchar(max)" />
     <Property Name="FechaDesde" Type="datetime" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Localidad">
     <Key>
@@ -312,9 +330,8 @@
     <Property Name="IDProducto" Type="int" />
     <Property Name="Precio" Type="float" />
     <Property Name="FechaAlta" Type="datetime" />
-    <Property Name="FechaDesde" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -329,8 +346,8 @@
     <Property Name="CostoActual" Type="float" />
     <Property Name="CostoContable" Type="float" />
     <Property Name="FechaAlta" Type="datetime" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
     <Property Name="UnidadMedida" Type="varchar" MaxLength="50" />
+    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductoCategoria">
     <Key>
@@ -410,7 +427,7 @@
     <Property Name="FechaAlta" Type="datetime" />
     <Property Name="Idioma" Type="varchar" MaxLength="10" />
     <Property Name="IDTipoUsuario" Type="int" />
-    <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <Association Name="FK_Bitacora_Usuario">
     <End Role="Usuario" Type="IIDTest2Model.Store.Usuario" Multiplicity="0..1" />
@@ -456,7 +473,7 @@
         <PropertyRef Name="IDTipoIVA" />
       </Principal>
       <Dependent Role="ClienteEmpresa">
-        <PropertyRef Name="TipoIVA" />
+        <PropertyRef Name="IDTipoIVA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -508,6 +525,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Documento_ClienteEmpresa">
+    <End Role="ClienteEmpresa" Type="IIDTest2Model.Store.ClienteEmpresa" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClienteEmpresa">
+        <PropertyRef Name="IDClienteEmpresa" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDClienteEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Documento_DocumentoTipo">
     <End Role="DocumentoTipo" Type="IIDTest2Model.Store.DocumentoTipo" Multiplicity="0..1" />
     <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
@@ -517,6 +546,30 @@
       </Principal>
       <Dependent Role="Documento">
         <PropertyRef Name="IDDocumentoTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_EmpresaLocal">
+    <End Role="EmpresaLocal" Type="IIDTest2Model.Store.EmpresaLocal" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpresaLocal">
+        <PropertyRef Name="IDEmpresaLocal" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDEmpresaLocal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_EstadoMisc">
+    <End Role="EstadoMisc" Type="IIDTest2Model.Store.EstadoMisc" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoMisc">
+        <PropertyRef Name="IDEstado" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDEstado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -532,6 +585,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Documento_Usuario1">
+    <End Role="Usuario" Type="IIDTest2Model.Store.Usuario" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDUsuarioCreacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documento_Usuario2">
+    <End Role="Usuario" Type="IIDTest2Model.Store.Usuario" Multiplicity="0..1" />
+    <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IDUsuarioUltimaModificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DocumentoDetalle_Documento">
     <End Role="Documento" Type="IIDTest2Model.Store.Documento" Multiplicity="0..1" />
     <End Role="DocumentoDetalle" Type="IIDTest2Model.Store.DocumentoDetalle" Multiplicity="*" />
@@ -544,15 +621,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DocumentoDetalle_Producto">
-    <End Role="Producto" Type="IIDTest2Model.Store.Producto" Multiplicity="0..1" />
+  <Association Name="FK_DocumentoDetalle_PrecioDetalle">
+    <End Role="PrecioDetalle" Type="IIDTest2Model.Store.PrecioDetalle" Multiplicity="0..1" />
     <End Role="DocumentoDetalle" Type="IIDTest2Model.Store.DocumentoDetalle" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Producto">
-        <PropertyRef Name="IDProducto" />
+      <Principal Role="PrecioDetalle">
+        <PropertyRef Name="IDPrecioDetalle" />
       </Principal>
       <Dependent Role="DocumentoDetalle">
-        <PropertyRef Name="IDPPrecioDetalle" />
+        <PropertyRef Name="IDPrecioDetalle" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -604,7 +681,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PrecioDetalle_ListaPrecio">
+  <Association Name="FK_PrecioDetalle_ListaPrecio1">
     <End Role="ListaPrecio" Type="IIDTest2Model.Store.ListaPrecio" Multiplicity="0..1" />
     <End Role="PrecioDetalle" Type="IIDTest2Model.Store.PrecioDetalle" Multiplicity="*" />
     <ReferentialConstraint>
@@ -712,7 +789,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="CCCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDCliEmp" Type="int" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getLastNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDTipoDoc" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -743,4 +826,7 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StockCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDProd" Type="int" Mode="In" />
+  </Function>
 </Schema>

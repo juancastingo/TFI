@@ -1,0 +1,217 @@
+﻿@model BIZ.BIZDocumento
+@using TFITest4.Resources
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>makePDF</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/general.css" rel="stylesheet" />
+    <link href="~/Content/Pedido.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+        body {
+            border: 1px solid black;
+            background-color: white;
+            margin: 20px;
+        }
+
+        td,th {
+            border: none !important;
+            border-right: none !important;
+            border-left: none !important;
+        }
+
+        #tablaTotal {
+            margin-right: 15px;
+            float: right;
+            font-size: 20px;
+        }
+
+        .fleft {
+            float: left;
+        }
+
+        .fright {
+            float: right;
+        }
+
+        .fnone {
+            float: none;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .nombre {
+            font-size: 20px;
+            font-weight: bolder;
+            font-family: Castellar;
+            text-align: center;
+        }
+
+        .nombre2 {
+            font-size: 15px;
+            font-weight: bolder;
+            font-family: Aharoni;
+            text-align: center;
+        }
+
+        .detalle {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .pedido {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .cliente h4 {
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fleft">
+            <img src="~/Content/images/Logo2.png" />
+        </div>
+        <div class="fnone nombre">
+            @Model.EmpresaLocal.NombreFantasia
+        </div>
+        <br />
+        <div class="fright detalle">
+            @Model.EmpresaLocal.Direccion.Calle @Model.EmpresaLocal.Direccion.Numero
+        </div>
+        <br />
+        <div class="fright detalle">
+            @Model.EmpresaLocal.Direccion.Localidad.Nombre
+        </div>
+        <br />
+        <div class="fright detalle">
+            @Model.EmpresaLocal.CUIT
+        </div>
+        <div class="clear"></div>
+        <hr />
+        <div class="cliente">
+            <h4>Cliente</h4>
+            <div class="fleft nombre2">
+                @Model.Usuario.ClienteEmpresa.NombreFantasia
+            </div>
+            <div class="clear"></div>
+            <div class="fleft detalle">
+                @Model.Usuario.ClienteEmpresa.Email
+            </div>
+            <br />
+            <div class="fleft detalle">
+                @Model.Usuario.ClienteEmpresa.Direccion.Calle @Model.Usuario.ClienteEmpresa.Direccion.Numero
+            </div>
+                        <br />
+            <div class="fleft detalle">
+                @Model.Usuario.ClienteEmpresa.Direccion.Localidad.Nombre @Model.Usuario.ClienteEmpresa.Direccion.Localidad.Provincia.Nombre @Model.Usuario.ClienteEmpresa.Direccion.Localidad.Provincia.Pais.Nombre
+            </div>
+            <br />
+            <div class="fleft detalle">
+                @Model.Usuario.ClienteEmpresa.Telefono
+            </div>
+        </div>
+        <div class="clear"></div>
+        <hr />
+        <div class="pedido">
+            Pedido  <span>@Model.IDDocumento.ToString().PadLeft(8, '0')</span>
+        </div>
+        <div>Fecha de Emisión: <span>@Model.FechaEmision</span></div>
+        <div>Estado: <span>@Model.EstadoMisc.Detalle</span></div>
+        <div class="clear"></div>
+        <hr />
+        <table id="" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Producto
+                    </th>
+                    <th>Cantidad</th>
+                    <th style="width: 150px !important;">Precio Unitario
+                    </th>
+                    <th style="width: 100px;text-align: left;">Precio
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{double SubTotal = 0;}
+                @foreach (var item in Model.DocumentoDetalle)
+                {
+                    <tr>
+                        <td style="border-right: none !important;border-left: none !important;">
+                            @Html.DisplayFor(modelItem => item.PrecioDetalle.Producto.Nombre)
+                        </td>
+                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
+                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
+                        </td >
+                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                            @{double DetalleSubt = 0;}
+
+                            @{
+                              DetalleSubt = (double)(item.PrecioDetalle.Precio * item.Cantidad);
+                              SubTotal += DetalleSubt;
+                            }
+
+                            <span class="MontoPrePedido">@DetalleSubt.ToString().Replace(",", ".")</span>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div id="tablaTotal" class="fleft">
+            @{double total = (@SubTotal + (@SubTotal * Model.Usuario.ClienteEmpresa.TipoIVA.Valor / 100)); }
+            <table>
+                <tr>
+                    <td style="padding-right: 50px !important;">Subtotal: 
+                    </td>
+                    <td>
+                        @SubTotal.ToString("C")
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 50px !important;">IVA Cliente: 
+                    </td>
+                    <td>@Model.Usuario.ClienteEmpresa.TipoIVA.Valor% </td>
+
+                </tr>
+                <tr>
+                    <td style="padding-right: 50px !important;">Total:
+                    </td>
+                    <td>@total.ToString("C")</td>
+                </tr>
+            </table>
+        </div>
+        <div class="clear"></div>
+        <br />
+        © @Model.EmpresaLocal.RazonSocial @DateTime.Now.Year
+
+    </div>
+</body>
+</html>
+
+

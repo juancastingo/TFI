@@ -1,6 +1,4 @@
-﻿
-
-#cart {
+﻿#cart {
     width: 200px;
     position: fixed;
     top: 30px;
@@ -8,6 +6,7 @@
     z-index: 999;
     /*/float: right;*/
 }
+
 
 .ui-state-hover {
     color: blue !important;
@@ -17,6 +16,28 @@
 #cart ol {
     margin: 0;
     padding: 1em 0 1em 3em;
+}
+
+.Rechazado {
+    color: red;
+}
+.Aprobado {
+    color: green;
+}
+.Facturado {
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.Cancelado {
+    text-decoration:line-through;
+    color: orange;
+}
+
+@media (max-width: 900px) {
+    .chicoNo {
+        display: none;
+    }
 }
 
 
@@ -37,4 +58,11 @@
     z-index: 9999999999 !important;
     width: 60px;
     height: 60px;
+}
+
+
+
+
+#PedidoModal #tblHead th {
+    text-align: center !important;
 }

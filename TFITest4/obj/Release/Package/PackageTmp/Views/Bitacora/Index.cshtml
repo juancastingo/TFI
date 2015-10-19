@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BIZ.BIZBitacora>
+
+<h2>Bitácora</h2>
+
+<table class="table tableJquery dt-responsive nowrap table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            @*        <th>
+            @Html.DisplayNameFor(model => model.IDBitacora)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IP)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {   
+            
+                 <tr class="@item.Tipo">
+                @*        <td>
+            @Html.DisplayFor(modelItem => item.IDBitacora)
+        </td>*@
+                <td>
+                    @item.Fecha.ToString("MM/dd/yyyy HH:mm")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @if (item.Usuario == null)
+                    {
+                        <span>Invitado</span>
+                    }
+                    else
+                    { 
+                        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    }
+                </td>
+                      <td>
+                    @Html.DisplayFor(modelItem => item.IP)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section readyEnding {
+        tabla
+        .order([0, 'desc'])
+        .draw();
+
+    $('.Informativo').css("color", "green");
+    $('.Error').css("color", "red");
+    $('.Advertencia').css("color","orange");
+
+    $('.tableJquery').on( 'draw.dt', function () {
+        $('.Informativo').css("color", "green");
+        $('.Error').css("color", "red");
+        $('.Advertencia').css("color","orange");
+} );
+}
+
+

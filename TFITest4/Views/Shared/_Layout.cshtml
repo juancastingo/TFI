@@ -792,6 +792,20 @@
                     $(this).text(parseFloat(esto).format(2, 3, '.', ','))
                 });
 
+                var RemoveSomee = function () {
+                    var searchArray = ["Somee"];
+                    var found = $('a').filter(function (idx, elem) {
+                        var html = $(elem).html();
+                        for (var i = 0, l = searchArray.length; i < l; i++) {
+                            if (html.indexOf(searchArray[i]) != -1) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }).css('display', 'none');
+                }
+                setTimeout(function () { RemoveSomee(); }, 3000);
+
             
                 $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
 

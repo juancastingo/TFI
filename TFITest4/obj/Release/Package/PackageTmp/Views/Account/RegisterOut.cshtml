@@ -4,6 +4,14 @@
 @{
     ViewBag.Title = "Registro";
 }
+
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "" && document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
+        window.location = "/"
+    }
+</script>
+
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
@@ -24,16 +32,16 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.Usuario)
+                        @Html.LabelFor(model => model.Usuario1)
                     </td>
                     <td>
                         <p id="UserCheck">
-                            @Html.EditorFor(model => model.Usuario) 
+                            @Html.EditorFor(model => model.Usuario1) 
                             <img height="30px" width="30px" src="~/Content/images/loader.gif" class="oculto" />
                             <span class=""></span>
                         </p>
                         
-                        @Html.ValidationMessageFor(model => model.Usuario)
+                        @Html.ValidationMessageFor(model => model.Usuario1)
                         
                     </td>
                 </tr>
@@ -88,7 +96,7 @@
             </tbody>
         </table>
         <p>
-            <input id="crearProv" class="btn btn-primary" type="submit" value="Create" />
+            <input id="crearUser" class="btn btn-primary" type="submit" value="Create" />
         </p>
     </fieldset>
 }
@@ -101,13 +109,14 @@
 
 
 @section EndScript{
+
     <script type="text/javascript">
-        $('#crearProv').prop('disabled', true);
+        $('#crearUser').prop('disabled', true);
         
         $('#UserCheck').focusout(function () {
             $('#UserCheck span').text("");
             var nombre = $('#UserCheck input').val()
-            if (nombre != "" && nombre.length < 11) {
+            if (nombre != "" && nombre.length < 16) {
                 $('#UserCheck img').toggleClass("oculto");
                 console.log("In FocusOut " + nombre);
                 var serviceURL = '@Url.Action("AjaxUserCheck", "Account")';
@@ -118,12 +127,12 @@
                     data: JSON.stringify(dataToSend),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: successFunc,
-                    error: errorFunc
+                    success: successFuncCheck,
+                    error: errorFuncCheck
                 });
             }
 
-            function successFunc(data, status) {
+            function successFuncCheck(data, status) {
                 console.log(data);
                 console.log("bien");
                 $('#UserCheck img').toggleClass("oculto");
@@ -132,19 +141,20 @@
                     $('#UserCheck span').text("@Language.UsuarioExistente");
                     $('#UserCheck span').addClass("mal");
                     $('#UserCheck span').removeClass("bien");
-                    $('#crearProv').prop('disabled', true);
+                    $('#crearUser').prop('disabled', true);
                 } else {
                     $('#UserCheck span').text("El usuario está disponible");
                     $('#UserCheck span').text("@Language.UsuarioExistenteOK");
                     $('#UserCheck span').addClass("bien");
                     $('#UserCheck span').removeClass("mal");
-                    $('#crearProv').prop('disabled', false);
+                    $('#crearUser').prop('disabled', false);
                 }
 
              }
-             function errorFunc(data, status) {
+             function errorFuncCheck(data, status) {
                  console.log("ERROR in ajax request");
                  console.log(status);
+                 $('#crearUser').prop('disabled', false);
              }
         });
     </script>

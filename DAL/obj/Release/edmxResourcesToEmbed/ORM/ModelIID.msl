@@ -6,9 +6,10 @@
         <MappingFragment StoreEntitySet="Bitacora">
           <ScalarProperty Name="IDBitacora" ColumnName="IDBitacora" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Modulo" ColumnName="Modulo" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -33,10 +34,11 @@
           <ScalarProperty Name="CUIT" ColumnName="CUIT" />
           <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
           <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
-          <ScalarProperty Name="TipoIVA" ColumnName="TipoIVA" />
+          <ScalarProperty Name="IDTipoIVA" ColumnName="IDTipoIVA" />
           <ScalarProperty Name="IDDireccion" ColumnName="IDDireccion" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -61,7 +63,7 @@
           <ScalarProperty Name="Dpto" ColumnName="Dpto" />
           <ScalarProperty Name="Detalle" ColumnName="Detalle" />
           <ScalarProperty Name="IDLocalidad" ColumnName="IDLocalidad" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -75,21 +77,18 @@
           <ScalarProperty Name="FechaContable" ColumnName="FechaContable" />
           <ScalarProperty Name="IDClienteEmpresa" ColumnName="IDClienteEmpresa" />
           <ScalarProperty Name="IDProveedor" ColumnName="IDProveedor" />
-          <ScalarProperty Name="IDComprobante" ColumnName="IDComprobante" />
           <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
           <ScalarProperty Name="Monto" ColumnName="Monto" />
           <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
-          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="IDUsuarioCreacion" ColumnName="IDUsuarioCreacion" />
           <ScalarProperty Name="IDDocumentoRef" ColumnName="IDDocumentoRef" />
           <ScalarProperty Name="IDEmpresaLocal" ColumnName="IDEmpresaLocal" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
           <ScalarProperty Name="CodigoExterno" ColumnName="CodigoExterno" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="IPCreacion" ColumnName="IPCreacion" />
-          <ScalarProperty Name="UsuarioUltimaModificacion" ColumnName="UsuarioUltimaModificacion" />
+          <ScalarProperty Name="IDUsuarioUltimaModificacion" ColumnName="IDUsuarioUltimaModificacion" />
           <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
           <ScalarProperty Name="IPUltimaModificacion" ColumnName="IPUltimaModificacion" />
-          <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+          <ScalarProperty Name="Detalle" ColumnName="Detalle" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -98,10 +97,8 @@
         <MappingFragment StoreEntitySet="DocumentoDetalle">
           <ScalarProperty Name="IDDocumentoDetalle" ColumnName="IDDocumentoDetalle" />
           <ScalarProperty Name="IDDocumento" ColumnName="IDDocumento" />
-          <ScalarProperty Name="IDPPrecioDetalle" ColumnName="IDPPrecioDetalle" />
-          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+          <ScalarProperty Name="IDPrecioDetalle" ColumnName="IDPrecioDetalle" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -118,8 +115,8 @@
           <ScalarProperty Name="Debito" ColumnName="Debito" />
           <ScalarProperty Name="AfectaContabilidad" ColumnName="AfectaContabilidad" />
           <ScalarProperty Name="Credito" ColumnName="Credito" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
           <ScalarProperty Name="UltimoNumeroManual" ColumnName="UltimoNumeroManual" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -150,7 +147,8 @@
           <ScalarProperty Name="IDListaPrecio" ColumnName="IDListaPrecio" />
           <ScalarProperty Name="Detalle" ColumnName="Detalle" />
           <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -199,9 +197,8 @@
           <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
           <ScalarProperty Name="Precio" ColumnName="Precio" />
           <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -217,8 +214,8 @@
           <ScalarProperty Name="CostoActual" ColumnName="CostoActual" />
           <ScalarProperty Name="CostoContable" ColumnName="CostoContable" />
           <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
           <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -307,10 +304,12 @@
           <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
           <ScalarProperty Name="Idioma" ColumnName="Idioma" />
           <ScalarProperty Name="IDTipoUsuario" ColumnName="IDTipoUsuario" />
-          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="FechaUltimaMod" ColumnName="FechaUltimaMod" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CCCheck" FunctionName="IIDTest2Model.Store.CCCheck" />
+    <FunctionImportMapping FunctionImportName="getLastNumber" FunctionName="IIDTest2Model.Store.getLastNumber" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IIDTest2Model.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IIDTest2Model.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IIDTest2Model.Store.sp_dropdiagram" />
@@ -335,5 +334,6 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="IIDTest2Model.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="IIDTest2Model.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="StockCheck" FunctionName="IIDTest2Model.Store.StockCheck" />
   </EntityContainerMapping>
 </Mapping>
