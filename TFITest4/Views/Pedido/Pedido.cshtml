@@ -80,7 +80,7 @@
                         }
                         @{if (item.EstadoMisc.Detalle == "Facturado")
                           {
-                              @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumento }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
+                              @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumentoRef }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
                           }
                               
                         }

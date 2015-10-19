@@ -779,7 +779,7 @@ namespace TFITest4.Controllers
             {
                 GIdFactura = Convert.ToInt32(Factura);
                 int idUser = (int)Session["userID"];
-                return new ActionAsPdf("makePDFFact") { FileName = "invoice" + gIdPedido + ".pdf" };
+                return new ActionAsPdf("makePDFFact") { FileName = "invoice" + GIdFactura + ".pdf" };
                 //return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

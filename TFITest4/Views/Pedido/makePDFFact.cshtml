@@ -135,7 +135,7 @@
         <div class="clear"></div>
         <hr />
         <div class="pedido">
-            Pedido  <span>@Model.IDDocumento.ToString().PadLeft(8, '0')</span>
+            Factura  <span>@Model.DocumentoTipo.Letra @Model.DocumentoTipo.Sucursal.ToString().PadLeft(4, '0')-@Model.NrDocumento.ToString().PadLeft(8, '0')</span>
         </div>
         <div>Fecha de Emisión: <span>@Model.FechaEmision</span></div>
         <div>Estado: <span>@Model.EstadoMisc.Detalle</span></div>
