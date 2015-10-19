@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "RegisterIn", new {} ,new { @class = "btn btn-primary", @style = "color:white" }) 
 </p>
-<table class="table tableJquery table-bordered nowrap dt-responsive table-striped" cellspacing="0" width="100%">
+<table class="table tableJquery table-bordered dt-responsive nowrap table-striped" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th>
@@ -76,7 +76,7 @@
             @Html.DisplayFor(modelItem => item.Telefono)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaAlta)
+            @item.FechaAlta.ToString("MM/dd/yyyy HH:mm")
         </td>
 @*        <td>
             @Html.DisplayFor(modelItem => item.Idioma)

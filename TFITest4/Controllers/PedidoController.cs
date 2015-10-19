@@ -21,6 +21,7 @@ namespace TFITest4.Controllers
     {
         private IIDTest2Entities db = new IIDTest2Entities();
         public static int gIdPedido;
+        public static int GIdFactura;
         private BLL.BLLProducto ProdWorker = new BLLProducto();
         //DAL.DALProducto ProdWorker = new DAL.DALProducto();
         //DAL.DALDocumento DocWorker = new DAL.DALDocumento();
@@ -565,7 +566,7 @@ namespace TFITest4.Controllers
             //Code to get content
             // return new Rotativa.ViewAsPdf("GeneratePDF", model){FileName = "TestViewAsPdf.pdf"}
             gIdPedido = Convert.ToInt32(NrPedido);
-            return new ActionAsPdf("makePDF") { FileName = "invoice" + gIdPedido + ".pdf" };
+            return new ActionAsPdf("makePDF") { FileName = "Pedido-" + gIdPedido + ".pdf" };
             // return new ActionAsPdf("Index") { FileName = "Test.pdf" };
         }
 
@@ -684,6 +685,124 @@ namespace TFITest4.Controllers
             }
             
         }
+
+
+
+
+        public ActionResult Facturar()
+        {
+            try
+            {
+                var docs = DocWorker.ObtenerDocsXEstado(3, 6); //3 es el tipo del documento documento. Acá pedido. 6 es el estado del doc. acá Aprobado
+                
+                float monto;
+                int IDEmpresa;
+
+                foreach (var doc in docs)
+                {
+                    monto = 0;
+                    foreach (var det in doc.DocumentoDetalle)
+                    {
+                        monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
+                    }
+                    doc.Monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
+                    IDEmpresa = (int)doc.IDClienteEmpresa;
+                    //double TCCstatus = DocWorker.verCCEstado(IDEmpresa);
+                    //doc.CCStatus = (TCCstatus + (TCCstatus * doc.ClienteEmpresa.TipoIVA.Valor / 100));
+                }
+                //ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
+                return View(docs);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("CerrarSesion", "Login");
+            }
+        }
+
+
+        public ActionResult facturarPedido(string Pedido)
+        {
+            try
+            {
+                int IDPedido = int.Parse(Pedido);
+                int idUser = (int)Session["userID"];
+                BIZDocumento pedido = DocWorker.ObtenerDocXID(IDPedido);
+                
+                BIZDocumento factura = new BIZDocumento();
+                factura.IDDocumentoTipo = 1; //tipo 1 es factura. Tengo q ver si creo varios tipos.... probablemente si por tipo de IVA
+                factura.FechaEmision = DateTime.Now;
+                factura.FechaUltimaModificacion = factura.FechaEmision;
+                factura.IDClienteEmpresa = pedido.ClienteEmpresa.IDClienteEmpresa;
+                factura.IDEstado = 9; //estado generada de factura 9
+                factura.IDUsuarioCreacion = idUser;
+                factura.IDUsuarioUltimaModificacion = idUser;
+                factura.IDEmpresaLocal = 1;
+                factura.IDDocumentoRef = IDPedido;
+                //factura.NrDocumento = DocWorker.getLastNumberAndUpdate
+                BIZDocumentoDetalle detalle;
+                foreach (BIZDocumentoDetalle det in pedido.DocumentoDetalle)
+                {
+                    detalle = new BIZDocumentoDetalle();
+                    detalle.Cantidad = det.Cantidad;
+                    detalle.IDPrecioDetalle = det.IDPrecioDetalle;
+                    factura.DocumentoDetalle.Add(det);
+                }
+                int IDDocNuevo = DocWorker.GuardarDocumentoFac(factura,pedido);
+
+
+
+                //DocWorker.GuardarDocumento(factura);
+                //DocWorker.ActualizarStatusDoc(IDPedido, 8, idUser); //8 es cancelado de pedido
+                Nullable<int> idU = null;
+                string ip = "Unknown";
+                try { idU = (int)Session["userID"]; }
+                catch (Exception ex) { }
+                try { ip = Session["_ip"].ToString(); }
+                catch (Exception ex) { }
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "Factura nr#" + IDDocNuevo + " Generada" + IDPedido, idU, ip));
+                TempData["OKNormal"] = Resources.Language.OKNormal;
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "Error al originar la factura", null, null));
+                return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+        public ActionResult ImprimirFactura(string Factura)
+        {
+            try
+            {
+                GIdFactura = Convert.ToInt32(Factura);
+                int idUser = (int)Session["userID"];
+                return new ActionAsPdf("makePDFFact") { FileName = "invoice" + gIdPedido + ".pdf" };
+                //return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+        public ActionResult makePDFFact()
+        {
+            var doc = DocWorker.ObtenerDocXID(GIdFactura);
+            Utils utils = new Utils();
+            int codigo = Convert.ToInt32(doc.NrDocumento);
+            string Scodigo = codigo.ToString();
+            utils.generaCodigoBarras(Scodigo.PadLeft(8, '0'));
+
+
+            //ViewBag.Barcode = codigo + ".jpg";
+            return View(doc);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

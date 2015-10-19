@@ -250,6 +250,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Controlar.
+        /// </summary>
+        public static string controlar {
+            get {
+                return ResourceManager.GetString("controlar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Copiar.
         /// </summary>
         public static string copiar {
@@ -372,6 +381,24 @@ namespace TFITest4.Resources {
         public static string estado {
             get {
                 return ResourceManager.GetString("estado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Factura.
+        /// </summary>
+        public static string factura {
+            get {
+                return ResourceManager.GetString("factura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Facturar.
+        /// </summary>
+        public static string facturar {
+            get {
+                return ResourceManager.GetString("facturar", resourceCulture);
             }
         }
         

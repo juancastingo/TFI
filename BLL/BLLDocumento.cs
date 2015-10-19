@@ -41,6 +41,21 @@ namespace BLL
             return DocWorker.SaveDocumento(_Documento);
         }
 
+        public int GuardarDocumentoFac(BIZDocumento _Documento,BIZDocumento _Pedido)
+        {
+             int LN = DocWorker.getLastNumber();
+             _Documento.NrDocumento = LN;
+             _Documento.FechaVencimiento = DateTime.Today.AddDays(30);
+             int nrFac = DocWorker.SaveDocumento(_Documento);
+             _Pedido.IDDocumentoRef = nrFac;
+             _Pedido.IDEstado = 8; //Estado facturado de pedido
+             _Pedido.FechaUltimaModificacion = _Documento.FechaUltimaModificacion;
+             _Pedido.IDUsuarioUltimaModificacion = _Documento.IDUsuarioUltimaModificacion;
+             DocWorker.update2documento(_Pedido);
+             //DocWorker.updatePedidoNrRefYEstado(_Documento);
+             return nrFac;
+        }
+
         public void ActualizarDocumento(BIZDocumento _Documento)
         {
             DocWorker.UpdateDocumento(_Documento);

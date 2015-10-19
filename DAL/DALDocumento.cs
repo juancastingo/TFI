@@ -116,6 +116,7 @@ namespace DAL
             OtroDoc.Monto = _Documento.Monto;
             OtroDoc.Detalle = _Documento.Detalle;
             OtroDoc.IDUsuarioUltimaModificacion = OtroDoc.IDUsuarioCreacion; //porq lo estoy creando
+            OtroDoc.NrDocumento = _Documento.NrDocumento;
             DocumentoDetalle DocDetalle;
             foreach (var Detalle in _Documento.DocumentoDetalle)
             {
@@ -225,6 +226,34 @@ namespace DAL
             int pend = db.Database.SqlQuery<int>("Select count(*) from Documento Where IDDocumentoTipo = " + tipoDoc + " and IDEstado = " + EstadoDoc).FirstOrDefault();
 
             return pend;
+        }
+
+        public int getLastNumber()
+        {
+            int Ultimo = db.Database.SqlQuery<int>("SELECT ISNULL(MAX(UltimoNumero), 0) +1  FROM DocumentoTipo  WHERE DocumentoTipo.IDDocumentoTipo = 1").FirstOrDefault();
+            string query = "update DocumentoTipo set UltimoNumero = " + Ultimo + " where DocumentoTipo.IDDocumentoTipo = 1";
+            db.Database.ExecuteSqlCommand(query);
+            return Ultimo;
+        }
+
+        public void updatePedidoNrRefYEstado(BIZDocumento _Documento)
+        {
+            string query = "update Documento SET IDEstado= 8, IDDocumentoRef=" + _Documento.IDDocumentoRef + ",FechaUltimaModificacion='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ", IDUsuarioUltimaModificacion=" + _Documento.IDUsuarioUltimaModificacion + "  WHERE IDDocumento = " + _Documento.IDDocumento;
+            db.Database.ExecuteSqlCommand(query);
+        }
+
+        public void update2documento(BIZDocumento _Documento)
+        {
+            var TDocumento = Mapper.Map<BIZDocumento, Documento>(_Documento);
+
+            var original = db.Documento.Find(_Documento.IDDocumento);
+
+            if (original != null)
+            {
+
+                db.Entry(original).CurrentValues.SetValues(TDocumento);
+                db.SaveChanges();
+            }
         }
     }
 }

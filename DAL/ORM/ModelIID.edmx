@@ -212,7 +212,7 @@
           <Property Name="Dpto" Type="varchar" MaxLength="10" />
           <Property Name="Detalle" Type="varchar(max)" />
           <Property Name="IDLocalidad" Type="int" />
-          <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+          <Property Name="FechaUltimaMod" Type="datetime" />
         </EntityType>
         <EntityType Name="Documento">
           <Key>
@@ -336,7 +336,7 @@
           <Property Name="Precio" Type="float" />
           <Property Name="FechaAlta" Type="datetime" />
           <Property Name="Activo" Type="bit" />
-          <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+          <Property Name="FechaUltimaMod" Type="datetime" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -798,6 +798,9 @@
           <Parameter Name="IDCliEmp" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getLastNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDTipoDoc" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -986,6 +989,9 @@
           <FunctionImport Name="CCCheck" ReturnType="Collection(Double)">
             <Parameter Name="IDCliEmp" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="getLastNumber" ReturnType="Collection(Int32)">
+            <Parameter Name="IDTipoDoc" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -1090,7 +1096,7 @@
           <Property Name="Dpto" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="IDLocalidad" Type="Int32" />
-          <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="Direccion" ToRole="ClienteEmpresa" />
           <NavigationProperty Name="Localidad" Relationship="IIDTest2Model.FK_Direccion_Localidad" FromRole="Direccion" ToRole="Localidad" />
           <NavigationProperty Name="EmpresaLocal" Relationship="IIDTest2Model.FK_EmpresaLocal_Direccion" FromRole="Direccion" ToRole="EmpresaLocal" />
@@ -1242,7 +1248,7 @@
           <Property Name="Precio" Type="Double" />
           <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <Property Name="Activo" Type="Boolean" />
-          <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DocumentoDetalle" Relationship="IIDTest2Model.FK_DocumentoDetalle_PrecioDetalle" FromRole="PrecioDetalle" ToRole="DocumentoDetalle" />
           <NavigationProperty Name="ListaPrecio" Relationship="IIDTest2Model.FK_PrecioDetalle_ListaPrecio1" FromRole="PrecioDetalle" ToRole="ListaPrecio" />
           <NavigationProperty Name="Producto" Relationship="IIDTest2Model.FK_PrecioDetalle_Producto" FromRole="PrecioDetalle" ToRole="Producto" />
@@ -2046,6 +2052,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CCCheck" FunctionName="IIDTest2Model.Store.CCCheck" />
+          <FunctionImportMapping FunctionImportName="getLastNumber" FunctionName="IIDTest2Model.Store.getLastNumber" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="IIDTest2Model.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="IIDTest2Model.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="IIDTest2Model.Store.sp_dropdiagram" />

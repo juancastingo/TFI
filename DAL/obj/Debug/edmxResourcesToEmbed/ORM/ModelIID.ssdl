@@ -207,7 +207,7 @@
     <Property Name="Dpto" Type="varchar" MaxLength="10" />
     <Property Name="Detalle" Type="varchar(max)" />
     <Property Name="IDLocalidad" Type="int" />
-    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <EntityType Name="Documento">
     <Key>
@@ -331,7 +331,7 @@
     <Property Name="Precio" Type="float" />
     <Property Name="FechaAlta" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="FechaUltimaMod" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimaMod" Type="datetime" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -793,6 +793,9 @@
     <Parameter Name="IDCliEmp" Type="int" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getLastNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDTipoDoc" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />

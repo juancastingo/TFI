@@ -150,6 +150,9 @@
     <FunctionImport Name="CCCheck" ReturnType="Collection(Double)">
       <Parameter Name="IDCliEmp" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="getLastNumber" ReturnType="Collection(Int32)">
+      <Parameter Name="IDTipoDoc" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -254,7 +257,7 @@
     <Property Name="Dpto" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
     <Property Name="Detalle" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="IDLocalidad" Type="Int32" />
-    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
     <NavigationProperty Name="ClienteEmpresa" Relationship="IIDTest2Model.FK_ClienteEmpresa_Direccion" FromRole="Direccion" ToRole="ClienteEmpresa" />
     <NavigationProperty Name="Localidad" Relationship="IIDTest2Model.FK_Direccion_Localidad" FromRole="Direccion" ToRole="Localidad" />
     <NavigationProperty Name="EmpresaLocal" Relationship="IIDTest2Model.FK_EmpresaLocal_Direccion" FromRole="Direccion" ToRole="EmpresaLocal" />
@@ -406,7 +409,7 @@
     <Property Name="Precio" Type="Double" />
     <Property Name="FechaAlta" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="FechaUltimaMod" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimaMod" Type="DateTime" Precision="3" />
     <NavigationProperty Name="DocumentoDetalle" Relationship="IIDTest2Model.FK_DocumentoDetalle_PrecioDetalle" FromRole="PrecioDetalle" ToRole="DocumentoDetalle" />
     <NavigationProperty Name="ListaPrecio" Relationship="IIDTest2Model.FK_PrecioDetalle_ListaPrecio1" FromRole="PrecioDetalle" ToRole="ListaPrecio" />
     <NavigationProperty Name="Producto" Relationship="IIDTest2Model.FK_PrecioDetalle_Producto" FromRole="PrecioDetalle" ToRole="Producto" />

@@ -962,6 +962,8 @@
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
+    <Content Include="Views\Pedido\Facturar.cshtml" />
+    <Content Include="Views\Pedido\makePDFFact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

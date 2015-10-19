@@ -426,4 +426,13 @@
   <data name="vacio" xml:space="preserve">
     <value>vacio</value>
   </data>
+  <data name="controlar" xml:space="preserve">
+    <value>Controlar</value>
+  </data>
+  <data name="facturar" xml:space="preserve">
+    <value>Facturar</value>
+  </data>
+  <data name="factura" xml:space="preserve">
+    <value>Factura</value>
+  </data>
 </root>

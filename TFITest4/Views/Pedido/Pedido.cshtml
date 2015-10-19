@@ -60,9 +60,9 @@
                 <td class="tdNumero">
                     <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
-                </td>
+                          <td>
+                            @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                          </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Usuario.Nombre)
                 </td>
@@ -78,10 +78,17 @@
                             <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >@Language.cancelar</button>
                           }
                         }
+                        @{if (item.EstadoMisc.Detalle == "Facturado")
+                          {
+                              @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumento }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
+                          }
+                              
+                        }
                     </p>
                 </td>
             </tr>
         }
+
     </tbody>
 </table>
 
@@ -208,12 +215,12 @@
         });
 
 
-            //$(document).ready(function () {
-            //    $('.MontoPrePedido').each(function (index) {
-            //        esto = $(this).text();
+        //$(document).ready(function () {
+        //    $('.MontoPrePedido').each(function (index) {
+        //        esto = $(this).text();
 
-            //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
-            //    });
-            //});
+        //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+        //    });
+        //});
     </script>
 }

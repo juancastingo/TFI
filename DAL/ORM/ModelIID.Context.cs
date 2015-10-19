@@ -64,6 +64,15 @@ namespace DAL.ORM
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("CCCheck", iDCliEmpParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> getLastNumber(Nullable<int> iDTipoDoc)
+        {
+            var iDTipoDocParameter = iDTipoDoc.HasValue ?
+                new ObjectParameter("IDTipoDoc", iDTipoDoc) :
+                new ObjectParameter("IDTipoDoc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getLastNumber", iDTipoDocParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?

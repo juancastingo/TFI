@@ -67,7 +67,11 @@ namespace TFITest4.Controllers
                 {
                     if (Session["grupo"].ToString() == "Creditos y Cobranzas")
                     {
-                        pendientes = DocWorker.ObtenerDocPendientes(3, 5);
+                        pendientes = DocWorker.ObtenerDocPendientes(3, 5); //3 pedido. 5 Pend de aprob
+                    }
+                    if (Session["grupo"].ToString() == "Comercial") 
+                    {
+                        pendientes = DocWorker.ObtenerDocPendientes(3, 6); //3 pedido. 5 aprobado
                     }
                 }
 
