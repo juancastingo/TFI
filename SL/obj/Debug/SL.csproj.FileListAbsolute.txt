@@ -6,3 +6,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Debug\BIZ
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Debug\SL.csprojResolveAssemblyReference.cache
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Debug\SL.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Debug\SL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Debug\Gma.QrCodeNet.Encoding.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Debug\Gma.QrCodeNet.Encoding.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Debug\Gma.QrCodeNet.Encoding.xml

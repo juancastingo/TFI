@@ -8,12 +8,27 @@ using System.Threading.Tasks;
 using System.Drawing;
 using BarcodeLib;
 using BIZ;
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace SL
 {
     public class Utils
     {
 
+        public string generarQR(string codigo)
+        {
+            var qrEncoder = new QrEncoder(ErrorCorrectionLevel.H);
+            var qrCode = qrEncoder.Encode(codigo);
+
+            var renderer = new GraphicsRenderer(new FixedModuleSize(5, QuietZoneModules.Two), Brushes.Black, Brushes.White);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "tmp\\"+ codigo +"QR.png";
+            using (var stream = new FileStream(path, FileMode.Create))
+                renderer.WriteToStream(qrCode.Matrix, ImageFormat.Png, stream);
+            return codigo+"QR.png";
+        }
 
         public String generaCodigoBarras(String codigo)
         {

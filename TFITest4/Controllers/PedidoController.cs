@@ -793,10 +793,17 @@ namespace TFITest4.Controllers
         public ActionResult makePDFFact()
         {
             var doc = DocWorker.ObtenerDocXID(GIdFactura);
+            if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
+            {
+                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle) {
+                    d.PrecioDetalle.Precio = doc.ClienteEmpresa.TipoIVA.Valor;
+                }
+            }
             Utils utils = new Utils();
             int codigo = Convert.ToInt32(doc.NrDocumento);
             string Scodigo = codigo.ToString();
-            utils.generaCodigoBarras(Scodigo.PadLeft(8, '0'));
+            ViewBag.CB = utils.generaCodigoBarras(Scodigo.PadLeft(8, '0')); //acá y abajo falta lo de la sucursal
+            ViewBag.QR = utils.generarQR(Scodigo.PadLeft(8, '0'));
 
 
             //ViewBag.Barcode = codigo + ".jpg";

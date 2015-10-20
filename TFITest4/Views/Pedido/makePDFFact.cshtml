@@ -30,7 +30,7 @@
             margin: 20px;
         }
 
-        td,th {
+        td, th {
             border: none !important;
             border-right: none !important;
             border-left: none !important;
@@ -84,7 +84,28 @@
         }
 
         .cliente h4 {
-            text-decoration:underline;
+            text-decoration: underline;
+        }
+
+        #CB {
+            width: 257px;
+            height: 150px;
+        }
+
+        .letra {
+            font-size: 40px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .fact {
+            font-weight: bold;
+            font-size: 25px;
+            margin-top: -75px;
+            margin-right: 114px;
         }
     </style>
 </head>
@@ -93,9 +114,11 @@
         <div class="fleft">
             <img src="~/Content/images/Logo2.png" />
         </div>
-        <div class="fnone nombre">
+       @* <div class="fnone nombre">
             @Model.EmpresaLocal.NombreFantasia
-        </div>
+        </div>*@
+        <div style="text-align:center;"><span class="letra">@Model.DocumentoTipo.Letra</span></div>
+        <div class="fright fact">FACTURA</div>
         <br />
         <div class="fright detalle">
             @Model.EmpresaLocal.Direccion.Calle @Model.EmpresaLocal.Direccion.Numero
@@ -123,7 +146,7 @@
             <div class="fleft detalle">
                 @Model.ClienteEmpresa.Direccion.Calle @Model.ClienteEmpresa.Direccion.Numero
             </div>
-                        <br />
+            <br />
             <div class="fleft detalle">
                 @Model.ClienteEmpresa.Direccion.Localidad.Nombre @Model.ClienteEmpresa.Direccion.Localidad.Provincia.Nombre @Model.ClienteEmpresa.Direccion.Localidad.Provincia.Pais.Nombre
             </div>
@@ -144,12 +167,12 @@
         <table id="" class="table table-striped" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th style="text-align: left;">Producto
+                    <th>Cantidad
                     </th>
-                    <th>Cantidad</th>
+                    <th  style="text-align: left;">Producto</th>
                     <th style="width: 150px !important;">Precio Unitario
                     </th>
-                    <th style="width: 100px;text-align: left;">Precio
+                    <th style="width: 100px; text-align: left;">Precio
                     </th>
 
                 </tr>
@@ -159,16 +182,18 @@
                 @foreach (var item in Model.DocumentoDetalle)
                 {
                     <tr>
-                        <td style="border-right: none !important;border-left: none !important;">
-                            @Html.DisplayFor(modelItem => item.PrecioDetalle.Producto.Nombre)
-                        </td>
-                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                        <td class="tdNumero" style="border-right: none !important; border-left: none !important;" >
                             @Html.DisplayFor(modelItem => item.Cantidad)
+
+                        </td style="border-right: none !important; border-left: none !important;">
+                        <td >
+                            @Html.DisplayFor(modelItem => item.PrecioDetalle.Producto.Nombre)
+
                         </td>
-                        <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
+                        <td style="width: 150px !important; border-right: none !important; border-left: none !important;" class="tdNumero">
                             <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
-                        </td >
-                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                        </td>
+                        <td class="tdNumero" style="border-right: none !important; border-left: none !important;">
                             @{double DetalleSubt = 0;}
 
                             @{
@@ -186,6 +211,7 @@
         <div id="tablaTotal" class="fleft">
             @{double total = (@SubTotal + (@SubTotal * Model.ClienteEmpresa.TipoIVA.Valor / 100)); }
             <table>
+                @{if (@Model.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto") {
                 <tr>
                     <td style="padding-right: 50px !important;">Subtotal: 
                     </td>
@@ -193,19 +219,27 @@
                         @SubTotal.ToString("C")
                     </td>
                 </tr>
-                <tr>
-                    <td style="padding-right: 50px !important;">IVA Cliente: 
-                    </td>
-                    <td>@Model.ClienteEmpresa.TipoIVA.Valor% </td>
+                    <tr>
+                        <td style="padding-right: 50px !important;">IVA Cliente: 
+                        </td>
+                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% </td>
 
-                </tr>
+                    </tr>
+                    }
+                }
                 <tr>
                     <td style="padding-right: 50px !important;">Total:
                     </td>
                     <td>@total.ToString("C")</td>
                 </tr>
             </table>
+            
         </div>
+        <div class="clear"></div>
+        <div style="float:left;">
+                <img id="CB" src="/tmp/@ViewBag.CB" />
+                <img id="QR" src="/tmp/@ViewBag.QR" />
+         </div>
         <div class="clear"></div>
         <br />
         © @Model.EmpresaLocal.RazonSocial @DateTime.Now.Year
