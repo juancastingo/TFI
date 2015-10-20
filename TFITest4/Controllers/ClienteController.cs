@@ -46,7 +46,7 @@ namespace TFITest4.Models
         {
             ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
             ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle");
-            var localidades = dirWorker.TraerAllLocalidades();
+            var localidades = dirWorker.ObtenerLocalidades();
             List<LocCliModel> MiLocalidades = new List<LocCliModel>();
             LocCliModel miLoc;
             foreach (var l in localidades)
@@ -108,7 +108,7 @@ namespace TFITest4.Models
             ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle",rcliente.IDTipoIVA);
 
 
-            var localidades = dirWorker.TraerAllLocalidades();
+            var localidades = dirWorker.ObtenerLocalidades();
             List<LocCliModel> MiLocalidades = new List<LocCliModel>();
             LocCliModel miLoc;
             foreach (var l in localidades)

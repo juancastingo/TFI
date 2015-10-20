@@ -48,9 +48,10 @@ namespace TFITest4.Models
 
         public DateTime FechaAlta { get; set; }
         public string Idioma { get; set; }
+
+        [Display(Name = "tipoUsuario", ResourceType = typeof(Language))]
         public int IDTipoUsuario { get; set; }
         public DateTime FechaUltimaMod { get; set; }
-
 
         public BIZClienteEmpresa ClienteEmpresa { get; set; }
         public ICollection<BIZDocumento> Documento { get; set; }

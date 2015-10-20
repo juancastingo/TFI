@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BIZ;
 using BLL;
-using DAL.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +12,16 @@ namespace TFITest4.Controllers
 {
     public class UsuariosController : Controller
     {
-        private IIDTest2Entities db = new IIDTest2Entities(); //sacar
         //
         // GET: /Usuarios/
         private BLLBitacora Bita = new BLLBitacora();
+        private BLLUsuario userWorker = new BLLUsuario();
+        private BLLGeneral generalWorker = new BLLGeneral();
+
 
         public ActionResult Index()
         {
-            DAL.DALUsuario Duser = new DAL.DALUsuario();
-            var usuarios = Duser.GetAllUsuarios();
+            var usuarios = userWorker.obtenerUsuarios();
             var RetUser = Mapper.Map<List<BIZUsuario>, List<ModelUsuario>>(usuarios);
             //DAL.DALUsuario DUserTestBorrar = new DAL.DALUsuario();
             //List<BIZ.BIZUsuario> List = DUserTestBorrar.GetAllUsuarios();
@@ -29,22 +29,10 @@ namespace TFITest4.Controllers
             return View(RetUser);
         }
 
-        //
-        // GET: /Usuarios/Details/5
-
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        //
-        // GET: /Usuarios/Create
 
         public ActionResult RegisterIN()
         {
-            DAL.DALUsuario UserWorker = new DAL.DALUsuario();
-            var TiposUsuario = UserWorker.GetAllTipoUsuario();
-            ViewBag.IDTipoUsuario = new SelectList(UserWorker.GetAllTipoUsuario(), "IDTipoUsuario", "Tipo");
+            ViewBag.IDTipoUsuario = new SelectList(userWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
             return View();
         }
 
@@ -60,8 +48,7 @@ namespace TFITest4.Controllers
                 User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(_user);
                 User.IDEstado = 13;
                 User.IDClienteEmpresa = null;
-                DAL.DALUsuario DALUser = new DAL.DALUsuario();
-                DALUser.InsertUsuario(User);
+                userWorker.InsertarUsuario(User);
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
@@ -76,51 +63,61 @@ namespace TFITest4.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                var Tuser = userWorker.ObtenerUsarioByID(id);
+                if (Tuser == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    var user = Mapper.Map<BIZUsuario, ModelUsuario>(Tuser);
+                    var tipos = userWorker.ObtenerTiposUsuario();
+                    var tiposU = tipos.Where(c => c.Tipo != "Externo" && c.Tipo != "Administrador");
+                    ViewBag.IDTipoUsuario = new SelectList(tiposU, "IDTipoUsuario", "Tipo",user.IDTipoUsuario);
+                    ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("Usuario"), "IDEstado", "Detalle",user.IDEstado);
+                    return View(user);
+                }
+            }
+            catch
+            {
+                return HttpNotFound();
+            }
         }
 
         //
         // POST: /Usuarios/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, BIZUsuario usuario)
         {
             try
             {
-                // TODO: Add update logic here
+                var user = userWorker.ObtenerUsarioByID(id);
+                user.Email = usuario.Email;
+                user.IDEstado = usuario.IDEstado;
+                user.Telefono = usuario.Telefono;
+                user.IDTipoUsuario = usuario.IDTipoUsuario;
+                user.Nombre = usuario.Nombre;
+                user.FechaUltimaMod = DateTime.Now;
+                if (userWorker.ActualizarUsuario(user))
+                {
+                    TempData["OKNormal"] = Resources.Language.OKNormal;
+                    return RedirectToAction("Index");
 
-                return RedirectToAction("Index");
+                } else {
+                    TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Usuarios/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Usuarios/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
         }
+
+
     }
 }

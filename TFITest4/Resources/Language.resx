@@ -435,4 +435,10 @@
   <data name="factura" xml:space="preserve">
     <value>Factura</value>
   </data>
+  <data name="codigo" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="tipoUsuario" xml:space="preserve">
+    <value>Tipo de Usuario</value>
+  </data>
 </root>

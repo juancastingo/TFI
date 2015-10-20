@@ -68,14 +68,13 @@
         </table>
         <p>
             <input class="btn btn-primary" id="btnCreate" type="submit" value="@Language.editar" />
+            @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-success", @style = "color:white" }) 
+
         </p>
     </fieldset>
         
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

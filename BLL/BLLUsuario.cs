@@ -12,11 +12,6 @@ namespace BLL
         DAL.DALUsuario D_User = new DAL.DALUsuario();
         DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
 
-        public List<BIZLocalidad> ObtenerLocalidades()
-        {
-            //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-            return D_Direccion.getAllLocalidades();
-        }
 
         public List<BIZTipoUsuario> ObtenerTiposUsuario()
         {
@@ -50,9 +45,24 @@ namespace BLL
             return D_User.getUserByUsuario(NombreUsuario);
         }
 
+        public BIZUsuario ObtenerUsarioByID(int IDUsuario)
+        {
+            return D_User.getUserByID(IDUsuario);
+        }
+
         public string ResetPassword(string UserToReset)
         {
             return D_User.ResetPassword(UserToReset);
+        }
+
+        public List<BIZUsuario> obtenerUsuarios()
+        {
+            return D_User.GetAllUsuarios();
+        }
+
+        public bool ActualizarUsuario(BIZUsuario usuario)
+        {
+            return D_User.UpdateUser(usuario);
         }
     }
 }

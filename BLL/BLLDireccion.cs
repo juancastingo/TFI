@@ -12,10 +12,12 @@ namespace BLL
     {
         private DALDireccion dirWorker = new DALDireccion();
 
-        public List<BIZLocalidad> TraerAllLocalidades()
+        public List<BIZLocalidad> ObtenerLocalidades()
         {
             return dirWorker.getAllLocalidades();
         }
+
+
 
     }
 }

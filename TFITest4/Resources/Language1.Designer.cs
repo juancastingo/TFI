@@ -232,6 +232,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Código.
+        /// </summary>
+        public static string codigo {
+            get {
+                return ResourceManager.GetString("codigo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Compre.
         /// </summary>
         public static string compre {
@@ -912,6 +921,15 @@ namespace TFITest4.Resources {
         public static string tipoIVA {
             get {
                 return ResourceManager.GetString("tipoIVA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Tipo de Usuario.
+        /// </summary>
+        public static string tipoUsuario {
+            get {
+                return ResourceManager.GetString("tipoUsuario", resourceCulture);
             }
         }
         

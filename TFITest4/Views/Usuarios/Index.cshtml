@@ -14,7 +14,7 @@
     <thead>
     <tr>
         <th>
-            Codigo
+            @Language.codigo
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
@@ -23,10 +23,10 @@
             @Html.DisplayNameFor(model => model.Usuario1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstadoMisc.Detalle)
+            @Language.estado
         </th>
         <th>
-                @Html.DisplayNameFor(model => model.ClienteEmpresa)
+                @Language.empresa
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -35,13 +35,10 @@
             @Html.DisplayNameFor(model => model.Telefono)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FechaAlta)
+            @Language.fechaAlta
         </th>
-@*        <th>
-            @Html.DisplayNameFor(model => model.Idioma)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.TipoUsuario.Tipo)
+            @Html.DisplayNameFor(model => model.IDTipoUsuario)
         </th>
         <th>@Language.action</th>
     </tr>
@@ -78,9 +75,6 @@
         <td>
             @item.FechaAlta.ToString("MM/dd/yyyy HH:mm")
         </td>
-@*        <td>
-            @Html.DisplayFor(modelItem => item.Idioma)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.TipoUsuario.Tipo)
         </td>

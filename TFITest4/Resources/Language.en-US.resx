@@ -432,4 +432,10 @@
   <data name="factura" xml:space="preserve">
     <value>Invoice</value>
   </data>
+  <data name="codigo" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="tipoUsuario" xml:space="preserve">
+    <value>User Type</value>
+  </data>
 </root>

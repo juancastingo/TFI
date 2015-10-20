@@ -16,6 +16,7 @@ namespace TFITest4.Controllers
         // register get
 
         BLLUsuario UsuarioWorker = new BLLUsuario();
+        BLLDireccion direccionWorker = new BLLDireccion();
         BLLCliente ClienteWorker = new BLLCliente();
         BLLBitacora Bita = new BLLBitacora();
 
@@ -23,7 +24,7 @@ namespace TFITest4.Controllers
         {
             //DAL.DALUsuario D_User = new DAL.DALUsuario();
             //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-            ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+            ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
             ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
             return View();
         }
@@ -43,7 +44,7 @@ namespace TFITest4.Controllers
                 {
                     //DAL.DALUsuario D_User = new DAL.DALUsuario();
                     //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-                    ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+                    ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
                     ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                     return View();
                 }
@@ -52,7 +53,7 @@ namespace TFITest4.Controllers
             {
                 //DAL.DALUsuario D_User = new DAL.DALUsuario();
                // DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
-                ViewBag.IDLocalidad = new SelectList(UsuarioWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
+                ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
                 ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                 return View();
             }

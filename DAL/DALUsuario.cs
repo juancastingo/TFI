@@ -15,7 +15,8 @@ namespace DAL
     {
         private IIDTest2Entities db = new IIDTest2Entities();
 
-        public DALUsuario() {
+        public DALUsuario()
+        {
             DALAutommaper automapper = new DALAutommaper();
         }
 
@@ -41,16 +42,16 @@ namespace DAL
             List<BIZUsuario> rList = new List<BIZUsuario>();
             var usuario = db.Usuario.Include("TipoUsuario");
             rList = Mapper.Map<List<Usuario>, List<BIZUsuario>>(usuario.ToList());
-           // foreach (Usuario u in usuario)
-           // {
+            // foreach (Usuario u in usuario)
+            // {
             //    oUsuario = new BIZUsuario();
             //    oUsuario.Email = u.Email;
-                //oUsuario.Estado = new BIZEstado();
-           //     oUsuario.EstadoMisc.IDEstado = u.EstadoMisc.IDEstado;
+            //oUsuario.Estado = new BIZEstado();
+            //     oUsuario.EstadoMisc.IDEstado = u.EstadoMisc.IDEstado;
 
             //}
 
-           
+
             return rList;
         }
 
@@ -77,7 +78,8 @@ namespace DAL
             db.SaveChanges();
         }
 
-        public Boolean CheckByName(BIZUsuario oUser) {
+        public Boolean CheckByName(BIZUsuario oUser)
+        {
             var TUser = db.Usuario
                     .Where(b => b.Usuario1 == oUser.Usuario1)
                     .FirstOrDefault();
@@ -105,12 +107,12 @@ namespace DAL
         {
             try
             {
-            var TUser = db.Usuario
-                .Where(b => b.Usuario1 == oUser.Usuario1)
-                .Where(c => c.Password == oUser.Password)
-                .FirstOrDefault();
-            var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
-            return UserReturn;
+                var TUser = db.Usuario
+                    .Where(b => b.Usuario1 == oUser.Usuario1)
+                    .Where(c => c.Password == oUser.Password)
+                    .FirstOrDefault();
+                var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
+                return UserReturn;
             }
             catch (Exception ex)
             {
@@ -128,7 +130,9 @@ namespace DAL
                     .FirstOrDefault();
                 var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
                 return UserReturn;
-            } catch(Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return null;
             }
         }
@@ -161,5 +165,43 @@ namespace DAL
         }
 
 
+
+        public BIZUsuario getUserByID(int IDUsuario)
+        {
+            BIZUsuario oUsuario = new BIZUsuario();
+            var TUsuario = db.Usuario
+                .SingleOrDefault(x => x.IDUsuario == IDUsuario);
+            if (TUsuario != null)
+            {
+                oUsuario = Mapper.Map<Usuario, BIZUsuario>(TUsuario);
+            }
+            else
+            {
+                return null;
+            }
+            return oUsuario;
+        }
+
+        public bool UpdateUser(BIZUsuario usuario)
+        {
+            try {
+                var TUsuario = Mapper.Map<BIZUsuario, Usuario>(usuario);
+
+                var original = db.Usuario.Find(usuario.IDUsuario);
+
+                if (original != null)
+                {
+
+                    db.Entry(original).CurrentValues.SetValues(TUsuario);
+                    db.SaveChanges();
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } catch {
+                return false;
+            }
+        }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model TFITest4.Models.ModelUsuario
+@using TFITest4.Resources
+
+
+<h2 class="titulo">@Language.editar</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Language.usuario</legend>
+        <table class="table  table-bordered table-striped" cellspacing="0" width="100%">
+
+            @Html.HiddenFor(model => model.IDUsuario)
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Nombre)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Nombre)
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </td>
+            </tr>
+            <tr>
+
+
+                <th class="editor-label">
+                    @Language.estado
+                </th>
+                <td class="editor-field">
+                    @Html.DropDownList("IDEstado")
+                    @Html.ValidationMessageFor(model => model.IDEstado)
+                </td>
+            </tr>
+            <tr>
+
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Telefono)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Telefono)
+                    @Html.ValidationMessageFor(model => model.Telefono)
+                </td>
+            </tr>
+            @{if (Model.TipoUsuario.Tipo != "Externo")
+              {
+                <tr>
+                    <td class="editor-label">
+                        @Html.LabelFor(model => model.IDTipoUsuario)
+                    </td>
+                    <td class="editor-field">
+                        @Html.DropDownList("IDTipoUsuario")
+                        @Html.ValidationMessageFor(model => model.IDTipoUsuario)
+                    </td>
+                </tr>
+              }
+            }
+        </table>
+
+        <p>
+            <input class="btn btn-primary" id="btnCreate" type="submit" value="@Language.editar" />
+            @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-success", @style = "color:white" }) 
+        </p>
+    </fieldset>
+    
+    
+    
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
