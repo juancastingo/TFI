@@ -803,6 +803,11 @@
                         }
                         return false;
                     }).css('display', 'none');
+                    $('div').filter(function () {
+                        return $(this).css('z-index') > 10000;
+                    }).each(function() {
+                        $(this).css('display', 'none');
+                    });
                 }
                 setTimeout(function () { RemoveSomee(); }, 3000);
 

@@ -7,10 +7,12 @@ using TFITest4;
 using BIZ;
 using TFITest4.Resources;
 using BLL;
+using TFITest4.Models;
 
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         // register get
@@ -153,6 +155,40 @@ namespace TFITest4.Controllers
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             }
             return View();
-        }  
+        }
+
+        [Authorize]
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePass(RegisterModel usuario)
+        {
+            try
+            {
+                BIZUsuario user = new BIZUsuario();
+                user.Usuario1 = (string)Session["usuario"];
+                user.Password = usuario.PrevPass;
+                BIZUsuario _usuario = UsuarioWorker.validarLogin(user);
+                if (_usuario != null)
+                {
+                    TempData["OKNormal"] = Resources.Language.OKNormal;
+                    return Redirect("/Login/CerrarSesion");
+                }
+                else
+                {
+                    TempData["ErrorNormal"] = Resources.Language.errorCambioPass; //cambiar por error de contraseña vieja
+                    return View(usuario);
+                }
+            }
+            catch
+            {
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return View(usuario);
+            }
+        }
     }
 }

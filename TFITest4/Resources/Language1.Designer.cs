@@ -367,6 +367,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor revise su contraseña.
+        /// </summary>
+        public static string errorCambioPass {
+            get {
+                return ResourceManager.GetString("errorCambioPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La operación no se pudo completar. Por favor logueese nuevamente.
         /// </summary>
         public static string ErrorLogInAgain {
@@ -691,6 +700,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nueva.
+        /// </summary>
+        public static string nueva {
+            get {
+                return ResourceManager.GetString("nueva", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Nuevo.
         /// </summary>
         public static string nuevo {
@@ -804,6 +822,15 @@ namespace TFITest4.Resources {
         public static string PrePedidoActualizado {
             get {
                 return ResourceManager.GetString("PrePedidoActualizado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Contraseña actual.
+        /// </summary>
+        public static string prevPass {
+            get {
+                return ResourceManager.GetString("prevPass", resourceCulture);
             }
         }
         

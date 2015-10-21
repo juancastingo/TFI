@@ -88,6 +88,12 @@ namespace TFITest4.Models
 
         [Required(ErrorMessageResourceType = typeof(Resources.Language),
         ErrorMessageResourceName = "Required")]
+        [DataType(DataType.Password)]
+        [Display(Name = "prevPass", ResourceType = typeof(Language))]
+        public string PrevPass { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Resources.Language),
+        ErrorMessageResourceName = "Required")]
         [StringLength(100, MinimumLength = 6, ErrorMessageResourceType=typeof(Resources.Language),
         ErrorMessageResourceName= "MinLength")]
         [DataType(DataType.Password)]
@@ -119,7 +125,8 @@ namespace TFITest4.Models
         //public SelectList 
         public int IDClienteEmpresa { get; set; }
         public int IDLocalidad { get; set; }
-        public int IDTipoUsuario { get; set; }
+        public int IDTipo
+        { get; set; }
 
     }
 

@@ -441,4 +441,13 @@
   <data name="tipoUsuario" xml:space="preserve">
     <value>Tipo de Usuario</value>
   </data>
+  <data name="nueva" xml:space="preserve">
+    <value>Nueva</value>
+  </data>
+  <data name="prevPass" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="errorCambioPass" xml:space="preserve">
+    <value>Por favor revise su contraseña</value>
+  </data>
 </root>

@@ -1,0 +1,51 @@
+﻿@using TFITest4.Resources
+@model TFITest4.Models.RegisterModel
+
+<h2 class="titulo">@Language.CambiarPass</h2>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.PrevPass)
+            </td>
+            <td class="editor-field">
+                @Html.EditorFor(model => model.PrevPass)
+                @Html.ValidationMessageFor(model => model.PrevPass)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Language.nueva @Html.LabelFor(model => model.Password)
+            </th>
+            <td class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.ConfirmPassword)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </td>
+        </tr>
+
+    </table>
+     <p>
+            <input id="crearUser" class="btn btn-primary" type="submit" value="Create" />
+        </p>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
