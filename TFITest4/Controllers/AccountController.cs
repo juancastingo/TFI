@@ -175,6 +175,8 @@ namespace TFITest4.Controllers
                 BIZUsuario _usuario = UsuarioWorker.validarLogin(user);
                 if (_usuario != null)
                 {
+                    _usuario.Password = usuario.Password;
+                    UsuarioWorker.ActualizarUsuario(_usuario);
                     TempData["OKNormal"] = Resources.Language.OKNormal;
                     return Redirect("/Login/CerrarSesion");
                 }

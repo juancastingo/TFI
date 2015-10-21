@@ -730,7 +730,14 @@ namespace TFITest4.Controllers
                 BIZDocumento pedido = DocWorker.ObtenerDocXID(IDPedido);
                 
                 BIZDocumento factura = new BIZDocumento();
-                factura.IDDocumentoTipo = 1; //tipo 1 es factura. Tengo q ver si creo varios tipos.... probablemente si por tipo de IVA
+                if (pedido.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto")
+                {
+                    factura.IDDocumentoTipo = 1; //tipo 1 es factura A. 
+                }
+                else
+                {
+                    factura.IDDocumentoTipo = 13; // tipo 13 es factura B. Osea != de responsable inscripto. monotributista, exento, no categorizado, no responsable, consumidor final
+                }
                 factura.FechaEmision = DateTime.Now;
                 factura.FechaUltimaModificacion = factura.FechaEmision;
                 factura.IDClienteEmpresa = pedido.ClienteEmpresa.IDClienteEmpresa;
@@ -793,18 +800,30 @@ namespace TFITest4.Controllers
         public ActionResult makePDFFact()
         {
             var doc = DocWorker.ObtenerDocXID(GIdFactura);
+            double monto = 0;
             if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
             {
-                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle) {
-                    d.PrecioDetalle.Precio = doc.ClienteEmpresa.TipoIVA.Valor;
+                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                {
+                    d.PrecioDetalle.Precio = d.PrecioDetalle.Precio + (doc.ClienteEmpresa.TipoIVA.Valor * d.PrecioDetalle.Precio / 100);
+                    monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
                 }
             }
+            else
+            {
+                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                {
+                    monto += Convert.ToDouble(d.PrecioDetalle.Precio)*d.Cantidad;
+                }
+                monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
+            }
+            doc.Monto = monto;
             Utils utils = new Utils();
             int codigo = Convert.ToInt32(doc.NrDocumento);
             string Scodigo = codigo.ToString();
             ViewBag.CB = utils.generaCodigoBarras(Scodigo.PadLeft(8, '0')); //acá y abajo falta lo de la sucursal
             ViewBag.QR = utils.generarQR(Scodigo.PadLeft(8, '0'));
-
+            ViewBag.letras = utils.enletras(doc.Monto.ToString());
 
             //ViewBag.Barcode = codigo + ".jpg";
             return View(doc);

@@ -43,7 +43,8 @@ namespace BLL
 
         public int GuardarDocumentoFac(BIZDocumento _Documento,BIZDocumento _Pedido)
         {
-             int LN = DocWorker.getLastNumber();
+            int tipoDoc = Convert.ToInt32(_Documento.IDDocumentoTipo);
+             int LN = DocWorker.getLastNumber(tipoDoc);
              _Documento.NrDocumento = LN;
              _Documento.FechaVencimiento = DateTime.Today.AddDays(30);
              int nrFac = DocWorker.SaveDocumento(_Documento);

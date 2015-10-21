@@ -228,10 +228,10 @@ namespace DAL
             return pend;
         }
 
-        public int getLastNumber()
+        public int getLastNumber(int tipoDoc)
         {
-            int Ultimo = db.Database.SqlQuery<int>("SELECT ISNULL(MAX(UltimoNumero), 0) +1  FROM DocumentoTipo  WHERE DocumentoTipo.IDDocumentoTipo = 1").FirstOrDefault();
-            string query = "update DocumentoTipo set UltimoNumero = " + Ultimo + " where DocumentoTipo.IDDocumentoTipo = 1";
+            int Ultimo = db.Database.SqlQuery<int>("SELECT ISNULL(MAX(UltimoNumero), 0) +1  FROM DocumentoTipo  WHERE DocumentoTipo.IDDocumentoTipo = " + tipoDoc).FirstOrDefault();
+            string query = "update DocumentoTipo set UltimoNumero = " + Ultimo + " where DocumentoTipo.IDDocumentoTipo = " + tipoDoc;
             db.Database.ExecuteSqlCommand(query);
             return Ultimo;
         }
