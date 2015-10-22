@@ -120,9 +120,9 @@ namespace DAL
 
         public void UpdateProducto(BIZProducto producto)
         {
-            var Tproducto = Mapper.Map<BIZProducto, Producto>(producto);
-
             var original = db.Producto.Find(producto.IDProducto);
+            producto.FechaAlta = Convert.ToDateTime(original.FechaAlta);
+            var Tproducto = Mapper.Map<BIZProducto, Producto>(producto);
 
             if (original != null)
             {

@@ -484,6 +484,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El carrito ha sido guardado.
+        /// </summary>
+        public static string guardarCarrito {
+            get {
+                return ResourceManager.GetString("guardarCarrito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Pagina de Inicio.
         /// </summary>
         public static string Home_Title {
@@ -570,6 +579,15 @@ namespace TFITest4.Resources {
         public static string limpiar {
             get {
                 return ResourceManager.GetString("limpiar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El carrito ha sido limpiado.
+        /// </summary>
+        public static string limpiarCarrito {
+            get {
+                return ResourceManager.GetString("limpiarCarrito", resourceCulture);
             }
         }
         
@@ -723,6 +741,15 @@ namespace TFITest4.Resources {
         public static string numero {
             get {
                 return ResourceManager.GetString("numero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La contraseña fué actualizada correctamente. Por favor ingrese nuevamente al sistema.
+        /// </summary>
+        public static string okCambioPass {
+            get {
+                return ResourceManager.GetString("okCambioPass", resourceCulture);
             }
         }
         

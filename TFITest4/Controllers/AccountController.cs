@@ -177,7 +177,7 @@ namespace TFITest4.Controllers
                 {
                     _usuario.Password = usuario.Password;
                     UsuarioWorker.ActualizarUsuario(_usuario);
-                    TempData["OKNormal"] = Resources.Language.OKNormal;
+                    TempData["OKNormal"] = Resources.Language.okCambioPass;
                     return Redirect("/Login/CerrarSesion");
                 }
                 else

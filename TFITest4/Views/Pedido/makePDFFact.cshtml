@@ -28,6 +28,7 @@
             border: 1px solid black;
             background-color: white;
             margin: 20px;
+            font-size: 14px;
         }
 
         td, th {
@@ -73,7 +74,7 @@
         }
 
         .detalle {
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .pedido {
@@ -107,39 +108,58 @@
             margin-top: -75px;
             margin-right: 75px;
         }
+
         #logo {
             margin-top: -30px;
             margin-bottom: -26px;
         }
+
         .fecha {
             border: 1px solid black;
             padding: 6px;
             font-size: 14px;
         }
+
         .fecha1 {
             border-bottom-left-radius: 4px;
             border-top-left-radius: 4px;
             padding-right: 54px;
         }
+
         .fecha2 {
             border-bottom-right-radius: 4px;
             border-top-right-radius: 4px;
         }
+
         .sinBDer {
             border-right: 0px !important;
         }
+
         .sinBIzq {
             border-left: 0px !important;
         }
+
         .cuit {
             border: 1px solid black;
             border-radius: 5px;
-            padding: 6px;
+            padding: 7px;
             margin-top: -14px;
-            margin-right: 2px;
+            margin-right: 3px;
+            font-size: 12px;
         }
+
         .ffecha {
-            margin-right: 2px;
+            margin-right: 3px;
+        }
+        .venc {
+            padding-right: 5px;
+        }
+        .vencFecha {
+            margin-top: -9px;
+        }
+
+        .strong {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -158,7 +178,13 @@
             <span class="fecha fecha1 sinBDer"><strong>FECHA</strong></span><span class="fecha sinBDer">@Model.FechaEmision.Day</span><span class="fecha sinBDer">@Model.FechaEmision.Month</span><span class="fecha fecha2">@Model.FechaEmision.Year</span>
         </div>
         <div class="clear"></div>
-        <br />
+        <br />  
+        <div class="fright detalle ffecha vencFecha">
+             @{DateTime FechaVenc = Convert.ToDateTime(@Model.FechaVencimiento);}
+            <span class="fecha fecha1 sinBDer venc"><strong>VENCIMIENTO</strong></span><span class="fecha sinBDer">@FechaVenc.Day</span><span class="fecha sinBDer">@FechaVenc.Month</span><span class="fecha fecha2">@FechaVenc.Year</span>
+        </div>
+        <div class="clear"></div>
+        <br />  
         <div class="fright detalle cuit">
          C.U.I.T.: @Model.EmpresaLocal.CUIT
             <br />
@@ -171,32 +197,25 @@
         <hr />
         <div class="cliente">
             <div class="fleft">
-                Señor(es): @Model.ClienteEmpresa.NombreFantasia
+                <span class="strong">Señor(es):</span> @Model.ClienteEmpresa.NombreFantasia
             </div>
             <div class="clear"></div>
             <div class="fleft detalle">
-                Dirección: @Model.ClienteEmpresa.Direccion.Calle @Model.ClienteEmpresa.Direccion.Numero
+                <span class="strong">Dirección:</span> @Model.ClienteEmpresa.Direccion.Calle @Model.ClienteEmpresa.Direccion.Numero
+                &nbsp;&nbsp;&nbsp;
             </div>
+            <span style="float: right;"><span class="strong">Loc:</span> @Model.ClienteEmpresa.Direccion.Localidad.Nombre</span>
             <br />
             <div class="fleft detalle">
-                @Model.ClienteEmpresa.Direccion.Calle @Model.ClienteEmpresa.Direccion.Numero
+                <span class="strong">Condición de Venta: </span>Cta. Cte.  &nbsp;&nbsp;&nbsp; 
             </div>
-            <br />
-            <div class="fleft detalle">
-                @Model.ClienteEmpresa.Direccion.Localidad.Nombre @Model.ClienteEmpresa.Direccion.Localidad.Provincia.Nombre @Model.ClienteEmpresa.Direccion.Localidad.Provincia.Pais.Nombre
-            </div>
-            <br />
-            <div class="fleft detalle">
-                @Model.ClienteEmpresa.Telefono
-            </div>
+            <span style="float: right;"><span class="strong">C.U.I.T.: </span>@Model.ClienteEmpresa.CUIT</span>
         </div>
         <div class="clear"></div>
         <hr />
         <div class="pedido">
-            Factura  <span>@Model.DocumentoTipo.Letra @Model.DocumentoTipo.Sucursal.ToString().PadLeft(4, '0')-@Model.NrDocumento.ToString().PadLeft(8, '0')</span>
+            Nr Factura: <span>@Model.DocumentoTipo.Sucursal.ToString().PadLeft(4, '0')-@Model.NrDocumento.ToString().PadLeft(8, '0')</span>
         </div>
-        <div>Fecha de Emisión: <span>@Model.FechaEmision</span></div>
-        <div>Estado: <span>@Model.EstadoMisc.Detalle</span></div>
         <div class="clear"></div>
         <hr />
         <table id="" class="table table-striped" cellspacing="0" width="100%">
@@ -247,16 +266,22 @@
 
             @{
                 double total = 0;
-                if (@Model.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto") {
-                total = (@SubTotal + (@SubTotal * Model.ClienteEmpresa.TipoIVA.Valor / 100)); 
-                } else {
+                if (@Model.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto")
+                {
+                    total = (@SubTotal + (@SubTotal * Model.ClienteEmpresa.TipoIVA.Valor / 100));
+                }
+                else
+                {
                     total = @SubTotal;
                 }
+                double iva = 0;
+                iva = (@SubTotal * Model.ClienteEmpresa.TipoIVA.Valor / 100);
              }
 
 
             <table>
-                @{if (@Model.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto") {
+                @{if (@Model.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto")
+                  {
                 <tr>
                     <td style="padding-right: 50px !important;">Subtotal: 
                     </td>
@@ -267,19 +292,21 @@
                     <tr>
                         <td style="padding-right: 50px !important;">IVA Cliente: 
                         </td>
-                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% </td>
+                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% ($ @iva)</td>
 
                     </tr>
-                    }
+                  }
                 }
                 <tr>
                     <td style="padding-right: 50px !important;">Total:
                     </td>
                     <td>@total.ToString("C")</td>
                 </tr>
-                <tr><td>@ViewBag.letras</td></tr>
+                <tr><td>Son: <span style="font-size:11px;">@ViewBag.letras</span></td></tr>
             </table>
-            
+            <br />
+            <br />
+            <br />
         </div>
         <div class="clear"></div>
         <div style="float:left;">

@@ -450,4 +450,13 @@
   <data name="errorCambioPass" xml:space="preserve">
     <value>Por favor revise su contraseña</value>
   </data>
+  <data name="okCambioPass" xml:space="preserve">
+    <value>La contraseña fué actualizada correctamente. Por favor ingrese nuevamente al sistema</value>
+  </data>
+  <data name="guardarCarrito" xml:space="preserve">
+    <value>El carrito ha sido guardado</value>
+  </data>
+  <data name="limpiarCarrito" xml:space="preserve">
+    <value>El carrito ha sido limpiado</value>
+  </data>
 </root>

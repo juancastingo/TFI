@@ -447,4 +447,13 @@
   <data name="errorCambioPass" xml:space="preserve">
     <value>Please check your password</value>
   </data>
+  <data name="okCambioPass" xml:space="preserve">
+    <value>The password was updated successfully. Please login again to the system</value>
+  </data>
+  <data name="guardarCarrito" xml:space="preserve">
+    <value>The Cart has been saved</value>
+  </data>
+  <data name="limpiarCarrito" xml:space="preserve">
+    <value>The Cart has been cleaned</value>
+  </data>
 </root>

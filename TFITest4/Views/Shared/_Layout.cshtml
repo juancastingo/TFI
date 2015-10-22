@@ -428,10 +428,10 @@
                 dataType: "json",
                 success: function () {
                     GetInit();
-                    toastr["success"]("The Cart has been cleaned", "OK!")
+                    toastr["success"]("@Language.limpiarCarrito", "OK!")
                 },
                 error: function () {
-                    toastr["error"]("Error while trying to clean the cart", "Error!")
+                    toastr["error"]("@Language.ErrorNormal", "Error!")
                 },
                 complete: ocultarGIF
             });
@@ -448,10 +448,10 @@
                         dataType: "json",
                         success: function () {
                             GetInit();
-                            toastr["success"]("The Cart has been saved", "OK!")
+                            toastr["success"]("@Language.guardarCarrito", "OK!")
                         },
                         error: function () {
-                            toastr["error"]("Error while trying to save the cart", "Error!")
+                            toastr["error"]("@Language.ErrorNormal", "Error!")
                         },
                         complete: ocultarGIF
                     });
