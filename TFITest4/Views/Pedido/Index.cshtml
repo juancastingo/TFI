@@ -10,9 +10,6 @@
     <link href="~/Content/Pedido.css" rel="stylesheet" />
 }
 
-
-
-
 <h2 class="titulo">@Language.pedido</h2>
 
 <div id="cart" style="display: none">
@@ -154,7 +151,7 @@
 
         function executeAjaxPedido(datos) {
             mostrarGIF();
-            console.log("executeAjaxPedido");
+            //console.log("executeAjaxPedido");
             var dataToSend = datos;
             var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
             $.ajax({
@@ -265,12 +262,12 @@
         $('.agregar').click(function () {
             var id = $(this).closest('tr').attr('id');
             var cantidad = $(this).closest('tr').find('td').eq(4).children().val();
-            console.log(id + " " + cantidad);
+            //console.log(id + " " + cantidad);
             $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;
             }
-            if (cantidad < 999) {
+            if (cantidad <= 99 && cantidad > 0) {
                 var DatosPedido = { id: id, cantidad: cantidad }
                 executeAjaxPedido(DatosPedido);
 
@@ -280,7 +277,7 @@
         $('.borrar').click(function () {
             var id = $(this).closest('tr').attr('id');
             var cantidad = $(this).closest('tr').find('td').eq(4).children().val()
-            console.log(id + " " + cantidad);
+            //console.log(id + " " + cantidad);
             $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;

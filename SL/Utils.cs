@@ -101,7 +101,7 @@ namespace SL
             if (decimales > 0)
             {
                 //dec = " CON " + decimales.ToString() + "/100";
-                dec = " Con " + toText(Convert.ToDouble(decimales)) + " Centavos";
+                dec = " Con " + toText(Convert.ToDouble(decimales)) + "";
             }
 
             res = toText(Convert.ToDouble(entero)) + dec;

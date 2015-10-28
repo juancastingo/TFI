@@ -149,7 +149,7 @@
                     <th>Cantidad</th>
                     <th style="width: 150px !important;">Precio Unitario
                     </th>
-                    <th style="width: 100px;text-align: left;">Precio
+                    <th style="width: 150px;text-align: center;">Precio
                     </th>
 
                 </tr>
@@ -166,17 +166,18 @@
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
                         <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
-                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
+                            @{double valor = Convert.ToDouble(@item.PrecioDetalle.Precio);}
+                            <span class="MontoPrePedido">@valor.ToString("C")</span>
                         </td >
-                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                        <td class="tdNumero" style="width: 150px !important;border-right: none !important;border-left: none !important;">
                             @{double DetalleSubt = 0;}
 
                             @{
                               DetalleSubt = (double)(item.PrecioDetalle.Precio * item.Cantidad);
                               SubTotal += DetalleSubt;
                             }
-
-                            <span class="MontoPrePedido">@DetalleSubt.ToString().Replace(",", ".")</span>
+                            @{double precio = valor*@item.Cantidad;}
+                            <span class="MontoPrePedido">@precio.ToString("C")</span>
                         </td>
 
                     </tr>

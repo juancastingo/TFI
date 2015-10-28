@@ -53,8 +53,8 @@
             </tr>
         </table>
         <p>
-            <input class="btn btn-primary" type="submit" value="Save" />
-            @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-success", @style = "color:white" }) 
+            <input class="btn btn-primary" type="submit" value="@Language.guardar" />
+            @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
 
         </p>
     </fieldset>

@@ -456,4 +456,13 @@
   <data name="limpiarCarrito" xml:space="preserve">
     <value>The Cart has been cleaned</value>
   </data>
+  <data name="confimarOperacion" xml:space="preserve">
+    <value>Are you sure that you want to execute this action?</value>
+  </data>
+  <data name="operacionCancelada" xml:space="preserve">
+    <value>Action cancelled!</value>
+  </data>
+  <data name="ConfimarCancelar" xml:space="preserve">
+    <value>Are you sure that you want to cancel? You will lost your modifications</value>
+  </data>
 </root>

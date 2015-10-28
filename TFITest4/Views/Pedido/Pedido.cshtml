@@ -46,23 +46,25 @@
         @foreach (var item in Model)
         {
 
-                <tr class="@item.EstadoMisc.Detalle">
+            <tr class="@item.EstadoMisc.Detalle">
                 <td>
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                    @*@item.FechaEmision.ToString("MM/dd/yyyy HH:mm")*@
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td>
-                    @item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")
+                    @*@item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")*@
+                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
                     <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
                 </td>
-                          <td>
-                            @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
-                          </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Usuario.Nombre)
                 </td>
@@ -80,7 +82,7 @@
                         }
                         @{if (item.EstadoMisc.Detalle == "Facturado")
                           {
-                              @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumentoRef }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
+                            @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumentoRef }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
                           }
                               
                         }
@@ -134,7 +136,25 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+    
 
+<script>
+
+    $(document).ready(function () {
+
+        urlDTLang = "";
+        if ($('#ActualCulture').val() == "esp") {
+            //urlDTLang = '/Scripts/Spanish.json';
+            urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+        }
+
+        try {
+            $('.tableJquery2').DataTable();
+           // tabla = $('.tableJquery2').DataTable();
+
+        } catch (err) { console.log("dt is not perfect") }
+    });
+</script>
 @section EndScript{
 
     <script>
@@ -189,28 +209,36 @@
 
 
         $('.DescartarPrePedido').click(function () {
-            mostrarGIF();
-            //var dataToSend = { CargarPedidoViejo: "juan" }
-            var serviceURL = '@Url.Action("CancelarPedido", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify({ Pedido: $(this).attr('data-val') }),
-                dataType: 'text',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, status) {
-                    if (data.Result == "") {
-                        toastr["success"]("@Language.OKNormal", "OK!");
-                        location.reload();
-                    } else {
-                        errorFunc;
-                    }
+            descID = $(this).attr('data-val')
+            $.confirm({
+                confirm: function () {
+                    mostrarGIF();
+                    //var dataToSend = { CargarPedidoViejo: "juan" }
+                    var serviceURL = '@Url.Action("CancelarPedido", "Pedido")';
+                    $.ajax({
+                        type: "POST",
+                        url: serviceURL,
+                        data: JSON.stringify({ Pedido: descID }),
+                        dataType: 'text',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data, status) {
+                            if (data.Result == "") {
+                                toastr["success"]("@Language.OKNormal", "OK!");
+                                location.reload();
+                            } else {
+                                errorFunc;
+                            }
+                        },
+                        error: function (status) {
+                            errorFunc;
+                        },
+                        complete: ocultarGIF
+                    });
                 },
-                error: function (status) {
-                    errorFunc;
-                },
-                complete: ocultarGIF
+                cancel: function () {
+                    toastr["info"]("@Language.operacionCancelada")
+                }
             });
         });
 

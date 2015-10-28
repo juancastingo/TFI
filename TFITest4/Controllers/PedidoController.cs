@@ -821,8 +821,8 @@ namespace TFITest4.Controllers
             Utils utils = new Utils();
             int codigo = Convert.ToInt32(doc.NrDocumento);
             string Scodigo = codigo.ToString();
-            ViewBag.CB = utils.generaCodigoBarras(Scodigo.PadLeft(8, '0')); //acá y abajo falta lo de la sucursal
-            ViewBag.QR = utils.generarQR(Scodigo.PadLeft(8, '0'));
+            ViewBag.CB = utils.generaCodigoBarras("779053800" +Scodigo.PadLeft(3,'0')); //un numero +nr fact
+            ViewBag.QR = utils.generarQR("779053800" + Scodigo.PadLeft(3, '0'));
             ViewBag.letras = utils.enletras(doc.Monto.ToString());
 
             //ViewBag.Barcode = codigo + ".jpg";

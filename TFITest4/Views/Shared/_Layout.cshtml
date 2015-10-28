@@ -14,7 +14,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="@Url.Content("~/Content/Code52.i18n/Code52.i18n.css")" rel="stylesheet" type="text/css" />
-@*    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    @*    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@
 
     @if (ViewBag.AlertError != null && ViewBag.AlertError != String.Empty)
     {                
-        @*
+@*
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">×</button>
             @ViewBag.AlertError
@@ -60,7 +60,7 @@
     @if (ViewBag.AlertOk != null && ViewBag.AlertOk != String.Empty)
     {           
              
-        @*<div class="alert alert-success">
+@*<div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">×</button>
             @ViewBag.AlertOk
         </div>*@
@@ -69,73 +69,78 @@
     }
 
 
-    <div id="bodyRender" style="width:98%; padding: 0px 1%;">
-    @RenderBody()
+    <div id="bodyRender" style="width: 98%; padding: 0px 1%;">
+        @RenderBody()
     </div>
 
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>@Language.logIn</h1><br>
-                    <div class="oculto" id="LoginImgLoader" >
-                     <img src="~/Content/images/loader2.gif" />
-                    </div>
-				  <form onsubmit="return false;" id="FormLogin" class="form col-md-12 center-block">
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>@Language.logIn</h1>
+                <br>
+                <div class="oculto" id="LoginImgLoader">
+                    <img src="~/Content/images/loader2.gif" />
+                </div>
+                <form onsubmit="return false;" id="FormLogin" class="form col-md-12 center-block">
                     <span class="mal"></span>
-					<input type="text" id="UserName" name="UserName" placeholder="@Language.NombreUsuario" autofocus required>
-					<input type="password" class="login-field login-field-password" id="LoginPassword" placeholder='@Language.Password' name="Password" required>
+                    <input type="text" id="UserName" name="UserName" placeholder="@Language.NombreUsuario" autofocus required>
+                    <input type="password" class="login-field login-field-password" id="LoginPassword" placeholder='@Language.Password' name="Password" required>
                     <input type="submit" id="loginModal" name="login" class="login loginmodal-submit" value="@Language.ingresar">
-				  </form>
-					
-				  <div class="login-help">
-					<a href="/Account/RegisterOut">@Language.registro</a> - <a href="/Login/ForgetPassword">@Language.olvidoPass</a>
-				  </div>
-				</div>
-			</div>
-		  </div>
+                </form>
 
-    
-<div class="modal fade" id="myModal">
-<div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title">@Language.carrito</h3> <span class="field-validation-error" id="TextoCarritoPedido"></span>
+                <div class="login-help">
+                    <a href="/Account/RegisterOut">@Language.registro</a> - <a href="/Login/ForgetPassword">@Language.olvidoPass</a>
+                </div>
+            </div>
         </div>
-        <div class="modal-body" id="carritoModal">
-		  <h5 class="text-center">@Language.suCarrito nr# <span id="NrPrePedido"></span></h5>
-          <table class="table table-striped" >
-            <thead id="tblHead">
-              <tr>
-                <th>@Language.producto</th>
-                <th>@Language.cantidad</th>
-                <th colspan="2">@Language.precioUnitario</th>
-                <th colspan="2">@Language.TotalProducto</th>
-              </tr>
-            </thead>
-            <tbody>
-             
-            </tbody>
-          </table>
-          <div class="form-group">
-            <div id="PostDiv">
-            </div>            <div class="clearfix"></div>
-          </div>
-		</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cerrar</button>
-          <button id="SaveCarritoPrePedido" type="button" class="btn btn-primary">@Language.guardar</button>
-          <button id="NuevoCarrito" type="button" class="btn btn-warning">@Language.nuevo @Language.carrito</button>
-          <button id="SubmitPedido" type="button" class="btn btn-success">@Language.enviar @Language.pedido</button>
+    </div>
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="modal-title">@Language.carrito</h3>
+                    <span class="field-validation-error" id="TextoCarritoPedido"></span>
+                </div>
+                <div class="modal-body" id="carritoModal">
+                    <h5 class="text-center">@Language.suCarrito nr# <span id="NrPrePedido"></span></h5>
+                    <table class="table table-striped">
+                        <thead id="tblHead">
+                            <tr>
+                                <th>@Language.producto</th>
+                                <th>@Language.cantidad</th>
+                                <th colspan="2">@Language.precioUnitario</th>
+                                <th colspan="2">@Language.TotalProducto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div id="PostDiv">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cerrar</button>
+                    <button id="SaveCarritoPrePedido" type="button" class="btn btn-primary">@Language.guardar</button>
+                    <button id="NuevoCarrito" type="button" class="btn btn-warning">@Language.nuevo @Language.carrito</button>
+                    <button id="SubmitPedido" type="button" class="btn btn-success">@Language.enviar @Language.pedido</button>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
         </div>
-				
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
-<a href="#0" class="cd-top">Top</a>
+    <a href="#0" class="cd-top">Top</a>
 
-   
+
 
     @Html.ValidationSummary(true)
 
@@ -143,7 +148,7 @@
 
     @RenderSection("scripts", required: false)
 
-    
+
 
 
     @*FancyBox*@
@@ -176,20 +181,22 @@
     <script type="text/javascript" src="~/Scripts/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="~/Scripts/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="~/Scripts/buttons.flash.min.js"></script>
-    
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/1.10.9/sorting/datetime-moment.js"></script>
+
     @*currency*@
     <script src="~/Scripts/accounting.min.js"></script>
 
     @*datetimepicker*@
     <script src="~/Scripts/moment-with-locales.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-    
+
 
 
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/hideShowPassword.min.js"></script>
     <script type="text/javascript" src="~/Scripts/toastr.min.js"></script>
-       
+    <script type="text/javascript" src="~/Scripts/jquery.confirm.min.js"></script>
 
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
     <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
@@ -207,36 +214,36 @@
             }
         });
     </script>
-     <script type="text/javascript">
-         // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
-         var controlSession = function() {
-             if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
-                 //console.log("dif from invitado");
-                 $('#bodyRender').hide()
-                 $.ajax({
-                     cache: false,
-                     type: 'post',
-                     url: "/Login/ControlSesion",
-                     data: $(this).serialize(),
-                     dataType: "json",
-                     success: function (response) {
-                         //console.log(response);
-                         if (response.Result == "NO") {
-                             document.location.href = "/Login/CerrarSesion";
-                         } else {
-                             if (response.Pendientes != -1) {
-                                 $('.docPendientes a').append(" (" + response.Pendientes + ")");
-                             }
+    <script type="text/javascript">
+        // con esto controlo el tema de q si va para atras no pueda ver las cosas y no aparezca el usuario logueado
+        var controlSession = function () {
+            if ($('#nombre_usuario').attr('data-val') != 'Invitado') {
+                //console.log("dif from invitado");
+                $('#bodyRender').hide()
+                $.ajax({
+                    cache: false,
+                    type: 'post',
+                    url: "/Login/ControlSesion",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success: function (response) {
+                        //console.log(response);
+                        if (response.Result == "NO") {
+                            document.location.href = "/Login/CerrarSesion";
+                        } else {
+                            if (response.Pendientes != -1) {
+                                $('.docPendientes a').append(" (" + response.Pendientes + ")");
+                            }
                             // if (response.PendFact != -1) {
-                             //    $('.facPendientes a').append(" (" + response.PendFact + ")");
-                           //  }
-                             $('#bodyRender').show()
-                         }
-                     }
-                 });
-             }
-         }
-         controlSession();
+                            //    $('.facPendientes a').append(" (" + response.PendFact + ")");
+                            //  }
+                            $('#bodyRender').show()
+                        }
+                    }
+                });
+            }
+        }
+        controlSession();
     </script>
     <script type="text/javascript">
 
@@ -269,7 +276,7 @@
         }
 
 
-        
+
         //number format end
         //mostrar sacar gif
         var ocultarGIF = function () {
@@ -360,8 +367,8 @@
                 } catch (ex) { }
             }
         }
-        
-        
+
+
 
 
 
@@ -388,13 +395,27 @@
             var count = 0;
             $('#carritoModal table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
             $('#carritoModal table > tbody').html('');
+            //console.log();
             list.forEach(function (elem) {
                 //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
                 subt += (elem.Precio * elem.Cant);
                 thisSubtotal = (elem.Precio * elem.Cant);
-              
-                $('#carritoModal table > tbody').append('<tr data-val="'+elem.id+'"><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
+
+                $('#carritoModal table > tbody').append('<tr data-val="' + elem.id + '"><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
             });
+            if (subt == 0) {
+                $('#SubmitPedido').attr('disabled', 'disabled');
+                $('#SaveCarritoPrePedido').attr('disabled', 'disabled');
+                $('#LimpiarCarrito').attr('disabled', 'disabled');
+                $('#cart-popover').click()
+                $('#cart-popover').click()
+            } else {
+                $('#SubmitPedido').removeAttr('disabled');
+                $('#SaveCarritoPrePedido').removeAttr('disabled');
+                $('#LimpiarCarrito').removeAttr('disabled');
+                $('#cart-popover').click()
+                $('#cart-popover').click()
+            }
             IVA = PreIVA;
             IVACalc = parseFloat(PreIVA);
             //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
@@ -402,59 +423,71 @@
             $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
             if (subt == 0) {
                 $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
-            } else {
-                $('#popover_content_wrapper').find("p:first").html("");
-            }
-
-        }
-        function errorFunc(status) {
-            //alert('error ' + status);
-            toastr["error"]("@Language.ErrorLogInAgain", "Error")
-
+        } else {
+            $('#popover_content_wrapper').find("p:first").html("");
         }
 
-        var assert = function(info) {
-            toastr["success"](info, "prueba")
-        }
+    }
+    function errorFunc(status) {
+        //alert('error ' + status);
+        toastr["error"]("@Language.ErrorLogInAgain", "Error")
 
-        function limpiarCarrito() {
-            mostrarGIF();
-            $('.popover').toggle();
-            $.ajax({
-                type: "POST",
-                url: "/Pedido/LimpiarCarrito",
-                data: param = "",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function () {
-                    GetInit();
-                    toastr["success"]("@Language.limpiarCarrito", "OK!")
-                },
-                error: function () {
-                    toastr["error"]("@Language.ErrorNormal", "Error!")
-                },
-                complete: ocultarGIF
-            });
-        }
+    }
 
-            function SaveCarritoPrePedido() {
-                if ($('#carritoModal table > tbody tr').length > 0) {
+    var assert = function (info) {
+        toastr["success"](info, "prueba")
+    }
+
+    function limpiarCarrito() {
+        // if (confirm("@Language.confimarOperacion")) {
+            $.confirm({
+                confirm: function () {
                     mostrarGIF();
+                    $('.popover').toggle();
                     $.ajax({
                         type: "POST",
-                        url: "/Pedido/GuardarCarrito",
+                        url: "/Pedido/LimpiarCarrito",
                         data: param = "",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function () {
                             GetInit();
-                            toastr["success"]("@Language.guardarCarrito", "OK!")
+                            toastr["success"]("@Language.limpiarCarrito", "OK!")
                         },
                         error: function () {
                             toastr["error"]("@Language.ErrorNormal", "Error!")
                         },
                         complete: ocultarGIF
                     });
+                },
+                cancel: function () {
+                    toastr["info"]("@Language.operacionCancelada")
+                }
+            });
+
+            // } else {
+            //     toastr["info"]("@Language.operacionCancelada")
+            // }
+        }
+
+        function SaveCarritoPrePedido() {
+            if ($('#carritoModal table > tbody tr').length > 0) {
+                mostrarGIF();
+                $.ajax({
+                    type: "POST",
+                    url: "/Pedido/GuardarCarrito",
+                    data: param = "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        GetInit();
+                        toastr["success"]("@Language.guardarCarrito", "OK!")
+                    },
+                    error: function () {
+                        toastr["error"]("@Language.ErrorNormal", "Error!")
+                        },
+                    complete: ocultarGIF
+                });
                 }
             }
 
@@ -474,6 +507,12 @@
                 });
             }
             var tabla;
+            var form_modified = false;
+            function confirmExit() {
+                msg = "@Language.ConfimarCancelar";
+                msg = $('<span/>').html(msg).text();
+                return msg
+             }
             $(document).ready(function () {
                 ok = $('#AlertOk').val();
                 if (ok != undefined) { toastr["success"](ok, "OK!") }
@@ -481,6 +520,53 @@
                 //para el carrito
 
 
+                $('select').on('change', function () {
+                    form_modified = true;
+                    try {
+                        volverExiste = $('.volver')[0]
+                        if (volverExiste) {
+                            window.onbeforeunload = confirmExit;
+                            confirmExit();
+                        }
+                    } catch (exception) { }
+                    console.log("change select");
+                }); // take care of select tags
+
+                $('input').on('change keypress', function () {
+                    form_modified = true;
+                    try {
+                        volverExiste = $('.volver')[0]
+                        if (volverExiste) {
+                            window.onbeforeunload = confirmExit;
+                            confirmExit();
+                        }
+                    } catch(exception) {}
+                    console.log("change input");
+                });
+
+
+                //para la confirmación antes de volver.... Ya lo hago con el beforeUnload
+               @* $('.volver').on('click', function () {
+                    if (form_modified) {
+                        msg = $('<span/>').html("@Language.ConfimarCancelar").text();
+                        if (!confirm(msg)) { //ver tema idioma se ve feo en español
+                            toastr["info"]("@Language.operacionCancelada")
+                            return false;
+                        }
+                    }
+                });*@
+
+
+                $.confirm.options = {
+                    text: "@Language.confimarOperacion",
+                    title: "",
+                    confirmButton: "@Language.confirmar",
+                    cancelButton: "@Language.cancelar",
+                    post: false,
+                    confirmButtonClass: "btn-primary",
+                    cancelButtonClass: "btn-default",
+                    dialogClass: "modal-dialog"
+                }
 
 
                 $('#cart-popover').popover({
@@ -497,7 +583,7 @@
                         $('#microfono').attr('src', '/Content/images/mic-animate.gif');
                     } catch (ex) { }
                 });
-           
+
                 if ($('#LoginExiste').val() == 1) {
                     //console.log($('#LoginExiste').attr("data-val"));
                     if ($('#LoginExiste').attr("data-val") == "Externo") {
@@ -536,9 +622,11 @@
                 urlDTLang = "";
                 if ($('#ActualCulture').val() == "esp") {
                     //urlDTLang = '/Scripts/Spanish.json';
+                    moment.locale('es');
                     urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
                 }
                 try {
+                    $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
                     tabla = $('.tableJquery').DataTable({
                         language: {
                             url: urlDTLang,
@@ -622,7 +710,7 @@
                                 //$('#MainMenu').fadeTo("slow", 1);
                                 //$('#login-modal').modal('hide');
                                 //if ($('#LoginExiste').attr("data-val") == "Externo") {
-                                 //   $('#CarritoMenuBoton').removeClass('oculto');
+                                //   $('#CarritoMenuBoton').removeClass('oculto');
                                 //}
                                 //$('#CarritoMenuBoton').removeClass('oculto');
                                 //GetInit();
@@ -648,23 +736,29 @@
                 })
 
                 $('#NuevoCarrito').click(function () {
-                    mostrarGIF();
-                    $.ajax({
-                        type: "POST",
-                        url: "/Pedido/NuevoPrePedido",
-                        data: param = "",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function () {
-                            GetInit();
-                            toastr["success"]("@Language.OKNormal", "OK!");
+                    $.confirm({
+                        confirm: function () {
+                            mostrarGIF();
+                            $.ajax({
+                                type: "POST",
+                                url: "/Pedido/NuevoPrePedido",
+                                data: param = "",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function () {
+                                    GetInit();
+                                    toastr["success"]("@Language.OKNormal", "OK!");
+                                },
+                                error: function () {
+                                    toastr["error"]("@Language.ErrorLogInAgain", "Error!")
+                                },
+                                complete: ocultarGIF
+                            });
                         },
-                        error: function () {
-                            toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                        },
-                        complete: ocultarGIF
+                        cancel: function () {
+                            toastr["info"]("@Language.operacionCancelada")
+                        }
                     });
-
                 });
 
                 $('#SubmitPedido').click(function () {
@@ -706,9 +800,9 @@
                                 $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                                 if (subt == 0) {
                                     $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
-                                } else {
-                                    $('#popover_content_wrapper').find("p:first").html("");
-                                }
+                            } else {
+                                $('#popover_content_wrapper').find("p:first").html("");
+                            }
                                 //$('#TextoCarritoPedido').text("No hay stock");
                                 //console.log(data);
                                 //$('#TextoCarritoPedido').text("No hay stock");
@@ -724,10 +818,10 @@
                                 //    });
                                 //});
 
-                            } else {
+                        } else {
 
-                                toastr["success"](data.Result, "OK!")
-                            }
+                            toastr["success"](data.Result, "OK!")
+                        }
                         },
                         error: function () {
                             toastr["error"]("@Language.ErrorLogInAgain", "Error!")
@@ -742,12 +836,12 @@
                 IEVersion = 13; //pongo 13 por si no es IE que tenga algo mayor que 9
                 //if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  {     // If Internet Explorer, return version number
                 if (!!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                    msie =1
+                    msie = 1
                 }
                 if (msie > 0) {
                     IEVersion = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
                 }
-                if ( (msie == -1) || (IEVersion < 10) ) {  
+                if ((msie == -1) || (IEVersion < 10)) {
                     $('#LoginPassword').hideShowPassword({
                         innerToggle: true
                     });
@@ -805,45 +899,49 @@
                     }).css('display', 'none');
                     $('div').filter(function () {
                         return $(this).css('z-index') > 10000;
-                    }).each(function() {
+                    }).each(function () {
                         $(this).css('display', 'none');
                     });
                 }
                 setTimeout(function () { RemoveSomee(); }, 3000);
 
-            
+
                 $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
 
 
                 @RenderSection("readyEnding", false)
             }); // END Document Ready
 
-            $('body').on('click', '#LimpiarCarrito', function () {
-                limpiarCarrito();
-                $('#cart-popover').click()
-            });
-            $('body').on('click', '#SaveCarritoPrePedido', function () {
-                SaveCarritoPrePedido(); //poner el evento con ajax
-            });
-            $('body').on('click', '#VerCarrito', function () {
-                $('.popover').toggle();
-                $('#myModal').modal('toggle');
-                $('#cart-popover').click()
-            });
-            $('body').on('click', '.myTrash', function () {
-                $(this).closest('tr').hide("slow");
-                console.log($(this));
-                mostrarGIF();
-                console.log("executeAjaxPedido");
-                var id = $(this).closest('tr').attr('data-val');
-                var cantidad = $(this).closest('tr').find('td').eq(1).html();
-                //console.log(id);
-                console.log(cantidad);
-                var cantidad = parseInt(cantidad);
-                cantidad *= -1;
-                console.log(cantidad);
-                var dataToSend = { id: id, Cantidad: cantidad }
-                var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
+        $('body').on('click', '#LimpiarCarrito', function () {
+            limpiarCarrito();
+            $('#cart-popover').click()
+        });
+        $('body').on('click', '#SaveCarritoPrePedido', function () {
+            SaveCarritoPrePedido(); //poner el evento con ajax
+        });
+        $('body').on('click', '#VerCarrito', function () {
+            $('.popover').toggle();
+            $('#myModal').modal('toggle');
+            $('#cart-popover').click()
+        });
+        $('body').on('click', '.myTrash', function () {
+            esto = $(this);
+            $.confirm({
+                confirm: function () {
+                    //if (confirm("@Language.confimarOperacion")) {
+                   esto.closest('tr').hide("slow");
+                   //console.log($(this));
+                   mostrarGIF();
+                   //console.log("executeAjaxPedido");
+                   var id = esto.closest('tr').attr('data-val');
+                   var cantidad = esto.closest('tr').find('td').eq(1).html();
+                   //console.log(id);
+                   console.log(cantidad);
+                   var cantidad = parseInt(cantidad);
+                   cantidad *= -1;
+                   console.log(cantidad);
+                   var dataToSend = { id: id, Cantidad: cantidad }
+                   var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
                 $.ajax({
                     type: "POST",
                     url: serviceURL,
@@ -854,47 +952,51 @@
                     error: errorFunc,
                     complete: ocultarGIF
                 });
-
-
-
-
-
+                   // } else {
+                   //      toastr["info"]("@Language.operacionCancelada")
+                   // }
+               },
+                cancel: function () {
+                    toastr["info"]("@Language.operacionCancelada");
+                }
             });
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "10000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
+        });
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "10000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
 
         //efectos
-            var map = { 18: false, 71: false};
-            $(document).keydown(function (e) {
-                if (e.keyCode in map) {
-                    map[e.keyCode] = true;
-                    if (map[18] && map[71]) {
-                        $('body').addClass("giro");
-                        setTimeout(function () { $('body').removeClass("giro"); }, 3500);
-                    }
+        var map = { 18: false, 71: false };
+        $(document).keydown(function (e) {
+            if (e.keyCode in map) {
+                map[e.keyCode] = true;
+                if (map[18] && map[71]) {
+                    $('body').addClass("giro");
+                    setTimeout(function () { $('body').removeClass("giro"); }, 3500);
                 }
-            }).keyup(function (e) {
-                if (e.keyCode in map) {
-                    map[e.keyCode] = false;
-                }
-            });
+            }
+        }).keyup(function (e) {
+            if (e.keyCode in map) {
+                map[e.keyCode] = false;
+            }
+        });
 
-        
+
     </script>
 
 

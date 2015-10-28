@@ -250,6 +250,24 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Está seguro que desea cancelar? Perderá las modificaciones realizadas..
+        /// </summary>
+        public static string ConfimarCancelar {
+            get {
+                return ResourceManager.GetString("ConfimarCancelar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Esta seguro que desea realizar esta accion?.
+        /// </summary>
+        public static string confimarOperacion {
+            get {
+                return ResourceManager.GetString("confimarOperacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirmar.
         /// </summary>
         public static string confirmar {
@@ -430,7 +448,7 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Fecha alta.
+        ///   Busca una cadena traducida similar a Fecha Alta.
         /// </summary>
         public static string fechaAlta {
             get {
@@ -448,7 +466,7 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Fecha emisión.
+        ///   Busca una cadena traducida similar a Fecha Emisión.
         /// </summary>
         public static string fechaEmision {
             get {
@@ -466,7 +484,7 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Fecha última modificación.
+        ///   Busca una cadena traducida similar a Fecha Última Modificación.
         /// </summary>
         public static string FUM {
             get {
@@ -777,6 +795,15 @@ namespace TFITest4.Resources {
         public static string olvidoPassText {
             get {
                 return ResourceManager.GetString("olvidoPassText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Acción cancelada!.
+        /// </summary>
+        public static string operacionCancelada {
+            get {
+                return ResourceManager.GetString("operacionCancelada", resourceCulture);
             }
         }
         

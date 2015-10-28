@@ -5,11 +5,22 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+        .cuentaCorriente {
+            font-weight: bold;
+        }
+        .valor1 {
+            text-align: right;
+        }
+    </style>
+
 <script type="text/javascript">
     //if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
     //    window.location = "/Login/Error"
     //}
 </script>
+
+
 
 
 <h2 class="titulo">@Language.clientes</h2>
@@ -71,7 +82,7 @@
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
                 </td>
                 <td>
-                    @item.FechaAlta.ToString("MM/dd/yyyy")
+                    @item.FechaAlta.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td class="valor1">
                     @item.Limite.ToString().Replace(",", ".")

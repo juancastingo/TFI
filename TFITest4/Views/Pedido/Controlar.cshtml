@@ -8,6 +8,9 @@
             font-weight: bold;
         }
 
+        .valor {
+            text-align: right;
+        }
 
     </style>
 
@@ -57,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 @*  <td class="SignoPesos">$</td>
                 <td class="tdNumero">

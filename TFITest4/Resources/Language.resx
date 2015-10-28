@@ -310,7 +310,7 @@
     <value>Descripción</value>
   </data>
   <data name="fechaAlta" xml:space="preserve">
-    <value>Fecha alta</value>
+    <value>Fecha Alta</value>
   </data>
   <data name="imagen" xml:space="preserve">
     <value>Imagen</value>
@@ -379,10 +379,10 @@
     <value>Enviar</value>
   </data>
   <data name="fechaEmision" xml:space="preserve">
-    <value>Fecha emisión</value>
+    <value>Fecha Emisión</value>
   </data>
   <data name="FUM" xml:space="preserve">
-    <value>Fecha última modificación</value>
+    <value>Fecha Última Modificación</value>
   </data>
   <data name="ingresar" xml:space="preserve">
     <value>Ingresar</value>
@@ -458,5 +458,14 @@
   </data>
   <data name="limpiarCarrito" xml:space="preserve">
     <value>El carrito ha sido limpiado</value>
+  </data>
+  <data name="confimarOperacion" xml:space="preserve">
+    <value>Esta seguro que desea realizar esta accion?</value>
+  </data>
+  <data name="operacionCancelada" xml:space="preserve">
+    <value>Acción cancelada!</value>
+  </data>
+  <data name="ConfimarCancelar" xml:space="preserve">
+    <value>¿Está seguro que desea cancelar? Perderá las modificaciones realizadas.</value>
   </data>
 </root>
