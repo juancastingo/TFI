@@ -235,7 +235,7 @@
     <value>Clientes</value>
   </data>
   <data name="compre" xml:space="preserve">
-    <value>Compre</value>
+    <value>Comprar</value>
   </data>
   <data name="inicioSesion" xml:space="preserve">
     <value>Iniciar Sesión</value>
@@ -465,7 +465,13 @@
   <data name="operacionCancelada" xml:space="preserve">
     <value>Acción cancelada!</value>
   </data>
+  <data name="cantidadProductos" xml:space="preserve">
+    <value>Por favor Ingrese una cantidad válida: </value>
+  </data>
   <data name="ConfimarCancelar" xml:space="preserve">
     <value>¿Está seguro que desea cancelar? Perderá las modificaciones realizadas.</value>
+  </data>
+  <data name="errorLogueo" xml:space="preserve">
+    <value>Por favor revise su Usuario o Contraseña</value>
   </data>
 </root>

@@ -1,12 +1,9 @@
 ﻿@model TFITest4.Models.ModelListaPrecio
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Create";
-}
-
 @section headSection {
       <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <script src="~/Scripts/moment.min.js"></script>
 }
 
 <h2 class="titulo">@Language.crear</h2>
@@ -58,16 +55,40 @@
                     </table>
 
         <p>
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="@Language.crear" class="btn btn-primary crearEditar" />
+            @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
+
         </p>
 
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink(@Language.volver, "Index")
-</div>
+@*<script type="text/javascript">
+    $('#datetimepicker1').datetimepicker({
+        minDate: moment()
+    });
+</script>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+@section EndScript {
+    <script type="text/javascript">
+        $(function () {
+            PickerIdioma = "en";
+            if ($('#ActualCulture').val() == "esp") {
+                PickerIdioma = "es";
+            }
+            $('#datetimepicker1').datetimepicker({
+                locale: PickerIdioma,
+                format: 'YYYY-MM-DD HH:mm',
+                defaultDate: moment()
+                //minDate: moment()
+                //pickTime: false para lo de la factura
+            });
+        });
+    </script>
 }

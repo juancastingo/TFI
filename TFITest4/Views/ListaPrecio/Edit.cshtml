@@ -53,7 +53,7 @@
             </tr>
         </table>
         <p>
-            <input class="btn btn-primary" type="submit" value="@Language.guardar" />
+            <input class="btn btn-primary crearEditar" type="submit" value="@Language.guardar" />
             @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
 
         </p>
@@ -77,7 +77,7 @@
             var dateNow = $('#FechaLoca').attr('value')
             console.log(dateNow);
             $('#datetimepicker2').datetimepicker({
-                locale: PickerIdioma,
+                locale: PickerIdioma,   
                 format: 'YYYY-MM-DD HH:mm',
                 defaultDate: dateNow
             });

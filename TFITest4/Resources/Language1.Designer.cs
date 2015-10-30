@@ -187,6 +187,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor Ingrese una cantidad válida: .
+        /// </summary>
+        public static string cantidadProductos {
+            get {
+                return ResourceManager.GetString("cantidadProductos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Carrito.
         /// </summary>
         public static string carrito {
@@ -241,7 +250,7 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Compre.
+        ///   Busca una cadena traducida similar a Comprar.
         /// </summary>
         public static string compre {
             get {
@@ -399,6 +408,15 @@ namespace TFITest4.Resources {
         public static string ErrorLogInAgain {
             get {
                 return ResourceManager.GetString("ErrorLogInAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Por favor revise su Usuario o Contraseña.
+        /// </summary>
+        public static string errorLogueo {
+            get {
+                return ResourceManager.GetString("errorLogueo", resourceCulture);
             }
         }
         

@@ -85,7 +85,7 @@
                     <span class="mal"></span>
                     <input type="text" id="UserName" name="UserName" placeholder="@Language.NombreUsuario" autofocus required>
                     <input type="password" class="login-field login-field-password" id="LoginPassword" placeholder='@Language.Password' name="Password" required>
-                    <input type="submit" id="loginModal" name="login" class="login loginmodal-submit" value="@Language.ingresar">
+                    <input type="submit" id="loginModal" name="login" class="btn login loginmodal-submit" value="@Language.ingresar">
                 </form>
 
                 <div class="login-help">
@@ -275,7 +275,9 @@
             }
         }
 
-
+        $('.crearEditar').click(function () {
+            window.onbeforeunload = null;
+        });
 
         //number format end
         //mostrar sacar gif
@@ -364,7 +366,8 @@
                             }
                         }
                     }
-                } catch (ex) { }
+                } catch (ex) {
+                }
             }
         }
 
@@ -388,44 +391,48 @@
 
 
         function successFunc(data, status) {
-            list = data.ListCarrito.Productos;
-            var PreIVA = data.rIVA;
-            $('#NrPrePedido').text(data.ListCarrito.IDDocumento);
-            var subt = 0;
-            var count = 0;
-            $('#carritoModal table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
-            $('#carritoModal table > tbody').html('');
-            //console.log();
-            list.forEach(function (elem) {
-                //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                subt += (elem.Precio * elem.Cant);
-                thisSubtotal = (elem.Precio * elem.Cant);
+            try {
+                list = data.ListCarrito.Productos;
+                var PreIVA = data.rIVA;
+                $('#NrPrePedido').text(data.ListCarrito.IDDocumento);
+                var subt = 0;
+                var count = 0;
+                $('#carritoModal table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                $('#carritoModal table > tbody').html('');
+                //console.log();
+                list.forEach(function (elem) {
+                    //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                    subt += (elem.Precio * elem.Cant);
+                    thisSubtotal = (elem.Precio * elem.Cant);
 
-                $('#carritoModal table > tbody').append('<tr data-val="' + elem.id + '"><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
-            });
-            if (subt == 0) {
-                $('#SubmitPedido').attr('disabled', 'disabled');
-                $('#SaveCarritoPrePedido').attr('disabled', 'disabled');
-                $('#LimpiarCarrito').attr('disabled', 'disabled');
-                $('#cart-popover').click()
-                $('#cart-popover').click()
-            } else {
-                $('#SubmitPedido').removeAttr('disabled');
-                $('#SaveCarritoPrePedido').removeAttr('disabled');
-                $('#LimpiarCarrito').removeAttr('disabled');
-                $('#cart-popover').click()
-                $('#cart-popover').click()
+                    $('#carritoModal table > tbody').append('<tr data-val="' + elem.id + '"><td>' + elem.Nombre + '</td><td class="numero">' + elem.Cant + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
+                });
+                if (subt == 0) {
+                    $('#SubmitPedido').attr('disabled', 'disabled');
+                    $('#SaveCarritoPrePedido').attr('disabled', 'disabled');
+                    $('#LimpiarCarrito').attr('disabled', 'disabled');
+                    $('#cart-popover').click()
+                    $('#cart-popover').click()
+                } else {
+                    $('#SubmitPedido').removeAttr('disabled');
+                    $('#SaveCarritoPrePedido').removeAttr('disabled');
+                    $('#LimpiarCarrito').removeAttr('disabled');
+                    $('#cart-popover').click()
+                    $('#cart-popover').click()
+                }
+                IVA = PreIVA;
+                IVACalc = parseFloat(PreIVA);
+                //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
+                $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
+                $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                if (subt == 0) {
+                    $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
+                } else {
+                    $('#popover_content_wrapper').find("p:first").html("");
+                }
+            } catch (ex) {
+                document.location.href = "/Login/CerrarSesion";
             }
-            IVA = PreIVA;
-            IVACalc = parseFloat(PreIVA);
-            //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</h4><h4 class="text-right"><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
-            $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
-            $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
-            if (subt == 0) {
-                $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
-        } else {
-            $('#popover_content_wrapper').find("p:first").html("");
-        }
 
     }
     function errorFunc(status) {
@@ -680,7 +687,9 @@
                         });
                         return false;
                     }
-                    $('#LoginImgLoader').removeClass("oculto");
+                    $('#loginModal').addClass("disabled in-progress");
+                    $('#loginModal').attr("disabled","disabled");
+                    //$('#LoginImgLoader').removeClass("oculto");
                     $('#MainMenu').fadeTo("slow", 0.1);
 
                     //var dataToSend = { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() }
@@ -725,10 +734,12 @@
                             }
                         },
                         error: function () {
-                            $('#login-modal span').text("Please check Username or Password");
+                            $('#login-modal span').text("@Language.errorLogueo");
                         },
                         complete: function () {
-                            $('#LoginImgLoader').addClass("oculto");
+                            //$('#LoginImgLoader').addClass("oculto");
+                            $('#loginModal').removeClass("disabled in-progress");
+                            $('#loginModal').prop("disabled", false);
 
                         }
                     });

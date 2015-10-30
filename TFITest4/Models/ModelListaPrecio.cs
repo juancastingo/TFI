@@ -15,6 +15,7 @@ namespace TFITest4.Models
         [Required]
         [Display(Name = "Nombre", ResourceType = typeof(Language))]
         public string Detalle { get; set; }
+        [Required]
         [Display(Name = "FechaDesde", ResourceType = typeof(Language))]
         public System.DateTime FechaDesde { get; set; }
         [Display(Name = "activo", ResourceType = typeof(Language))]

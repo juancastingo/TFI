@@ -462,7 +462,13 @@
   <data name="operacionCancelada" xml:space="preserve">
     <value>Action cancelled!</value>
   </data>
+  <data name="cantidadProductos" xml:space="preserve">
+    <value>Please enter a valid value:</value>
+  </data>
   <data name="ConfimarCancelar" xml:space="preserve">
     <value>Are you sure that you want to cancel? You will lost your modifications</value>
+  </data>
+  <data name="errorLogueo" xml:space="preserve">
+    <value>Please check Username or Password</value>
   </data>
 </root>
