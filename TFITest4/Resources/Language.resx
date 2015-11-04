@@ -471,6 +471,9 @@
   <data name="ConfimarCancelar" xml:space="preserve">
     <value>¿Está seguro que desea cancelar? Perderá las modificaciones realizadas.</value>
   </data>
+  <data name="emailConfirm" xml:space="preserve">
+    <value>Un link de activación de cuenta ha sido enviado a su correo</value>
+  </data>
   <data name="errorLogueo" xml:space="preserve">
     <value>Por favor revise su Usuario o Contraseña</value>
   </data>

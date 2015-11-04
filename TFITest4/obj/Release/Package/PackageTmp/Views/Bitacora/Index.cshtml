@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<BIZ.BIZBitacora>
 
+<script type="text/javascript">
+    if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
+
+
 <h2>Bitácora</h2>
 
 <table class="table tableJquery dt-responsive nowrap table-bordered" cellspacing="0" width="100%">
@@ -34,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.IDBitacora)
         </td>*@
                 <td>
-                    @item.Fecha.ToString("MM/dd/yyyy HH:mm")
+                    @item.Fecha.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)

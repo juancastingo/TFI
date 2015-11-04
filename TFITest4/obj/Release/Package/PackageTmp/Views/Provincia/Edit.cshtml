@@ -1,16 +1,17 @@
 ﻿@model BIZ.BIZProvincia
+@using TFITest4.Resources
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>@Language.editar</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>BIZProvincia</legend>
+        <legend></legend>
            @Html.HiddenFor(model => model.IDProvincia)
 
         <table class="table table-bordered table-striped" cellspacing="0" width="100%">
@@ -33,14 +34,12 @@
             </tr>
          </table>
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" class="btn btn-primary crearEditar"  value="@Language.guardar" />
+            @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
         </p>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

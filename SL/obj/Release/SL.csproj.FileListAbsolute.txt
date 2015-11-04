@@ -6,3 +6,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Release\S
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\obj\Release\SL.pdb
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\BIZ.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\BIZ.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\Gma.QrCodeNet.Encoding.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\Gma.QrCodeNet.Encoding.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\SL\bin\Release\Gma.QrCodeNet.Encoding.xml

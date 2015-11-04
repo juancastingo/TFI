@@ -14,3 +14,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\obj\Release\
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\SL.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\BarcodeLib.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\SL.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\Gma.QrCodeNet.Encoding.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\Gma.QrCodeNet.Encoding.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\DAL\bin\Release\Gma.QrCodeNet.Encoding.xml

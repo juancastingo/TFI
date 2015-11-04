@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<BIZ.BIZProducto>
 @using TFITest4.Resources;
 
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Externo") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -9,9 +17,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link href="~/Content/Pedido.css" rel="stylesheet" />
 }
-
-
-
 
 <h2 class="titulo">@Language.pedido</h2>
 
@@ -34,7 +39,7 @@
                 @Language.imagen
             </th>
             <th class="transparente"></th>
-            <th style="width: 100px;">
+            <th>
                 @Language.precio
             </th>
             <th>@Language.cantidad
@@ -50,7 +55,7 @@
                 @Language.imagen
             </th>
             <th class="transparente"></th>
-            <th style="width: 100px;">
+            <th >
                 @Language.precio
             </th>
             <th>@Language.cantidad
@@ -137,7 +142,8 @@
                         cantidad = 1;
                     }
                     var DatosPedido = { id: id, cantidad: cantidad }
-                    executeAjaxPedido(DatosPedido);
+                    var boton = ui.draggable.closest('tr').find('.btn');
+                    executeAjaxPedido(DatosPedido,boton);
 
                 }
             }).sortable({
@@ -152,9 +158,18 @@
         });
 
 
-        function executeAjaxPedido(datos) {
-            mostrarGIF();
-            console.log("executeAjaxPedido");
+
+        function executeAjaxPedido(datos, TEsto) {
+            if (TEsto != undefined) {
+                var estoAddRem = TEsto;
+                estoAddRem.attr("disabled", "disabled");
+                estoAddRem.addClass("in-progress");
+                estoAddRem.addClass("disabled");
+            }
+
+            //TEsto.prop("disabled", false);
+            //mostrarGIF();
+            //console.log("executeAjaxPedido");
             var dataToSend = datos;
             var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
             $.ajax({
@@ -165,9 +180,18 @@
                 dataType: "json",
                 success: successFunc,
                 error: errorFunc,
-                complete: ocultarGIF
+                complete: mySuccs
             });
-
+            function mySuccs() {
+                //ocultarGIF();
+                if (TEsto != undefined) {
+                    setTimeout(function () {  
+                        TEsto.prop("disabled", false);
+                        TEsto.removeClass("in-progress");
+                        TEsto.removeClass("disabled");
+                    }, 500);
+                }
+            }
             //comento successFunc y errorFunc de aca porque uso las de Layout asi no repito
             //function successFunc2(data, status) {
             //    console.log("success2");
@@ -261,34 +285,39 @@
         });
 
         var list;
-
+        var maxProd = 100;
+        var minProd = 1;
         $('.agregar').click(function () {
             var id = $(this).closest('tr').attr('id');
             var cantidad = $(this).closest('tr').find('td').eq(4).children().val();
-            console.log(id + " " + cantidad);
+            //console.log(id + " " + cantidad);
             $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;
             }
-            if (cantidad < 999) {
+            if (cantidad <= maxProd && cantidad >= minProd) {
                 var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido);
+                executeAjaxPedido(DatosPedido,$(this));
 
+            } else {
+                toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
             }
 
         });
         $('.borrar').click(function () {
             var id = $(this).closest('tr').attr('id');
             var cantidad = $(this).closest('tr').find('td').eq(4).children().val()
-            console.log(id + " " + cantidad);
+            //console.log(id + " " + cantidad);
             $(this).closest('tr').find('td').eq(4).children().val('');
             if (cantidad == 0) {
                 cantidad = 1;
             }
-            if (cantidad < 999 && cantidad > -999) {
+            if (cantidad <= maxProd && cantidad >= minProd) {
                 cantidad *= -1;
                 var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido);
+                executeAjaxPedido(DatosPedido,$(this));
+            } else {
+                toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
             }
         });
     </script>

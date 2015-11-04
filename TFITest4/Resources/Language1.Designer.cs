@@ -376,6 +376,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Un link de activación de cuenta ha sido enviado a su correo.
+        /// </summary>
+        public static string emailConfirm {
+            get {
+                return ResourceManager.GetString("emailConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Empresa.
         /// </summary>
         public static string empresa {

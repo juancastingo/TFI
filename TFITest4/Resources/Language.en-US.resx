@@ -468,6 +468,9 @@
   <data name="ConfimarCancelar" xml:space="preserve">
     <value>Are you sure that you want to cancel? You will lost your modifications</value>
   </data>
+  <data name="emailConfirm" xml:space="preserve">
+    <value>A confirmation Link has been sent you your email account</value>
+  </data>
   <data name="errorLogueo" xml:space="preserve">
     <value>Please check Username or Password</value>
   </data>

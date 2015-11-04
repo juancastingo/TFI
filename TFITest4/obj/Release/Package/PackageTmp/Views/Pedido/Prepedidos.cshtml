@@ -21,7 +21,7 @@
                 <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
             </th>
             <th class="transparente"></th>
-            <th style="width:100px;">
+            <th>
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>Estado
@@ -41,10 +41,10 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td>
-                    @item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")
+                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">

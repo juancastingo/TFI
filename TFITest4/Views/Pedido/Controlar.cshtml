@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Creditos y Cobranzas" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
     <style>

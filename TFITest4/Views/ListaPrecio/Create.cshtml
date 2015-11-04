@@ -2,7 +2,7 @@
 @using TFITest4.Resources
 
 @section headSection {
-      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
     <script src="~/Scripts/moment.min.js"></script>
 }
 
@@ -11,52 +11,52 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-        <fieldset>
+    <fieldset>
         <legend>@Language.listaPrecios</legend>
-    <table class="table table-bordered table-striped" cellspacing="0" width="100%">
-        <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Detalle)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Detalle)
-            @Html.ValidationMessageFor(model => model.Detalle)
-        </td>
-        </tr>
-        <tr>    
-        <td class="editor-label">
-            @Html.LabelFor(model => model.FechaDesde)
-        </td>
-        <td class="editor-field">
-@*            @Html.EditorFor(model => model.FechaDesde)*@
-            @Html.ValidationMessageFor(model => model.FechaDesde)
-                <div class='input-group date' id='datetimepicker1'>
-                    <input name="FechaDesde" type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-        </div>
-         </td>
-        </tr>
+        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Detalle)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Detalle)
+                    @Html.ValidationMessageFor(model => model.Detalle)
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.FechaDesde)
+                </td>
+                <td class="editor-field">
+                    @*            @Html.EditorFor(model => model.FechaDesde)*@
+                    @Html.ValidationMessageFor(model => model.FechaDesde)
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input name="FechaDesde" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
 
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Activo)
-        </td>
-        <td class="editor-field">
-            <select name="Activo">
-                <option value="true">@Language.verdadero</option>
-                <option value="False">@Language.falso</option>
-            </select>
-            @*            @Html.EditorFor(model => model.Activo)
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Activo)
+                </td>
+                <td class="editor-field">
+                    <select name="Activo">
+                        <option value="true">@Language.verdadero</option>
+                        <option value="False">@Language.falso</option>
+                    </select>
+                    @*            @Html.EditorFor(model => model.Activo)
             @Html.ValidationMessageFor(model => model.Activo)*@
-        </td>
-        </tr>
-                    </table>
+                </td>
+            </tr>
+        </table>
 
         <p>
             <input type="submit" value="@Language.crear" class="btn btn-primary crearEditar" />
-            @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
+            @Html.ActionLink(@Language.cancelar, "Index", new { }, new { @class = "btn btn-success volver", @style = "color:white" })
 
         </p>
 
@@ -85,9 +85,9 @@
             $('#datetimepicker1').datetimepicker({
                 locale: PickerIdioma,
                 format: 'YYYY-MM-DD HH:mm',
-                defaultDate: moment()
-                //minDate: moment()
-                //pickTime: false para lo de la factura
+                //defaultDate: moment(),
+                //minDate: moment(),
+                //pickTime: false //para lo de la factura
             });
         });
     </script>

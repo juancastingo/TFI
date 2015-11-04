@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
+@section headSection {
+      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <script src="~/Scripts/moment.min.js"></script>
+}
 
 <h2>Facturar</h2>
 
@@ -33,7 +37,7 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 @*  <td class="SignoPesos">$</td>
                 <td class="tdNumero">
@@ -49,7 +53,7 @@
 
                 <td>
                     <p>
-                        <button data-val="@item.IDDocumento"  value=""  class="FacturarPedido btn btn-success btn-sm" >@Language.facturar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="PreFacturarPedido btn btn-success btn-sm" >@Language.facturar</button>
                         @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                     </p>
                 </td>
@@ -59,17 +63,75 @@
 </table>
 
 
+
+
+@*modal*@
+
+
+<div class="modal fade" id="FactModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">@Language.facturar Fecha fact</h3>
+            </div>
+            <div class="modal-body" id="PedidoModalBody">
+                <div class='input-group date' id='datetimepicker1'>
+                        <input id="FechaFac" type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="FacturarPedido btn btn-warning " data-dismiss="modal">@Language.confirmar</button>
+                <button type="button" class="btn btn-default " data-dismiss="modal">@Language.cancelar</button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+
+
+
 @section EndScript{
 
     <script>
+        //$(function () {
+            PickerIdioma = "en";
+            if ($('#ActualCulture').val() == "esp") {
+                PickerIdioma = "es";
+            }
+            $('#datetimepicker1').datetimepicker({
+                locale: PickerIdioma,
+                format: 'YYYY-MM-DD',
+                minDate: moment(),
+                maxDate: moment().add(30, 'days')
+                //pickTime: false 
+           });
+        //});
+            var IDPedido;
+            $('.PreFacturarPedido').click(function () {
+                IDPedido = $(this).attr('data-val');
+            $('#FactModal').modal('toggle');
+        });
+
+
         $('.FacturarPedido').click(function () {
-            pedidoNr = $(this).attr('data-val');
+            pedidoNr = IDPedido;
+            FechaFac = $('#FechaFac').val();
             mostrarGIF();
             var serviceURL = '@Url.Action("facturarPedido", "Pedido")';
            $.ajax({
                type: "POST",
                url: serviceURL,
-               data: JSON.stringify({ Pedido: pedidoNr }),
+               data: JSON.stringify({ Pedido: pedidoNr, fecha: FechaFac }),
                dataType: 'text',
                contentType: "application/json; charset=utf-8",
                dataType: "json",

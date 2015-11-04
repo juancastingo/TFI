@@ -12,7 +12,7 @@ using TFITest4.Models;
 
 namespace TFITest4.Controllers
 {
-    
+
     public class AccountController : Controller
     {
         // register get
@@ -54,7 +54,7 @@ namespace TFITest4.Controllers
             catch
             {
                 //DAL.DALUsuario D_User = new DAL.DALUsuario();
-               // DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
+                // DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
                 ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
                 ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                 return View();
@@ -71,47 +71,51 @@ namespace TFITest4.Controllers
         [HttpPost]
         public ActionResult RegisterOut(Models.RegisterModel U)
         {
-            //try
-            //{
-                if (ModelState.IsValid)
+            try
+            {
+                //if (ModelState.IsValid)
+                // {
+                BIZUsuario User = new BIZUsuario();
+                User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(U);
+                User.IDEstado = 12;
+                User.IDTipoUsuario = 2;
+                UsuarioWorker.InsertarUsuario(User);
+                //DALUser.InsertUsuario(User);
+                TempData["OKNormal"] = Resources.Language.OKNormal;
+                SL.Utils util = new SL.Utils();
+                var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
+                BIZ.BIZCorreo correo = new BIZCorreo();
+                correo.Subject = "Please Validate IID Account";
+                correo.To = User.Email;
+                string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
+                string body = String.Format(Language.MailValidationLink, User.Nombre, link);
+                //correo.Body = "Hi " + User.Nombre + ", <p>Plese validate your IID account with the following link</p> <a href='http://" + Request.Url.Host.ToLower() +":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
+                correo.Body = body;
+                util.sendMail(correo);
+                string _ip = "Unknown";
+                try
                 {
-                    BIZUsuario User = new BIZUsuario();
-                    User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(U);
-                    User.IDEstado = 12;
-                    User.IDTipoUsuario = 2;
-                    UsuarioWorker.InsertarUsuario(User);
-                    //DALUser.InsertUsuario(User);
-                    TempData["OKNormal"] = Resources.Language.OKNormal;
-                    SL.Utils util = new SL.Utils();
-                    var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
-                    BIZ.BIZCorreo correo = new BIZCorreo();
-                    correo.Subject = "Please Validate IID Account";
-                    correo.To = User.Email;
-                    string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
-                    string body = String.Format(Language.MailValidationLink, User.Nombre, link);
-                    //correo.Body = "Hi " + User.Nombre + ", <p>Plese validate your IID account with the following link</p> <a href='http://" + Request.Url.Host.ToLower() +":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
-                    correo.Body = body;
-                    util.sendMail(correo);
-                    string _ip = "Unknown";
-                    try
-                    {
-                        _ip = (string)Session["_ip"];
-                    } catch(Exception) {}
-
-                    Bita.guardarBitacora(new BIZBitacora("Informativo","Se ha creado el usuario " + User.Usuario1, null,_ip));
-                    return RedirectToAction("EmailConfirm");
+                    _ip = (string)Session["_ip"];
                 }
+                catch (Exception) { }
+
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado el usuario " + User.Usuario1, null, _ip));
+                return RedirectToAction("EmailConfirm");
+            }
+            catch (Exception ex)
+            {
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 //DAL.DALCliente DCliente = new DAL.DALCliente();
                 ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
                 return View(U);
+            }
             //}
             //catch(Exception err)
             //{
-                //TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
-                //DAL.DALCliente DCliente = new DAL.DALCliente();
-                //ViewBag.IDClienteEmpresa = new SelectList(DCliente.getAllClienteEmpresa(), "IDClienteEmpresa", "Nombre");
-                //return View(U);
+            //TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+            //DAL.DALCliente DCliente = new DAL.DALCliente();
+            //ViewBag.IDClienteEmpresa = new SelectList(DCliente.getAllClienteEmpresa(), "IDClienteEmpresa", "Nombre");
+            //return View(U);
             //}
         }
 

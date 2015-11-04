@@ -13,142 +13,137 @@
         @Html.HiddenFor(Model => Model.IDClienteEmpresa)
         @Html.HiddenFor(Model => Model.Direccion.IDDireccion)
         @Html.HiddenFor(Model => Model.FechaAlta)
-        <div class="editor-label">
+        <table class="table  table-bordered table-striped" cellspacing="0" width="100%">
+        <tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Nombre)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Nombre)
             @Html.ValidationMessageFor(model => model.Nombre)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>    
+        <td class="editor-label">
             @Html.LabelFor(model => model.IDEstado)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.DropDownList("IDEstado", String.Empty)
             @Html.ValidationMessageFor(model => model.IDEstado)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Limite)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Limite)
             @Html.ValidationMessageFor(model => model.Limite)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.CUIT)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.CUIT)
             @Html.ValidationMessageFor(model => model.CUIT)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.RazonSocial)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.RazonSocial)
             @Html.ValidationMessageFor(model => model.RazonSocial)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.NombreFantasia)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.NombreFantasia)
             @Html.ValidationMessageFor(model => model.NombreFantasia)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.IDTipoIVA)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.DropDownList("IDTipoIVA", String.Empty)
             @Html.ValidationMessageFor(model => model.IDTipoIVA)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.IDLocalidad)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.DropDownList("IDLocalidad")
             @Html.ValidationMessageFor(model => model.IDLocalidad)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Calle)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Direccion.Calle)
             @Html.ValidationMessageFor(model => model.Direccion)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Numero)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Direccion.Numero)
             @Html.ValidationMessageFor(model => model.Numero)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Piso)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Direccion.Piso)
             @Html.ValidationMessageFor(model => model.Piso)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Dpto)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Direccion.Dpto)
             @Html.ValidationMessageFor(model => model.Dpto)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Detalle)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Direccion.Detalle)
             @Html.ValidationMessageFor(model => model.Detalle)
-        </div>
-
-
-
-
-
-
-
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Telefono)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Telefono)
             @Html.ValidationMessageFor(model => model.Telefono)
-        </div>
-
-        <div class="editor-label">
+        </td>
+        </tr><tr>
+        <td class="editor-label">
             @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
+        </td>
+        <td class="editor-field">
             @Html.EditorFor(model => model.Email)
             @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
+        </td>
+            </tr>
+            </table>
+        <br />
         <p>
-            <input type="submit" class="btn btn-primary" value="@Language.editar" />
+            <input type="submit" class="btn btn-primary crearEditar" value="@Language.guardar" />
+            @Html.ActionLink(@Language.canecelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
+
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

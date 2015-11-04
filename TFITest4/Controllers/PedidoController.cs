@@ -721,12 +721,13 @@ namespace TFITest4.Controllers
         }
 
 
-        public ActionResult facturarPedido(string Pedido)
+        public ActionResult facturarPedido(string Pedido, string fecha)
         {
             try
             {
                 int IDPedido = int.Parse(Pedido);
                 int idUser = (int)Session["userID"];
+                DateTime FechaFac = DateTime.Parse(fecha);
                 BIZDocumento pedido = DocWorker.ObtenerDocXID(IDPedido);
                 
                 BIZDocumento factura = new BIZDocumento();
@@ -738,8 +739,8 @@ namespace TFITest4.Controllers
                 {
                     factura.IDDocumentoTipo = 13; // tipo 13 es factura B. Osea != de responsable inscripto. monotributista, exento, no categorizado, no responsable, consumidor final
                 }
-                factura.FechaEmision = DateTime.Now;
-                factura.FechaUltimaModificacion = factura.FechaEmision;
+                factura.FechaEmision = FechaFac;
+                factura.FechaUltimaModificacion = DateTime.Now;
                 factura.IDClienteEmpresa = pedido.ClienteEmpresa.IDClienteEmpresa;
                 factura.IDEstado = 9; //estado generada de factura 9
                 factura.IDUsuarioCreacion = idUser;
@@ -767,7 +768,7 @@ namespace TFITest4.Controllers
                 catch (Exception ex) { }
                 try { ip = Session["_ip"].ToString(); }
                 catch (Exception ex) { }
-                Bita.guardarBitacora(new BIZBitacora("Informativo", "Factura nr#" + IDDocNuevo + " Generada" + IDPedido, idU, ip));
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "Factura nr#" + IDDocNuevo + " Generada. pedido nr#" + IDPedido, idU, ip));
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }

@@ -1,20 +1,18 @@
 ﻿@model TFITest4.Models.ModelListaPrecio
+@using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Edit";
-}
 @section headSection {
       <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 }
 
-<h2>Edit</h2>
+<h2>@Language.editar</h2>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>ModelListaPrecio</legend>
+        <legend>@Language.listaPrecios</legend>
         @Html.HiddenFor(model => model.IDListaPrecio)
         <table class="table table-bordered table-striped" cellspacing="0" width="100%">
             <tr>
@@ -55,14 +53,12 @@
             </tr>
         </table>
         <p>
-            <input class="btn btn-primary" type="submit" value="Save" />
+            <input class="btn btn-primary crearEditar" type="submit" value="@Language.guardar" />
+            @Html.ActionLink(@Language.cancelar, "Index", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
+
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 
 
@@ -81,7 +77,7 @@
             var dateNow = $('#FechaLoca').attr('value')
             console.log(dateNow);
             $('#datetimepicker2').datetimepicker({
-                locale: PickerIdioma,
+                locale: PickerIdioma,   
                 format: 'YYYY-MM-DD HH:mm',
                 defaultDate: dateNow
             });

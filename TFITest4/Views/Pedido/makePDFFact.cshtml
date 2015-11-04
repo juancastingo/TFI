@@ -224,9 +224,9 @@
                     <th>Cantidad
                     </th>
                     <th  style="text-align: left;">Producto</th>
-                    <th style="width: 150px !important;">Precio Unitario
+                    <th style="width: 150px !important;text-align: right;">Precio Unitario
                     </th>
-                    <th style="width: 100px; text-align: left;">Precio
+                    <th style="width: 100px; text-align: right;">Precio
                     </th>
 
                 </tr>
@@ -239,13 +239,15 @@
                         <td class="tdNumero" style="border-right: none !important; border-left: none !important;" >
                             @Html.DisplayFor(modelItem => item.Cantidad)
 
-                        </td style="border-right: none !important; border-left: none !important;">
+                        </td >
                         <td >
                             @Html.DisplayFor(modelItem => item.PrecioDetalle.Producto.Nombre)
-
+                            
                         </td>
                         <td style="width: 150px !important; border-right: none !important; border-left: none !important;" class="tdNumero">
-                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
+@*                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>*@
+                            @{double precio = Convert.ToDouble(item.PrecioDetalle.Precio);}
+                            <span class="MontoPrePedido">@precio.ToString("n2")</span>
                         </td>
                         <td class="tdNumero" style="border-right: none !important; border-left: none !important;">
                             @{double DetalleSubt = 0;}
@@ -255,7 +257,7 @@
                               SubTotal += DetalleSubt;
                             }
 
-                            <span class="MontoPrePedido">@DetalleSubt.ToString().Replace(",", ".")</span>
+                            <span class="MontoPrePedido">@DetalleSubt.ToString("n2")</span>
                         </td>
 
                     </tr>
@@ -292,7 +294,7 @@
                     <tr>
                         <td style="padding-right: 50px !important;">IVA Cliente: 
                         </td>
-                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% ($ @iva)</td>
+                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% ($ @iva.ToString("n2"))</td>
 
                     </tr>
                   }

@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Creditos y Cobranzas" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
     <style>
@@ -8,6 +16,9 @@
             font-weight: bold;
         }
 
+        .valor {
+            text-align: right;
+        }
 
     </style>
 
@@ -57,7 +68,7 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("MM/dd/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
                 </td>
                 @*  <td class="SignoPesos">$</td>
                 <td class="tdNumero">

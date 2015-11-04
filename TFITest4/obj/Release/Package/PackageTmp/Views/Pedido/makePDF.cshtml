@@ -147,9 +147,9 @@
                     <th style="text-align: left;">Producto
                     </th>
                     <th>Cantidad</th>
-                    <th style="width: 150px !important;">Precio Unitario
+                    <th style="width: 150px !important;text-align: right">Precio Unitario
                     </th>
-                    <th style="width: 100px;text-align: left;">Precio
+                    <th style="width: 150px;text-align: right;">Precio
                     </th>
 
                 </tr>
@@ -166,17 +166,18 @@
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
                         <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
-                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>
+                            @{double valor = Convert.ToDouble(@item.PrecioDetalle.Precio);}
+                            <span class="MontoPrePedido">@valor.ToString("n2")</span>
                         </td >
-                        <td class="tdNumero" style="border-right: none !important;border-left: none !important;">
+                        <td class="tdNumero" style="width: 150px !important;border-right: none !important;border-left: none !important;">
                             @{double DetalleSubt = 0;}
 
                             @{
                               DetalleSubt = (double)(item.PrecioDetalle.Precio * item.Cantidad);
                               SubTotal += DetalleSubt;
                             }
-
-                            <span class="MontoPrePedido">@DetalleSubt.ToString().Replace(",", ".")</span>
+                            @{double precio = valor*@item.Cantidad;}
+                            <span class="MontoPrePedido">@precio.ToString("n2")</span>
                         </td>
 
                     </tr>
@@ -184,7 +185,10 @@
             </tbody>
         </table>
         <div id="tablaTotal" class="fleft">
-            @{double total = (@SubTotal + (@SubTotal * Model.Usuario.ClienteEmpresa.TipoIVA.Valor / 100)); }
+            @{double total = (@SubTotal + (@SubTotal * Model.Usuario.ClienteEmpresa.TipoIVA.Valor / 100));
+              double iva = 0;
+              iva = (@SubTotal * Model.ClienteEmpresa.TipoIVA.Valor / 100);
+              }
             <table>
                 <tr>
                     <td style="padding-right: 50px !important;">Subtotal: 
@@ -196,7 +200,7 @@
                 <tr>
                     <td style="padding-right: 50px !important;">IVA Cliente: 
                     </td>
-                    <td>@Model.Usuario.ClienteEmpresa.TipoIVA.Valor% </td>
+                    <td>@Model.Usuario.ClienteEmpresa.TipoIVA.Valor% ($ @iva.ToString("n2"))</td>
 
                 </tr>
                 <tr>

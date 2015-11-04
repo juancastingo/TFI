@@ -69,3 +69,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Sys
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\BLL.pdb
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.xml
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Microsoft.Owin.Cors.xml
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Gma.QrCodeNet.Encoding.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Gma.QrCodeNet.Encoding.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\Gma.QrCodeNet.Encoding.xml

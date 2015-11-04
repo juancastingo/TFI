@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = "Index";
 }
-@Html.ActionLink("PDF", "DownloadViewPDF")
 <div class="container">
 
 <h2 class="center">@Language.ProvinciaTitle</h2>
@@ -34,8 +33,7 @@
                         @Html.DisplayFor(modelItem => item.Pais.Nombre)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProvincia }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IDProvincia })
+                        @Html.ActionLink(Language.editar, "Edit", new { id = item.IDProvincia }, new { @class = "btn btn-primary", @style = "color:white" })
                     </td>
                 </tr>
             }
