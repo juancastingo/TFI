@@ -477,4 +477,13 @@
   <data name="errorLogueo" xml:space="preserve">
     <value>Por favor revise su Usuario o Contraseña</value>
   </data>
+  <data name="invalidMail" xml:space="preserve">
+    <value>Email inválido</value>
+  </data>
+  <data name="UsuarioNoConfirmado" xml:space="preserve">
+    <value>El usuario no se encuentra confirmado para ingresar al sistema. Solicite autorización a un administrador del sistema.</value>
+  </data>
+  <data name="UsuarioValidado" xml:space="preserve">
+    <value>Validación correcta de usuario: </value>
+  </data>
 </root>

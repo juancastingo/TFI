@@ -98,7 +98,7 @@ namespace DAL
             var TUser = db.Usuario
                     .Where(b => b.Usuario1 == oUser.Usuario1)
                     .FirstOrDefault();
-            TUser.IDEstado = 13;
+            TUser.IDEstado = 26;
             db.Entry(TUser).State = EntityState.Modified;
             db.SaveChanges();
         }

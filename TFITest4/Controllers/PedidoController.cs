@@ -13,6 +13,8 @@ using System.Data.SqlClient;
 using SL;
 using Rotativa;
 using BLL;
+using System.Threading;
+using System.Globalization;
 
 namespace TFITest4.Controllers
 {
@@ -27,6 +29,7 @@ namespace TFITest4.Controllers
         //DAL.DALDocumento DocWorker = new DAL.DALDocumento();
         private BLLDocumento DocWorker = new BLLDocumento();
         private BLLBitacora Bita = new BLLBitacora();
+        Utils util = new Utils();
 
 
         //
@@ -448,7 +451,7 @@ namespace TFITest4.Controllers
                 //stockCarrito Stock = new stockCarrito();
 
                 Boolean TodoOK = false;
-                
+
                 if (ListCarrito.Productos.Count != 0)
                 {
                     TodoOK = true;
@@ -572,6 +575,7 @@ namespace TFITest4.Controllers
 
         public ActionResult makePDF()
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
             var doc = DocWorker.ObtenerDocXID(gIdPedido);
             //Utils utils = new Utils();
             //string codigo = "123456";
@@ -606,7 +610,7 @@ namespace TFITest4.Controllers
                 }
                 carritoPedido.estado = RPedido.EstadoMisc.Detalle;
                 carritoPedido.comentario = RPedido.Detalle;
-               
+
 
 
                 //Session["CarritoPedido"] = carritoPedido;
@@ -638,7 +642,7 @@ namespace TFITest4.Controllers
                 {
                     status = 22;
                 }
-                
+
 
                 BIZDocumento doc = new BIZDocumento();
                 if (justif != "")
@@ -649,17 +653,41 @@ namespace TFITest4.Controllers
 
                 Nullable<int> idU = null;
                 string ip = "Unknown";
-                try { idU = (int)Session["userID"]; } catch (Exception ex) { }
-                try { ip = Session["_ip"].ToString(); }  catch (Exception ex) { }
+                try { idU = (int)Session["userID"]; }
+                catch (Exception ex) { }
+                try { ip = Session["_ip"].ToString(); }
+                catch (Exception ex) { }
                 string inf = "";
                 if (status == 6)
                     inf = "Se ha aprobado el pedido nr ";
                 else
                     inf = "Se ha rechazado el pedido nr ";
 
+                //bitacora
+                try
+                {
                     Bita.guardarBitacora(new BIZBitacora("Informativo", inf + IDPedido, idU, ip));
+                }
+                catch (Exception ex) { }
 
-                return Json(new { Result = ""}, JsonRequestBehavior.AllowGet);
+                //mail
+                var EstePedido = DocWorker.ObtenerDocXID(IDPedido);
+                BIZ.BIZCorreo correo = new BIZCorreo();
+                correo.Subject = "Nueva Actualización en sus pedidos";
+                correo.To = EstePedido.ClienteEmpresa.Email;
+                correo.cc = EstePedido.Usuario.Email;
+                if (status == 6)
+                {
+                    correo.Body =  "<span>"+ EstePedido.Usuario.Nombre +",</span><br><span>Se ha aprobado su pepido nr # " + IDPedido + ". Ingrese al sistema para visualizarlo</span>";
+                }
+                else
+                {
+                    correo.Body = "<span>" + EstePedido.Usuario.Nombre + ",</span><br><span>Se ha rechazado su pepido nr # " + IDPedido + ". Ingrese al sistema para visualizarloo</span>";
+
+                }
+                util.sendMail(correo);
+                TempData["OKNormal"] = Resources.Language.OKNormal;
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -677,13 +705,28 @@ namespace TFITest4.Controllers
                 int IDPedido = int.Parse(Pedido);
                 int idUser = (int)Session["userID"];
                 DocWorker.ActualizarStatusDoc(IDPedido, 23, idUser); //23 es cancelado de pedido
+
+
+                //bitacora
+                string ip = "Unknown";
+                try { ip = Session["_ip"].ToString(); }
+                catch (Exception ex) { }
+                string inf = "Cancelación pedido nr " + IDPedido;
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", inf, idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["OKNormal"] = Resources.Language.OKNormal;
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
+                Bita.guardarBitacora(new BIZBitacora("Error", "Error al cancelar pedido" , null, "Unknown"));
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
 
@@ -694,7 +737,7 @@ namespace TFITest4.Controllers
             try
             {
                 var docs = DocWorker.ObtenerDocsXEstado(3, 6); //3 es el tipo del documento documento. Acá pedido. 6 es el estado del doc. acá Aprobado
-                
+
                 float monto;
                 int IDEmpresa;
 
@@ -729,7 +772,7 @@ namespace TFITest4.Controllers
                 int idUser = (int)Session["userID"];
                 DateTime FechaFac = DateTime.Parse(fecha);
                 BIZDocumento pedido = DocWorker.ObtenerDocXID(IDPedido);
-                
+
                 BIZDocumento factura = new BIZDocumento();
                 if (pedido.ClienteEmpresa.TipoIVA.Detalle == "Responsable Inscripto")
                 {
@@ -756,7 +799,7 @@ namespace TFITest4.Controllers
                     detalle.IDPrecioDetalle = det.IDPrecioDetalle;
                     factura.DocumentoDetalle.Add(det);
                 }
-                int IDDocNuevo = DocWorker.GuardarDocumentoFac(factura,pedido);
+                int IDDocNuevo = DocWorker.GuardarDocumentoFac(factura, pedido);
 
 
 
@@ -768,7 +811,20 @@ namespace TFITest4.Controllers
                 catch (Exception ex) { }
                 try { ip = Session["_ip"].ToString(); }
                 catch (Exception ex) { }
-                Bita.guardarBitacora(new BIZBitacora("Informativo", "Factura nr#" + IDDocNuevo + " Generada. pedido nr#" + IDPedido, idU, ip));
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Factura nr#" + IDDocNuevo + " Generada. pedido nr#" + IDPedido, idU, ip));
+                }
+                catch (Exception ex) { }
+
+                //mail
+                BIZ.BIZCorreo correo = new BIZCorreo();
+                correo.Subject = "Nueva Actualización en sus pedidos";
+                correo.To = pedido.ClienteEmpresa.Email;
+                correo.cc = pedido.Usuario.Email;
+                correo.Body = "<span>" + pedido.Usuario.Nombre + ",</span><br><span>Se ha Facturado su pepido nr # " + IDPedido + ". Ingrese al sistema para imprimir la factura</span>";
+                util.sendMail(correo);
+
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
@@ -800,6 +856,7 @@ namespace TFITest4.Controllers
 
         public ActionResult makePDFFact()
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
             var doc = DocWorker.ObtenerDocXID(GIdFactura);
             double monto = 0;
             if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
@@ -814,7 +871,7 @@ namespace TFITest4.Controllers
             {
                 foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
                 {
-                    monto += Convert.ToDouble(d.PrecioDetalle.Precio)*d.Cantidad;
+                    monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
                 }
                 monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
             }
@@ -822,7 +879,7 @@ namespace TFITest4.Controllers
             Utils utils = new Utils();
             int codigo = Convert.ToInt32(doc.NrDocumento);
             string Scodigo = codigo.ToString();
-            ViewBag.CB = utils.generaCodigoBarras("779053800" +Scodigo.PadLeft(3,'0')); //un numero +nr fact
+            ViewBag.CB = utils.generaCodigoBarras("779053800" + Scodigo.PadLeft(3, '0')); //un numero +nr fact
             ViewBag.QR = utils.generarQR("779053800" + Scodigo.PadLeft(3, '0'));
             ViewBag.letras = utils.enletras(doc.Monto.ToString());
 

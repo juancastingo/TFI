@@ -77,7 +77,7 @@
                         @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
                         @{if (item.EstadoMisc.Detalle != "Facturado" && item.EstadoMisc.Detalle != "Rechazado" && item.EstadoMisc.Detalle != "Cancelado")
                           {
-                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >@Language.cancelar</button>
+                            <button data-val="@item.IDDocumento"  value=""  class="DescartarPedido btn btn-danger btn-sm" >@Language.cancelar</button>
                           }
                         }
                         @{if (item.EstadoMisc.Detalle == "Facturado")
@@ -208,7 +208,7 @@
         });
 
 
-        $('.DescartarPrePedido').click(function () {
+        $('.DescartarPedido').click(function () {
             descID = $(this).attr('data-val')
             $.confirm({
                 confirm: function () {
@@ -224,16 +224,16 @@
                         dataType: "json",
                         success: function (data, status) {
                             if (data.Result == "") {
-                                toastr["success"]("@Language.OKNormal", "OK!");
                                 location.reload();
                             } else {
                                 errorFunc;
+                                ocultarGIF();
                             }
                         },
                         error: function (status) {
                             errorFunc;
-                        },
-                        complete: ocultarGIF
+                            ocultarGIF();
+                        }
                     });
                 },
                 cancel: function () {

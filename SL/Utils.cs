@@ -59,9 +59,13 @@ namespace SL
                 MailMessage mail = new MailMessage();
 
                 mail.To.Add(pCorreo.To);
+                if (pCorreo.cc != null)
+                {
+                    mail.CC.Add(pCorreo.cc);
+                }
                 mail.From = new MailAddress("iidcorpuai@gmail.com");
                 mail.Subject = pCorreo.Subject;
-                mail.Body = pCorreo.Body;
+                mail.Body = pCorreo.Body + "<br><br><hr><span>Atte.</span><br><span>IID</span>";
 
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
@@ -74,7 +78,7 @@ namespace SL
                 smtp.Send(mail);
             }
             catch (Exception ex) {
-                //bitacora guardar error mail
+                //nada
             }
 
         }

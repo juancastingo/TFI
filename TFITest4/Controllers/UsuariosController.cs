@@ -40,20 +40,50 @@ namespace TFITest4.Controllers
         // POST: /Usuarios/Create
 
         [HttpPost]
-        public ActionResult RegisterIN(RegisterModel _user)
+        public ActionResult RegisterIN(ModelUsuario _user)
         {
             try
             {
                 BIZUsuario User = new BIZUsuario();
-                User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(_user);
+                User = AutoMapper.Mapper.Map<ModelUsuario, BIZUsuario>(_user);
                 User.IDEstado = 13;
                 User.IDClienteEmpresa = null;
                 userWorker.InsertarUsuario(User);
+
+
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha generado el usuario: " + _user.Usuario1, idUser, ip));
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             catch
             {
+
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                Bita.guardarBitacora(new BIZBitacora("Error", "Error al crear un usuario de forma interna", idUser, ip));
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return RedirectToAction("Index");
             }
         }
@@ -98,7 +128,7 @@ namespace TFITest4.Controllers
                 user.Email = usuario.Email;
                 user.IDEstado = usuario.IDEstado;
                 user.Telefono = usuario.Telefono;
-                user.IDTipoUsuario = usuario.IDTipoUsuario;
+               // user.IDTipoUsuario = usuario.IDTipoUsuario; //esto lo rompia porq no traia nada
                 user.Nombre = usuario.Nombre;
                 user.FechaUltimaMod = DateTime.Now;
                 if (userWorker.ActualizarUsuario(user))

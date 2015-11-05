@@ -583,6 +583,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Email inválido.
+        /// </summary>
+        public static string invalidMail {
+            get {
+                return ResourceManager.GetString("invalidMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Invitado.
         /// </summary>
         public static string Invitado {
@@ -1087,11 +1096,29 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a El usuario no se encuentra confirmado para ingresar al sistema. Solicite autorización a un administrador del sistema..
+        /// </summary>
+        public static string UsuarioNoConfirmado {
+            get {
+                return ResourceManager.GetString("UsuarioNoConfirmado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El usuario no se encuentra habilitado para ingresar al sistema.
         /// </summary>
         public static string UsuarioNoHabilitado {
             get {
                 return ResourceManager.GetString("UsuarioNoHabilitado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Validación correcta de usuario: .
+        /// </summary>
+        public static string UsuarioValidado {
+            get {
+                return ResourceManager.GetString("UsuarioValidado", resourceCulture);
             }
         }
         

@@ -474,4 +474,13 @@
   <data name="errorLogueo" xml:space="preserve">
     <value>Please check Username or Password</value>
   </data>
+  <data name="invalidMail" xml:space="preserve">
+    <value>Invalid Email Address</value>
+  </data>
+  <data name="UsuarioNoConfirmado" xml:space="preserve">
+    <value>The User is not Enabled to access the system. Ask authorization to a system admin.</value>
+  </data>
+  <data name="UsuarioValidado" xml:space="preserve">
+    <value>Validation was performed for User: </value>
+  </data>
 </root>

@@ -132,17 +132,25 @@ namespace TFITest4.Controllers
                 Session["grupo"] = _usuario.TipoUsuario.Tipo;
                 return PartialView("~/Views/Shared/Menu.cshtml");
             }
+            else if (_usuario != null)
+            {
+                if (_usuario.IDEstado == 12)
+                {
+                    return Json(new { status = "error", message = @Language.UsuarioNoHabilitado });
+                }
+                else if (_usuario.IDEstado == 26)
+                {
+
+                    return Json(new { status = "error", message = @Language.UsuarioNoConfirmado });
+                }
+                else
+                {
+                    return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
+                }
+            }
             else
             {
-               // if (_usuario.IDEstado != 13)
-               // {
-               //     return Json(new { status = "error", message = @Language.UsuarioNoHabilitado });
-               // }
-               // else
-              //  {
-
-                    return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
-               // }
+                return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
             }
         }
 
