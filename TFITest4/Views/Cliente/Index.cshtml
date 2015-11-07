@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelClienteEmpresa>
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Index";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
 <style>
         .cuentaCorriente {

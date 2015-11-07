@@ -8,6 +8,7 @@ using TFITest4.Models;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class LocalidadController : Controller
     {
         //

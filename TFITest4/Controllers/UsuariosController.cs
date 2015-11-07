@@ -10,6 +10,7 @@ using TFITest4.Models;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         //
@@ -32,7 +33,10 @@ namespace TFITest4.Controllers
 
         public ActionResult RegisterIN()
         {
-            ViewBag.IDTipoUsuario = new SelectList(userWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
+            var tipos = userWorker.ObtenerTiposUsuario();
+            var tiposU = tipos.Where(c => c.Tipo != "Externo" && c.Tipo != "Administrador");
+            ViewBag.IDTipoUsuario = new SelectList(tiposU, "IDTipoUsuario", "Tipo");
+
             return View();
         }
 

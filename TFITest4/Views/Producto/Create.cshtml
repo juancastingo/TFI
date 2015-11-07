@@ -1,6 +1,13 @@
 ﻿@model TFITest4.Models.ModelProducto
 @using TFITest4.Resources
 
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
 
 <h2 class="titulo">@Language.crear</h2>
@@ -84,7 +91,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@Language.volver, "Index")
 </div>
 
 @section Scripts {

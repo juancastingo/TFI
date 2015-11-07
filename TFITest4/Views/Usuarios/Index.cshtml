@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelUsuario>
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Index";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
-<h2 class="title">@Language.usuario</h2>
+<h2 class="titulo">@Language.usuario</h2>
 
 <p>
     @Html.ActionLink("Create New", "RegisterIn", new {} ,new { @class = "btn btn-primary", @style = "color:white" }) 
@@ -47,7 +51,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td style="text-align: right">
             @Html.DisplayFor(modelItem => item.IDUsuario)
         </td>
         <td>

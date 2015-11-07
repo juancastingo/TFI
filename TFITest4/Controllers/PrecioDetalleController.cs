@@ -5,9 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using BIZ;
+using TFITest4.Models;
+using AutoMapper;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class PrecioDetalleController : Controller
     {
         //
@@ -49,11 +52,13 @@ namespace TFITest4.Controllers
         // POST: /PrecioDetalle/Create
 
         [HttpPost]
-        public ActionResult Create(BIZPrecioDetalle PrecioDetalle)
+        public ActionResult Create(ModelPrecioDetalle PrecioDetalle)
         {
             try
             {
-                precioWorker.CrearDetallePrecio(PrecioDetalle);
+                var precioD = Mapper.Map<ModelPrecioDetalle, BIZPrecioDetalle>(PrecioDetalle);
+                precioWorker.CrearDetallePrecio(precioD);
+                TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             catch
@@ -61,6 +66,7 @@ namespace TFITest4.Controllers
                 ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
                 //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
                 ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return View();
             }
         }

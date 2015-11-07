@@ -9,6 +9,7 @@ using BLL;
 
 namespace TFITest4.Controllers
 {
+    [Authorize]
     public class PaisController : Controller
     {
         //

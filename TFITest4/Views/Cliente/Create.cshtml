@@ -1,9 +1,13 @@
 ﻿@model TFITest4.Models.ModelClienteEmpresa
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Create";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
 <div class="container">
 <h2 class="titulo">@Language.crear</h2>
@@ -135,7 +139,7 @@
         </div>
         <br />
         <p>
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="@Language.crear" class="btn btn-primary" />
         </p>
     </fieldset>
 }

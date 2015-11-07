@@ -1,6 +1,15 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
+
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 @section headSection {
       <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
     <script src="~/Scripts/moment.min.js"></script>

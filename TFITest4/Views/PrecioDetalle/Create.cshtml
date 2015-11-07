@@ -1,9 +1,15 @@
-﻿@model BIZ.BIZPrecioDetalle
+﻿@model TFITest4.Models.ModelPrecioDetalle
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Create";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        retURLErr = window.location.pathname + window.location.search;
+        retURLErr = retURLErr.replace(/[/]/g, "%2f")
+        window.location = "/Login/Error?ReturnUrl=" + retURLErr;
+    }
+</script>
 
 <h2 class="titulo">@Language.crear</h2>
 
@@ -14,7 +20,7 @@
         <table class="table table-bordered">
             <tr>
         <td class="editor-label">
-            @Html.LabelFor(model => model.IDListaPrecio, "ListaPrecio")
+            @Html.LabelFor(model => model.IDListaPrecio)
         </td>
         <td class="editor-field">
             @Html.DropDownList("IDListaPrecio", String.Empty)
@@ -22,7 +28,7 @@
         </td>
             </tr><tr>
         <td class="editor-label">
-            @Html.LabelFor(model => model.IDProducto, "Producto")
+            @Html.LabelFor(model => model.IDProducto)
         </td>
         <td class="editor-field">
             @Html.DropDownList("IDProducto", String.Empty)
@@ -30,7 +36,7 @@
         </td>
             </tr><tr>
         <td class="editor-label">
-            <label>@Language.precio</label>
+            @Html.LabelFor(model => model.Precio)
         </td>
         <td class="editor-field">
             @Html.EditorFor(model => model.Precio)
@@ -47,13 +53,15 @@
          </tr>
         
         </table>
-    </fieldset>
-}
-<div>
+            <div>
             <input type="submit" class="btn btn-primary" value="@Language.crear" />
-        @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-warning", @style = "color:white" })
-
+            @Html.ActionLink(@Language.volver, "Index", new {}, new { @class = "btn btn-warning", @style = "color:white" })
+    
         </div>
+    </fieldset>
+
+}
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

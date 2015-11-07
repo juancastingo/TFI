@@ -1,65 +1,69 @@
 ﻿@model BIZ.BIZPrecioDetalle
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Edit";
-}
-
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-
     <fieldset>
         <legend class="titulo">@Language.listaDetalle</legend>
         <table class="table table-bordered table-striped" cellspacing="0" width="100%">
             <tr>
-                <th class="editor-label">
-                    Nr# @Model.IDPrecioDetalle
+                <th class="editor-label">Nr# 
                 </th>
-            </tr>
-
-
-            <tr>
                 <td class="editor-label">
-                    
-                    @Html.LabelFor(model => model.ListaPrecio.Detalle)
+                    @Model.IDPrecioDetalle
+                </td>
+            </tr>
+            <tr>
+                <th class="editor-label">
+                @Language.listaPrecios
+                </th>
+                <td class="editor-label">
                     @Model.ListaPrecio.Detalle
                 </td>
             </tr>
             <tr>
+                <th class="editor-label">
+                    @Language.producto
+                    </th>
                 <td class="editor-label">
-                    
-                    @Html.LabelFor(model => model.Producto)
                     @Model.Producto.Nombre
                 </td>
             </tr>
             <tr>
+                <th class="editor-label">
+                    @Language.precio
+                </th>
                 <td class="editor-label">
-                    
-                    @Html.LabelFor(model => model.Precio)
                     @Model.Precio
                 </td>
             </tr>
             <tr>
+                <th class="editor-label">
+                    @Language.activo
+                </th>
                 <td class="editor-field">
-                    @Html.LabelFor(model => model.Activo)
+                    
                     @Html.EditorFor(model => model.Activo)
                     @Html.ValidationMessageFor(model => model.Activo)
                 </td>
             </tr>
-            <tr>
-
-                <td>
-                    <input class="btn btn-primary crearEditar" type="submit" style="max-width: 6%;" value="@Language.guardar" />
-                </td>
-            </tr>
         </table>
+        <input class="btn btn-primary crearEditar" type="submit" style="max-width: 6%;" value="@Language.guardar" />
+        @Html.ActionLink(@Language.cancelar, "Index","ListaPrecio", new {}, new { @class = "btn btn-success volver", @style = "color:white" }) 
     </fieldset>
 }
 
 <div>
-   @* @Html.ActionLink("Back to List", "Index")*@
+    @* @Html.ActionLink("Back to List", "Index")*@
 </div>
 
 @section Scripts {

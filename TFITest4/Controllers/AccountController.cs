@@ -74,33 +74,35 @@ namespace TFITest4.Controllers
             try
             {
                 //if (ModelState.IsValid)
-                // {
-                BIZUsuario User = new BIZUsuario();
-                User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(U);
-                User.IDEstado = 12;
-                User.IDTipoUsuario = 2;
-                UsuarioWorker.InsertarUsuario(User);
-                //DALUser.InsertUsuario(User);
-                TempData["OKNormal"] = Resources.Language.OKNormal;
-                SL.Utils util = new SL.Utils();
-                var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
-                BIZ.BIZCorreo correo = new BIZCorreo();
-                correo.Subject = "Please Validate IID Account";
-                correo.To = User.Email;
-                string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
-                string body = String.Format(Language.MailValidationLink, User.Nombre, link);
-                //correo.Body = "Hi " + User.Nombre + ", <p>Plese validate your IID account with the following link</p> <a href='http://" + Request.Url.Host.ToLower() +":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
-                correo.Body = body;
-                util.sendMail(correo);
-                string _ip = "Unknown";
-                try
-                {
-                    _ip = (string)Session["_ip"];
-                }
-                catch (Exception) { }
+                //{
+                    BIZUsuario User = new BIZUsuario();
+                    User = AutoMapper.Mapper.Map<Models.RegisterModel, BIZUsuario>(U);
+                    User.IDEstado = 12;
+                    User.IDTipoUsuario = 2;
+                    UsuarioWorker.InsertarUsuario(User);
+                    //DALUser.InsertUsuario(User);
+                    TempData["OKNormal"] = Resources.Language.OKNormal;
+                    SL.Utils util = new SL.Utils();
+                    var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
+                    BIZ.BIZCorreo correo = new BIZCorreo();
+                    correo.Subject = "Please Validate IID Account";
+                    correo.To = User.Email;
+                    string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
+                    string body = String.Format(Language.MailValidationLink, User.Nombre, link);
+                    //correo.Body = "Hi " + User.Nombre + ", <p>Plese validate your IID account with the following link</p> <a href='http://" + Request.Url.Host.ToLower() +":" + Request.Url.Port + "/Account/validateUser?k=" + UserEncoded + "'>Link</a>";
+                    correo.Body = body;
+                    util.sendMail(correo);
+                    string _ip = "Unknown";
+                    try
+                    {
+                        _ip = (string)Session["_ip"];
+                    }
+                    catch (Exception) { }
 
-                Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado el usuario " + User.Usuario1, null, _ip));
-                return RedirectToAction("EmailConfirm");
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado el usuario " + User.Usuario1, null, _ip));
+                    return RedirectToAction("EmailConfirm");
+                //}
+                //throw new ArgumentNullException("value");
             }
             catch (Exception ex)
             {

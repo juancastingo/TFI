@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace TFITest4.Models
 {
+    [Authorize]
     public class ListaPrecioController : Controller
     {
         //

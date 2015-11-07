@@ -714,7 +714,8 @@
                                     //console.log(fullURL);
                                     window.location = fullURL
                                 } else {
-                                    window.location.reload();
+                                    //if (window.location.pathname+window.location.search == /Login/Error
+                                    window.location = "/Home";
                                 }
                                 //$("#MainMenu").html(result);
                                 //$('#MainMenu').fadeTo("slow", 1);
@@ -838,8 +839,9 @@
                             },
                             error: function () {
                                 toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                                ocultarGIF
-                            }
+                                ocultarGIF();
+                            },
+                            complete: ocultarGIF
                         });
                         },
                         cancel: function () {

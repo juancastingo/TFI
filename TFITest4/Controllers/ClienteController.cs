@@ -12,6 +12,7 @@ using TFITest4.Resources;
 
 namespace TFITest4.Models
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         //
