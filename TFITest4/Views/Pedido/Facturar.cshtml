@@ -11,7 +11,7 @@
 </script>
 
 @section headSection {
-      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
     <script src="~/Scripts/moment.min.js"></script>
 }
 
@@ -86,11 +86,11 @@
             </div>
             <div class="modal-body" id="PedidoModalBody">
                 <div class='input-group date' id='datetimepicker1'>
-                        <input id="FechaFac" type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                    <input id="FechaFac" type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="FacturarPedido btn btn-warning " data-dismiss="modal">@Language.confirmar</button>
@@ -113,21 +113,21 @@
 
     <script>
         //$(function () {
-            PickerIdioma = "en";
-            if ($('#ActualCulture').val() == "esp") {
-                PickerIdioma = "es";
-            }
-            $('#datetimepicker1').datetimepicker({
-                locale: PickerIdioma,
-                format: 'YYYY-MM-DD',
-                minDate: moment(),
-                maxDate: moment().add(30, 'days')
-                //pickTime: false 
-           });
+        PickerIdioma = "en";
+        if ($('#ActualCulture').val() == "esp") {
+            PickerIdioma = "es";
+        }
+        $('#datetimepicker1').datetimepicker({
+            locale: PickerIdioma,
+            format: 'YYYY-MM-DD',
+            minDate: moment(),
+            maxDate: moment().add(30, 'days')
+            //pickTime: false 
+        });
         //});
-            var IDPedido;
-            $('.PreFacturarPedido').click(function () {
-                IDPedido = $(this).attr('data-val');
+        var IDPedido;
+        $('.PreFacturarPedido').click(function () {
+            IDPedido = $(this).attr('data-val');
             $('#FactModal').modal('toggle');
         });
 
@@ -137,33 +137,33 @@
             FechaFac = $('#FechaFac').val();
             mostrarGIF();
             var serviceURL = '@Url.Action("facturarPedido", "Pedido")';
-           $.ajax({
-               type: "POST",
-               url: serviceURL,
-               data: JSON.stringify({ Pedido: pedidoNr, fecha: FechaFac }),
-               dataType: 'text',
-               contentType: "application/json; charset=utf-8",
-               dataType: "json",
-               success: function (data, status) {
-                   //console.log(data);
-                   if (data.Result == "") {
+            $.ajax({
+                type: "POST",
+                url: serviceURL,
+                data: JSON.stringify({ Pedido: pedidoNr, fecha: FechaFac }),
+                dataType: 'text',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    //console.log(data);
+                    if (data.Result == "") {
                         //toastr["success"]("@Language.OKNormal", "OK!");
-                        location.reload();
-                    } else {
-                        errorFunc;
-                    }
-                    },
-                    error: errorFunc
-                });
+                       location.reload();
+                   } else {
+                       errorFunc;
+                   }
+               },
+               error: errorFunc
+           });
         });
 
     </script>
-        
+
 }
 
 
 @section numerosScript{
-            var list = [];
+var list = [];
             var list2 = [];
 
             $('.valor1').each(function () {

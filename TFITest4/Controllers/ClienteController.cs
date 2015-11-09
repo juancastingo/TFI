@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL;
 using AutoMapper;
 using BIZ;
 using TFITest4.Models;
@@ -24,8 +23,7 @@ namespace TFITest4.Models
 
         public ActionResult Index()
         {
-            DALCliente DCli = new DALCliente();
-            var clientes = Mapper.Map<List<BIZClienteEmpresa>, List<ModelClienteEmpresa>>(DCli.getAllClienteEmpresa());
+            var clientes = Mapper.Map<List<BIZClienteEmpresa>, List<ModelClienteEmpresa>>(clienteWorker.ObtenerClienteEmpresas());
             return View(clientes);
         }
 

@@ -14,11 +14,11 @@ namespace TFITest4.Controllers
         //
         // GET: /Localidad/
         private BLLBitacora Bita = new BLLBitacora();
-
+        private BLLDireccion direccionWorker = new BLLDireccion();
         public ActionResult Index()
-        {
-            DAL.DALDireccion DDireccion = new DAL.DALDireccion();
-            var ListModelLocalidades = AutoMapper.Mapper.Map<List<BIZ.BIZLocalidad>, List<Models.ModelLocalidad>>(DDireccion.getAllLocalidades());
+        {            
+            //var ListModelLocalidades = AutoMapper.Mapper.Map<List<BIZ.BIZLocalidad>, List<Models.ModelLocalidad>>(DDireccion.getAllLocalidades());
+            var ListModelLocalidades = AutoMapper.Mapper.Map<List<BIZ.BIZLocalidad>, List<Models.ModelLocalidad>>(direccionWorker.getAllLocalidades());
             return View(ListModelLocalidades);
         }
 

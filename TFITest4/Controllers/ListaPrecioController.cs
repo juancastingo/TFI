@@ -15,11 +15,11 @@ namespace TFITest4.Models
         //
         // GET: /ListaPrecio2/
         private BLLBitacora Bita = new BLLBitacora();
+        private BLLPrecio precioWorker = new BLLPrecio();
 
         public ActionResult Index()
         {
-            DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
-            var lista = PrecioWorker.getAllListaPrecio();
+            var lista = precioWorker.getAllListaPrecio();
             var rList = Mapper.Map<List<BIZListaPrecio>, List<ModelListaPrecio>>(lista);
             return View(rList);
         }
@@ -41,9 +41,8 @@ namespace TFITest4.Models
         {
             try
             {
-                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
                 ListaPrecio.FechaUltimaMod = DateTime.Now;
-                PrecioWorker.CreateListaPrecio(ListaPrecio);
+                precioWorker.CreateListaPrecio(ListaPrecio);
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
@@ -58,8 +57,7 @@ namespace TFITest4.Models
 
         public ActionResult Edit(int id)
         {
-            DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
-            var Lista = PrecioWorker.GetByID(id);
+            var Lista = precioWorker.GetByID(id);
             var rList = Mapper.Map<BIZListaPrecio, ModelListaPrecio>(Lista);
             return View(rList);
         }
@@ -72,8 +70,7 @@ namespace TFITest4.Models
         {
             try
             {
-                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
-                PrecioWorker.UpdateListaPrecio(collection);
+                precioWorker.UpdateListaPrecio(collection);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -95,9 +92,7 @@ namespace TFITest4.Models
                 ListaACopiar.Detalle = CopiaText;
                 double factor = Convert.ToDouble(CopiaFactor);
                 ListaACopiar.FechaDesde = Convert.ToDateTime(FechaDesde);
-                DAL.DALPrecio PrecioWorker = new DAL.DALPrecio();
-
-                PrecioWorker.CopyList(ListaACopiar,factor);
+                precioWorker.copiarLista(ListaACopiar, factor);
                 return Json(new { Result = ""}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

@@ -16,7 +16,6 @@ namespace TFITest4.Controllers
     {
         //
         // GET: /Producto/
-        //private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities();
         private BLLProducto productoWorker = new BLLProducto();
         private BLLGeneral generalWorker = new BLLGeneral();
         private BLLBitacora Bita = new BLLBitacora();

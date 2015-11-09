@@ -38,7 +38,6 @@ namespace TFITest4.Controllers
 
 
 
-        private DAL.ORM.IIDTest2Entities db = new DAL.ORM.IIDTest2Entities(); //borrar
         public ActionResult Create()
         {
             ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");

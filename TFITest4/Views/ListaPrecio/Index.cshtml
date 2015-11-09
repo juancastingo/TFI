@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<TFITest4.Models.ModelListaPrecio>
 @using TFITest4.Resources;
 
+
 <script type="text/javascript">
     tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
     console.log(tipoUserGroup);
@@ -224,10 +225,27 @@
                     $('#ModalDetalle .modal-body table > tbody').html("");
                     data.detalles.forEach(function (elem) {
                         //console.log(elem);
-                        cuerpo = "<tr><td>" + elem.Producto + "</td><td>" + elem.Estado + "</td><td>" + elem.Precio + "</td><td><a class='btn btn-xs btn-success' role='button' href=/PrecioDetalle/Edit/" + elem.IDPrecioDetalle + ">@Language.editar</a></td></tr>"
+                        cuerpo = "<tr><td>" + elem.Producto + "</td><td>" + elem.Estado + "</td><td style='text-align:right;' class='valor valor1'>" + elem.Precio + "</td><td><a class='btn btn-xs btn-success' role='button' href=/PrecioDetalle/Edit/" + elem.IDPrecioDetalle + ">@Language.editar</a></td></tr>"
                         $('#ModalDetalle .modal-body table > tbody').append(cuerpo);
                     });
                     //if (data.Result == "") {
+                    // pongo lindo los precios
+                    var list = [];
+                    var list2 = [];
+
+                    $('.valor1').each(function () {
+                        list.push($(this).html())
+                    });
+                    var i = 0;
+                    $('.valor1').each(function () {
+                        list2 = accounting.formatColumn(list, "$     ");
+                        console.log(list2);
+                        $(this).html(list2[i]);
+                        i++;
+                    })
+
+
+
                      $('#ModalDetalle').modal('toggle');
                     //} else {
                     //    errorFunc;

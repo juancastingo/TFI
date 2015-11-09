@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.ORM;
 using BIZ;
 using TFITest4.Resources;
 using System.Data.Objects;
@@ -21,12 +20,9 @@ namespace TFITest4.Controllers
     [Authorize]
     public class PedidoController : Controller
     {
-        private IIDTest2Entities db = new IIDTest2Entities();
         public static int gIdPedido;
         public static int GIdFactura;
         private BLL.BLLProducto ProdWorker = new BLLProducto();
-        //DAL.DALProducto ProdWorker = new DAL.DALProducto();
-        //DAL.DALDocumento DocWorker = new DAL.DALDocumento();
         private BLLDocumento DocWorker = new BLLDocumento();
         private BLLBitacora Bita = new BLLBitacora();
         Utils util = new Utils();
@@ -536,7 +532,6 @@ namespace TFITest4.Controllers
             try
             {
                 var docs = DocWorker.ObtenerDocsXEstado(3, 5); //3 es el tipo del documento documento. Acá pedido. 5 es el estado del doc. acá pendiente de aprobación
-                //var docs = DALDoc.ge
                 float monto;
                 int IDEmpresa;
 

@@ -1,5 +1,4 @@
 ﻿using BIZ;
-using DAL.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,6 @@ namespace TFITest4.Controllers
     public class HomeController : Controller
     {
 
-        private IIDTest2Entities db = new IIDTest2Entities();
         //
         // GET: /Home/
         private BLLBitacora Bita = new BLLBitacora();

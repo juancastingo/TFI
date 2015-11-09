@@ -15,12 +15,12 @@ namespace TFITest4.Controllers
         //
         // GET: /Provincia/
         private BLLBitacora Bita = new BLLBitacora();
+        private BLLDireccion direccionWorker = new BLLDireccion();
 
         public ActionResult Index()
         {
-            DAL.DALDireccion tProv = new DAL.DALDireccion();
             List<BIZ.BIZProvincia> ListaProv = new List<BIZ.BIZProvincia>();
-            ListaProv = tProv.getAllProvincias();
+            ListaProv = direccionWorker.getAllProvincias();
             return View(ListaProv);
         }
 
@@ -46,8 +46,7 @@ namespace TFITest4.Controllers
 
         public ActionResult Create()
         {
-            DAL.DALDireccion tPais = new DAL.DALDireccion();
-            ViewBag.IDPais = new SelectList(tPais.getAllPaises(), "IDPais", "Nombre");
+            ViewBag.IDPais = new SelectList(direccionWorker.getAllPaises(), "IDPais", "Nombre");
             return View();
         }
 
@@ -57,28 +56,26 @@ namespace TFITest4.Controllers
         [HttpPost]
         public ActionResult Create(BIZ.BIZProvincia Provincia)
         {
-            DAL.DALDireccion tProvincia = new DAL.DALDireccion();
             //var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
             if (ModelState.IsValid)
             {
                 try
                 {
-                    tProvincia.insertProvincia(Provincia);
+                    direccionWorker.insertProvincia(Provincia);
                 }
                 catch
                 {
                     //el error
                     ViewBag.AlertError = Resources.Language.ErrorNormal;
-                    DAL.DALDireccion tPais = new DAL.DALDireccion();
-                    ViewBag.IDPais = new SelectList(tPais.getAllPaises(), "IDPais", "Nombre");
-                    return View();
+                    ViewBag.IDPais = new SelectList(direccionWorker.getAllPaises(), "IDPais", "Nombre");
+                    TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                    return View(Provincia);
                 }
             }
             TempData["OKNormal"] = Resources.Language.OKNormal;
             return RedirectToAction("Index");
             //  }
 
-            // DAL.DALPais tpais = new DAL.DALPais();
             //   ViewBag.Pais = new SelectList(tpais.getPaises(), "IDPais", "Pais");
             //   return View();
         }
@@ -87,59 +84,57 @@ namespace TFITest4.Controllers
         public ActionResult Edit(int id)
         {
             BIZ.BIZProvincia provincia = new BIZ.BIZProvincia();
-            DAL.DALDireccion Dprov = new DAL.DALDireccion();
-            provincia = Dprov.GetProvinciaByID(id);
+            provincia = direccionWorker.GetProvinciaByID(id);
             //db.Provincia.Find(id);
             if (provincia == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDPais = new SelectList(Dprov.getAllPaises(), "IDPais", "Nombre", provincia.Pais.IDPais);
+            ViewBag.IDPais = new SelectList(direccionWorker.getAllPaises(), "IDPais", "Nombre", provincia.Pais.IDPais);
             return View(provincia);
         }
 
         [HttpPost]
         public ActionResult Edit(BIZ.BIZProvincia provincia)
         {
-            DAL.DALDireccion Dprov = new DAL.DALDireccion();
             if (ModelState.IsValid)
             {
-                Dprov.UpdateProvincia(provincia);
+                direccionWorker.UpdateProvincia(provincia);
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             ViewBag.AlertError = Resources.Language.ErrorNormal;
-            ViewBag.IDPais = new SelectList(Dprov.getAllPaises(), "IDPais", "Nombre", provincia.Pais.IDPais);
+            ViewBag.IDPais = new SelectList(direccionWorker.getAllPaises(), "IDPais", "Nombre", provincia.Pais.IDPais);
             return View(provincia);
         }
 
-        public ActionResult Delete(int id)
-        {
-            BIZ.BIZProvincia provincia = new BIZ.BIZProvincia();
-            DAL.DALDireccion Dprov = new DAL.DALDireccion();
-            provincia = Dprov.GetProvinciaByID(id);
-            if (provincia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(provincia);
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    BIZ.BIZProvincia provincia = new BIZ.BIZProvincia();
+        //    DAL.DALDireccion Dprov = new DAL.DALDireccion();
+        //    provincia = Dprov.GetProvinciaByID(id);
+        //    if (provincia == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(provincia);
+        //}
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            DAL.DALDireccion Dprov = new DAL.DALDireccion();
-            int r = Dprov.DeleteProvincia(id);
-            if (r == 0)
-            {
-                TempData["OKNormal"] = Resources.Language.OKNormal;
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
-                return RedirectToAction("Index");
-            }
-        }
+        //[HttpPost, ActionName("Delete")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    DAL.DALDireccion Dprov = new DAL.DALDireccion();
+        //    int r = Dprov.DeleteProvincia(id);
+        //    if (r == 0)
+        //    {
+        //        TempData["OKNormal"] = Resources.Language.OKNormal;
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+        //        return RedirectToAction("Index");
+        //    }
+        //}
     }
 }

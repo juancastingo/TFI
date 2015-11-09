@@ -15,13 +15,14 @@ namespace TFITest4.Controllers
         //
         // GET: /Pais/
         private BLLBitacora Bita = new BLLBitacora();
-
+        private BLLDireccion direccionWorker = new BLLDireccion();
         [Authorize]
         public ActionResult Index()
         {
             DAL.DALDireccion tProv = new DAL.DALDireccion();
             List<BIZ.BIZPais> ListaPaises = new List<BIZ.BIZPais>();
-            ListaPaises = tProv.getAllPaises();
+            ListaPaises = direccionWorker.getAllPaises();
+            //ListaPaises = tProv.getAllPaises();
             Mapper.CreateMap<BIZ.BIZPais, ModelPais>();
             List<ModelPais> ListaMpais = Mapper.Map<List<BIZ.BIZPais>, List<ModelPais>>(ListaPaises);
             return View(ListaMpais);

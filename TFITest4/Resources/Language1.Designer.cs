@@ -97,6 +97,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Suelte aquí su ítem.
+        /// </summary>
+        public static string agregarVisual {
+            get {
+                return ResourceManager.GetString("agregarVisual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Analizar Pedidos.
         /// </summary>
         public static string analizar {
@@ -498,6 +507,15 @@ namespace TFITest4.Resources {
         public static string fechaEmision {
             get {
                 return ResourceManager.GetString("fechaEmision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Hasta.
+        /// </summary>
+        public static string fechaHasta {
+            get {
+                return ResourceManager.GetString("fechaHasta", resourceCulture);
             }
         }
         
@@ -966,6 +984,15 @@ namespace TFITest4.Resources {
         public static string rechazar {
             get {
                 return ResourceManager.GetString("rechazar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registrar documentos.
+        /// </summary>
+        public static string registrar {
+            get {
+                return ResourceManager.GetString("registrar", resourceCulture);
             }
         }
         

@@ -255,5 +255,12 @@ namespace DAL
                 db.SaveChanges();
             }
         }
+
+        public void registerDocs(DateTime fecha1, DateTime fecha2)
+        {
+            string query = "update Documento SET FechaUltimaModificacion='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', FechaContable='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE (IDDocumentoTipo = 1 or IDDocumentoTipo = 13) and FechaEmision > '" + fecha1.ToString("yyyy-MM-dd") + "' and FechaEmision < '" + fecha2.ToString("yyyy-MM-dd") + "' and FechaContable is NULL";
+            db.Database.ExecuteSqlCommand(query);
+
+        }
     }
 }

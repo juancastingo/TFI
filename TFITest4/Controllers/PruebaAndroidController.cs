@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL;
 using BLL;
 
 namespace TFITest4.Controllers
@@ -13,6 +12,7 @@ namespace TFITest4.Controllers
         //
         // GET: /PruebaAndroid/
         private BLLBitacora Bita = new BLLBitacora();
+        private BLLDocumento docWorker = new BLLDocumento();
 
         public class persona
         {
@@ -64,9 +64,8 @@ namespace TFITest4.Controllers
 
         public ActionResult Pedidos(string empresa,string password)
         {
-            DALDocumento docWorker = new DALDocumento();
             int empresaID = Convert.ToInt32(empresa);
-            var docs = docWorker.getDocsByEmpresa(empresaID,3);
+            var docs = docWorker.ObtenerDocsXEmpresa(empresaID,3);
             modelDoc mdoc;
             List<modelDoc> listDoc = new List<modelDoc>();
             foreach (var d in docs)
@@ -91,9 +90,8 @@ namespace TFITest4.Controllers
 
         public ActionResult Detalle(string idDoc, string password)
         {
-            DALDocumento docWorker = new DALDocumento();
             int IdocID = Convert.ToInt32(idDoc);
-            var doc = docWorker.getDocByID(IdocID);
+            var doc = docWorker.ObtenerDocXID(IdocID);
             var docR = new modelDoc2();
             docR.Estado = doc.EstadoMisc.Detalle;
             docR.FechaEmision = doc.FechaEmision.ToString();

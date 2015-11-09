@@ -81,5 +81,10 @@ namespace BLL
             return DocWorker.getPendingDocs(a, b);
         }
 
+
+        public void registrarDocs(DateTime fecha1, DateTime fecha2)
+        {
+            DocWorker.registerDocs(fecha1, fecha2);
+        }
     }
 }

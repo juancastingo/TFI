@@ -24,7 +24,6 @@ namespace TFITest4.Controllers
         {
             var usuarios = userWorker.obtenerUsuarios();
             var RetUser = Mapper.Map<List<BIZUsuario>, List<ModelUsuario>>(usuarios);
-            //DAL.DALUsuario DUserTestBorrar = new DAL.DALUsuario();
             //List<BIZ.BIZUsuario> List = DUserTestBorrar.GetAllUsuarios();
             //var usuario = db.Usuario;
             return View(RetUser);

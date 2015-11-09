@@ -480,6 +480,18 @@
   <data name="UsuarioNoConfirmado" xml:space="preserve">
     <value>The User is not Enabled to access the system. Ask authorization to a system admin.</value>
   </data>
+  <data name="agregarVisual" xml:space="preserve">
+    <value>Add your items here</value>
+  </data>
+  <data name="fechaEmision" xml:space="preserve">
+    <value>Submited Date</value>
+  </data>
+  <data name="fechaHasta" xml:space="preserve">
+    <value>to date</value>
+  </data>
+  <data name="registrar" xml:space="preserve">
+    <value>Register docs</value>
+  </data>
   <data name="UsuarioValidado" xml:space="preserve">
     <value>Validation was performed for User: </value>
   </data>

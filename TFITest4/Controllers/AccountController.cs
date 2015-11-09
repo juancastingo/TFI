@@ -24,8 +24,6 @@ namespace TFITest4.Controllers
 
         public ActionResult Register()
         {
-            //DAL.DALUsuario D_User = new DAL.DALUsuario();
-            //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
             ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
             ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
             return View();
@@ -44,8 +42,6 @@ namespace TFITest4.Controllers
                 }
                 else
                 {
-                    //DAL.DALUsuario D_User = new DAL.DALUsuario();
-                    //DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
                     ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
                     ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                     return View();
@@ -53,8 +49,6 @@ namespace TFITest4.Controllers
             }
             catch
             {
-                //DAL.DALUsuario D_User = new DAL.DALUsuario();
-                // DAL.DALDireccion D_Direccion = new DAL.DALDireccion();
                 ViewBag.IDLocalidad = new SelectList(direccionWorker.ObtenerLocalidades(), "IDLocalidad", "Nombre");
                 ViewBag.IDTipoUsuario = new SelectList(UsuarioWorker.ObtenerTiposUsuario(), "IDTipoUsuario", "Tipo");
                 return View();
@@ -63,7 +57,6 @@ namespace TFITest4.Controllers
 
         public ActionResult RegisterOut()
         {
-            //DAL.DALCliente DCliente = new DAL.DALCliente();
             ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
             return View();
         }
@@ -80,7 +73,6 @@ namespace TFITest4.Controllers
                     User.IDEstado = 12;
                     User.IDTipoUsuario = 2;
                     UsuarioWorker.InsertarUsuario(User);
-                    //DALUser.InsertUsuario(User);
                     TempData["OKNormal"] = Resources.Language.OKNormal;
                     SL.Utils util = new SL.Utils();
                     var UserEncoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(User.Usuario1));
@@ -107,7 +99,6 @@ namespace TFITest4.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
-                //DAL.DALCliente DCliente = new DAL.DALCliente();
                 ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
                 return View(U);
             }
@@ -115,7 +106,6 @@ namespace TFITest4.Controllers
             //catch(Exception err)
             //{
             //TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
-            //DAL.DALCliente DCliente = new DAL.DALCliente();
             //ViewBag.IDClienteEmpresa = new SelectList(DCliente.getAllClienteEmpresa(), "IDClienteEmpresa", "Nombre");
             //return View(U);
             //}

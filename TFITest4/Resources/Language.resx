@@ -483,6 +483,15 @@
   <data name="UsuarioNoConfirmado" xml:space="preserve">
     <value>El usuario no se encuentra confirmado para ingresar al sistema. Solicite autorización a un administrador del sistema.</value>
   </data>
+  <data name="agregarVisual" xml:space="preserve">
+    <value>Suelte aquí su ítem</value>
+  </data>
+  <data name="fechaHasta" xml:space="preserve">
+    <value>Fecha Hasta</value>
+  </data>
+  <data name="registrar" xml:space="preserve">
+    <value>Registrar documentos</value>
+  </data>
   <data name="UsuarioValidado" xml:space="preserve">
     <value>Validación correcta de usuario: </value>
   </data>

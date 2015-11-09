@@ -60,6 +60,21 @@
                                 @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
                             </li>
                             }
+                            if (Session["grupo"].ToString() == "Contable")
+                            {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">Contabilidadddd<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink(@Language.registrar, "Registrar", "Contabilidad")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Asientossss", "Asientos", "Contabilidad")
+                                    </li>
+
+                                </ul>
+                            </li>
+                            }
                         }
                         @if (Session["usuario"] != null)
                         {

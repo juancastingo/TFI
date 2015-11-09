@@ -38,5 +38,31 @@ namespace BLL
             PrecioDetalle.FechaUltimaMod = DateTime.Now;
             precioWorker.createDetallePrecio(PrecioDetalle);
         }
+
+        public void copiarLista(BIZListaPrecio Lista, double factor)
+        {
+            precioWorker.CopyList(Lista, factor);
+        }
+
+        public List<BIZListaPrecio> getAllListaPrecio()
+        {
+            return precioWorker.getAllListaPrecio();
+        }
+
+        public void CreateListaPrecio(BIZListaPrecio ListaPrecio)
+        {
+            precioWorker.CreateListaPrecio(ListaPrecio);
+        }
+
+        public BIZListaPrecio GetByID(int id)
+        {
+            return precioWorker.GetByID(id);
+        }
+
+        public void UpdateListaPrecio(BIZListaPrecio collection)
+        {
+            precioWorker.UpdateListaPrecio(collection);
+        }
+
     }
 }

@@ -173,6 +173,7 @@
     <Compile Include="Controllers\BitacoraORMController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Controllers\ClienteORMController.cs" />
+    <Compile Include="Controllers\ContabilidadController.cs" />
     <Compile Include="Controllers\DocumentoORMController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ListaPrecioORMController.cs" />
@@ -970,6 +971,8 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Account\ChangePass.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Contabilidad\Registrar.cshtml" />
+    <Content Include="Views\Contabilidad\Asientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
