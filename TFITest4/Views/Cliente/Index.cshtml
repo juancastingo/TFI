@@ -32,7 +32,7 @@
 <p>
     @Html.ActionLink(@Language.crear, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
 </p>
-<table class="table tableJquery table-bordered dt-responsive nowrap table-striped" cellspacing="0">
+<table class="table tableJquery table-bordered dt-responsive nowrap table-striped" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th>Nr#</th>
@@ -138,6 +138,31 @@
                 media: {}
             }
         });
+        //$(document).ready(function () {
+        //    urlDTLang = "";
+        //    if ($('#ActualCulture').val() == "esp") {
+        //        //urlDTLang = '/Scripts/Spanish.json';
+        //        moment.locale('es');
+        //        urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+        //    }
+        //    try {
+        //        setTimeout(function () {
+        //            $('.tableJquery2').DataTable({
+        //                responsive: true,
+        //                language: {
+        //                    url: urlDTLang,
+        //                }
+        //            });
+        //        }, 100);
+        //    }
+        // catch (err) { console.log("dt is not perfect") }
+        //});
+        
+
+
+
+
+
     </script>
 }
 

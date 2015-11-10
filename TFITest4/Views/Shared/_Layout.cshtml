@@ -656,11 +656,13 @@
             }
             try {
                 $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
-                tabla = $('.tableJquery').DataTable({
-                    language: {
-                        url: urlDTLang,
-                    }
-                });
+                setTimeout(function () {
+                    tabla = $('.tableJquery').DataTable({
+                        language: {
+                            url: urlDTLang,
+                        }
+                    });
+                }, 500);
 
             } catch (err) { console.log("dt is not perfect") }
 
