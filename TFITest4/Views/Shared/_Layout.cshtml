@@ -18,12 +18,34 @@
     <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/toastr.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="~/Content/responsive.bootstrap.min.css" type="text/css" />
 
     <link href="~/Content/general.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" type="text/css" />
+
     @RenderSection("headSection", false)
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "10000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+
 </head>
 <body>
     <div id="preload">
@@ -195,8 +217,8 @@
 
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/hideShowPassword.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/toastr.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.confirm.min.js"></script>
+
 
     <input type="hidden" id="ActualCulture" value="@Language.Lenguaje" />
     <input type="hidden" id="IvaCliente" value="@ViewBag.IVA" />
@@ -460,17 +482,17 @@
                     success: function () {
                         GetInit();
                         toastr["success"]("@Language.limpiarCarrito", "OK!")
-                        },
-                        error: function () {
-                            toastr["error"]("@Language.ErrorNormal", "Error!")
-                        },
-                        complete: ocultarGIF
-                    });
-                },
-                cancel: function () {
-                    toastr["info"]("@Language.operacionCancelada")
-                }
-            });
+                    },
+                    error: function () {
+                        toastr["error"]("@Language.ErrorNormal", "Error!")
+                    },
+                    complete: ocultarGIF
+                });
+            },
+            cancel: function () {
+                toastr["info"]("@Language.operacionCancelada")
+            }
+        });
 
         // } else {
         //     toastr["info"]("@Language.operacionCancelada")
@@ -517,42 +539,42 @@
         var form_modified = false;
         function confirmExit() {
             msg = "@Language.ConfimarCancelar";
-                msg = $('<span/>').html(msg).text();
-                return msg
-            }
-            $(document).ready(function () {
-                ok = $('#AlertOk').val();
-                if (ok != undefined) { toastr["success"](ok, "OK!") }
-                if ($('#AlertError').val() != undefined) { toastr["error"]($('#AlertError').val(), "Error") }
-                //para el carrito
+            msg = $('<span/>').html(msg).text();
+            return msg
+        }
+        $(document).ready(function () {
+            ok = $('#AlertOk').val();
+            if (ok != undefined) { toastr["success"](ok, "OK!") }
+            if ($('#AlertError').val() != undefined) { toastr["error"]($('#AlertError').val(), "Error") }
+            //para el carrito
 
 
-                $('select').on('change', function () {
-                    form_modified = true;
-                    try {
-                        volverExiste = $('.volver')[0]
-                        if (volverExiste) {
-                            window.onbeforeunload = confirmExit;
-                            confirmExit();
-                        }
-                    } catch (exception) { }
-                    console.log("change select");
-                }); // take care of select tags
+            $('select').on('change', function () {
+                form_modified = true;
+                try {
+                    volverExiste = $('.volver')[0]
+                    if (volverExiste) {
+                        window.onbeforeunload = confirmExit;
+                        confirmExit();
+                    }
+                } catch (exception) { }
+                console.log("change select");
+            }); // take care of select tags
 
-                $('input').on('change keypress', function () {
-                    form_modified = true;
-                    try {
-                        volverExiste = $('.volver')[0]
-                        if (volverExiste) {
-                            window.onbeforeunload = confirmExit;
-                            confirmExit();
-                        }
-                    } catch (exception) { }
-                    console.log("change input");
-                });
+            $('input').on('change keypress', function () {
+                form_modified = true;
+                try {
+                    volverExiste = $('.volver')[0]
+                    if (volverExiste) {
+                        window.onbeforeunload = confirmExit;
+                        confirmExit();
+                    }
+                } catch (exception) { }
+                console.log("change input");
+            });
 
 
-                //para la confirmación antes de volver.... Ya lo hago con el beforeUnload
+            //para la confirmación antes de volver.... Ya lo hago con el beforeUnload
                @* $('.volver').on('click', function () {
                     if (form_modified) {
                         msg = $('<span/>').html("@Language.ConfimarCancelar").text();
@@ -564,8 +586,8 @@
                 });*@
 
 
-                $.confirm.options = {
-                    text: "@Language.confimarOperacion",
+            $.confirm.options = {
+                text: "@Language.confimarOperacion",
                     title: "",
                     confirmButton: "@Language.confirmar",
                     cancelButton: "@Language.cancelar",
@@ -576,167 +598,167 @@
                 }
 
 
-                $('#cart-popover').popover({
-                    html: true,
-                    container: 'body',
-                    content: function () {
-                        return $('#popover_content_wrapper').html();
-                    }
-                });
-
-                $('#microfono').click(function () {
-                    try {
-                        recognition.start()
-                        $('#microfono').attr('src', '/Content/images/mic-animate.gif');
-                    } catch (ex) { }
-                });
-
-                if ($('#LoginExiste').val() == 1) {
-                    //console.log($('#LoginExiste').attr("data-val"));
-                    if ($('#LoginExiste').attr("data-val") == "Externo") {
-                        $('#CarritoMenuBoton').removeClass('oculto');
-                        //traigo data de la sesion y lleno el "carrito"
-                        GetInit();
-                    }
+            $('#cart-popover').popover({
+                html: true,
+                container: 'body',
+                content: function () {
+                    return $('#popover_content_wrapper').html();
                 }
+            });
+
+            $('#microfono').click(function () {
+                try {
+                    recognition.start()
+                    $('#microfono').attr('src', '/Content/images/mic-animate.gif');
+                } catch (ex) { }
+            });
+
+            if ($('#LoginExiste').val() == 1) {
+                //console.log($('#LoginExiste').attr("data-val"));
+                if ($('#LoginExiste').attr("data-val") == "Externo") {
+                    $('#CarritoMenuBoton').removeClass('oculto');
+                    //traigo data de la sesion y lleno el "carrito"
+                    GetInit();
+                }
+            }
 
 
 
 
 
-                $(".editor-field input").addClass("form-control");
-                $("table input").addClass("form-control");
-                $("select option[value='']").remove()
-                $('select').addClass("show-tick");
-                $('select').attr("data-live-search", "true");
-                $('select').selectpicker();
+            $(".editor-field input").addClass("form-control");
+            $("table input").addClass("form-control");
+            $("select option[value='']").remove()
+            $('select').addClass("show-tick");
+            $('select').attr("data-live-search", "true");
+            $('select').selectpicker();
 
-                $('#cart-popover').popover({
-                    html: true,
-                    container: 'body',
-                    content: function () {
-                        return $('#popover_content_wrapper').html();
-                    }
-                });
+            $('#cart-popover').popover({
+                html: true,
+                container: 'body',
+                content: function () {
+                    return $('#popover_content_wrapper').html();
+                }
+            });
 
 
 
-                //primero acomodo numeros antes de hacer lo de las tablas
+            //primero acomodo numeros antes de hacer lo de las tablas
                 @RenderSection("numerosScript", false)
 
 
 
-                urlDTLang = "";
+            urlDTLang = "";
+            if ($('#ActualCulture').val() == "esp") {
+                //urlDTLang = '/Scripts/Spanish.json';
+                moment.locale('es');
+                urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+            }
+            try {
+                $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
+                tabla = $('.tableJquery').DataTable({
+                    language: {
+                        url: urlDTLang,
+                    }
+                });
+
+            } catch (err) { console.log("dt is not perfect") }
+
+
+
+            $(function () {
+                PickerIdioma = "en";
                 if ($('#ActualCulture').val() == "esp") {
-                    //urlDTLang = '/Scripts/Spanish.json';
-                    moment.locale('es');
-                    urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+                    PickerIdioma = "es";
                 }
-                try {
-                    $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
-                    tabla = $('.tableJquery').DataTable({
-                        language: {
-                            url: urlDTLang,
+                var dateNow = new Date();
+                $('#datetimepicker1').datetimepicker({
+                    locale: PickerIdioma,
+                    format: 'YYYY-MM-DD HH:mm',
+                    defaultDate: dateNow
+
+                });
+            });
+            $('.tableJquery').on('draw.dt', function () {
+                $('.transparente').removeClass('sorting')
+            });
+            $('.transparente').removeClass('sorting');
+            var ttnewTitle = $('.titulo').html();
+            if (typeof ttnewTitle != "undefined") {
+                var tnewTitle = $('.titulo').html().split("");
+                var newTitle = "";
+                for (i = 0; i < tnewTitle.length ; i++) {
+                    newTitle += "<span>" + tnewTitle[i] + "</span>";
+                }
+                $('.titulo').html(newTitle)
+            }
+
+            $('#login-modal').on('shown.bs.modal', function () {
+                $('#UserName').focus();
+            });
+
+            $('#loginModal').click(function () {
+                $('#login-modal span').text("");
+                if ($('#UserName').val() == "" || $('#LoginPassword').val() == "") {
+                    $('#FormLogin :input:visible[required="required"]').each(function () {
+                        if (!this.validity.valid) {
+                            $(this).focus();
+                            // break
+                            return false;
                         }
                     });
-
-                } catch (err) { console.log("dt is not perfect") }
-
-
-
-                $(function () {
-                    PickerIdioma = "en";
-                    if ($('#ActualCulture').val() == "esp") {
-                        PickerIdioma = "es";
-                    }
-                    var dateNow = new Date();
-                    $('#datetimepicker1').datetimepicker({
-                        locale: PickerIdioma,
-                        format: 'YYYY-MM-DD HH:mm',
-                        defaultDate: dateNow
-
-                    });
-                });
-                $('.tableJquery').on('draw.dt', function () {
-                    $('.transparente').removeClass('sorting')
-                });
-                $('.transparente').removeClass('sorting');
-                var ttnewTitle = $('.titulo').html();
-                if (typeof ttnewTitle != "undefined") {
-                    var tnewTitle = $('.titulo').html().split("");
-                    var newTitle = "";
-                    for (i = 0; i < tnewTitle.length ; i++) {
-                        newTitle += "<span>" + tnewTitle[i] + "</span>";
-                    }
-                    $('.titulo').html(newTitle)
+                    return false;
                 }
+                $('#loginModal').addClass("disabled in-progress");
+                $('#loginModal').attr("disabled", "disabled");
+                //$('#LoginImgLoader').removeClass("oculto");
+                $('#MainMenu').fadeTo("slow", 0.1);
 
-                $('#login-modal').on('shown.bs.modal', function () {
-                    $('#UserName').focus();
-                });
+                //var dataToSend = { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() }
+                var RetUrl = window.location.href.split('=%2f')[1];
+                if (RetUrl) RetUrl = RetUrl.replace('%2f', '/');
+                else RetUrl = "";
+                $.ajax({
+                    url: '/Login/MenuReload',
+                    //data: JSON.stringify(dataToSend),
+                    data: { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() },
+                    type: 'POST',
+                    success: function (result) {
+                        console.log(result);
+                        if (result.status == "error") {
+                            $('#login-modal span').text(result.message);
+                            $('#MainMenu').fadeTo("slow", 1);
 
-                $('#loginModal').click(function () {
-                    $('#login-modal span').text("");
-                    if ($('#UserName').val() == "" || $('#LoginPassword').val() == "") {
-                        $('#FormLogin :input:visible[required="required"]').each(function () {
-                            if (!this.validity.valid) {
-                                $(this).focus();
-                                // break
-                                return false;
-                            }
-                        });
-                        return false;
-                    }
-                    $('#loginModal').addClass("disabled in-progress");
-                    $('#loginModal').attr("disabled", "disabled");
-                    //$('#LoginImgLoader').removeClass("oculto");
-                    $('#MainMenu').fadeTo("slow", 0.1);
-
-                    //var dataToSend = { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() }
-                    var RetUrl = window.location.href.split('=%2f')[1];
-                    if (RetUrl) RetUrl = RetUrl.replace('%2f', '/');
-                    else RetUrl = "";
-                    $.ajax({
-                        url: '/Login/MenuReload',
-                        //data: JSON.stringify(dataToSend),
-                        data: { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() },
-                        type: 'POST',
-                        success: function (result) {
-                            console.log(result);
-                            if (result.status == "error") {
-                                $('#login-modal span').text(result.message);
-                                $('#MainMenu').fadeTo("slow", 1);
-
+                        } else {
+                            //console.log("recargando ");
+                            if (RetUrl != "") {
+                                fullURL = window.location.href.split("/")[0] + "//" + window.location.href.split("/")[2] + "/" + RetUrl;
+                                //console.log(fullURL);
+                                window.location = fullURL
                             } else {
-                                //console.log("recargando ");
-                                if (RetUrl != "") {
-                                    fullURL = window.location.href.split("/")[0] + "//" + window.location.href.split("/")[2] + "/" + RetUrl;
-                                    //console.log(fullURL);
-                                    window.location = fullURL
-                                } else {
-                                    //if (window.location.pathname+window.location.search == /Login/Error
-                                    window.location = "/Home";
-                                }
-                                //$("#MainMenu").html(result);
-                                //$('#MainMenu').fadeTo("slow", 1);
-                                //$('#login-modal').modal('hide');
-                                //if ($('#LoginExiste').attr("data-val") == "Externo") {
-                                //   $('#CarritoMenuBoton').removeClass('oculto');
-                                //}
-                                //$('#CarritoMenuBoton').removeClass('oculto');
-                                //GetInit();
-                                //$('#cart-popover').popover({
-                                //    html: true,
-                                //    container: 'body',
-                                //    content: function () {
-                                //        return $('#popover_content_wrapper').html();
-                                //    }
-                                //});
-                                //controlSession();
+                                //if (window.location.pathname+window.location.search == /Login/Error
+                                window.location = "/Home";
                             }
-                        },
-                        error: function () {
-                            $('#login-modal span').text("@Language.errorLogueo");
+                            //$("#MainMenu").html(result);
+                            //$('#MainMenu').fadeTo("slow", 1);
+                            //$('#login-modal').modal('hide');
+                            //if ($('#LoginExiste').attr("data-val") == "Externo") {
+                            //   $('#CarritoMenuBoton').removeClass('oculto');
+                            //}
+                            //$('#CarritoMenuBoton').removeClass('oculto');
+                            //GetInit();
+                            //$('#cart-popover').popover({
+                            //    html: true,
+                            //    container: 'body',
+                            //    content: function () {
+                            //        return $('#popover_content_wrapper').html();
+                            //    }
+                            //});
+                            //controlSession();
+                        }
+                    },
+                    error: function () {
+                        $('#login-modal span').text("@Language.errorLogueo");
                         },
                         complete: function () {
                             //$('#LoginImgLoader').addClass("oculto");
@@ -748,19 +770,20 @@
 
                 })
 
-                $('#NuevoCarrito').click(function () {
-                    $.confirm({
-                        confirm: function () {
-                            mostrarGIF();
-                            $.ajax({
-                                type: "POST",
-                                url: "/Pedido/NuevoPrePedido",
-                                data: param = "",
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function () {
-                                    GetInit();
-                                    toastr["success"]("@Language.OKNormal", "OK!");
+            $('#NuevoCarrito').click(function () {
+                $.confirm({
+                    confirm: function () {
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/Pedido/NuevoPrePedido",
+                            data: param = "",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function () {
+                                GetInit();
+                                toastr["success"]("@Language.OKNormal", "OK!");
                                 },
                                 error: function () {
                                     toastr["error"]("@Language.ErrorLogInAgain", "Error!")
@@ -774,75 +797,76 @@
                     });
                 });
 
-                $('#SubmitPedido').click(function () {
-                    $.confirm({
-                        confirm: function () {
-                            mostrarGIF();
-                            $.ajax({
-                                type: "POST",
-                                url: "/Pedido/SubmitPedido",
-                                data: param = "",
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (data) {
-                                    console.log(data);
-                                    if (data.CarritoStock == "ir") {
-                                        window.location = "/Pedido/Pedido";
-                                    }
-                                    if (data.devolver != "" && data.CarritoStock != "ir") {
-                                        list = data.CarritoStock.Productos;
-                                        $('#NrPrePedido').text(data.IDDocumento);
-                                        var subt = 0;
-                                        var count = 0;
-                                        $('#carritoModal table > thead').html('<th>@Language.producto</th><th style="padding-right: 15px;">@Language.cantidad</th><th style="padding-right: 15px;">@Language.disponible</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
-                                    $('#carritoModal table > thead')
-                                    $('#carritoModal table > tbody').html('');
-                                    list.forEach(function (elem) {
-                                        //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                                        subt += (elem.Precio * elem.Cant);
-                                        thisSubtotal = (elem.Precio * elem.Cant);
-                                        NoStockClass = "SiStock"; blink = "";
-                                        if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
-                                        $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
-                                    });
-                                    setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
-                                    var PreIVA = IVA;
-                                    IVA = PreIVA;
-                                    IVACalc = parseFloat(PreIVA);
-
-                                    //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
-                                    $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
-                                    $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
-                                    if (subt == 0) {
-                                        $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
-                                } else {
-                                    $('#popover_content_wrapper').find("p:first").html("");
+            $('#SubmitPedido').click(function () {
+                $.confirm({
+                    confirm: function () {
+                        mostrarGIF();
+                        $.ajax({
+                            type: "POST",
+                            url: "/Pedido/SubmitPedido",
+                            data: param = "",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.CarritoStock == "ir") {
+                                    mostrarGIF();
+                                    window.location = "/Pedido/Pedido";
                                 }
-                                    //$('#TextoCarritoPedido').text("No hay stock");
-                                    //console.log(data);
-                                    //$('#TextoCarritoPedido').text("No hay stock");
-                                    //i = 0;
-                                    //$('#carritoModal table > thead').find('tr').eq(0).append("<th>Quantity</th>")
-                                    //$('#carritoModal table > tbody tr').each(function () {
-                                    //    $(this).append("<td>" + data.CarritoStock.Productos[i].stock + "</td>");
-                                    //    $(this).find('td').eq(1).each(function () {
+                                if (data.devolver != "" && data.CarritoStock != "ir") {
+                                    list = data.CarritoStock.Productos;
+                                    $('#NrPrePedido').text(data.IDDocumento);
+                                    var subt = 0;
+                                    var count = 0;
+                                    $('#carritoModal table > thead').html('<th>@Language.producto</th><th style="padding-right: 15px;">@Language.cantidad</th><th style="padding-right: 15px;">@Language.disponible</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                                        $('#carritoModal table > thead')
+                                        $('#carritoModal table > tbody').html('');
+                                        list.forEach(function (elem) {
+                                            //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                                            subt += (elem.Precio * elem.Cant);
+                                            thisSubtotal = (elem.Precio * elem.Cant);
+                                            NoStockClass = "SiStock"; blink = "";
+                                            if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
+                                            $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
+                                        });
+                                        setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
+                                        var PreIVA = IVA;
+                                        IVA = PreIVA;
+                                        IVACalc = parseFloat(PreIVA);
 
-                                    //        $(this).text(data.CarritoStock.Productos[i].Cant + " " + data.CarritoStock.Productos[i].stock);
-                                    //        i++;
-                                    //        //console.log($(this).find('td').eq(1).text())
-                                    //    });
-                                    //});
+                                        //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
+                                        $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
+                                        $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                                        if (subt == 0) {
+                                            $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
+                                        } else {
+                                            $('#popover_content_wrapper').find("p:first").html("");
+                                        }
+                                        //$('#TextoCarritoPedido').text("No hay stock");
+                                        //console.log(data);
+                                        //$('#TextoCarritoPedido').text("No hay stock");
+                                        //i = 0;
+                                        //$('#carritoModal table > thead').find('tr').eq(0).append("<th>Quantity</th>")
+                                        //$('#carritoModal table > tbody tr').each(function () {
+                                        //    $(this).append("<td>" + data.CarritoStock.Productos[i].stock + "</td>");
+                                        //    $(this).find('td').eq(1).each(function () {
 
-                            } else {
-                                toastr["success"](data.Result, "OK!")
-                            }
-                            },
-                            error: function () {
-                                toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                                ocultarGIF();
-                            },
-                            complete: ocultarGIF
-                        });
+                                        //        $(this).text(data.CarritoStock.Productos[i].Cant + " " + data.CarritoStock.Productos[i].stock);
+                                        //        i++;
+                                        //        //console.log($(this).find('td').eq(1).text())
+                                        //    });
+                                        //});
+                                        ocultarGIF();
+                                } else {
+                                    toastr["success"](data.Result, "OK!")
+                                }
+                                },
+                                error: function () {
+                                    toastr["error"]("@Language.ErrorLogInAgain", "Error!")
+                                    ocultarGIF();
+                                }//,
+                                //complete: ocultarGIF
+                            });
                         },
                         cancel: function () {
                             toastr["info"]("@Language.operacionCancelada")
@@ -853,88 +877,88 @@
 
 
 
-                $("#preload").addClass("oculto");
-                //OJO veo si NO es IE
-                var ua = window.navigator.userAgent;
-                var msie = ua.indexOf("MSIE ");
-                IEVersion = 13; //pongo 13 por si no es IE que tenga algo mayor que 9
-                //if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  {     // If Internet Explorer, return version number
-                if (!!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-                    msie = 1
-                }
-                if (msie > 0) {
-                    IEVersion = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
-                }
-                if ((msie == -1) || (IEVersion < 10)) {
-                    $('#LoginPassword').hideShowPassword({
-                        innerToggle: true
-                    });
-                }
-                //OJO
-                $('.hideShowPassword-wrapper').css('width', '100%');
-                $('.hideShowPassword-toggle').css('margin-top', '-25px');
-
-
-                //BACK TO TOP
-                //******************************************************//
-                // browser window scroll (in pixels) after which the "back to top" link is shown
-                var offset = 300,
-                        //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
-                        offset_opacity = 1200,
-                        //duration of the top scrolling animation (in ms)
-                        scroll_top_duration = 700,
-                        //grab the "back to top" link
-                        $back_to_top = $('.cd-top');
-
-                //hide or show the "back to top" link
-                $(window).scroll(function () {
-                    ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-                    if ($(this).scrollTop() > offset_opacity) {
-                        $back_to_top.addClass('cd-fade-out');
-                    }
+            $("#preload").addClass("oculto");
+            //OJO veo si NO es IE
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            IEVersion = 13; //pongo 13 por si no es IE que tenga algo mayor que 9
+            //if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  {     // If Internet Explorer, return version number
+            if (!!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+                msie = 1
+            }
+            if (msie > 0) {
+                IEVersion = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
+            }
+            if ((msie == -1) || (IEVersion < 10)) {
+                $('#LoginPassword').hideShowPassword({
+                    innerToggle: true
                 });
+            }
+            //OJO
+            $('.hideShowPassword-wrapper').css('width', '100%');
+            $('.hideShowPassword-toggle').css('margin-top', '-25px');
 
-                //smooth scroll to top
-                $back_to_top.on('click', function (event) {
-                    event.preventDefault();
-                    $('body,html').animate({
-                        scrollTop: 0,
-                    }, scroll_top_duration
-                    );
-                });
-                //******************************************************//
 
-                $('.MontoPrePedido').each(function (index) {
-                    esto = $(this).text();
-                    //console.log(esto);
-                    $(this).text(parseFloat(esto).format(2, 3, '.', ','))
-                });
+            //BACK TO TOP
+            //******************************************************//
+            // browser window scroll (in pixels) after which the "back to top" link is shown
+            var offset = 300,
+                    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+                    offset_opacity = 1200,
+                    //duration of the top scrolling animation (in ms)
+                    scroll_top_duration = 700,
+                    //grab the "back to top" link
+                    $back_to_top = $('.cd-top');
 
-                var RemoveSomee = function () {
-                    var searchArray = ["Somee"];
-                    var found = $('a').filter(function (idx, elem) {
-                        var html = $(elem).html();
-                        for (var i = 0, l = searchArray.length; i < l; i++) {
-                            if (html.indexOf(searchArray[i]) != -1) {
-                                return true;
-                            }
+            //hide or show the "back to top" link
+            $(window).scroll(function () {
+                ($(this).scrollTop() > offset) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+                if ($(this).scrollTop() > offset_opacity) {
+                    $back_to_top.addClass('cd-fade-out');
+                }
+            });
+
+            //smooth scroll to top
+            $back_to_top.on('click', function (event) {
+                event.preventDefault();
+                $('body,html').animate({
+                    scrollTop: 0,
+                }, scroll_top_duration
+                );
+            });
+            //******************************************************//
+
+            $('.MontoPrePedido').each(function (index) {
+                esto = $(this).text();
+                //console.log(esto);
+                $(this).text(parseFloat(esto).format(2, 3, '.', ','))
+            });
+
+            var RemoveSomee = function () {
+                var searchArray = ["Somee"];
+                var found = $('a').filter(function (idx, elem) {
+                    var html = $(elem).html();
+                    for (var i = 0, l = searchArray.length; i < l; i++) {
+                        if (html.indexOf(searchArray[i]) != -1) {
+                            return true;
                         }
-                        return false;
-                    }).css('display', 'none');
-                    $('div').filter(function () {
-                        return $(this).css('z-index') > 10000;
-                    }).each(function () {
-                        $(this).css('display', 'none');
-                    });
-                }
-                setTimeout(function () { RemoveSomee(); }, 3000);
+                    }
+                    return false;
+                }).css('display', 'none');
+                $('div').filter(function () {
+                    return $(this).css('z-index') > 10000;
+                }).each(function () {
+                    $(this).css('display', 'none');
+                });
+            }
+            setTimeout(function () { RemoveSomee(); }, 3000);
 
 
-                $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
+            $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
 
 
                 @RenderSection("readyEnding", false)
-            }); // END Document Ready
+        }); // END Document Ready
 
         $('body').on('click', '#LimpiarCarrito', function () {
             limpiarCarrito();
@@ -966,16 +990,16 @@
                     console.log(cantidad);
                     var dataToSend = { id: id, Cantidad: cantidad }
                     var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
-                   $.ajax({
-                       type: "POST",
-                       url: serviceURL,
-                       data: JSON.stringify(dataToSend),
-                       contentType: "application/json; charset=utf-8",
-                       dataType: "json",
-                       success: GetInit,
-                       error: errorFunc,
-                       complete: ocultarGIF
-                   });
+                    $.ajax({
+                        type: "POST",
+                        url: serviceURL,
+                        data: JSON.stringify(dataToSend),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: GetInit,
+                        error: errorFunc,
+                        complete: ocultarGIF
+                    });
                     // } else {
                     //      toastr["info"]("@Language.operacionCancelada")
                     // }
@@ -986,23 +1010,7 @@
             });
         });
 
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "10000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
+
 
         //efectos
         var map = { 18: false, 71: false };

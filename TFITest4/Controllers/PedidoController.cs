@@ -485,6 +485,7 @@ namespace TFITest4.Controllers
                         }
                         int IDDocNuevo = DocWorker.GuardarDocumento(pedido);
 
+                        Session["ListCarrito"] = null;
                         devolver = @Language.OKNormal;
                         return Json(new { Result = devolver, CarritoStock = "ir" }, JsonRequestBehavior.AllowGet);
                     }

@@ -86,7 +86,7 @@
                 <td class="tdNumero"><span class="MontoPrePedido">@item.PrecioActual.ToString().Replace(",", ".")</span>
                 </td>
                 <td>
-                    <input style="width: 100%;" type="number" min="0" max="100" placeholder="@Language.cantidad" />
+                    <input style="width: 100%;" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' min="0" max="100" placeholder="@Language.cantidad" />
                 </td>
                 @*        <td>
             @Html.DisplayFor(modelItem => item.UnidadMedida)
@@ -224,7 +224,8 @@
 
 
         $(document).ready(function () {
-            toastr["info"]("@Language.pss", "Psss")
+            toastr.info("@Language.pss", "Psss")
+            setTimeout(function () { toastr.clear() }, 3000);
             $(".fancybox").fancybox({
                 openEffect: 'elastic',
                 closeEffect: 'elastic',
@@ -284,9 +285,7 @@
 
         });
 
-        function isInteger(n) {
-            return n === +n && n === (n | 0);
-        }
+   
 
         var list;
         var maxProd = 100;
@@ -300,10 +299,8 @@
                 cantidad = 1;
             }
             if (cantidad <= maxProd && cantidad >= minProd) {
-                if (isInteger(cantidad)) {
                     var DatosPedido = { id: id, cantidad: cantidad }
                     executeAjaxPedido(DatosPedido, $(this));
-                }
 
             } else {
                 toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
@@ -319,11 +316,9 @@
                 cantidad = 1;
             }
             if (cantidad <= maxProd && cantidad >= minProd) {
-                if (isInteger(cantidad)) {
                     cantidad *= -1;
                     var DatosPedido = { id: id, cantidad: cantidad }
                     executeAjaxPedido(DatosPedido, $(this));
-                }
             } else {
                 toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
             }
