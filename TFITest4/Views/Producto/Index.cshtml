@@ -69,7 +69,7 @@
                         @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
                     </td>
                     <td>
-                        @item.FechaAlta.ToString("dd/MMM/yyyy HH:mm")
+                        @item.FechaAlta.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                     </td>
                     <td>
                         @Html.ActionLink(Language.editar, "Edit", new { id = item.IDProducto }, new { @class = "btn btn-primary", @style = "color:white" })

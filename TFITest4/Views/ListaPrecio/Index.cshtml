@@ -45,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.Detalle)
                 </td>
                 <td>
-                    @item.FechaDesde.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaDesde.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
 
                 <td>

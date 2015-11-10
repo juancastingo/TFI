@@ -40,85 +40,98 @@
                                         @Html.ActionLink(@Language.compre, "Index", "Pedido")
                                     </li>
                                     <li>
-                                        @Html.ActionLink(@Language.pedido+"s", "Pedido", "Pedido")
+                                        @Html.ActionLink(@Language.pedido + "s", "Pedido", "Pedido")
                                     </li>
                                     <li>
-                                        @Html.ActionLink("Pre" + @Language.pedido+"s", "Prepedidos", "Pedido")
+                                        @Html.ActionLink("Pre" + @Language.pedido + "s", "Prepedidos", "Pedido")
                                     </li>
                                 </ul>
                             </li>
                             }
                             if (Session["grupo"].ToString() == "Creditos y Cobranzas")
                             {
-                                <li class="docPendientes">
-                                    @Html.ActionLink(@Language.analizar, "Controlar", "Pedido")
-                                </li>   
+                            <li class="docPendientes">
+                                @Html.ActionLink(@Language.analizar, "Controlar", "Pedido")
+                            </li>   
                             }
                             if (Session["grupo"].ToString() == "Comercial")
                             {
-                                <li class="docPendientes">
-                                    @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
-                                </li>
+                            <li class="docPendientes">
+                                @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
+                            </li>
+                            }
+                            if (Session["grupo"].ToString() == "Contable")
+                            {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">Contabilidadddd<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink(@Language.registrar, "Registrar", "Contabilidad")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Asientossss", "Asientos", "Contabilidad")
+                                    </li>
+
+                                </ul>
+                            </li>
                             }
                         }
-                        <li class="dropdown">
-                            <a href="#" id="configuracion" class="dropdown-toggle" data-toggle="dropdown">@Language.MenuConfiguracion<strong class="caret"></strong></a>
+                        @if (Session["usuario"] != null)
+                        {
+                            if (Session["grupo"].ToString() == "Comercial" || Session["grupo"].ToString() == "Administrador")
+                            {
+                            <li class="dropdown">
+                                <a href="#" id="configuracion" class="dropdown-toggle" data-toggle="dropdown">@Language.MenuConfiguracion<strong class="caret"></strong></a>
 
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink(@Language.clientes, "Index", "Cliente")
-                                </li>
-                                <li>
-                                    @Html.ActionLink(@Language.producto+"s", "Index", "producto")
-                                </li>
-                                <li class="dropdown-submenu">
-
-
-                                    <a tabindex="-1" href="#">@Language.lugares</a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            @Html.ActionLink("Pais", "Index", "Pais")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("Provincia", "Index", "Provincia")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink("Localidad", "Index", "Localidad")
-                                        </li>
-                                        <li class="dropdown-submenu">
-                                            <a href="#">Even More..</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">3rd level</a></li>
-                                                <li><a href="#">3rd level</a></li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    @Html.ActionLink(@Language.usuario+"s", "Index", "Usuarios")
-                                </li>
-
-                                <li class="dropdown-submenu">
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink(@Language.clientes, "Index", "Cliente")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(@Language.producto + "s", "Index", "producto")
+                                    </li>
+                                    <li class="dropdown-submenu">
 
 
-                                    <a tabindex="-1" href="#">@Language.precios</a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            @Html.ActionLink(@Language.listaPrecios, "Index", "ListaPrecio")
-                                        </li>
-                                        <li>
-                                            @Html.ActionLink(@Language.listaDetalle, "Index", "PrecioDetalle")
-                                        </li>
-                                    </ul>
-                                </li>
+                                        <a tabindex="-1" href="#">@Language.lugares</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                @Html.ActionLink("Pais", "Index", "Pais")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Provincia", "Index", "Provincia")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Localidad", "Index", "Localidad")
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(@Language.usuario + "s", "Index", "Usuarios")
+                                    </li>
 
-                                <li>
-                                    @Html.ActionLink(@Language.bitacora, "Index", "Bitacora")
-                                </li>
+                                    <li class="dropdown-submenu">
 
-                            </ul>
-                        </li>
+
+                                        <a tabindex="-1" href="#">@Language.precios</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                @Html.ActionLink(@Language.listaPrecios, "Index", "ListaPrecio")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink(@Language.listaDetalle, "Index", "PrecioDetalle")
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        @Html.ActionLink(@Language.bitacora, "Index", "Bitacora")
+                                    </li>
+
+                                </ul>
+                            </li>
+                            }
+                        }
                     </ul>
 
 
@@ -153,7 +166,7 @@
                                 <a href="#" id="nombre_usuario" data-val="Invitado">@Language.usuario: @Language.Invitado</a>
                             }
                         </li>
-                        <li class="dropdown" style="width:150px;" id="i18n-options-container">
+                        <li class="dropdown" style="width: 150px;" id="i18n-options-container">
                             <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">@Language.MenuIdioma<b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
@@ -168,8 +181,24 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">About<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("About1", "Index", "ListaPrecio")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("About2", "Index", "PrecioDetalle")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Contact", "Index", "PrecioDetalle")
+                                </li>
+                            </ul>
+                        </li>
                         <li>
-                            <a><img id="microfono" alt="Start"  src="/Content/images/mic.gif"></a>
+                            <a>
+                                <img id="microfono" alt="Start" src="/Content/images/mic.gif">
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -188,7 +217,7 @@
         <a href="#" id="VerCarrito" class="btn btn-primary">
             <span class="glyphicon glyphicon-shopping-cart"></span>@Language.ver @Language.carrito
         </a>
-        <a href="#" id="LimpiarCarrito"  class="btn btn-default">
+        <a href="#" id="LimpiarCarrito" class="btn btn-default">
             <span class="glyphicon glyphicon-trash"></span>@Language.limpiar
         </a>
 

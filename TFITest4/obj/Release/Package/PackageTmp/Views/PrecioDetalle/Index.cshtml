@@ -1,5 +1,18 @@
 ﻿@model IEnumerable<BIZ.BIZPrecioDetalle>
 @using TFITest4.Resources;
+
+
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        retURLErr = window.location.pathname + window.location.search;
+        retURLErr = retURLErr.replace(/[/]/g, "%2f")
+        window.location = "/Login/Error?ReturnUrl=" + retURLErr;
+    }
+</script>
+
+
 <div class="container">
 <h2 class="titulo">@TFITest4.Resources.Language.listaDetalle</h2>
 <p>
@@ -14,22 +27,22 @@
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.ListaPrecio.Detalle)*@
-            Lista
+            @Language.listaPrecios
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Producto)
+            @Language.producto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Precio)
+            @Language.precio
         </th>
 @*        <th>
             @Html.DisplayNameFor(model => model.FechaAlta)
         </th>*@
 
         <th>
-            @Html.DisplayNameFor(model => model.Activo)
+            @Language.activo
         </th>
-        <th>Edit</th>
+        <th>@Language.editar</th>
     </tr>
             </thead>  
         <tbody>

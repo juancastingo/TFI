@@ -41,10 +41,10 @@
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
-                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td>
-                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">

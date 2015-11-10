@@ -1,11 +1,15 @@
 ﻿@using TFITest4.Resources;
 @model IEnumerable<TFITest4.Models.ModelPais>
 
-@{
-    ViewBag.Title = "Index";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
-<center><h2>@Language.Pais</h2></center>
+<h2 class="titulo">@Language.Pais</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")

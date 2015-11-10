@@ -167,7 +167,7 @@
                         </td>
                         <td style="width: 150px !important;border-right: none !important;border-left: none !important;" class="tdNumero" >
                             @{double valor = Convert.ToDouble(@item.PrecioDetalle.Precio);}
-                            <span class="MontoPrePedido">@valor.ToString("n2")</span>
+                            <span class="MontoPrePedido">@valor.ToString("C")</span>
                         </td >
                         <td class="tdNumero" style="width: 150px !important;border-right: none !important;border-left: none !important;">
                             @{double DetalleSubt = 0;}
@@ -177,7 +177,7 @@
                               SubTotal += DetalleSubt;
                             }
                             @{double precio = valor*@item.Cantidad;}
-                            <span class="MontoPrePedido">@precio.ToString("n2")</span>
+                            <span class="MontoPrePedido">@precio.ToString("C")</span>
                         </td>
 
                     </tr>

@@ -19,7 +19,6 @@
         .valor {
             text-align: right;
         }
-
     </style>
 
 }
@@ -114,7 +113,7 @@
                 <h3 class="modal-title">@Language.justifacion</h3>
             </div>
             <div class="modal-body" id="PedidoModalBody">
-                <input type="text" style="width:100%;" id="justifText" required />
+                <input type="text" style="width: 100%;" id="justifText" required />
 
             </div>
             <div class="modal-footer">
@@ -150,7 +149,14 @@ tabla
             pedidoNr = $(this).attr('data-val');
             var estado = $(this).closest('tr').attr("data-val");
             if (estado == "bien") {
-                llamadaAR(pedidoNr, "", tipo)
+                $.confirm({
+                    confirm: function () {
+                        llamadaAR(pedidoNr, "", tipo)
+                    },
+                    cancel: function () {
+                        toastr["info"]("@Language.operacionCancelada")
+                    }
+                });
             } else {
                 $('#JustModal input').attr('data-val', $(this).attr('data-val'));
                 $('#JustModal input').focus();
@@ -162,7 +168,14 @@ tabla
             pedidoNr = $(this).attr('data-val');
             var estado = $(this).closest('tr').attr("data-val");
             if (estado != "bien") {
-                llamadaAR(pedidoNr, "", tipo)
+                $.confirm({
+                    confirm: function () {
+                        llamadaAR(pedidoNr, "", tipo)
+                    },
+                    cancel: function () {
+                        toastr["info"]("@Language.operacionCancelada")
+                    }
+                 });
             } else {
                 $('#JustModal input').attr('data-val', $(this).attr('data-val'));
                 $('#JustModal input').focus();
@@ -171,19 +184,19 @@ tabla
         });
 
         var llamadaAR = function (id, just, tipoAct) {
-                mostrarGIF();
-                var serviceURL = '@Url.Action("AprobarRechazarPedido", "Pedido")';
+            mostrarGIF();
+            var serviceURL = '@Url.Action("AprobarRechazarPedido", "Pedido")';
                 $.ajax({
                     type: "POST",
                     url: serviceURL,
-                    data: JSON.stringify({ Pedido: id, tipoActualizacion: tipoAct , justif: just}),
+                    data: JSON.stringify({ Pedido: id, tipoActualizacion: tipoAct, justif: just }),
                     dataType: 'text',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data, status) {
                         //console.log(data);
                         if (data.Result == "") {
-                            toastr["success"]("@Language.OKNormal", "OK!");
+                            //toastr["success"]("@Language.OKNormal", "OK!");
                             location.reload();
                         } else {
                             errorFunc;
@@ -191,37 +204,37 @@ tabla
                     },
                     error: errorFunc
                 });
-            }
+        }
 
 
-        $('.AprobarRechazar').click(function () {
-            //console.log(pedidoNr);
-            //console.log($('#justifText').val());
-            llamadaAR(pedidoNr,$('#justifText').val(),tipo)
-        });
+            $('.AprobarRechazar').click(function () {
+                //console.log(pedidoNr);
+                //console.log($('#justifText').val());
+                llamadaAR(pedidoNr, $('#justifText').val(), tipo)
+            });
 
 
 
 
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            $('#JustModal').on('shown.bs.modal', function () {
-                $('#JustModal input').focus();
-            })
-        });
-        //    $('.MontoPrePedido').each(function (index) {
-        //        esto = $(this).text();
+                $('#JustModal').on('shown.bs.modal', function () {
+                    $('#JustModal input').focus();
+                })
+            });
+            //    $('.MontoPrePedido').each(function (index) {
+            //        esto = $(this).text();
 
-        //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
-        //    });
-        //});
+            //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+            //    });
+            //});
     </script>
 }
 
 
 @section numerosScript{
-            var list = [];
+var list = [];
             var list2 = [];
 
             $('.valor1').each(function () {

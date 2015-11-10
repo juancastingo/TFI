@@ -221,7 +221,7 @@
         <table id="" class="table table-striped" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Cantidad
+                    <th style="max-width: 10px;">Cantidad
                     </th>
                     <th  style="text-align: left;">Producto</th>
                     <th style="width: 150px !important;text-align: right;">Precio Unitario
@@ -236,7 +236,7 @@
                 @foreach (var item in Model.DocumentoDetalle)
                 {
                     <tr>
-                        <td class="tdNumero" style="border-right: none !important; border-left: none !important;" >
+                        <td class="tdNumero" style="border-right: none !important; border-left: none !important;"  >
                             @Html.DisplayFor(modelItem => item.Cantidad)
 
                         </td >
@@ -247,7 +247,7 @@
                         <td style="width: 150px !important; border-right: none !important; border-left: none !important;" class="tdNumero">
 @*                            <span class="MontoPrePedido">@item.PrecioDetalle.Precio.ToString().Replace(",", ".")</span>*@
                             @{double precio = Convert.ToDouble(item.PrecioDetalle.Precio);}
-                            <span class="MontoPrePedido">@precio.ToString("n2")</span>
+                            <span class="MontoPrePedido">@precio.ToString("C")</span>
                         </td>
                         <td class="tdNumero" style="border-right: none !important; border-left: none !important;">
                             @{double DetalleSubt = 0;}
@@ -257,7 +257,7 @@
                               SubTotal += DetalleSubt;
                             }
 
-                            <span class="MontoPrePedido">@DetalleSubt.ToString("n2")</span>
+                            <span class="MontoPrePedido">@DetalleSubt.ToString("C")</span>
                         </td>
 
                     </tr>
@@ -294,7 +294,7 @@
                     <tr>
                         <td style="padding-right: 50px !important;">IVA Cliente: 
                         </td>
-                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% ($ @iva.ToString("n2"))</td>
+                        <td>@Model.ClienteEmpresa.TipoIVA.Valor% (@iva.ToString("C"))</td>
 
                     </tr>
                   }
@@ -320,6 +320,19 @@
         © @Model.EmpresaLocal.RazonSocial @DateTime.Now.Year
 
     </div>
+    <script>
+        //number format
+        Number.prototype.format = function (n, x, s, c) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+                num = this.toFixed(Math.max(0, ~~n));
+
+            return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+        };
+
+
+
+
+    </script>
 </body>
 </html>
 

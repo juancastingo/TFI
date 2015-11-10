@@ -86,7 +86,7 @@
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
                 </td>
                 <td>
-                    @item.FechaAlta.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaAlta.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td class="valor1">
                     @item.Limite.ToString().Replace(",", ".")

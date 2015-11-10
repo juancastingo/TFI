@@ -1,0 +1,143 @@
+﻿@*@model IEnumerable<BIZ.BIZDocumento>*@
+@using TFITest4.Resources
+
+@section headSection {
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <script src="~/Scripts/moment.min.js"></script>
+    <style>
+        /*.primera, .primera td {
+            border-bottom: 2px solid black !important;
+        }*/
+        .ultima, .ultima td {
+            border-bottom: 2px solid black !important;
+        }
+    </style>
+}
+
+
+
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Contable" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
+
+<h2 class="titulo">Asientos</h2>
+
+
+
+
+
+<div class="container">
+    <div class='col-md-1'></div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <span>@Language.FechaDesde</span>
+            <div class='input-group date' id='datetimepicker6'>
+
+                <input id="fecha1" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <span>@Language.fechaHasta</span>
+            <div class='input-group date' id='datetimepicker7'>
+                <input id="fecha2" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row"></div>
+
+
+<div class="row">
+    <div class="center">
+        <input id="ObtenerAsientos" type="button" class="btn btn-primary" value="Ejecutar" />
+    </div>
+</div>
+<div class="row"></div>
+<br />
+
+
+<script type="text/javascript">
+    $(function () {
+
+        PickerIdioma = "en";
+        if ($('#ActualCulture').val() == "esp") {
+            PickerIdioma = "es";
+        }
+        $('#datetimepicker6').datetimepicker({
+            locale: PickerIdioma,
+            format: 'YYYY-MM-DD'
+        });
+        $('#datetimepicker7').datetimepicker({
+            locale: PickerIdioma,
+            format: 'YYYY-MM-DD',
+            useCurrent: false
+        });
+
+        //$('#datetimepicker6').datetimepicker();
+        //$('#datetimepicker7').datetimepicker({
+        //    useCurrent: false 
+        //});
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+<div class="tablaAsientos">
+    <table class="table table-bordered dt-responsive nowrap table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Cuenta Debe</th>
+                <th>Cuenta Haber</th>
+                <th>Debe</th>
+                <th>Haber</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="primera">
+                <td>23-nov-2015
+                </td>
+                <td>Clientes
+                </td>
+                <td></td>
+                <td>$150
+                </td>
+                <td></td>
+            </tr>
+            <tr class="ultima">
+                <td></td>
+                <td></td>
+                <td>Ventas</td>
+                <td></td>
+                <td>$150</td>
+            </tr>
+
+        </tbody>
+                <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Cuenta Debe</th>
+                <th>Cuenta Haber</th>
+                <th>Debe</th>
+                <th>Haber</th>
+            </tr>
+        </thead>
+    </table>
+</div>

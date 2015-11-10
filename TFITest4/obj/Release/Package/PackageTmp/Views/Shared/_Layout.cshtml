@@ -427,12 +427,12 @@
                 $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
                 if (subt == 0) {
                     $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
-                } else {
-                    $('#popover_content_wrapper').find("p:first").html("");
-                }
-            } catch (ex) {
-                document.location.href = "/Login/CerrarSesion";
+            } else {
+                $('#popover_content_wrapper').find("p:first").html("");
             }
+        } catch (ex) {
+            document.location.href = "/Login/CerrarSesion";
+        }
 
     }
     function errorFunc(status) {
@@ -447,19 +447,19 @@
 
     function limpiarCarrito() {
         // if (confirm("@Language.confimarOperacion")) {
-            $.confirm({
-                confirm: function () {
-                    mostrarGIF();
-                    $('.popover').toggle();
-                    $.ajax({
-                        type: "POST",
-                        url: "/Pedido/LimpiarCarrito",
-                        data: param = "",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function () {
-                            GetInit();
-                            toastr["success"]("@Language.limpiarCarrito", "OK!")
+        $.confirm({
+            confirm: function () {
+                mostrarGIF();
+                $('.popover').toggle();
+                $.ajax({
+                    type: "POST",
+                    url: "/Pedido/LimpiarCarrito",
+                    data: param = "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        GetInit();
+                        toastr["success"]("@Language.limpiarCarrito", "OK!")
                         },
                         error: function () {
                             toastr["error"]("@Language.ErrorNormal", "Error!")
@@ -472,10 +472,10 @@
                 }
             });
 
-            // } else {
-            //     toastr["info"]("@Language.operacionCancelada")
-            // }
-        }
+        // } else {
+        //     toastr["info"]("@Language.operacionCancelada")
+        // }
+    }
 
         function SaveCarritoPrePedido() {
             if ($('#carritoModal table > tbody tr').length > 0) {
@@ -492,34 +492,34 @@
                     },
                     error: function () {
                         toastr["error"]("@Language.ErrorNormal", "Error!")
-                        },
+                    },
                     complete: ocultarGIF
                 });
-                }
             }
+        }
 
-            function keepSessionAlive() {
-                $.ajax({
-                    type: "POST",
-                    url: "/Login/keepAlive",
-                    data: param = "",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function () {
-                        console.log("keepAlive ok..");
-                    },
-                    error: function () {
-                        console.log("keepAlive failed..");
-                    }
-                });
-            }
-            var tabla;
-            var form_modified = false;
-            function confirmExit() {
-                msg = "@Language.ConfimarCancelar";
+        function keepSessionAlive() {
+            $.ajax({
+                type: "POST",
+                url: "/Login/keepAlive",
+                data: param = "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    console.log("keepAlive ok..");
+                },
+                error: function () {
+                    console.log("keepAlive failed..");
+                }
+            });
+        }
+        var tabla;
+        var form_modified = false;
+        function confirmExit() {
+            msg = "@Language.ConfimarCancelar";
                 msg = $('<span/>').html(msg).text();
                 return msg
-             }
+            }
             $(document).ready(function () {
                 ok = $('#AlertOk').val();
                 if (ok != undefined) { toastr["success"](ok, "OK!") }
@@ -547,7 +547,7 @@
                             window.onbeforeunload = confirmExit;
                             confirmExit();
                         }
-                    } catch(exception) {}
+                    } catch (exception) { }
                     console.log("change input");
                 });
 
@@ -688,7 +688,7 @@
                         return false;
                     }
                     $('#loginModal').addClass("disabled in-progress");
-                    $('#loginModal').attr("disabled","disabled");
+                    $('#loginModal').attr("disabled", "disabled");
                     //$('#LoginImgLoader').removeClass("oculto");
                     $('#MainMenu').fadeTo("slow", 0.1);
 
@@ -702,8 +702,9 @@
                         data: { UserName: $('#UserName').val(), Password: $('#LoginPassword').val() },
                         type: 'POST',
                         success: function (result) {
+                            console.log(result);
                             if (result.status == "error") {
-                                $('#login-modal span').text("@Language.RevisarUsuarioContra");
+                                $('#login-modal span').text(result.message);
                                 $('#MainMenu').fadeTo("slow", 1);
 
                             } else {
@@ -713,7 +714,8 @@
                                     //console.log(fullURL);
                                     window.location = fullURL
                                 } else {
-                                    window.location.reload();
+                                    //if (window.location.pathname+window.location.search == /Login/Error
+                                    window.location = "/Home";
                                 }
                                 //$("#MainMenu").html(result);
                                 //$('#MainMenu').fadeTo("slow", 1);
@@ -773,73 +775,84 @@
                 });
 
                 $('#SubmitPedido').click(function () {
-                    mostrarGIF();
-                    $.ajax({
-                        type: "POST",
-                        url: "/Pedido/SubmitPedido",
-                        data: param = "",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            console.log(data);
-                            if (data.CarritoStock == "ir") {
-                                window.location = "/Pedido/Pedido";
-                            }
-                            if (data.devolver != "" && data.CarritoStock != "ir") {
-                                list = data.CarritoStock.Productos;
-                                $('#NrPrePedido').text(data.IDDocumento);
-                                var subt = 0;
-                                var count = 0;
-                                $('#carritoModal table > thead').html('<th>@Language.producto</th><th style="padding-right: 15px;">@Language.cantidad</th><th style="padding-right: 15px;">@Language.disponible</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
-                                $('#carritoModal table > thead')
-                                $('#carritoModal table > tbody').html('');
-                                list.forEach(function (elem) {
-                                    //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
-                                    subt += (elem.Precio * elem.Cant);
-                                    thisSubtotal = (elem.Precio * elem.Cant);
-                                    NoStockClass = "SiStock"; blink = "";
-                                    if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
-                                    $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
-                                });
-                                setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
-                                var PreIVA = IVA;
-                                IVA = PreIVA;
-                                IVACalc = parseFloat(PreIVA);
+                    $.confirm({
+                        confirm: function () {
+                            mostrarGIF();
+                            $.ajax({
+                                type: "POST",
+                                url: "/Pedido/SubmitPedido",
+                                data: param = "",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    console.log(data);
+                                    if (data.CarritoStock == "ir") {
+                                        window.location = "/Pedido/Pedido";
+                                    }
+                                    if (data.devolver != "" && data.CarritoStock != "ir") {
+                                        list = data.CarritoStock.Productos;
+                                        $('#NrPrePedido').text(data.IDDocumento);
+                                        var subt = 0;
+                                        var count = 0;
+                                        $('#carritoModal table > thead').html('<th>@Language.producto</th><th style="padding-right: 15px;">@Language.cantidad</th><th style="padding-right: 15px;">@Language.disponible</th><th colspan="2">@Language.precioUnitario</th><th colspan="2">@Language.TotalProducto</th>');
+                                    $('#carritoModal table > thead')
+                                    $('#carritoModal table > tbody').html('');
+                                    list.forEach(function (elem) {
+                                        //console.log(elem.id + " " + elem.Nombre + " " + elem.Cant + " " + elem.Precio);
+                                        subt += (elem.Precio * elem.Cant);
+                                        thisSubtotal = (elem.Precio * elem.Cant);
+                                        NoStockClass = "SiStock"; blink = "";
+                                        if (elem.Cant > elem.stock) { NoStockClass = "NoStock"; blink = "blink" }
+                                        $('#carritoModal table > tbody').append('<tr  data-val="' + elem.id + '" class="' + blink + '"><td>' + elem.Nombre + '</td><td class="numero ' + NoStockClass + '">' + elem.Cant + '</td><td class="numero ElStock">' + elem.stock + '</td><td>$</td><td class="numero">' + elem.Precio.format(2, 3, '.', ',') + '</td><td>$</td><td class="numero">' + thisSubtotal.format(2, 3, '.', ',') + '</td><td><span class="glyphicon glyphicon-trash myTrash"></span></td></tr>');
+                                    });
+                                    setTimeout(function () { $('#carritoModal table > tbody .blink').removeClass('blink'); }, 3000);
+                                    var PreIVA = IVA;
+                                    IVA = PreIVA;
+                                    IVACalc = parseFloat(PreIVA);
 
-                                //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
-                                $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
-                                $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
-                                if (subt == 0) {
-                                    $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
+                                    //$('#PostDiv').html('<h4 class="text-right">Subtotal= $' + subt.format(2, 3, '.', ',') + '</h4><h4 class="text-right">IVA Cliente= ' + IVA + '% </h4><h4 class="text-right">Total= $' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</h4>');
+                                    $('#PostDiv').html('<table class="cartTable"><tr><th >Subtotal</th><td> $' + subt.format(2, 3, '.', ',') + '</td></tr><tr><th>IVA Cliente</th><td>' + IVA + '% ($' + (subt * IVACalc / 100).format(2, 3, '.', ',') + ')</td></tr><tr><th>Total</th><td>$' + (subt + (subt * IVACalc / 100)).format(2, 3, '.', ',') + '</td></tr>');
+                                    $('.CarritoSubtotal').html("$" + subt.format(2, 3, '.', ','));
+                                    if (subt == 0) {
+                                        $('#popover_content_wrapper').find("p:first").html("@Language.carrito @Language.vacio");
+                                } else {
+                                    $('#popover_content_wrapper').find("p:first").html("");
+                                }
+                                    //$('#TextoCarritoPedido').text("No hay stock");
+                                    //console.log(data);
+                                    //$('#TextoCarritoPedido').text("No hay stock");
+                                    //i = 0;
+                                    //$('#carritoModal table > thead').find('tr').eq(0).append("<th>Quantity</th>")
+                                    //$('#carritoModal table > tbody tr').each(function () {
+                                    //    $(this).append("<td>" + data.CarritoStock.Productos[i].stock + "</td>");
+                                    //    $(this).find('td').eq(1).each(function () {
+
+                                    //        $(this).text(data.CarritoStock.Productos[i].Cant + " " + data.CarritoStock.Productos[i].stock);
+                                    //        i++;
+                                    //        //console.log($(this).find('td').eq(1).text())
+                                    //    });
+                                    //});
+
                             } else {
-                                $('#popover_content_wrapper').find("p:first").html("");
+                                toastr["success"](data.Result, "OK!")
                             }
-                                //$('#TextoCarritoPedido').text("No hay stock");
-                                //console.log(data);
-                                //$('#TextoCarritoPedido').text("No hay stock");
-                                //i = 0;
-                                //$('#carritoModal table > thead').find('tr').eq(0).append("<th>Quantity</th>")
-                                //$('#carritoModal table > tbody tr').each(function () {
-                                //    $(this).append("<td>" + data.CarritoStock.Productos[i].stock + "</td>");
-                                //    $(this).find('td').eq(1).each(function () {
-
-                                //        $(this).text(data.CarritoStock.Productos[i].Cant + " " + data.CarritoStock.Productos[i].stock);
-                                //        i++;
-                                //        //console.log($(this).find('td').eq(1).text())
-                                //    });
-                                //});
-
-                        } else {
-
-                            toastr["success"](data.Result, "OK!")
+                            },
+                            error: function () {
+                                toastr["error"]("@Language.ErrorLogInAgain", "Error!")
+                                ocultarGIF();
+                            },
+                            complete: ocultarGIF
+                        });
+                        },
+                        cancel: function () {
+                            toastr["info"]("@Language.operacionCancelada")
                         }
-                        },
-                        error: function () {
-                            toastr["error"]("@Language.ErrorLogInAgain", "Error!")
-                        },
-                        complete: ocultarGIF
                     });
                 });
+
+
+
+
                 $("#preload").addClass("oculto");
                 //OJO veo si NO es IE
                 var ua = window.navigator.userAgent;
@@ -940,33 +953,33 @@
             $.confirm({
                 confirm: function () {
                     //if (confirm("@Language.confimarOperacion")) {
-                   esto.closest('tr').hide("slow");
-                   //console.log($(this));
-                   mostrarGIF();
-                   //console.log("executeAjaxPedido");
-                   var id = esto.closest('tr').attr('data-val');
-                   var cantidad = esto.closest('tr').find('td').eq(1).html();
-                   //console.log(id);
-                   console.log(cantidad);
-                   var cantidad = parseInt(cantidad);
-                   cantidad *= -1;
-                   console.log(cantidad);
-                   var dataToSend = { id: id, Cantidad: cantidad }
-                   var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
-                $.ajax({
-                    type: "POST",
-                    url: serviceURL,
-                    data: JSON.stringify(dataToSend),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: GetInit,
-                    error: errorFunc,
-                    complete: ocultarGIF
-                });
-                   // } else {
-                   //      toastr["info"]("@Language.operacionCancelada")
-                   // }
-               },
+                    esto.closest('tr').hide("slow");
+                    //console.log($(this));
+                    mostrarGIF();
+                    //console.log("executeAjaxPedido");
+                    var id = esto.closest('tr').attr('data-val');
+                    var cantidad = esto.closest('tr').find('td').eq(1).html();
+                    //console.log(id);
+                    console.log(cantidad);
+                    var cantidad = parseInt(cantidad);
+                    cantidad *= -1;
+                    console.log(cantidad);
+                    var dataToSend = { id: id, Cantidad: cantidad }
+                    var serviceURL = '@Url.Action("PedidoAjax2", "Pedido")';
+                   $.ajax({
+                       type: "POST",
+                       url: serviceURL,
+                       data: JSON.stringify(dataToSend),
+                       contentType: "application/json; charset=utf-8",
+                       dataType: "json",
+                       success: GetInit,
+                       error: errorFunc,
+                       complete: ocultarGIF
+                   });
+                    // } else {
+                    //      toastr["info"]("@Language.operacionCancelada")
+                    // }
+                },
                 cancel: function () {
                     toastr["info"]("@Language.operacionCancelada");
                 }

@@ -1,9 +1,14 @@
 ﻿@using TFITest4.Resources
 @model IEnumerable<BIZ.BIZProvincia>
 
-@{
-    ViewBag.Title = "Index";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 <div class="container">
 
 <h2 class="center">@Language.ProvinciaTitle</h2>

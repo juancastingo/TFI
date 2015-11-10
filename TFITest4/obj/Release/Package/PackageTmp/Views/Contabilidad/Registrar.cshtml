@@ -1,0 +1,152 @@
+﻿@using TFITest4.Resources
+
+
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Contable" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
+@section headSection {
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <script src="~/Scripts/moment.min.js"></script>
+}
+
+
+<h2 class="titulo">@Language.registrar</h2>
+@*<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <span>Seleccione un mes para registrar --></span>
+        </div>
+        <div class="col-md-4">
+            <div class='input-group date' id='datetimepicker1'>
+                <input id="Fecha" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="container">
+    <div class='col-md-1'></div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <span>@Language.FechaDesde</span>
+            <div class='input-group date' id='datetimepicker6'>
+
+                <input id="fecha1" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <span>@Language.fechaHasta</span>
+            <div class='input-group date' id='datetimepicker7'>
+                <input id="fecha2" type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row"></div>
+
+
+<div class="row">
+    <input id="RegistrarMes" type="button" class="btn btn-primary" value="Registrar" />
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        PickerIdioma = "en";
+        if ($('#ActualCulture').val() == "esp") {
+            PickerIdioma = "es";
+        }
+        $('#datetimepicker6').datetimepicker({
+            locale: PickerIdioma,
+            format: 'YYYY-MM-DD'
+        });
+        $('#datetimepicker7').datetimepicker({
+            locale: PickerIdioma,
+            format: 'YYYY-MM-DD',
+            useCurrent: false
+        });
+
+        //$('#datetimepicker6').datetimepicker();
+        //$('#datetimepicker7').datetimepicker({
+        //    useCurrent: false 
+        //});
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+
+
+
+@section EndScript{
+
+    <script>
+        //$(function () {
+        PickerIdioma = "en";
+        if ($('#ActualCulture').val() == "esp") {
+            PickerIdioma = "es";
+        }
+        $('#datetimepicker1').datetimepicker({
+            locale: PickerIdioma,
+            minDate: moment(),
+            format: 'YYYY-MM'
+            //pickTime: false 
+        });
+
+        $('#RegistrarMes').click(function () {
+            console.log($("#fecha1").val());
+            console.log($("#fecha2").val());
+            if ($("#fecha1").val() != "" && $("#fecha2").val() != "") {
+                Fecha1 = $('#fecha1').val();
+                Fecha2 = $('#fecha2').val();
+                //moment(PFecha);
+                mostrarGIF();
+                var serviceURL = '@Url.Action("RegistrarMes", "Contabilidad")';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify({ f1: Fecha1, f2: Fecha2 }),
+                    dataType: 'text',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        //console.log(data);
+                        if (data.Result == "") {
+                            toastr["success"]("@Language.OKNormal", "OK!");
+                        ocultarGIF();
+                            //location.reload();
+                    } else {
+                        errorFunc;
+                    }
+                    },
+                    error: errorFunc
+                });
+        } else {
+            toastr["info"]("Please complete all fields", "Info");
+        }
+        });
+
+
+    </script>
+}

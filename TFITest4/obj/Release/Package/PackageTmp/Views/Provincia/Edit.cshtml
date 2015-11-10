@@ -1,9 +1,13 @@
 ﻿@model BIZ.BIZProvincia
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Edit";
-}
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
 
 <h2>@Language.editar</h2>
 

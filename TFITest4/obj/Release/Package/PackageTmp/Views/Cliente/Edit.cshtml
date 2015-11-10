@@ -1,6 +1,14 @@
 ﻿@model TFITest4.Models.ModelClienteEmpresa
 @using TFITest4.Resources
 
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        window.location = "/Login/Error"
+    }
+</script>
+
 <div class="container">
 
 <h2 class="titulo">@Language.editar</h2>
@@ -95,7 +103,7 @@
             @Html.ValidationMessageFor(model => model.Numero)
         </td>
         </tr><tr>
-        <td class="editor-label">
+        @*<td class="editor-label">
             @Html.LabelFor(model => model.Piso)
         </td>
         <td class="editor-field">
@@ -110,7 +118,7 @@
             @Html.EditorFor(model => model.Direccion.Dpto)
             @Html.ValidationMessageFor(model => model.Dpto)
         </td>
-        </tr><tr>
+        </tr><tr>*@
         <td class="editor-label">
             @Html.LabelFor(model => model.Detalle)
         </td>
