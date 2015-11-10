@@ -284,6 +284,10 @@
 
         });
 
+        function isInteger(n) {
+            return n === +n && n === (n | 0);
+        }
+
         var list;
         var maxProd = 100;
         var minProd = 1;
@@ -296,8 +300,10 @@
                 cantidad = 1;
             }
             if (cantidad <= maxProd && cantidad >= minProd) {
-                var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido,$(this));
+                if (isInteger(cantidad)) {
+                    var DatosPedido = { id: id, cantidad: cantidad }
+                    executeAjaxPedido(DatosPedido, $(this));
+                }
 
             } else {
                 toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
@@ -313,9 +319,11 @@
                 cantidad = 1;
             }
             if (cantidad <= maxProd && cantidad >= minProd) {
-                cantidad *= -1;
-                var DatosPedido = { id: id, cantidad: cantidad }
-                executeAjaxPedido(DatosPedido,$(this));
+                if (isInteger(cantidad)) {
+                    cantidad *= -1;
+                    var DatosPedido = { id: id, cantidad: cantidad }
+                    executeAjaxPedido(DatosPedido, $(this));
+                }
             } else {
                 toastr["warning"]("@Language.cantidadProductos " + minProd + "-" + maxProd, "Error")
             }
