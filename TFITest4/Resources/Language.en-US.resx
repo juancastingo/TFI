@@ -495,4 +495,16 @@
   <data name="UsuarioValidado" xml:space="preserve">
     <value>Validation was performed for User: </value>
   </data>
+  <data name="cargar" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="descartar" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="prePedido" xml:space="preserve">
+    <value>Pre-Order</value>
+  </data>
+  <data name="prePedidoCargado" xml:space="preserve">
+    <value>The Cart has been loaded</value>
+  </data>
 </root>

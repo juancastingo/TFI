@@ -1,43 +1,41 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
-@{
-    ViewBag.Title = "Prepedidos";
-}
+
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
 }
-<h2>Prepedidos - @ViewBag.Empresa</h2>
+<h2 class="titulo">@Language.prePedido - @ViewBag.Empresa</h2>
 
 <table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
-            <th>NR Prepedido
+            <th>NR
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaEmision)
+                @Language.fechaEmision
             </th>
             <th>
-                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Fecha Ultima modificacion">FUM</span>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.FUM">FUM</span>
             </th>
             <th class="transparente"></th>
             <th>
-                @Html.DisplayNameFor(model => model.Monto)
+                @Language.monto
             </th>
-            <th>Estado
+            <th>@Language.estado
             </th>
-            <th>Usuario Creacion
+            <th>@Language.usuarioCreacion
             </th>
-            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="Usuario Ultima modificacion">UUM</span>
+            <th><span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.UUM">UUM</span>
             </th>
-            <th>Actions</th>
+            <th>@Language.action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="numero">
                     @Html.DisplayFor(modelItem => item.IDDocumento)
                 </td>
                 <td>
@@ -61,8 +59,8 @@
                 </td>
                 <td>
                     <p>
-                        <button data-val="@item.IDDocumento"  value=""  class="CargarPedidos btn btn-primary btn-sm" >cargar</button>
-                        <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >Descartar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="CargarPedidos btn btn-primary btn-sm" >@Language.cargar</button>
+                        <button data-val="@item.IDDocumento"  value=""  class="DescartarPrePedido btn btn-danger btn-sm" >@Language.descartar</button>
                     </p>
                 </td>
             </tr>
@@ -91,7 +89,7 @@
             });
             function successFunc(data, status) {
                 console.log(data);
-                toastr["success"]("The Cart has been loaded", "Success!")
+                toastr["success"]("@Language.prePedidoCargado", "Success!")
                 if (data.Result != "") toastr["warning"](data.Result, "@Language.Atencion")
             }
             function errorFunc(status) {

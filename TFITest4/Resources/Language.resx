@@ -486,8 +486,20 @@
   <data name="agregarVisual" xml:space="preserve">
     <value>Suelte aquí su ítem</value>
   </data>
+  <data name="cargar" xml:space="preserve">
+    <value>Cargar</value>
+  </data>
+  <data name="descartar" xml:space="preserve">
+    <value>Descartar</value>
+  </data>
   <data name="fechaHasta" xml:space="preserve">
     <value>Fecha Hasta</value>
+  </data>
+  <data name="prePedido" xml:space="preserve">
+    <value>Pre-Pedido</value>
+  </data>
+  <data name="prePedidoCargado" xml:space="preserve">
+    <value>El pedido ha sido cargado</value>
   </data>
   <data name="registrar" xml:space="preserve">
     <value>Registrar documentos</value>

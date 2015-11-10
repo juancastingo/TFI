@@ -205,6 +205,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cargar.
+        /// </summary>
+        public static string cargar {
+            get {
+                return ResourceManager.GetString("cargar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Carrito.
         /// </summary>
         public static string carrito {
@@ -327,6 +336,15 @@ namespace TFITest4.Resources {
         public static string cuentaCorriente {
             get {
                 return ResourceManager.GetString("cuentaCorriente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descartar.
+        /// </summary>
+        public static string descartar {
+            get {
+                return ResourceManager.GetString("descartar", resourceCulture);
             }
         }
         
@@ -925,11 +943,29 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Pre-Pedido.
+        /// </summary>
+        public static string prePedido {
+            get {
+                return ResourceManager.GetString("prePedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Alguno/s precios de su prepedido han sido actualizados a los nuevos valores vigentes.
         /// </summary>
         public static string PrePedidoActualizado {
             get {
                 return ResourceManager.GetString("PrePedidoActualizado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El pedido ha sido cargado.
+        /// </summary>
+        public static string prePedidoCargado {
+            get {
+                return ResourceManager.GetString("prePedidoCargado", resourceCulture);
             }
         }
         
