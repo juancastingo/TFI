@@ -648,23 +648,7 @@
 
 
 
-            urlDTLang = "";
-            if ($('#ActualCulture').val() == "esp") {
-                //urlDTLang = '/Scripts/Spanish.json';
-                moment.locale('es');
-                urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
-            }
-            try {
-                $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
-                setTimeout(function () {
-                    tabla = $('.tableJquery').DataTable({
-                        language: {
-                            url: urlDTLang,
-                        }
-                    });
-                }, 500);
-
-            } catch (err) { console.log("dt is not perfect") }
+          
 
 
 
@@ -953,7 +937,31 @@
                     $(this).css('display', 'none');
                 });
             }
+
+
+
+            var urlDTLang = "";
+            if ($('#ActualCulture').val() == "esp") {
+                //urlDTLang = '/Scripts/Spanish.json';
+                moment.locale('es');
+                urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+            }
+            try {
+                $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
+                setTimeout(function () {
+                    tabla = $('.tableJquery').DataTable({
+                        language: {
+                            url: urlDTLang,
+                        }
+                    });
+                }, 1000);
+
+            } catch (err) { console.log("dt is not perfect") }
+
+
             setTimeout(function () { RemoveSomee(); }, 3000);
+
+
 
 
             $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
