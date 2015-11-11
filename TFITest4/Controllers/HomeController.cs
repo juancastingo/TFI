@@ -15,7 +15,7 @@ namespace TFITest4.Controllers
         //
         // GET: /Home/
         private BLLBitacora Bita = new BLLBitacora();
-
+        private BLLDocumento docWorker = new BLLDocumento();
 
 
         public ActionResult Index()
@@ -173,8 +173,42 @@ namespace TFITest4.Controllers
 
             return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
         }
-    
 
+
+        public ActionResult PDFMaker(string fghjhtyuighj)
+        {
+            try
+            {
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                if (UsuarioIN != null)
+                {
+                    if (UsuarioIN.TipoUsuario.Tipo == "Externo")
+                    {
+                        BIZDocumento doc = docWorker.ObtenerDocXID(Convert.ToInt32(fghjhtyuighj));
+                        if (doc.ClienteEmpresa.IDClienteEmpresa == UsuarioIN.ClienteEmpresa.IDClienteEmpresa)
+                        {
+                            ViewBag.nr = Convert.ToInt32(fghjhtyuighj);
+                        }
+                        else
+                        {
+                            ViewBag.nr = -1;
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.nr = Convert.ToInt32(fghjhtyuighj);
+                    }
+                }
+                else
+                {
+                    ViewBag.nr = 0;
+                }
+            }
+            catch (Exception ex) {
+                ViewBag.nr = 0;
+            }
+            return View();
+        }
 
     }
 }

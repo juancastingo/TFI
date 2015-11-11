@@ -818,7 +818,9 @@ namespace TFITest4.Controllers
                 correo.Subject = "Nueva Actualización en sus pedidos";
                 correo.To = pedido.ClienteEmpresa.Email;
                 correo.cc = pedido.Usuario.Email;
-                correo.Body = "<span>" + pedido.Usuario.Nombre + ",</span><br><span>Se ha Facturado su pepido nr # " + IDPedido + ". Ingrese al sistema para imprimir la factura</span>";
+                string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/home/PDFMaker?odwidji32i324mu32u83257fm3209v5m320m392=u32hrwqduwqhdwqudhwqduwqdhwqduhwqudhwqudhwqud32hr32hrhf932hrn928v5u208m3f47&fghjhtyuighj=" + IDDocNuevo +"&32m3204c32094mqwdqwdwqdwqdwqd32=d4023123213213m'>Link</a>";
+                string body = String.Format("<span>" + pedido.Usuario.Nombre + ",</span><br><span>Se ha Facturado su pepido nr # " + IDPedido + ". Ingrese al sistema para imprimir la factura --> " + link +"</span>");
+                correo.Body = body;
                 util.sendMail(correo);
 
                 TempData["OKNormal"] = Resources.Language.OKNormal;
@@ -850,6 +852,7 @@ namespace TFITest4.Controllers
         }
 
 
+        
         public ActionResult makePDFFact()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
@@ -882,6 +885,51 @@ namespace TFITest4.Controllers
             //ViewBag.Barcode = codigo + ".jpg";
             return View(doc);
         }
+
+
+
+        
+        public ActionResult makePDFFactOut(string f)
+        {
+            try
+            {
+                //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
+                int IDFact;
+                IDFact = Convert.ToInt32(f);
+                ViewBag.nr = IDFact;
+                //var doc = DocWorker.ObtenerDocXID(IDFact);
+                //double monto = 0;
+                //if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
+                //{
+                //    foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                //    {
+                //        d.PrecioDetalle.Precio = d.PrecioDetalle.Precio + (doc.ClienteEmpresa.TipoIVA.Valor * d.PrecioDetalle.Precio / 100);
+                //        monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                //    }
+                //}
+                //else
+                //{
+                //    foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                //    {
+                //        monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                //    }
+                //    monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
+                //}
+                //doc.Monto = monto;
+                //Utils utils = new Utils();
+                //int codigo = Convert.ToInt32(doc.NrDocumento);
+                //string Scodigo = codigo.ToString();
+                //ViewBag.CB = utils.generaCodigoBarras("779053800" + Scodigo.PadLeft(3, '0')); //un numero +nr fact
+                //ViewBag.QR = utils.generarQR("779053800" + Scodigo.PadLeft(3, '0'));
+                //ViewBag.letras = utils.enletras(doc.Monto.ToString());
+
+                ////ViewBag.Barcode = codigo + ".jpg";
+                //return View(doc);
+                return View();
+            }
+            catch { return View(); }
+        }
+
 
 
         //protected override void Dispose(bool disposing)

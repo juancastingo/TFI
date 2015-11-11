@@ -973,6 +973,8 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Contabilidad\Registrar.cshtml" />
     <Content Include="Views\Contabilidad\Asientos.cshtml" />
+    <Content Include="Views\Pedido\makePDFFactOut.cshtml" />
+    <Content Include="Views\Home\PDFMaker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
