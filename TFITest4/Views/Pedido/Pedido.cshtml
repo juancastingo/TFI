@@ -18,7 +18,7 @@
     <h2 class="titulo">@Language.pedido - @ViewBag.Empresa</h2>
 </div>
 
-<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table id="" class="table tableJqueryFUM dt-responsive nowrap table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>NR
@@ -155,6 +155,14 @@
         } catch (err) { console.log("dt is not perfect") }
     });
 </script>
+
+@section readyEnding {
+    
+        tabla
+        .order([1, 'asc'])
+        .draw();
+
+    }
 @section EndScript{
 
     <script>
@@ -252,3 +260,4 @@
         //});
     </script>
 }
+

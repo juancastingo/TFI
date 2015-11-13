@@ -125,6 +125,12 @@ namespace DAL
 
         public void createDetallePrecio(BIZPrecioDetalle PrecioDetalle)
         {
+            //0 = false
+            if ((bool)PrecioDetalle.Activo)
+            {
+                string query = "UPDATE PrecioDetalle SET Activo=0 WHERE IDListaPrecio=" + PrecioDetalle.IDListaPrecio + " AND IDProducto = " + PrecioDetalle.IDProducto;
+                db.Database.ExecuteSqlCommand(query);
+            }
             var tPrecio = Mapper.Map<BIZPrecioDetalle, PrecioDetalle>(PrecioDetalle);
             db.PrecioDetalle.Add(tPrecio);
             db.SaveChanges();
