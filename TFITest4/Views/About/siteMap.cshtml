@@ -1,0 +1,68 @@
+﻿@using TFITest4.Resources
+@section headSection {
+    <link href="~/Content/jquery.jOrgChart.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.jOrgChart.js"></script>
+
+}
+
+<h2 class="titulo">siteMappppp</h2>
+
+
+    
+    <ul id="org" style="display:none">
+    <li>
+       <a href="/">Home</a>
+       <ul>
+         <li id="beer"><a href="/">@Language.registro</a></li>
+         <li>@Language.pedido
+           <p>Cliente</p>
+
+           <ul>
+             <li><a href="/Pedido/">@Language.compre</a></li>
+             <li>
+                <a href="http://tquila.com" target="_blank">Aubergine</a>
+             </li>
+           </ul>
+         </li>
+         <li class="fruit">Fruit
+           <ul>
+             <li>Apple
+               <ul>
+                 <li>Granny Smith</li>
+               </ul>
+             </li>
+             <li>Berries
+                                <ul>
+                 <li>Blueberry</li>
+                 <li>Cucumber</li>
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li>Bread</li>
+         <li class="collapsed">Chocolate
+           <ul>
+             <li>Topdeck</li>
+             <li>Reese's Cups</li>
+           </ul>
+         </li>
+       </ul>
+     </li>
+   </ul>
+<script src="~/Scripts/jquery.jOrgChart.js"></script>
+    <div id="chart" class="orgChart"></div>
+         <script>
+             $(document).ready(function () {
+                 $("#org").jOrgChart({
+                     chartElement: '#chart',
+                     dragAndDrop: false
+                 });
+             });
+    </script>
+
+@section EndScript {
+<script src="~/Scripts/jquery.jOrgChart.js"></script>
+    }

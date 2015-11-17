@@ -168,6 +168,7 @@
     <Compile Include="Code52.i18n\CultureHelper.cs" />
     <Compile Include="Code52.i18n\LanguageFilterAttribute.cs" />
     <Compile Include="Code52.i18n\LocalizationHelpers.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\BitacoraORMController.cs" />
@@ -250,6 +251,7 @@
     <Content Include="Content\code52.i18n\images\flags\fr.png" />
     <Content Include="Content\code52.i18n\images\flags\gb.png" />
     <Content Include="Content\code52.i18n\images\flags\it.png" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
     <Content Include="Content\flavr\css\animate.css" />
     <Content Include="Content\flavr\css\flavr.css" />
@@ -282,6 +284,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\general.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Content\images\bkgd.png" />
     <Content Include="Content\images\cd-top-arrow.svg" />
     <Content Include="Content\images\background-photo-mobile-devices.jpg" />
     <Content Include="Content\images\chrome_dinosaur.gif" />
@@ -295,6 +298,7 @@
     <Content Include="Content\images\mic-animate.gif" />
     <Content Include="Content\images\mic.gif" />
     <Content Include="Content\images\wink.svg" />
+    <Content Include="Content\jquery.jOrgChart.css" />
     <Content Include="Content\Pedido.css" />
     <Content Include="Content\responsive-full-background-image.css" />
     <Content Include="Content\responsive.bootstrap.min.css" />
@@ -827,6 +831,7 @@
     <Content Include="Scripts\jquery.confirm.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.jOrgChart.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -975,6 +980,7 @@
     <Content Include="Views\Contabilidad\Asientos.cshtml" />
     <Content Include="Views\Pedido\makePDFFactOut.cshtml" />
     <Content Include="Views\Home\PDFMaker.cshtml" />
+    <Content Include="Views\About\siteMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
