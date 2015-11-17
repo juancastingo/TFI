@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
-@{
-    ViewBag.Title = "Pedidos";
-}
+
 
 @section headSection {
     <link href="~/Content/simptip.min.css" rel="stylesheet" />
@@ -18,7 +16,7 @@
     <h2 class="titulo">@Language.pedido - @ViewBag.Empresa</h2>
 </div>
 
-<table id="" class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
+<table id="" class="table tableJqueryFUM dt-responsive nowrap table-bordered table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>NR
@@ -52,11 +50,11 @@
                 </td>
                 <td>
                     @*@item.FechaEmision.ToString("MM/dd/yyyy HH:mm")*@
-                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td>
                     @*@item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")*@
-                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm")
+                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
@@ -155,6 +153,14 @@
         } catch (err) { console.log("dt is not perfect") }
     });
 </script>
+
+@section readyEnding {
+    
+        tabla
+        .order([1, 'asc'])
+        .draw();
+
+    }
 @section EndScript{
 
     <script>
@@ -252,3 +258,4 @@
         //});
     </script>
 }
+

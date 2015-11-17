@@ -1,0 +1,30 @@
+﻿@*http://localhost:2234/home/PDFMaker?odwidji32i324mu32u83257fm3209v5m320m392=u32hrwqduwqhdwqudhwqduwqdhwqduhwqudhwqudhwqud32hr32hrhf932hrn928v5u208m3f47&fghjhtyuighj=85&32m3204c32094mqwdqwdwqdwqdwqd32=d4023123213213m*@
+@using TFITest4.Resources
+
+@{ if (ViewBag.nr == 0) {
+       
+        <script>
+            retURLErr = window.location.pathname + window.location.search;
+            retURLErr = retURLErr.replace(/[/]/g, "%2f")
+            window.location = "/Login/Error?ReturnUrl=" + retURLErr;
+</script>
+       
+   } else 
+   if (ViewBag.nr == -1) {
+       <br /><br /><br /><br /><br /><br />
+       <center>@Language.AccesoError</center>
+   } else
+   {
+       <br /><br /><br /><br /><br /><br />
+       <center>
+           <script>
+               window.location = "/pedido/ImprimirFactura?Factura=@ViewBag.nr";
+               $('#preload').addClass("oculto");
+           </script>
+    @*@Html.ActionLink(@Language.Imprimir, "ImprimirFactura", "Pedido", new { Factura = @ViewBag.nr }, new { @class = "btn btn-success imprimir" , @style = "color:white", id = "imp" })*@
+</center>
+}
+}  
+        <script>
+    //window.location= ""
+</script>

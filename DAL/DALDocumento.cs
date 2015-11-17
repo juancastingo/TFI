@@ -262,5 +262,16 @@ namespace DAL
             db.Database.ExecuteSqlCommand(query);
 
         }
+
+        public List<BIZDocumento> getDocsByType(int tipoDoc)
+        {
+
+              var  Daldocs = db.Documento
+               .Where(b => b.IDDocumentoTipo == tipoDoc);
+           
+            var Ddocs = Daldocs.ToList();
+            var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
+            return documentos;
+        }
     }
 }

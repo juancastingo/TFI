@@ -1,0 +1,91 @@
+﻿@using TFITest4.Resources
+@section headSection {
+    <link href="~/Content/jquery.jOrgChart.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <style>
+        h2 {
+            margin-top: 22px;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.jOrgChart.js"></script>
+
+
+}
+
+<h2 class="titulo">siteMappppp</h2>
+
+
+
+<ul id="org" style="display: none">
+    <li>
+        <a href="/">Home</a>
+        <ul>
+            <li><a href="/">@Language.registro</a></li>
+            <li>@Language.pedido
+                <p>Cliente</p>
+
+                <ul>
+                    <li>
+                        <a href="/Pedido/">@Language.compre</a>
+
+                    </li>
+                    <li>
+                        <a href="/Pedido/pedido">@Language.pedido</a>
+                    </li>
+                    <li>
+                        <a href="/Pedido/prepedido">Pre-@Language.pedido</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/pedido/Controlar">@Language.analizar</a>
+                <p>Creditos y Cobranzas</p>
+            </li>
+            <li>
+                <a href="/">Contabilidad</a>
+                <p>Contable</p>
+                <ul>
+                    <li><a href="/">@Language.registrar</a></li>
+                    <li><a href="/">Asientossss</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/">@Language.facturar</a>
+                <p>Comercial</p>
+            </li>
+            <li>
+                <a href="/">@Language.MenuConfiguracion</a>
+                <p>Comercial</p>
+                <ul>
+                    
+                    <li><a href="">@Language.clientes</a></li>
+                    <li>
+                        <a href="">@Language.precios</a>
+                        <ul>
+                            <li><a href="/">@Language.listaPrecios</a></li>
+                            <li><a href="/">@Language.listaDetalle</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">@Language.producto</a></li>
+                    <li><a href="">@Language.usuario</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<script src="~/Scripts/jquery.jOrgChart.js"></script>
+<div id="chart" class="orgChart"></div>
+<script>
+    $(document).ready(function () {
+        $('#aLogin').addClass("oculto");
+        $("#org").jOrgChart({
+            chartElement: '#chart',
+            dragAndDrop: false
+        });
+    });
+</script>
+
+@section EndScript {
+    <script src="~/Scripts/jquery.jOrgChart.js"></script>
+}

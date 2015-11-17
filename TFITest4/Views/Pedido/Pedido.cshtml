@@ -136,31 +136,7 @@
 <!-- /.modal -->
     
 
-<script>
 
-    $(document).ready(function () {
-
-        urlDTLang = "";
-        if ($('#ActualCulture').val() == "esp") {
-            //urlDTLang = '/Scripts/Spanish.json';
-            urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
-        }
-
-        try {
-            $('.tableJquery2').DataTable();
-           // tabla = $('.tableJquery2').DataTable();
-
-        } catch (err) { console.log("dt is not perfect") }
-    });
-</script>
-
-@section readyEnding {
-    
-        tabla
-        .order([1, 'asc'])
-        .draw();
-
-    }
 @section EndScript{
 
     <script>

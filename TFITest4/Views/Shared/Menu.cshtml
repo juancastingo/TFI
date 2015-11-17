@@ -56,8 +56,16 @@
                             }
                             if (Session["grupo"].ToString() == "Comercial")
                             {
-                            <li class="docPendientes">
-                                @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
+                            <li class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Language.pedido<span>s</span><strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li class="docPendientes">
+                                        @Html.ActionLink(@Language.facturar, "Facturar", "Pedido")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink(@Language.pedido + "s", "All", "Pedido")
+                                    </li>
+                                </ul>
                             </li>
                             }
                             if (Session["grupo"].ToString() == "Contable")

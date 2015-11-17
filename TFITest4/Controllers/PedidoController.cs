@@ -828,7 +828,7 @@ namespace TFITest4.Controllers
             }
             catch (Exception ex)
             {
-                Bita.guardarBitacora(new BIZBitacora("Informativo", "Error al originar la factura", null, null));
+                Bita.guardarBitacora(new BIZBitacora("Error", "Error al originar la factura", null, null));
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
@@ -929,6 +929,43 @@ namespace TFITest4.Controllers
             }
             catch { return View(); }
         }
+
+
+        //todos los pedidos
+         public ActionResult All()
+        {
+            try
+            {
+                BIZUsuario UsuarioIN = (BIZUsuario)Session["SUsuario"];
+                //var docs = DocWorker.ObtenerDocsXEmpresa(UsuarioIN.ClienteEmpresa.IDClienteEmpresa, 3, -1); //3 es el tipo de documento. Acá pedido. -1 es para traer todos
+                var docs = DocWorker.ObtenerDocsXTipo(3);
+                float monto;
+                foreach (var doc in docs)
+                {
+                    monto = 0;
+                    foreach (var det in doc.DocumentoDetalle)
+                    {
+                        monto += (float)(det.Cantidad * det.PrecioDetalle.Precio);
+                    }
+                    doc.Monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
+                }
+                //ViewBag.IVA = UsuarioIN.ClienteEmpresa.TipoIVA.Valor;
+                //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
+                return View(docs);
+            }
+            catch (Exception ex)
+            {
+                Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar obtener documentos", null, null));
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("CerrarSesion", "Login");
+            }
+        }
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<BIZ.BIZDocumento>
+@using TFITest4.Resources
+
+
+@section headSection {
+    <link href="~/Content/simptip.min.css" rel="stylesheet" />
+    <link href="~/Content/Pedido.css" rel="stylesheet" />
+}
+
+<script type="text/javascript">
+    tipoUserGroup = document.getElementById('LoginExiste').getAttribute("data-val");
+    console.log(tipoUserGroup);
+    if (tipoUserGroup != "Comercial" && tipoUserGroup != "Administrador") {
+        retURLErr = window.location.pathname + window.location.search;
+        retURLErr = retURLErr.replace(/[/]/g, "%2f")
+        window.location = "/Login/Error?ReturnUrl=" + retURLErr;
+    }
+</script>
+<div>
+    <h2 class="titulo">@Language.pedido</h2>
+</div>
+
+<table id="" class="table tableJqueryFUM dt-responsive nowrap table-bordered table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>NR
+            </th>
+            <th>
+                @Language.fechaEmision
+            </th>
+            <th>
+                <span class="simptip-position-top simptip-movable simptip-info" data-tooltip="@Language.FUM">FUM</span>
+            </th>
+            <th class="transparente"></th>
+            <th >
+                @Language.monto
+            </th>
+            <th>@Language.estado
+            </th>
+            <th>@Language.usuarioCreacion
+            </th>
+            <th>@Language.empresa
+            </th>
+            <th>@Language.action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr class="@item.EstadoMisc.Detalle">
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDDocumento)
+                </td>
+                <td>
+                    @*@item.FechaEmision.ToString("MM/dd/yyyy HH:mm")*@
+                    @item.FechaEmision.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
+                </td>
+                <td>
+                    @*@item.FechaUltimaModificacion.ToString("MM/dd/yyyy HH:mm")*@
+                    @item.FechaUltimaModificacion.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
+                </td>
+                <td class="SignoPesos">$</td>
+                <td class="tdNumero">
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteEmpresa.Nombre)
+                </td>
+                <td>
+                    <p>
+                        @Html.ActionLink(@Language.Imprimir, "PedidoPDF", new { NrPedido = item.IDDocumento }, new { @class = "btn btn-primary btn-sm", @style = "color:white" })
+                        @{if (item.EstadoMisc.Detalle == "Facturado")
+                          {
+                            @Html.ActionLink(@Language.factura, "ImprimirFactura", new { Factura = item.IDDocumentoRef }, new { @class = "btn btn-warning btn-sm", @style = "color:white" })
+                          }
+                              
+                        }
+                    </p>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

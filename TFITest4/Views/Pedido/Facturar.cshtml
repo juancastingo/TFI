@@ -120,8 +120,8 @@
         $('#datetimepicker1').datetimepicker({
             locale: PickerIdioma,
             format: 'YYYY-MM-DD',
-            minDate: moment(),
-            maxDate: moment().add(30, 'days')
+            minDate: moment().subtract(29,'days'),
+            maxDate: moment().add(300, 'days')
             //pickTime: false 
         });
         //});
@@ -133,28 +133,40 @@
 
 
         $('.FacturarPedido').click(function () {
-            pedidoNr = IDPedido;
-            FechaFac = $('#FechaFac').val();
-            mostrarGIF();
-            var serviceURL = '@Url.Action("facturarPedido", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify({ Pedido: pedidoNr, fecha: FechaFac }),
-                dataType: 'text',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, status) {
-                    //console.log(data);
-                    if (data.Result == "") {
-                        //toastr["success"]("@Language.OKNormal", "OK!");
-                       location.reload();
-                   } else {
-                       errorFunc;
-                   }
-               },
-               error: errorFunc
-           });
+            if ($('#FechaFac').val() == "") {
+                //$('.glyphicon-calendar').click();
+                //$('.input-group-addon').click();
+                //$('#FechaFac').focus();
+                setTimeout(function () {
+                    $('#FactModal').modal('show');
+                    $('.input-group-addon').click();
+                }, 500);
+                
+
+            } else {
+                pedidoNr = IDPedido;
+                FechaFac = $('#FechaFac').val();
+                mostrarGIF();
+                var serviceURL = '@Url.Action("facturarPedido", "Pedido")';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify({ Pedido: pedidoNr, fecha: FechaFac }),
+                    dataType: 'text',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        //console.log(data);
+                        if (data.Result == "") {
+                            //toastr["success"]("@Language.OKNormal", "OK!");
+                            location.reload();
+                        } else {
+                            errorFunc;
+                        }
+                    },
+                    error: errorFunc
+                });
+            }
         });
 
     </script>

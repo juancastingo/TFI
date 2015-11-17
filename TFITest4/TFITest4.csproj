@@ -981,6 +981,7 @@
     <Content Include="Views\Pedido\makePDFFactOut.cshtml" />
     <Content Include="Views\Home\PDFMaker.cshtml" />
     <Content Include="Views\About\siteMap.cshtml" />
+    <Content Include="Views\Pedido\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

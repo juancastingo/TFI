@@ -42,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.IDBitacora)
         </td>*@
                 <td>
-                    @item.Fecha.ToString("dd/MMM/yyyy HH:mm")
+                    @item.Fecha.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)

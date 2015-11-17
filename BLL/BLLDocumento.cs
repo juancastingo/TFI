@@ -86,5 +86,10 @@ namespace BLL
         {
             DocWorker.registerDocs(fecha1, fecha2);
         }
+
+        public List<BIZDocumento> ObtenerDocsXTipo(int tipoDoc)
+        {
+            return DocWorker.getDocsByType(tipoDoc);
+        }
     }
 }
