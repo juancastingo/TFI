@@ -1,4 +1,3 @@
-C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\BLL.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\BLL.pdb
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\BIZ.dll
@@ -10,5 +9,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\DA
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\AutoMapper.xml
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\EntityFramework.xml
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\obj\Debug\BLL.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\BLL\obj\Debug\BLL.pdb
