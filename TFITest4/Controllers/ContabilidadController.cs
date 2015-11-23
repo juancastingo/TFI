@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using TFITest4.Models;
+
 
 namespace TFITest4.Controllers
 {
@@ -29,8 +31,33 @@ namespace TFITest4.Controllers
 
         public ActionResult Asientos()
         {
-
             return View();
         }
+
+        public ActionResult GetAsientos(DateTime fecha, DateTime fecha2)
+        {
+            try
+            {
+                var docs = DocWorker.obtenerDocumentsPorFechaContable(fecha, fecha2);
+                List<ModelAsiento> asientos = new List<ModelAsiento>();
+                ModelAsiento asiento = new ModelAsiento();
+                foreach (var d in docs)
+                {
+                    //asiento.IDDocumento = d.IDDocumento;
+                    //asiento.FechaContable = d.FechaContable;
+                    //asiento.debe = d.DocumentoTipo.
+                    //asiento.haber = d.DocumentoTipo.Credito;
+
+                }
+
+                return Json(new { status = "", docs = docs });
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return Json(new { status = "Error" });
+        }
+
     }
 }

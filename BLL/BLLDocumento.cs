@@ -91,5 +91,10 @@ namespace BLL
         {
             return DocWorker.getDocsByType(tipoDoc);
         }
+
+        public List<BIZDocumento> obtenerDocumentsPorFechaContable(DateTime fecha, DateTime fecha2)
+        {
+            return DocWorker.getDocsByFechaContable(fecha,fecha2);
+        }
     }
 }

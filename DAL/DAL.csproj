@@ -161,7 +161,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="ORM\ModelIID.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelIID.Designer.cs</LastGenOutput>

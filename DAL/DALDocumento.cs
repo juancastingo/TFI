@@ -273,5 +273,16 @@ namespace DAL
             var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
             return documentos;
         }
+
+        public List<BIZDocumento> getDocsByFechaContable(DateTime fecha, DateTime fecha2)
+        {
+            var Daldocs = db.Documento
+            .Where(b => b.FechaContable >= fecha)
+            .Where(b => b.FechaContable <= fecha2);
+
+            var Ddocs = Daldocs.ToList();
+            var documentos = Mapper.Map<List<Documento>, List<BIZDocumento>>(Ddocs);
+            return documentos;
+        }
     }
 }

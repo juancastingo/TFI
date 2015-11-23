@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<BIZ.BIZDocumento>*@
+﻿@model IEnumerable<BIZ.BIZDocumento>
 @using TFITest4.Resources
 
 @section headSection {
@@ -130,7 +130,7 @@
             </tr>
 
         </tbody>
-                <thead>
+        <thead>
             <tr>
                 <th>Fecha</th>
                 <th>Cuenta Debe</th>
@@ -141,3 +141,48 @@
         </thead>
     </table>
 </div>
+
+
+
+
+
+
+@section EndScript{
+    <script>
+
+        $('#ObtenerAsientos').click(function () {
+            //console.log($("#fecha1").val());
+            //console.log($("#fecha2").val());
+            if ($("#fecha1").val() != "" && $("#fecha2").val() != "") {
+                Fecha1 = $('#fecha1').val();
+                Fecha2 = $('#fecha2').val();
+                //moment(PFecha);
+                mostrarGIF();
+                var serviceURL = '@Url.Action("GetAsientos", "Contabilidad")';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: JSON.stringify({ fecha: Fecha1, fecha2: Fecha2 }),
+                    dataType: 'text',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        //console.log(data);
+                        if (data.Result == "") {
+                            toastr["success"]("@Language.OKNormal", "OK!");
+                        ocultarGIF();
+                            //location.reload();
+                    } else {
+                        errorFunc;
+                    }
+                    },
+                    error: errorFunc
+                });
+        } else {
+            toastr["info"]("Please complete all fields", "Info");
+        }
+        });
+
+
+    </script>
+}

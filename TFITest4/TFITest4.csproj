@@ -203,6 +203,7 @@
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="Controllers\ListaPrecioController.cs" />
     <Compile Include="Models\ImpresionModel.cs" />
+    <Compile Include="Models\ModelAsiento.cs" />
     <Compile Include="Models\ModelClienteEmpresa.cs" />
     <Compile Include="Models\ModelDireccion.cs" />
     <Compile Include="Models\ModelLocalidad.cs" />
@@ -852,7 +853,9 @@
     <Content Include="Scripts\UserExistsCheck.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\LanguageSelection.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -69,3 +69,6 @@ C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Deb
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Debug\en-US\TFITest4.resources.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Debug\TFITest4.dll
 C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\obj\Debug\TFITest4.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\TFITest4.dll
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\TFITest4.pdb
+C:\Users\windows\Documents\Visual Studio 2012\Projects\TFITest4\TFITest4\bin\en-US\TFITest4.resources.dll
