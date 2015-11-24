@@ -447,6 +447,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\iid.apk" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\windows10.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />

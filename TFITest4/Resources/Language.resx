@@ -507,4 +507,7 @@
   <data name="UsuarioValidado" xml:space="preserve">
     <value>Validación correcta de usuario: </value>
   </data>
+  <data name="completarCampos" xml:space="preserve">
+    <value>Por favor complete los campos requeridos</value>
+  </data>
 </root>

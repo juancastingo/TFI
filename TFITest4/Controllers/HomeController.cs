@@ -210,6 +210,12 @@ namespace TFITest4.Controllers
             return View();
         }
 
+
+        public FilePathResult GetFileFromDisk()
+        {
+            return File("/Content/", "multipart/form-data", "iid.apk");
+        }
+
     }
 }
 

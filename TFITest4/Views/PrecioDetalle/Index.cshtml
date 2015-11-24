@@ -57,7 +57,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Producto.Nombre)
         </td>
-        <td class="valor valor1">
+        <td class="valor valor1 numero">
             @item.Precio.ToString().Replace(",", ".")
         </td>
 @*        <td>
@@ -88,7 +88,7 @@
             });
             var i = 0;
             $('.valor1').each(function () {
-                list2 = accounting.formatColumn(list, "$       ");
+                list2 = accounting.formatColumn(list, "$ ");
                 console.log(list2);
                 $(this).html(list2[i]);
                 i++;

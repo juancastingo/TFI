@@ -268,6 +268,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Por favor complete los campos requeridos.
+        /// </summary>
+        public static string completarCampos {
+            get {
+                return ResourceManager.GetString("completarCampos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Comprar.
         /// </summary>
         public static string compre {

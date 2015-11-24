@@ -19,7 +19,7 @@ namespace TFITest4.Models
         [Required(ErrorMessageResourceType = typeof(Resources.Language),
         ErrorMessageResourceName = "Required")]
         [Display(Name = "precio", ResourceType = typeof(Language))]
-        public Nullable<double> Precio { get; set; }
+        public double Precio { get; set; }
         public Nullable<System.DateTime> FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaDesde { get; set; }
         [Display(Name = "activo", ResourceType = typeof(Language))]

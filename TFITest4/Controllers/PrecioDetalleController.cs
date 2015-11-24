@@ -51,7 +51,7 @@ namespace TFITest4.Controllers
         // POST: /PrecioDetalle/Create
 
         [HttpPost]
-        public ActionResult Create(ModelPrecioDetalle PrecioDetalle)
+        public ActionResult Create(ModelPrecioDetalle PrecioDetalle, double Precio)
         {
             try
             {

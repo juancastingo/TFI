@@ -507,4 +507,7 @@
   <data name="prePedidoCargado" xml:space="preserve">
     <value>The Cart has been loaded</value>
   </data>
+  <data name="completarCampos" xml:space="preserve">
+    <value>Please fill all the required fields</value>
+  </data>
 </root>

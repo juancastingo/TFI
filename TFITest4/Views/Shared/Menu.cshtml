@@ -53,6 +53,11 @@
                             <li class="docPendientes">
                                 @Html.ActionLink(@Language.analizar, "Controlar", "Pedido")
                             </li>   
+                            <li class="">
+                                @Html.ActionLink("App","GetFileFromDisk","Home")
+    
+
+                            </li> 
                             }
                             if (Session["grupo"].ToString() == "Comercial")
                             {

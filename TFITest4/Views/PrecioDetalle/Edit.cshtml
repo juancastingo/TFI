@@ -42,8 +42,9 @@
                 <th class="editor-label">
                     @Language.precio
                 </th>
-                <td class="editor-label">
-                    @Model.Precio
+                <td id="prec" class="editor-label">
+                    @{ double precio = (double)Model.Precio; }
+                    @precio.ToString().Replace(",", ".")
                 </td>
             </tr>
             <tr>
@@ -69,3 +70,16 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+<script>
+    $(document).ready(function() {
+
+        PnewP = $('#prec').html();
+        newP = parseFloat(PnewP).format(2, 3, '.', ',');
+        $('#prec').html("$ " + newP);
+    });
+
+    </script>
+    
