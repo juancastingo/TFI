@@ -22,8 +22,8 @@ namespace BIZ
         public Nullable<int> UltimoNumeroManual { get; set; }
         public System.DateTime FechaUltimaMod { get; set; }
 
-        //public virtual Cuenta Cuenta { get; set; }
-        //public virtual Cuenta Cuenta1 { get; set; }
+        public BIZCuenta Cuenta { get; set; }
+        public BIZCuenta Cuenta1 { get; set; }
         public virtual ICollection<BIZDocumento> Documento { get; set; }
     }
 }

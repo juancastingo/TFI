@@ -22,13 +22,11 @@ namespace DAL.ORM
     
         public int IDCuenta { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> IDRubro { get; set; }
-        public Nullable<int> IDTipoCuenta { get; set; }
-        public Nullable<int> IDPlanCuentaM { get; set; }
+        public Nullable<int> IDCategoriaContable { get; set; }
+        public Nullable<int> IDSubCategoriaContable { get; set; }
     
-        public virtual PlanCuentaMayor PlanCuentaMayor { get; set; }
-        public virtual Rubro Rubro { get; set; }
-        public virtual TipoCuenta TipoCuenta { get; set; }
+        public virtual CategoriaContable CategoriaContable { get; set; }
+        public virtual SubCategoriaContable SubCategoriaContable { get; set; }
         public virtual ICollection<DocumentoTipo> DocumentoTipo { get; set; }
         public virtual ICollection<DocumentoTipo> DocumentoTipo1 { get; set; }
     }

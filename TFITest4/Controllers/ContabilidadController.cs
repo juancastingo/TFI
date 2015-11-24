@@ -43,15 +43,22 @@ namespace TFITest4.Controllers
                 ModelAsiento asiento = new ModelAsiento();
                 foreach (var d in docs)
                 {
-                    //asiento.IDDocumento = d.IDDocumento;
-                    //asiento.FechaContable = d.FechaContable;
-                    //asiento.debe = d.DocumentoTipo.
-                    //asiento.haber = d.DocumentoTipo.Credito;
+                    asiento = new ModelAsiento();
+                    asiento.IDDocumento = d.IDDocumento;
+                    asiento.FechaContable = (DateTime)d.FechaContable;
+                    asiento.debe = d.DocumentoTipo.Cuenta.Nombre;
+                    asiento.haber = d.DocumentoTipo.Cuenta1.Nombre;
+                    double aux = 0;
+                    foreach (var det in d.DocumentoDetalle)
+                    {
+                        aux += (det.Cantidad * (double)det.PrecioDetalle.Precio);
+                    }
+
+                    asiento.monto = aux + (aux * d.ClienteEmpresa.TipoIVA.Valor/100);
+                    asientos.Add(asiento);
 
                 }
-
-                return Json(new { status = "", docs = docs });
-
+                return Json(new {status = "", docs = asientos });
             }
             catch (Exception ex)
             {

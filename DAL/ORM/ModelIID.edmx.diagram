@@ -4,42 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fd0f87666271486f8b944dbfa7a8e59e" Name="Diagrama1">
+      <Diagram DiagramId="bbdd3c5520394b1ead67f35f0be45c1b" Name="Diagrama1" ZoomLevel="74">
         <EntityTypeShape EntityType="IIDTest2Model.Bitacora" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.CategoriaContable" Width="1.5" PointX="1.5" PointY="22.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.CierreContable" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.ClienteEmpresa" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.Cuenta" Width="1.5" PointX="3.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.Cuenta" Width="1.5" PointX="3.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Direccion" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Documento" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.DocumentoDetalle" Width="1.5" PointX="13.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.DocumentoTipo" Width="1.5" PointX="6" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.EmpresaLocal" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.DocumentoTipo" Width="1.5" PointX="6" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.EmpresaLocal" Width="1.5" PointX="6" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.EstadoMisc" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.ListaPrecio" Width="1.5" PointX="9" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Localidad" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.MailLocal" Width="1.5" PointX="10.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Pais" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.PlanCuentaMayor" Width="1.5" PointX="1.5" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.PrecioDetalle" Width="1.5" PointX="11.25" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Producto" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.ProductoCategoria" Width="1.5" PointX="3.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.Proveedor" Width="1.5" PointX="6" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.Proveedor" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Provincia" Width="1.5" PointX="1.5" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.Rubro" Width="1.5" PointX="1.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IIDTest2Model.SubCategoriaContable" Width="1.5" PointX="1.5" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.sysdiagrams" Width="1.5" PointX="11.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IIDTest2Model.TipoCuenta" Width="1.5" PointX="1.5" PointY="26.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.TipoIVA" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.TipoUsuario" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IIDTest2Model.Usuario" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="IIDTest2Model.FK_Bitacora_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="IIDTest2Model.FK_Cuenta_CategoriaContable" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_ClienteEmpresa_Direccion" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_ClienteEmpresa_EstadoMisc" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_ClienteEmpresa_TipoIVA" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_Documento_ClienteEmpresa" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_Usuario_ClienteEmpresa" ManuallyRouted="false" />
-        <AssociationConnector Association="IIDTest2Model.FK_Cuenta_PlanCuentaMayor" ManuallyRouted="false" />
-        <AssociationConnector Association="IIDTest2Model.FK_Cuenta_Rubro" ManuallyRouted="false" />
-        <AssociationConnector Association="IIDTest2Model.FK_Cuenta_TipoCuenta" ManuallyRouted="false" />
+        <AssociationConnector Association="IIDTest2Model.FK_Cuenta_SubCategoriaContable" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_DocumentoTipo_Cuenta" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_DocumentoTipo_Cuenta1" ManuallyRouted="false" />
         <AssociationConnector Association="IIDTest2Model.FK_Direccion_Localidad" ManuallyRouted="false" />

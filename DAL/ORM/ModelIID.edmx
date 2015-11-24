@@ -7,6 +7,7 @@
       <Schema Namespace="IIDTest2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="IIDTest2ModelStoreContainer">
           <EntitySet Name="Bitacora" EntityType="IIDTest2Model.Store.Bitacora" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoriaContable" EntityType="IIDTest2Model.Store.CategoriaContable" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CierreContable" EntityType="IIDTest2Model.Store.CierreContable" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ClienteEmpresa" EntityType="IIDTest2Model.Store.ClienteEmpresa" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Cuenta" EntityType="IIDTest2Model.Store.Cuenta" store:Type="Tables" Schema="dbo" />
@@ -20,15 +21,13 @@
           <EntitySet Name="Localidad" EntityType="IIDTest2Model.Store.Localidad" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MailLocal" EntityType="IIDTest2Model.Store.MailLocal" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pais" EntityType="IIDTest2Model.Store.Pais" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PlanCuentaMayor" EntityType="IIDTest2Model.Store.PlanCuentaMayor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PrecioDetalle" EntityType="IIDTest2Model.Store.PrecioDetalle" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Producto" EntityType="IIDTest2Model.Store.Producto" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductoCategoria" EntityType="IIDTest2Model.Store.ProductoCategoria" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Proveedor" EntityType="IIDTest2Model.Store.Proveedor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Provincia" EntityType="IIDTest2Model.Store.Provincia" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Rubro" EntityType="IIDTest2Model.Store.Rubro" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SubCategoriaContable" EntityType="IIDTest2Model.Store.SubCategoriaContable" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="IIDTest2Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TipoCuenta" EntityType="IIDTest2Model.Store.TipoCuenta" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TipoIVA" EntityType="IIDTest2Model.Store.TipoIVA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TipoUsuario" EntityType="IIDTest2Model.Store.TipoUsuario" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Usuario" EntityType="IIDTest2Model.Store.Usuario" store:Type="Tables" Schema="dbo" />
@@ -48,16 +47,12 @@
             <End Role="TipoIVA" EntitySet="TipoIVA" />
             <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_PlanCuentaMayor" Association="IIDTest2Model.Store.FK_Cuenta_PlanCuentaMayor">
-            <End Role="PlanCuentaMayor" EntitySet="PlanCuentaMayor" />
+          <AssociationSet Name="FK_Cuenta_CategoriaContable" Association="IIDTest2Model.Store.FK_Cuenta_CategoriaContable">
+            <End Role="CategoriaContable" EntitySet="CategoriaContable" />
             <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_Rubro" Association="IIDTest2Model.Store.FK_Cuenta_Rubro">
-            <End Role="Rubro" EntitySet="Rubro" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_TipoCuenta" Association="IIDTest2Model.Store.FK_Cuenta_TipoCuenta">
-            <End Role="TipoCuenta" EntitySet="TipoCuenta" />
+          <AssociationSet Name="FK_Cuenta_SubCategoriaContable" Association="IIDTest2Model.Store.FK_Cuenta_SubCategoriaContable">
+            <End Role="SubCategoriaContable" EntitySet="SubCategoriaContable" />
             <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
           <AssociationSet Name="FK_Direccion_Localidad" Association="IIDTest2Model.Store.FK_Direccion_Localidad">
@@ -164,6 +159,13 @@
           <Property Name="Tipo" Type="varchar" MaxLength="50" />
           <Property Name="IP" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CategoriaContable">
+          <Key>
+            <PropertyRef Name="IDCategoriaContable" />
+          </Key>
+          <Property Name="IDCategoriaContable" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoriaContable" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CierreContable">
           <Key>
             <PropertyRef Name="IDCierreContable" />
@@ -197,9 +199,8 @@
           </Key>
           <Property Name="IDCuenta" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" />
-          <Property Name="IDRubro" Type="int" />
-          <Property Name="IDTipoCuenta" Type="int" />
-          <Property Name="IDPlanCuentaM" Type="int" />
+          <Property Name="IDCategoriaContable" Type="int" />
+          <Property Name="IDSubCategoriaContable" Type="int" />
         </EntityType>
         <EntityType Name="Direccion">
           <Key>
@@ -319,13 +320,6 @@
           <Property Name="IDPais" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="varchar" MaxLength="80" />
         </EntityType>
-        <EntityType Name="PlanCuentaMayor">
-          <Key>
-            <PropertyRef Name="IDPlanCuentaMayor" />
-          </Key>
-          <Property Name="IDPlanCuentaMayor" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="PrecioDetalle">
           <Key>
             <PropertyRef Name="IDPrecioDetalle" />
@@ -378,12 +372,12 @@
           <Property Name="Nombre" Type="varchar" MaxLength="80" />
           <Property Name="IDPais" Type="int" />
         </EntityType>
-        <EntityType Name="Rubro">
+        <EntityType Name="SubCategoriaContable">
           <Key>
-            <PropertyRef Name="IDRubro" />
+            <PropertyRef Name="IDSubCategoriaContable" />
           </Key>
-          <Property Name="IDRubro" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="IDSubCategoriaContable" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SubCategoriaContable" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -394,13 +388,6 @@
           <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="TipoCuenta">
-          <Key>
-            <PropertyRef Name="IDTipoCuenta" />
-          </Key>
-          <Property Name="IDTipoCuenta" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TipoIVA">
           <Key>
@@ -482,39 +469,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuenta_PlanCuentaMayor">
-          <End Role="PlanCuentaMayor" Type="IIDTest2Model.Store.PlanCuentaMayor" Multiplicity="0..1" />
+        <Association Name="FK_Cuenta_CategoriaContable">
+          <End Role="CategoriaContable" Type="IIDTest2Model.Store.CategoriaContable" Multiplicity="0..1" />
           <End Role="Cuenta" Type="IIDTest2Model.Store.Cuenta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PlanCuentaMayor">
-              <PropertyRef Name="IDPlanCuentaMayor" />
+            <Principal Role="CategoriaContable">
+              <PropertyRef Name="IDCategoriaContable" />
             </Principal>
             <Dependent Role="Cuenta">
-              <PropertyRef Name="IDPlanCuentaM" />
+              <PropertyRef Name="IDCategoriaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuenta_Rubro">
-          <End Role="Rubro" Type="IIDTest2Model.Store.Rubro" Multiplicity="0..1" />
+        <Association Name="FK_Cuenta_SubCategoriaContable">
+          <End Role="SubCategoriaContable" Type="IIDTest2Model.Store.SubCategoriaContable" Multiplicity="0..1" />
           <End Role="Cuenta" Type="IIDTest2Model.Store.Cuenta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Rubro">
-              <PropertyRef Name="IDRubro" />
+            <Principal Role="SubCategoriaContable">
+              <PropertyRef Name="IDSubCategoriaContable" />
             </Principal>
             <Dependent Role="Cuenta">
-              <PropertyRef Name="IDRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cuenta_TipoCuenta">
-          <End Role="TipoCuenta" Type="IIDTest2Model.Store.TipoCuenta" Multiplicity="0..1" />
-          <End Role="Cuenta" Type="IIDTest2Model.Store.Cuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoCuenta">
-              <PropertyRef Name="IDTipoCuenta" />
-            </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="IDTipoCuenta" />
+              <PropertyRef Name="IDSubCategoriaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -841,6 +816,7 @@
       <Schema Namespace="IIDTest2Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="IIDTest2Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Bitacora" EntityType="IIDTest2Model.Bitacora" />
+          <EntitySet Name="CategoriaContable" EntityType="IIDTest2Model.CategoriaContable" />
           <EntitySet Name="CierreContable" EntityType="IIDTest2Model.CierreContable" />
           <EntitySet Name="ClienteEmpresa" EntityType="IIDTest2Model.ClienteEmpresa" />
           <EntitySet Name="Cuenta" EntityType="IIDTest2Model.Cuenta" />
@@ -854,21 +830,23 @@
           <EntitySet Name="Localidad" EntityType="IIDTest2Model.Localidad" />
           <EntitySet Name="MailLocal" EntityType="IIDTest2Model.MailLocal" />
           <EntitySet Name="Pais" EntityType="IIDTest2Model.Pais" />
-          <EntitySet Name="PlanCuentaMayor" EntityType="IIDTest2Model.PlanCuentaMayor" />
           <EntitySet Name="PrecioDetalle" EntityType="IIDTest2Model.PrecioDetalle" />
           <EntitySet Name="Producto" EntityType="IIDTest2Model.Producto" />
           <EntitySet Name="ProductoCategoria" EntityType="IIDTest2Model.ProductoCategoria" />
           <EntitySet Name="Proveedor" EntityType="IIDTest2Model.Proveedor" />
           <EntitySet Name="Provincia" EntityType="IIDTest2Model.Provincia" />
-          <EntitySet Name="Rubro" EntityType="IIDTest2Model.Rubro" />
+          <EntitySet Name="SubCategoriaContable" EntityType="IIDTest2Model.SubCategoriaContable" />
           <EntitySet Name="sysdiagrams" EntityType="IIDTest2Model.sysdiagrams" />
-          <EntitySet Name="TipoCuenta" EntityType="IIDTest2Model.TipoCuenta" />
           <EntitySet Name="TipoIVA" EntityType="IIDTest2Model.TipoIVA" />
           <EntitySet Name="TipoUsuario" EntityType="IIDTest2Model.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="IIDTest2Model.Usuario" />
           <AssociationSet Name="FK_Bitacora_Usuario" Association="IIDTest2Model.FK_Bitacora_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Bitacora" EntitySet="Bitacora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cuenta_CategoriaContable" Association="IIDTest2Model.FK_Cuenta_CategoriaContable">
+            <End Role="CategoriaContable" EntitySet="CategoriaContable" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteEmpresa_Direccion" Association="IIDTest2Model.FK_ClienteEmpresa_Direccion">
             <End Role="Direccion" EntitySet="Direccion" />
@@ -890,16 +868,8 @@
             <End Role="ClienteEmpresa" EntitySet="ClienteEmpresa" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_PlanCuentaMayor" Association="IIDTest2Model.FK_Cuenta_PlanCuentaMayor">
-            <End Role="PlanCuentaMayor" EntitySet="PlanCuentaMayor" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_Rubro" Association="IIDTest2Model.FK_Cuenta_Rubro">
-            <End Role="Rubro" EntitySet="Rubro" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cuenta_TipoCuenta" Association="IIDTest2Model.FK_Cuenta_TipoCuenta">
-            <End Role="TipoCuenta" EntitySet="TipoCuenta" />
+          <AssociationSet Name="FK_Cuenta_SubCategoriaContable" Association="IIDTest2Model.FK_Cuenta_SubCategoriaContable">
+            <End Role="SubCategoriaContable" EntitySet="SubCategoriaContable" />
             <End Role="Cuenta" EntitySet="Cuenta" />
           </AssociationSet>
           <AssociationSet Name="FK_DocumentoTipo_Cuenta" Association="IIDTest2Model.FK_DocumentoTipo_Cuenta">
@@ -1038,6 +1008,14 @@
           <Property Name="IP" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Usuario" Relationship="IIDTest2Model.FK_Bitacora_Usuario" FromRole="Bitacora" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="CategoriaContable">
+          <Key>
+            <PropertyRef Name="IDCategoriaContable" />
+          </Key>
+          <Property Name="IDCategoriaContable" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoriaContable1" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_CategoriaContable" FromRole="CategoriaContable" ToRole="Cuenta" />
+        </EntityType>
         <EntityType Name="CierreContable">
           <Key>
             <PropertyRef Name="IDCierreContable" />
@@ -1076,12 +1054,10 @@
           </Key>
           <Property Name="IDCuenta" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="IDRubro" Type="Int32" />
-          <Property Name="IDTipoCuenta" Type="Int32" />
-          <Property Name="IDPlanCuentaM" Type="Int32" />
-          <NavigationProperty Name="PlanCuentaMayor" Relationship="IIDTest2Model.FK_Cuenta_PlanCuentaMayor" FromRole="Cuenta" ToRole="PlanCuentaMayor" />
-          <NavigationProperty Name="Rubro" Relationship="IIDTest2Model.FK_Cuenta_Rubro" FromRole="Cuenta" ToRole="Rubro" />
-          <NavigationProperty Name="TipoCuenta" Relationship="IIDTest2Model.FK_Cuenta_TipoCuenta" FromRole="Cuenta" ToRole="TipoCuenta" />
+          <Property Name="IDCategoriaContable" Type="Int32" />
+          <Property Name="IDSubCategoriaContable" Type="Int32" />
+          <NavigationProperty Name="CategoriaContable" Relationship="IIDTest2Model.FK_Cuenta_CategoriaContable" FromRole="Cuenta" ToRole="CategoriaContable" />
+          <NavigationProperty Name="SubCategoriaContable" Relationship="IIDTest2Model.FK_Cuenta_SubCategoriaContable" FromRole="Cuenta" ToRole="SubCategoriaContable" />
           <NavigationProperty Name="DocumentoTipo" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta" FromRole="Cuenta" ToRole="DocumentoTipo" />
           <NavigationProperty Name="DocumentoTipo1" Relationship="IIDTest2Model.FK_DocumentoTipo_Cuenta1" FromRole="Cuenta" ToRole="DocumentoTipo" />
         </EntityType>
@@ -1230,14 +1206,6 @@
           <Property Name="Nombre" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Provincia" Relationship="IIDTest2Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
         </EntityType>
-        <EntityType Name="PlanCuentaMayor">
-          <Key>
-            <PropertyRef Name="IDPlanCuentaMayor" />
-          </Key>
-          <Property Name="IDPlanCuentaMayor" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_PlanCuentaMayor" FromRole="PlanCuentaMayor" ToRole="Cuenta" />
-        </EntityType>
         <EntityType Name="PrecioDetalle">
           <Key>
             <PropertyRef Name="IDPrecioDetalle" />
@@ -1301,13 +1269,13 @@
           <NavigationProperty Name="Localidad" Relationship="IIDTest2Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
           <NavigationProperty Name="Pais" Relationship="IIDTest2Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
-        <EntityType Name="Rubro">
+        <EntityType Name="SubCategoriaContable">
           <Key>
-            <PropertyRef Name="IDRubro" />
+            <PropertyRef Name="IDSubCategoriaContable" />
           </Key>
-          <Property Name="IDRubro" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_Rubro" FromRole="Rubro" ToRole="Cuenta" />
+          <Property Name="IDSubCategoriaContable" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCategoriaContable1" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_SubCategoriaContable" FromRole="SubCategoriaContable" ToRole="Cuenta" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1318,14 +1286,6 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TipoCuenta">
-          <Key>
-            <PropertyRef Name="IDTipoCuenta" />
-          </Key>
-          <Property Name="IDTipoCuenta" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Cuenta" Relationship="IIDTest2Model.FK_Cuenta_TipoCuenta" FromRole="TipoCuenta" ToRole="Cuenta" />
         </EntityType>
         <EntityType Name="TipoIVA">
           <Key>
@@ -1376,6 +1336,18 @@
             </Principal>
             <Dependent Role="Bitacora">
               <PropertyRef Name="IDUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cuenta_CategoriaContable">
+          <End Role="CategoriaContable" Type="IIDTest2Model.CategoriaContable" Multiplicity="0..1" />
+          <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaContable">
+              <PropertyRef Name="IDCategoriaContable" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="IDCategoriaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1439,39 +1411,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cuenta_PlanCuentaMayor">
-          <End Role="PlanCuentaMayor" Type="IIDTest2Model.PlanCuentaMayor" Multiplicity="0..1" />
+        <Association Name="FK_Cuenta_SubCategoriaContable">
+          <End Role="SubCategoriaContable" Type="IIDTest2Model.SubCategoriaContable" Multiplicity="0..1" />
           <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PlanCuentaMayor">
-              <PropertyRef Name="IDPlanCuentaMayor" />
+            <Principal Role="SubCategoriaContable">
+              <PropertyRef Name="IDSubCategoriaContable" />
             </Principal>
             <Dependent Role="Cuenta">
-              <PropertyRef Name="IDPlanCuentaM" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cuenta_Rubro">
-          <End Role="Rubro" Type="IIDTest2Model.Rubro" Multiplicity="0..1" />
-          <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rubro">
-              <PropertyRef Name="IDRubro" />
-            </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="IDRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cuenta_TipoCuenta">
-          <End Role="TipoCuenta" Type="IIDTest2Model.TipoCuenta" Multiplicity="0..1" />
-          <End Role="Cuenta" Type="IIDTest2Model.Cuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoCuenta">
-              <PropertyRef Name="IDTipoCuenta" />
-            </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="IDTipoCuenta" />
+              <PropertyRef Name="IDSubCategoriaContable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1756,6 +1704,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaContable">
+            <EntityTypeMapping TypeName="IIDTest2Model.CategoriaContable">
+              <MappingFragment StoreEntitySet="CategoriaContable">
+                <ScalarProperty Name="IDCategoriaContable" ColumnName="IDCategoriaContable" />
+                <ScalarProperty Name="CategoriaContable1" ColumnName="CategoriaContable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CierreContable">
             <EntityTypeMapping TypeName="IIDTest2Model.CierreContable">
               <MappingFragment StoreEntitySet="CierreContable">
@@ -1790,9 +1746,8 @@
               <MappingFragment StoreEntitySet="Cuenta">
                 <ScalarProperty Name="IDCuenta" ColumnName="IDCuenta" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IDRubro" ColumnName="IDRubro" />
-                <ScalarProperty Name="IDTipoCuenta" ColumnName="IDTipoCuenta" />
-                <ScalarProperty Name="IDPlanCuentaM" ColumnName="IDPlanCuentaM" />
+                <ScalarProperty Name="IDCategoriaContable" ColumnName="IDCategoriaContable" />
+                <ScalarProperty Name="IDSubCategoriaContable" ColumnName="IDSubCategoriaContable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1924,14 +1879,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PlanCuentaMayor">
-            <EntityTypeMapping TypeName="IIDTest2Model.PlanCuentaMayor">
-              <MappingFragment StoreEntitySet="PlanCuentaMayor">
-                <ScalarProperty Name="IDPlanCuentaMayor" ColumnName="IDPlanCuentaMayor" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PrecioDetalle">
             <EntityTypeMapping TypeName="IIDTest2Model.PrecioDetalle">
               <MappingFragment StoreEntitySet="PrecioDetalle">
@@ -1989,11 +1936,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rubro">
-            <EntityTypeMapping TypeName="IIDTest2Model.Rubro">
-              <MappingFragment StoreEntitySet="Rubro">
-                <ScalarProperty Name="IDRubro" ColumnName="IDRubro" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <EntitySetMapping Name="SubCategoriaContable">
+            <EntityTypeMapping TypeName="IIDTest2Model.SubCategoriaContable">
+              <MappingFragment StoreEntitySet="SubCategoriaContable">
+                <ScalarProperty Name="IDSubCategoriaContable" ColumnName="IDSubCategoriaContable" />
+                <ScalarProperty Name="SubCategoriaContable1" ColumnName="SubCategoriaContable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2005,14 +1952,6 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoCuenta">
-            <EntityTypeMapping TypeName="IIDTest2Model.TipoCuenta">
-              <MappingFragment StoreEntitySet="TipoCuenta">
-                <ScalarProperty Name="IDTipoCuenta" ColumnName="IDTipoCuenta" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

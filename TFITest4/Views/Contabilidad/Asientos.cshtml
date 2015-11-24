@@ -38,7 +38,7 @@
             <span>@Language.FechaDesde</span>
             <div class='input-group date' id='datetimepicker6'>
 
-                <input id="fecha1" type='text' class="form-control" />
+                <input id="fecha1" type='text' class="form-control desab" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -48,8 +48,8 @@
     <div class='col-md-5'>
         <div class="form-group">
             <span>@Language.fechaHasta</span>
-            <div class='input-group date' id='datetimepicker7'>
-                <input id="fecha2" type='text' class="form-control" />
+            <div class='input-group date desab' id='datetimepicker7'>
+                <input id="fecha2" type='text' class="form-control desab" />
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -62,7 +62,7 @@
 
 <div class="row">
     <div class="center">
-        <input id="ObtenerAsientos" type="button" class="btn btn-primary" value="Ejecutar" />
+        <input id="ObtenerAsientos" type="button" class="btn btn-primary desab" value="Ejecutar" />
     </div>
 </div>
 <div class="row"></div>
@@ -99,10 +99,10 @@
     });
 </script>
 
-<div class="tablaAsientos">
-    <table class="table table-bordered dt-responsive nowrap table-striped" cellspacing="0" width="100%">
+<div class="DivTablaAsientos">
+    <table id="tablaAsientos" class="table table-bordered nowrap table-striped desab" cellspacing="0" width="100%">
         <thead>
-            <tr>
+            <tr class="ultima">
                 <th>Fecha</th>
                 <th>Cuenta Debe</th>
                 <th>Cuenta Haber</th>
@@ -111,34 +111,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="primera">
-                <td>23-nov-2015
-                </td>
-                <td>Clientes
-                </td>
-                <td></td>
-                <td>$150
-                </td>
-                <td></td>
-            </tr>
-            <tr class="ultima">
-                <td></td>
-                <td></td>
-                <td>Ventas</td>
-                <td></td>
-                <td>$150</td>
-            </tr>
-
         </tbody>
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Cuenta Debe</th>
-                <th>Cuenta Haber</th>
-                <th>Debe</th>
-                <th>Haber</th>
+        <tfoot>
+            <tr class="ultima">
+                <th colspan="3">Total</th>
+                <th class="numero"></th>
+                <th class="numero"></th>
             </tr>
-        </thead>
+        </tfoot>
     </table>
 </div>
 
@@ -151,13 +131,17 @@
     <script>
 
         $('#ObtenerAsientos').click(function () {
-            //console.log($("#fecha1").val());
-            //console.log($("#fecha2").val());
             if ($("#fecha1").val() != "" && $("#fecha2").val() != "") {
                 Fecha1 = $('#fecha1').val();
                 Fecha2 = $('#fecha2').val();
                 //moment(PFecha);
-                mostrarGIF();
+                //mostrarGIF();
+                $('.desab').addClass("disabled in-progress");
+                $('.desab').attr("disabled", "disabled");
+                $('#tablaAsientos tbody').hide("slow");
+                $('#tablaAsientos tfoot').hide("slow");
+                $('#tablaAsientos tbody').html("");
+                $('#tablaAsientos tfoot').html("");
                 var serviceURL = '@Url.Action("GetAsientos", "Contabilidad")';
                 $.ajax({
                     type: "POST",
@@ -167,11 +151,24 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data, status) {
-                        //console.log(data);
-                        if (data.Result == "") {
+                        console.log(data);
+                        if (data.status == "") {
+
+                            total = 0;
+                            data.docs.forEach(function (elem) {
+                                console.log(elem);
+                                var fecha = new Date(parseInt(elem.FechaContable.substr(6)));
+                                $('#tablaAsientos tbody').append("<tr><td>" + fecha.toLocaleDateString() + "</td><td>" + elem.debe + "</td><td></td><td class='numero'>$ " + elem.monto.format(2, 3, '.', ',') + "</td><td></td></tr>");
+                                $('#tablaAsientos tbody').append("<tr class='ultima'><td></td><td></td><td>" + elem.haber + "</td><td></td><td class='numero'>$ " + elem.monto.format(2, 3, '.', ',') + "</td></tr>");
+                                total += elem.monto;
+                            });
+                            $('#tablaAsientos tfoot').append("<tr class='ultima'><th colspan='3'>Total</th><th class='numero'>$ " + total.format(2, 3, '.', ',') + "</th><th class='numero'>$ " + total.format(2, 3, '.', ',') + "</th></tr>");
                             toastr["success"]("@Language.OKNormal", "OK!");
-                        ocultarGIF();
-                            //location.reload();
+                            $('#tablaAsientos tbody').show("slow");
+                            $('#tablaAsientos tfoot').show("slow");
+                            $('.desab').removeClass("disabled in-progress");
+                            $('.desab').prop("disabled", false);
+
                     } else {
                         errorFunc;
                     }

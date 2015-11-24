@@ -69,6 +69,14 @@ namespace DAL
             AutoMapper.Mapper.CreateMap<EmpresaLocal, BIZEmpresaLocal>();
             AutoMapper.Mapper.CreateMap<BIZEmpresaLocal, EmpresaLocal>();
 
+            //contabilidad
+            AutoMapper.Mapper.CreateMap<Cuenta, BIZCuenta>();
+            AutoMapper.Mapper.CreateMap<BIZCuenta, Cuenta>();
+            AutoMapper.Mapper.CreateMap<CategoriaContable, BIZCategoriaContable>();
+            AutoMapper.Mapper.CreateMap<BIZCategoriaContable, CategoriaContable>();
+            AutoMapper.Mapper.CreateMap<SubCategoriaContable, BIZSubCategoriaContable>();
+            AutoMapper.Mapper.CreateMap<BIZSubCategoriaContable, SubCategoriaContable>();
+
             //general
             AutoMapper.Mapper.CreateMap<BIZBitacora, Bitacora>();
             AutoMapper.Mapper.CreateMap<Bitacora, BIZBitacora>();

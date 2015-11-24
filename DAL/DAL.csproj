@@ -62,6 +62,9 @@
     <Compile Include="ORM\Bitacora.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORM\CategoriaContable.cs">
+      <DependentUpon>ModelIID.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORM\CierreContable.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
@@ -116,9 +119,6 @@
     <Compile Include="ORM\Pais.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\PlanCuentaMayor.cs">
-      <DependentUpon>ModelIID.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\PrecioDetalle.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
@@ -134,19 +134,16 @@
     <Compile Include="ORM\Provincia.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\Rubro.cs">
-      <DependentUpon>ModelIID.tt</DependentUpon>
-    </Compile>
     <Compile Include="ORM\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\sp_helpdiagrams_Result.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\sysdiagrams.cs">
+    <Compile Include="ORM\SubCategoriaContable.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM\TipoCuenta.cs">
+    <Compile Include="ORM\sysdiagrams.cs">
       <DependentUpon>ModelIID.tt</DependentUpon>
     </Compile>
     <Compile Include="ORM\TipoIVA.cs">

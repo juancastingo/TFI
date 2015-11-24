@@ -163,7 +163,15 @@
                     console.log(list);
                     $('#NrPedido').text(data.Pedido.IDDocumento);
                     $('#EstadoPedido').text(data.Pedido.estado);
-                    $('#ComentarioPedido').text(data.Pedido.comentario);
+
+                    console.log(typeof (data.Pedido.comentario));
+                    console.log(data.Pedido.comentario);
+                    if (data.Pedido.comentario != null) {
+                        $('#ComentarioPedido').text(data.Pedido.comentario);
+                    } else {
+                        $('#ComentarioPedido').text("");
+                    }
+
                     var subt = 0;
                     var count = 0;
                     $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th>@Language.precioUnitario</th><th>@Language.TotalProducto</th>');

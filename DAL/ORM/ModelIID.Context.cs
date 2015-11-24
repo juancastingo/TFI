@@ -29,6 +29,7 @@ namespace DAL.ORM
         }
     
         public DbSet<Bitacora> Bitacora { get; set; }
+        public DbSet<CategoriaContable> CategoriaContable { get; set; }
         public DbSet<CierreContable> CierreContable { get; set; }
         public DbSet<ClienteEmpresa> ClienteEmpresa { get; set; }
         public DbSet<Cuenta> Cuenta { get; set; }
@@ -42,15 +43,13 @@ namespace DAL.ORM
         public DbSet<Localidad> Localidad { get; set; }
         public DbSet<MailLocal> MailLocal { get; set; }
         public DbSet<Pais> Pais { get; set; }
-        public DbSet<PlanCuentaMayor> PlanCuentaMayor { get; set; }
         public DbSet<PrecioDetalle> PrecioDetalle { get; set; }
         public DbSet<Producto> Producto { get; set; }
         public DbSet<ProductoCategoria> ProductoCategoria { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Provincia> Provincia { get; set; }
-        public DbSet<Rubro> Rubro { get; set; }
+        public DbSet<SubCategoriaContable> SubCategoriaContable { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public DbSet<TipoCuenta> TipoCuenta { get; set; }
         public DbSet<TipoIVA> TipoIVA { get; set; }
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
         public DbSet<Usuario> Usuario { get; set; }

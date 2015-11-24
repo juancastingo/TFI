@@ -12,15 +12,15 @@ namespace DAL.ORM
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoCuenta
+    public partial class SubCategoriaContable
     {
-        public TipoCuenta()
+        public SubCategoriaContable()
         {
             this.Cuenta = new HashSet<Cuenta>();
         }
     
-        public int IDTipoCuenta { get; set; }
-        public string Nombre { get; set; }
+        public int IDSubCategoriaContable { get; set; }
+        public string SubCategoriaContable1 { get; set; }
     
         public virtual ICollection<Cuenta> Cuenta { get; set; }
     }

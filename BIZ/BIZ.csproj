@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BIZBitacora.cs" />
+    <Compile Include="BIZCategoriaContable.cs" />
     <Compile Include="BIZClienteEmpresa.cs" />
     <Compile Include="BIZCorreo.cs" />
+    <Compile Include="BIZCuenta.cs" />
     <Compile Include="BIZDireccion.cs" />
     <Compile Include="BIZDocumento.cs" />
     <Compile Include="BIZDocumentoDetalle.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="BIZProducto.cs" />
     <Compile Include="BIZProductoCategoria.cs" />
     <Compile Include="BIZProvincia.cs" />
+    <Compile Include="BIZSubCategoriaContable.cs" />
     <Compile Include="BIZTipoIVA.cs" />
     <Compile Include="BIZTipoUsuario.cs" />
     <Compile Include="BIZUsuario.cs" />
