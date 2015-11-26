@@ -51,10 +51,11 @@ namespace TFITest4.Controllers
         // POST: /PrecioDetalle/Create
 
         [HttpPost]
-        public ActionResult Create(ModelPrecioDetalle PrecioDetalle, double Precio)
+        public ActionResult Create(ModelPrecioDetalle PrecioDetalle, string Precio)
         {
             try
             {
+                PrecioDetalle.Precio = Convert.ToDouble(Precio);
                 var precioD = Mapper.Map<ModelPrecioDetalle, BIZPrecioDetalle>(PrecioDetalle);
                 precioWorker.CrearDetallePrecio(precioD);
                 TempData["OKNormal"] = Resources.Language.OKNormal;

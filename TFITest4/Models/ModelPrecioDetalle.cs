@@ -16,6 +16,7 @@ namespace TFITest4.Models
         [Display(Name = "producto", ResourceType = typeof(Language))]
         public Nullable<int> IDProducto { get; set; }
         public int IDTipoUsuario { get; set; }
+        //[DisplayFormat(ApplyFormatInEditMode= true, DataFormatString="{0:c}")]
         [Required(ErrorMessageResourceType = typeof(Resources.Language),
         ErrorMessageResourceName = "Required")]
         [Display(Name = "precio", ResourceType = typeof(Language))]

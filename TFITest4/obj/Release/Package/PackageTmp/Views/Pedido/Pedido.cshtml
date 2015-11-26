@@ -136,31 +136,7 @@
 <!-- /.modal -->
     
 
-<script>
 
-    $(document).ready(function () {
-
-        urlDTLang = "";
-        if ($('#ActualCulture').val() == "esp") {
-            //urlDTLang = '/Scripts/Spanish.json';
-            urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
-        }
-
-        try {
-            $('.tableJquery2').DataTable();
-           // tabla = $('.tableJquery2').DataTable();
-
-        } catch (err) { console.log("dt is not perfect") }
-    });
-</script>
-
-@section readyEnding {
-    
-        tabla
-        .order([1, 'asc'])
-        .draw();
-
-    }
 @section EndScript{
 
     <script>
@@ -187,7 +163,15 @@
                     console.log(list);
                     $('#NrPedido').text(data.Pedido.IDDocumento);
                     $('#EstadoPedido').text(data.Pedido.estado);
-                    $('#ComentarioPedido').text(data.Pedido.comentario);
+
+                    console.log(typeof (data.Pedido.comentario));
+                    console.log(data.Pedido.comentario);
+                    if (data.Pedido.comentario != null) {
+                        $('#ComentarioPedido').text(data.Pedido.comentario);
+                    } else {
+                        $('#ComentarioPedido').text("");
+                    }
+
                     var subt = 0;
                     var count = 0;
                     $('#PedidoModalBody table > thead').html('<th>@Language.producto</th><th>@Language.cantidad</th><th>@Language.precioUnitario</th><th>@Language.TotalProducto</th>');

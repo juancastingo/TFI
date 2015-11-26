@@ -14,7 +14,7 @@
 <h2 class="titulo">@Language.crear</h2>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    
     <fieldset>
         <legend>@Language.listaDetalle</legend>
         <table class="table table-bordered">
@@ -66,3 +66,12 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+<script>
+    $('#Precio').on('change keypress', function (e) {
+        $('#Precio').val($('#Precio').val().replace(/,/g, '.'))
+    });
+    
+</script>

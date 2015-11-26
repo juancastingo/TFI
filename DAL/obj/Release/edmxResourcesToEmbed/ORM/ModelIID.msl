@@ -13,6 +13,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CategoriaContable">
+      <EntityTypeMapping TypeName="IIDTest2Model.CategoriaContable">
+        <MappingFragment StoreEntitySet="CategoriaContable">
+          <ScalarProperty Name="IDCategoriaContable" ColumnName="IDCategoriaContable" />
+          <ScalarProperty Name="CategoriaContable1" ColumnName="CategoriaContable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CierreContable">
       <EntityTypeMapping TypeName="IIDTest2Model.CierreContable">
         <MappingFragment StoreEntitySet="CierreContable">
@@ -47,9 +55,8 @@
         <MappingFragment StoreEntitySet="Cuenta">
           <ScalarProperty Name="IDCuenta" ColumnName="IDCuenta" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="IDRubro" ColumnName="IDRubro" />
-          <ScalarProperty Name="IDTipoCuenta" ColumnName="IDTipoCuenta" />
-          <ScalarProperty Name="IDPlanCuentaM" ColumnName="IDPlanCuentaM" />
+          <ScalarProperty Name="IDCategoriaContable" ColumnName="IDCategoriaContable" />
+          <ScalarProperty Name="IDSubCategoriaContable" ColumnName="IDSubCategoriaContable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -181,14 +188,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PlanCuentaMayor">
-      <EntityTypeMapping TypeName="IIDTest2Model.PlanCuentaMayor">
-        <MappingFragment StoreEntitySet="PlanCuentaMayor">
-          <ScalarProperty Name="IDPlanCuentaMayor" ColumnName="IDPlanCuentaMayor" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PrecioDetalle">
       <EntityTypeMapping TypeName="IIDTest2Model.PrecioDetalle">
         <MappingFragment StoreEntitySet="PrecioDetalle">
@@ -246,11 +245,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Rubro">
-      <EntityTypeMapping TypeName="IIDTest2Model.Rubro">
-        <MappingFragment StoreEntitySet="Rubro">
-          <ScalarProperty Name="IDRubro" ColumnName="IDRubro" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+    <EntitySetMapping Name="SubCategoriaContable">
+      <EntityTypeMapping TypeName="IIDTest2Model.SubCategoriaContable">
+        <MappingFragment StoreEntitySet="SubCategoriaContable">
+          <ScalarProperty Name="IDSubCategoriaContable" ColumnName="IDSubCategoriaContable" />
+          <ScalarProperty Name="SubCategoriaContable1" ColumnName="SubCategoriaContable" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -262,14 +261,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoCuenta">
-      <EntityTypeMapping TypeName="IIDTest2Model.TipoCuenta">
-        <MappingFragment StoreEntitySet="TipoCuenta">
-          <ScalarProperty Name="IDTipoCuenta" ColumnName="IDTipoCuenta" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

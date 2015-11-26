@@ -210,7 +210,16 @@ tabla
             $('.AprobarRechazar').click(function () {
                 //console.log(pedidoNr);
                 //console.log($('#justifText').val());
-                llamadaAR(pedidoNr, $('#justifText').val(), tipo)
+                if ($('#justifText').val() != "") {
+                    llamadaAR(pedidoNr, $('#justifText').val(), tipo)
+                } else {
+                    
+                    toastr["info"]("@Language.completarCampos", "Info");
+                    setTimeout(function () {  
+                    $('#JustModal').modal('toggle');
+                    $('#justifText').focus();
+                    }, 500);
+                }
             });
 
 

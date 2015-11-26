@@ -68,19 +68,19 @@
     </tbody>
 </table>
 @section readyEnding {
-        tabla
+       @* tabla
         .order([0, 'desc'])
-        .draw();
+        .draw();*@
 
     $('.Informativo').css("color", "green");
     $('.Error').css("color", "red");
     $('.Advertencia').css("color","orange");
 
-    $('.tableJquery').on( 'draw.dt', function () {
+@*    $('.tableJquery').on( 'draw.dt', function () {
         $('.Informativo').css("color", "green");
         $('.Error').css("color", "red");
         $('.Advertencia').css("color","orange");
-} );
+} );*@
 }
 
 
