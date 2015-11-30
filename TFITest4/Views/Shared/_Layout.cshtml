@@ -971,7 +971,14 @@
 
             setTimeout(function () { RemoveSomee(); }, 3000);
 
-
+            setTimeout(function () {
+                $('.goog-te-banner-frame').css("bottom", 0);
+                $('.goog-te-banner-frame').css("top", "inherit");
+                $('.goog-te-combo').change(function () {
+                    $('.goog-te-banner-frame').css("bottom", 0);
+                    $('.goog-te-banner-frame').css("top", "inherit");
+                });
+            }, 500);
 
 
             $(function () { window.setInterval("keepSessionAlive()", 600000); }); //10 min
