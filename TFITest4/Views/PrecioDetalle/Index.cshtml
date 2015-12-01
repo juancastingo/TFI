@@ -14,73 +14,100 @@
 
 
 <div class="container">
-<h2 class="titulo">@TFITest4.Resources.Language.listaDetalle</h2>
-<p>
-    @Html.ActionLink(@Language.nuevo, "Create", new {}, new { @class = "btn btn-primary", @style = "color:white" })
-</p>
-    <table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">  
+    <h2 class="titulo">@TFITest4.Resources.Language.listaDetalle</h2>
+    <p>
+        @Html.ActionLink(@Language.nuevo, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
+    </p>
+    <table class="table tableJqueryPrecioD table-bordered table-striped" cellspacing="0" width="100%">
         <thead>
-        <tr>    
-        <th>
-            @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
-            Nr
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.ListaPrecio.Detalle)*@
-            @Language.listaPrecios
-        </th>
-        <th>
-            @Language.producto
-        </th>
-        <th>
-            @Language.precio
-        </th>
-@*        <th>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
+                    Nr
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ListaPrecio.Detalle)*@
+                    @Language.listaPrecios
+                </th>
+                <th>
+                    @Language.producto
+                </th>
+                <th>
+                    @Language.precio
+                </th>
+                @*        <th>
             @Html.DisplayNameFor(model => model.FechaAlta)
         </th>*@
 
-        <th>
-            @Language.activo
-        </th>
-        <th>@Language.editar</th>
-    </tr>
-            </thead>  
+                <th>
+                    @Language.activo
+                </th>
+                <th>@Language.editar</th>
+            </tr>
+        </thead>
         <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDPrecioDetalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ListaPrecio.Detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Producto.Nombre)
-        </td>
-        <td class="valor valor1 numero">
-            @item.Precio.ToString().Replace(",", ".")
-        </td>
-@*        <td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="numero">
+                        @Html.DisplayFor(modelItem => item.IDPrecioDetalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ListaPrecio.Detalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                    </td>
+                    <td class="valor valor1 numero">
+                        @item.Precio.ToString().Replace(",", ".")
+                    </td>
+                    @*        <td>
             @Html.DisplayFor(modelItem => item.FechaAlta)
         </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.IDPrecioDetalle }, new { @class = "btn btn-primary", @style = "color:white" })
-        </td>
-    </tr>
-}
-</tbody>
-</table>
-    </div>
+                    <td>
+                        @item.Activo
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDPrecioDetalle }, new { @class = "btn btn-primary", @style = "color:white" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.IDPrecioDetalle)*@
+                    Nr
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ListaPrecio.Detalle)*@
+                    @Language.listaPrecios
+                </th>
+                <th>
+                    @Language.producto
+                </th>
+                <th class="numero">
+                    @Language.precio
+                </th>
+                @*        <th>
+            @Html.DisplayNameFor(model => model.FechaAlta)
+        </th>*@
+
+                <th>
+                    @Language.activo
+                </th>
+                <th>@Language.editar</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
 
 
 
 
 @section numerosScript{
-            var list = [];
+var list = [];
             var list2 = [];
 
             $('.valor1').each(function () {
@@ -89,9 +116,56 @@
             var i = 0;
             $('.valor1').each(function () {
                 list2 = accounting.formatColumn(list, "$ ");
-                console.log(list2);
+                //console.log(list2);
                 $(this).html(list2[i]);
                 i++;
             })
            
+}
+
+
+@section EndScript{
+
+    <script type="text/javascript">
+        console.log("sadsad");
+        try {
+            var urlDTLang = "";
+            if ($('#ActualCulture').val() == "esp") {
+                //urlDTLang = '/Scripts/Spanish.json';
+                moment.locale('es');
+                urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+            }
+
+            $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
+            //setTimeout(function () {
+            //    tabla = $('.tableJqueryUser').DataTable({
+
+            //        language: {
+            //            url: urlDTLang,
+            //        }
+            //    }).columnFilter();
+
+            //}, 1000);
+
+            setTimeout(function () {
+                $('.tableJqueryPrecioD').dataTable({
+                    language: {
+                        url: urlDTLang,
+                    }
+                })
+                .columnFilter({ 
+                    aoColumns: [null,
+                               { type: "select" },
+                               { type: "select" },
+                               { type: "text" },
+                               { type: "select" },
+                               null
+                    ]
+
+                });
+            }, 1000);
+        } catch (ex) { console.log(ex); }
+    </script>
+
+
 }
