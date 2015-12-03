@@ -134,11 +134,13 @@
                                             </li>
                                         </ul>
                                     </li>
-
-                                    <li>
-                                        @Html.ActionLink(@Language.bitacora, "Index", "Bitacora")
-                                    </li>
-
+                                    @{if (Session["grupo"].ToString() == "Administrador")
+                                     {
+                                        <li>
+                                            @Html.ActionLink(@Language.bitacora, "Index", "Bitacora")
+                                        </li>
+                                        }
+                                    }
                                 </ul>
                             </li>
                             }

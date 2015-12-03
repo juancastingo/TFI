@@ -511,6 +511,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Fecha.
+        /// </summary>
+        public static string fecha {
+            get {
+                return ResourceManager.GetString("fecha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha Alta.
         /// </summary>
         public static string fechaAlta {
@@ -534,6 +543,15 @@ namespace TFITest4.Resources {
         public static string fechaEmision {
             get {
                 return ResourceManager.GetString("fechaEmision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha Factura.
+        /// </summary>
+        public static string fechaFact {
+            get {
+                return ResourceManager.GetString("fechaFact", resourceCulture);
             }
         }
         
@@ -648,9 +666,9 @@ namespace TFITest4.Resources {
         /// <summary>
         ///   Busca una cadena traducida similar a Por favor ingresar un motivo para esta acción.
         /// </summary>
-        public static string justifacion {
+        public static string justificacion {
             get {
-                return ResourceManager.GetString("justifacion", resourceCulture);
+                return ResourceManager.GetString("justificacion", resourceCulture);
             }
         }
         
@@ -1105,6 +1123,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Tipo.
+        /// </summary>
+        public static string tipo {
+            get {
+                return ResourceManager.GetString("tipo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Tipo IVA.
         /// </summary>
         public static string tipoIVA {
@@ -1191,6 +1218,15 @@ namespace TFITest4.Resources {
         public static string UsuarioValidado {
             get {
                 return ResourceManager.GetString("UsuarioValidado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a En breve un administrador del sistema verificará sus datos y le dará acceso definitivo al sistema..
+        /// </summary>
+        public static string UsuarioValidadoInfo {
+            get {
+                return ResourceManager.GetString("UsuarioValidadoInfo", resourceCulture);
             }
         }
         

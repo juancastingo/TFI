@@ -387,7 +387,7 @@
   <data name="ingresar" xml:space="preserve">
     <value>Ingresar</value>
   </data>
-  <data name="justifacion" xml:space="preserve">
+  <data name="justificacion" xml:space="preserve">
     <value>Por favor ingresar un motivo para esta acción</value>
   </data>
   <data name="limpiar" xml:space="preserve">
@@ -509,5 +509,17 @@
   </data>
   <data name="completarCampos" xml:space="preserve">
     <value>Por favor complete los campos requeridos</value>
+  </data>
+  <data name="UsuarioValidadoInfo" xml:space="preserve">
+    <value>En breve un administrador del sistema verificará sus datos y le dará acceso definitivo al sistema.</value>
+  </data>
+  <data name="fecha" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="fechaFact" xml:space="preserve">
+    <value>Fecha Factura</value>
+  </data>
+  <data name="tipo" xml:space="preserve">
+    <value>Tipo</value>
   </data>
 </root>

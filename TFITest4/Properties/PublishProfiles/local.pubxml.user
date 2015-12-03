@@ -38,7 +38,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/24/2015 19:09:54</publishTime>
     </File>
     <File Include="bin/en-US/TFITest4.resources.dll">
-      <publishTime>11/25/2015 10:01:25</publishTime>
+      <publishTime>12/01/2015 18:24:43</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/11/2015 16:02:40</publishTime>
@@ -143,7 +143,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/11/2015 16:03:28</publishTime>
     </File>
     <File Include="bin/TFITest4.dll">
-      <publishTime>11/25/2015 10:01:25</publishTime>
+      <publishTime>12/01/2015 18:24:38</publishTime>
     </File>
     <File Include="bin/WebActivator.dll">
       <publishTime>08/12/2015 09:57:40</publishTime>
@@ -155,13 +155,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/12/2015 15:31:31</publishTime>
     </File>
     <File Include="Content/bootstrap-datetimepicker-build.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap-datetimepicker.css">
-      <publishTime>08/09/2015 12:24:55</publishTime>
+      <publishTime>09/08/2015 12:24:55</publishTime>
     </File>
     <File Include="Content/bootstrap-datetimepicker.min.css">
-      <publishTime>08/09/2015 12:24:55</publishTime>
+      <publishTime>09/08/2015 12:24:55</publishTime>
     </File>
     <File Include="Content/bootstrap-mvc-validation.css">
       <publishTime>08/12/2015 15:31:31</publishTime>
@@ -194,220 +194,220 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/12/2015 09:09:12</publishTime>
     </File>
     <File Include="Content/bootstrap/alerts.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/badges.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/bootstrap.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/breadcrumbs.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/button-groups.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/buttons.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/carousel.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/close.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/code.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/component-animations.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/dropdowns.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/forms.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/glyphicons.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/grid.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/input-groups.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/jumbotron.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/labels.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/list-group.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/media.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/alerts.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/background-variant.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/border-radius.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/buttons.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/center-block.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/clearfix.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/forms.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/gradients.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/grid-framework.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/grid.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/hide-text.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/image.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/labels.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/list-group.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/nav-divider.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/nav-vertical-align.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/opacity.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/pagination.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/panels.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/progress-bar.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/reset-filter.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/reset-text.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/resize.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/responsive-visibility.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/size.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/tab-focus.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/table-row.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/text-emphasis.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/text-overflow.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/mixins/vendor-prefixes.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/modals.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/navbar.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/navs.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/normalize.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/pager.less">
-      <publishTime>08/09/2015 12:24:36</publishTime>
+      <publishTime>09/08/2015 12:24:36</publishTime>
     </File>
     <File Include="Content/bootstrap/pagination.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/panels.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/popovers.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/print.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/progress-bars.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/responsive-embed.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/responsive-utilities.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/scaffolding.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/tables.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/theme.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/thumbnails.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/tooltip.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/type.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/utilities.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/variables.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/bootstrap/wells.less">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/buttons.dataTables.min.css">
-      <publishTime>01/09/2015 20:22:40</publishTime>
+      <publishTime>09/01/2015 20:22:40</publishTime>
     </File>
     <File Include="Content/code52.i18n/Code52.i18n.css">
       <publishTime>08/12/2015 09:58:14</publishTime>
@@ -518,28 +518,28 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/24/2015 10:06:01</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.eot">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.svg">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>08/09/2015 12:24:35</publishTime>
+      <publishTime>09/08/2015 12:24:35</publishTime>
     </File>
     <File Include="Content/general.css">
       <publishTime>11/23/2015 22:49:47</publishTime>
     </File>
     <File Include="Content/Home.css">
-      <publishTime>02/10/2015 10:42:47</publishTime>
+      <publishTime>10/02/2015 10:42:47</publishTime>
     </File>
     <File Include="Content/iid.apk">
-      <publishTime>11/24/2015 17:49:58</publishTime>
+      <publishTime>11/30/2015 12:47:21</publishTime>
     </File>
     <File Include="Content/images/background-photo-mobile-devices.jpg">
       <publishTime>09/29/2015 21:16:08</publishTime>
@@ -551,7 +551,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/30/2015 19:04:36</publishTime>
     </File>
     <File Include="Content/images/chrome_dinosaur.gif">
-      <publishTime>04/11/2015 19:18:10</publishTime>
+      <publishTime>11/04/2015 19:18:10</publishTime>
     </File>
     <File Include="Content/images/glyphicons-halflings-white.png">
       <publishTime>08/12/2015 15:31:05</publishTime>
@@ -566,10 +566,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/18/2015 08:27:09</publishTime>
     </File>
     <File Include="Content/images/loader.gif">
-      <publishTime>02/09/2015 12:14:05</publishTime>
+      <publishTime>09/02/2015 12:14:05</publishTime>
     </File>
     <File Include="Content/images/loader2.gif">
-      <publishTime>02/09/2015 11:50:28</publishTime>
+      <publishTime>09/02/2015 11:50:28</publishTime>
     </File>
     <File Include="Content/images/Logo.ico">
       <publishTime>08/24/2015 12:34:18</publishTime>
@@ -599,7 +599,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/13/2015 21:16:02</publishTime>
     </File>
     <File Include="Content/simptip.min.css">
-      <publishTime>04/09/2015 09:30:04</publishTime>
+      <publishTime>09/04/2015 09:30:04</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>08/12/2015 09:38:45</publishTime>
@@ -767,10 +767,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/11/2015 16:03:06</publishTime>
     </File>
     <File Include="Content/toastr.min.css">
-      <publishTime>01/09/2015 20:22:47</publishTime>
+      <publishTime>09/01/2015 20:22:47</publishTime>
     </File>
     <File Include="Content/_bootstrap-datetimepicker.less">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>08/12/2015 09:09:11</publishTime>
@@ -791,13 +791,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/11/2015 16:01:45</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>06/11/2015 11:29:14</publishTime>
+      <publishTime>11/06/2015 11:29:14</publishTime>
     </File>
     <File Include="Pimages/B1.png">
       <publishTime>08/26/2015 15:30:29</publishTime>
     </File>
     <File Include="Pimages/C1.png">
-      <publishTime>05/09/2015 16:25:29</publishTime>
+      <publishTime>09/05/2015 16:25:29</publishTime>
     </File>
     <File Include="Rotativa/wkhtmltopdf.exe">
       <publishTime>08/22/2015 03:23:54</publishTime>
@@ -806,13 +806,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/18/2015 16:50:48</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datetimepicker.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datetimepicker.min.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/bootstrap-maxlength.min.js">
-      <publishTime>04/07/2015 01:43:22</publishTime>
+      <publishTime>07/04/2015 01:43:22</publishTime>
     </File>
     <File Include="Scripts/bootstrap-select.min.js">
       <publishTime>08/17/2015 11:50:56</publishTime>
@@ -824,7 +824,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/12/2015 09:09:10</publishTime>
     </File>
     <File Include="Scripts/buttons.flash.min.js">
-      <publishTime>01/09/2015 20:23:32</publishTime>
+      <publishTime>09/01/2015 20:23:32</publishTime>
     </File>
     <File Include="Scripts/Code52.i18n.js">
       <publishTime>08/12/2015 09:58:11</publishTime>
@@ -833,7 +833,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/18/2015 09:54:44</publishTime>
     </File>
     <File Include="Scripts/dataTables.buttons.min.js">
-      <publishTime>01/09/2015 20:23:27</publishTime>
+      <publishTime>09/01/2015 20:23:27</publishTime>
     </File>
     <File Include="Scripts/dataTables.responsive.min.js">
       <publishTime>10/13/2015 21:14:49</publishTime>
@@ -1976,25 +1976,25 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/11/2015 16:03:10</publishTime>
     </File>
     <File Include="Scripts/moment-with-locales.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/moment-with-locales.min.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/moment.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/moment.min.js">
-      <publishTime>08/09/2015 12:24:37</publishTime>
+      <publishTime>09/08/2015 12:24:37</publishTime>
     </File>
     <File Include="Scripts/Spanish.json">
-      <publishTime>07/09/2015 20:02:08</publishTime>
+      <publishTime>09/07/2015 20:02:08</publishTime>
     </File>
     <File Include="Scripts/toastr.min.js">
-      <publishTime>01/09/2015 20:23:39</publishTime>
+      <publishTime>09/01/2015 20:23:39</publishTime>
     </File>
     <File Include="Scripts/UserExistsCheck.js">
-      <publishTime>07/09/2015 19:10:05</publishTime>
+      <publishTime>09/07/2015 19:10:05</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>08/12/2015 09:09:10</publishTime>
@@ -2006,16 +2006,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>10/22/2015 11:54:12</publishTime>
     </File>
     <File Include="Views/Account/EmailConfirm.cshtml">
-      <publishTime>03/11/2015 21:15:36</publishTime>
+      <publishTime>11/03/2015 21:15:36</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>08/23/2015 12:52:26</publishTime>
     </File>
     <File Include="Views/Account/RegisterOut.cshtml">
-      <publishTime>06/11/2015 11:30:39</publishTime>
+      <publishTime>11/06/2015 11:30:39</publishTime>
     </File>
     <File Include="Views/Account/ValidateUser.cshtml">
-      <publishTime>05/11/2015 14:58:36</publishTime>
+      <publishTime>11/05/2015 14:58:36</publishTime>
     </File>
     <File Include="Views/Bitacora/Index.cshtml">
       <publishTime>11/24/2015 23:54:01</publishTime>
@@ -2036,13 +2036,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/21/2015 16:25:13</publishTime>
     </File>
     <File Include="Views/Cliente/Create.cshtml">
-      <publishTime>05/11/2015 18:30:01</publishTime>
+      <publishTime>11/05/2015 18:30:01</publishTime>
     </File>
     <File Include="Views/Cliente/Edit.cshtml">
-      <publishTime>10/11/2015 20:16:21</publishTime>
+      <publishTime>11/10/2015 20:16:21</publishTime>
     </File>
     <File Include="Views/Cliente/Index.cshtml">
-      <publishTime>10/11/2015 19:43:51</publishTime>
+      <publishTime>11/10/2015 19:43:51</publishTime>
     </File>
     <File Include="Views/ClienteEmpresaORM/Create.cshtml">
       <publishTime>08/17/2015 13:30:04</publishTime>
@@ -2075,28 +2075,28 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/26/2015 15:59:06</publishTime>
     </File>
     <File Include="Views/Contabilidad/Asientos.cshtml">
-      <publishTime>11/23/2015 23:33:28</publishTime>
+      <publishTime>11/26/2015 12:55:56</publishTime>
     </File>
     <File Include="Views/Contabilidad/Registrar.cshtml">
-      <publishTime>11/24/2015 17:46:50</publishTime>
+      <publishTime>11/26/2015 12:56:20</publishTime>
     </File>
     <File Include="Views/DocumentoORM/Create.cshtml">
-      <publishTime>03/09/2015 02:48:47</publishTime>
+      <publishTime>09/03/2015 02:48:47</publishTime>
     </File>
     <File Include="Views/DocumentoORM/Delete.cshtml">
-      <publishTime>01/09/2015 15:18:03</publishTime>
+      <publishTime>09/01/2015 15:18:03</publishTime>
     </File>
     <File Include="Views/DocumentoORM/Details.cshtml">
-      <publishTime>01/09/2015 15:17:59</publishTime>
+      <publishTime>09/01/2015 15:17:59</publishTime>
     </File>
     <File Include="Views/DocumentoORM/Edit.cshtml">
-      <publishTime>01/09/2015 15:18:02</publishTime>
+      <publishTime>09/01/2015 15:18:02</publishTime>
     </File>
     <File Include="Views/DocumentoORM/Index.cshtml">
-      <publishTime>01/09/2015 15:17:58</publishTime>
+      <publishTime>09/01/2015 15:17:58</publishTime>
     </File>
     <File Include="Views/Error/NotFound.cshtml">
-      <publishTime>04/11/2015 19:27:06</publishTime>
+      <publishTime>11/04/2015 19:27:06</publishTime>
     </File>
     <File Include="Views/ExampleLayouts/Fluid.cshtml">
       <publishTime>08/13/2015 00:04:32</publishTime>
@@ -2126,7 +2126,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/22/2015 19:15:05</publishTime>
     </File>
     <File Include="Views/ListaPrecio/Create.cshtml">
-      <publishTime>05/11/2015 18:29:37</publishTime>
+      <publishTime>11/05/2015 18:29:37</publishTime>
     </File>
     <File Include="Views/ListaPrecio/Delete.cshtml">
       <publishTime>08/26/2015 11:01:09</publishTime>
@@ -2135,10 +2135,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/26/2015 11:01:07</publishTime>
     </File>
     <File Include="Views/ListaPrecio/Edit.cshtml">
-      <publishTime>05/11/2015 18:29:31</publishTime>
+      <publishTime>11/05/2015 18:29:31</publishTime>
     </File>
     <File Include="Views/ListaPrecio/Index.cshtml">
-      <publishTime>10/11/2015 16:11:33</publishTime>
+      <publishTime>11/26/2015 09:07:44</publishTime>
     </File>
     <File Include="Views/ListaPrecioORM/Create.cshtml">
       <publishTime>08/26/2015 11:01:07</publishTime>
@@ -2153,10 +2153,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>09/09/2015 19:04:17</publishTime>
     </File>
     <File Include="Views/ListaPrecioORM/Index.cshtml">
-      <publishTime>06/09/2015 23:48:13</publishTime>
+      <publishTime>09/06/2015 23:48:13</publishTime>
     </File>
     <File Include="Views/Localidad/Index.cshtml">
-      <publishTime>05/11/2015 18:29:12</publishTime>
+      <publishTime>11/05/2015 18:29:12</publishTime>
     </File>
     <File Include="Views/Localidad/IndexOld.cshtml">
       <publishTime>08/17/2015 12:08:15</publishTime>
@@ -2177,16 +2177,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/15/2015 13:36:15</publishTime>
     </File>
     <File Include="Views/Login/resetPassword.cshtml">
-      <publishTime>07/09/2015 17:50:16</publishTime>
+      <publishTime>09/07/2015 17:50:16</publishTime>
     </File>
     <File Include="Views/Login/Test.cshtml">
       <publishTime>08/15/2015 15:22:44</publishTime>
     </File>
     <File Include="Views/Pais/Create.cshtml">
-      <publishTime>05/11/2015 18:28:21</publishTime>
+      <publishTime>11/05/2015 18:28:21</publishTime>
     </File>
     <File Include="Views/Pais/Index.cshtml">
-      <publishTime>05/11/2015 18:27:32</publishTime>
+      <publishTime>11/05/2015 18:27:32</publishTime>
     </File>
     <File Include="Views/Pais/IndexOld.cshtml">
       <publishTime>08/11/2015 16:18:56</publishTime>
@@ -2216,13 +2216,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/17/2015 16:59:16</publishTime>
     </File>
     <File Include="Views/Pedido/Index.cshtml">
-      <publishTime>10/11/2015 18:33:10</publishTime>
+      <publishTime>11/10/2015 18:33:10</publishTime>
     </File>
     <File Include="Views/Pedido/makePDF.cshtml">
-      <publishTime>05/11/2015 17:01:57</publishTime>
+      <publishTime>11/05/2015 17:01:57</publishTime>
     </File>
     <File Include="Views/Pedido/makePDFFact.cshtml">
-      <publishTime>05/11/2015 17:24:32</publishTime>
+      <publishTime>11/05/2015 17:24:32</publishTime>
     </File>
     <File Include="Views/Pedido/makePDFFactOut.cshtml">
       <publishTime>11/11/2015 10:37:18</publishTime>
@@ -2246,10 +2246,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/24/2015 10:50:39</publishTime>
     </File>
     <File Include="Views/PrecioDetalle/Index.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/01/2015 11:39:44</publishTime>
     </File>
     <File Include="Views/PrecioDetalleORM/Create.cshtml">
-      <publishTime>06/09/2015 18:02:54</publishTime>
+      <publishTime>09/06/2015 18:02:54</publishTime>
     </File>
     <File Include="Views/PrecioDetalleORM/Delete.cshtml">
       <publishTime>08/27/2015 14:09:02</publishTime>
@@ -2264,13 +2264,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/27/2015 14:48:09</publishTime>
     </File>
     <File Include="Views/Producto/Create.cshtml">
-      <publishTime>05/11/2015 18:26:49</publishTime>
+      <publishTime>11/05/2015 18:26:49</publishTime>
     </File>
     <File Include="Views/Producto/Edit.cshtml">
-      <publishTime>05/11/2015 18:26:45</publishTime>
+      <publishTime>11/05/2015 18:26:45</publishTime>
     </File>
     <File Include="Views/Producto/Index.cshtml">
-      <publishTime>10/11/2015 15:36:26</publishTime>
+      <publishTime>11/10/2015 15:36:26</publishTime>
     </File>
     <File Include="Views/ProductoCategoriaORM/Create.cshtml">
       <publishTime>08/24/2015 17:35:52</publishTime>
@@ -2288,7 +2288,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/24/2015 17:35:50</publishTime>
     </File>
     <File Include="Views/ProductoORM/Create.cshtml">
-      <publishTime>08/10/2015 12:43:17</publishTime>
+      <publishTime>10/08/2015 12:43:17</publishTime>
     </File>
     <File Include="Views/ProductoORM/Delete.cshtml">
       <publishTime>08/24/2015 17:29:48</publishTime>
@@ -2303,7 +2303,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/25/2015 16:59:26</publishTime>
     </File>
     <File Include="Views/Provincia/Create.cshtml">
-      <publishTime>05/11/2015 18:26:16</publishTime>
+      <publishTime>11/05/2015 18:26:16</publishTime>
     </File>
     <File Include="Views/Provincia/CreateOLD.cshtml">
       <publishTime>08/11/2015 17:27:02</publishTime>
@@ -2312,10 +2312,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/18/2015 12:05:07</publishTime>
     </File>
     <File Include="Views/Provincia/Details.cshtml">
-      <publishTime>05/11/2015 18:26:11</publishTime>
+      <publishTime>11/05/2015 18:26:11</publishTime>
     </File>
     <File Include="Views/Provincia/Edit.cshtml">
-      <publishTime>05/11/2015 18:26:07</publishTime>
+      <publishTime>11/05/2015 18:26:07</publishTime>
     </File>
     <File Include="Views/Provincia/GenerarPDF.cshtml">
       <publishTime>08/22/2015 10:53:28</publishTime>
@@ -2324,7 +2324,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/22/2015 10:42:03</publishTime>
     </File>
     <File Include="Views/Provincia/Index.cshtml">
-      <publishTime>05/11/2015 18:25:55</publishTime>
+      <publishTime>11/05/2015 18:25:55</publishTime>
     </File>
     <File Include="Views/Shared/Create.cshtml">
       <publishTime>08/12/2015 15:31:31</publishTime>
@@ -2342,7 +2342,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/12/2015 10:59:14</publishTime>
     </File>
     <File Include="Views/Shared/Menu.cshtml">
-      <publishTime>11/24/2015 18:46:36</publishTime>
+      <publishTime>11/30/2015 11:11:54</publishTime>
     </File>
     <File Include="Views/Shared/_alerts.cshtml">
       <publishTime>08/12/2015 15:31:31</publishTime>
@@ -2360,7 +2360,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/12/2015 15:31:02</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/23/2015 00:43:59</publishTime>
+      <publishTime>11/26/2015 12:24:27</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutStingo.Login.cshtml">
       <publishTime>08/17/2015 18:36:02</publishTime>
@@ -2381,16 +2381,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/24/2015 00:00:41</publishTime>
     </File>
     <File Include="Views/UsuarioORM/Index.cshtml">
-      <publishTime>06/09/2015 22:34:42</publishTime>
+      <publishTime>09/06/2015 22:34:42</publishTime>
     </File>
     <File Include="Views/Usuarios/Edit.cshtml">
-      <publishTime>05/11/2015 18:25:13</publishTime>
+      <publishTime>11/05/2015 18:25:13</publishTime>
     </File>
     <File Include="Views/Usuarios/Index.cshtml">
-      <publishTime>10/11/2015 19:45:09</publishTime>
+      <publishTime>11/26/2015 08:46:10</publishTime>
     </File>
     <File Include="Views/Usuarios/RegisterIn.cshtml">
-      <publishTime>05/11/2015 18:21:39</publishTime>
+      <publishTime>11/05/2015 18:21:39</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>09/09/2015 11:23:59</publishTime>
@@ -2399,7 +2399,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>08/11/2015 16:01:45</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/25/2015 10:15:59</publishTime>
+      <publishTime>12/01/2015 18:26:24</publishTime>
     </File>
   </ItemGroup>
 </Project>

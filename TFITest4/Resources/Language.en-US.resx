@@ -510,4 +510,16 @@
   <data name="completarCampos" xml:space="preserve">
     <value>Please fill all the required fields</value>
   </data>
+  <data name="UsuarioValidadoInfo" xml:space="preserve">
+    <value>A system administrator will approve your user soon once your data is validated</value>
+  </data>
+  <data name="fecha" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="fechaFact" xml:space="preserve">
+    <value>Invoice Date</value>
+  </data>
+  <data name="tipo" xml:space="preserve">
+    <value>Type</value>
+  </data>
 </root>

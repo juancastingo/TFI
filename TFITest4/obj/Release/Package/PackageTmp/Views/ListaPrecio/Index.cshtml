@@ -11,58 +11,79 @@
 </script>
 
 @section headSection {
-      <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 }
 <div class="container">
 
-<h2 class="titulo">@Language.listaPrecios</h2>
+    <h2 class="titulo">@Language.listaPrecios</h2>
 
-<p>
-    @Html.ActionLink(@Language.nuevo, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
-</p>
-<table class="table tableJquery table-bordered table-striped" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Detalle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaDesde)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
-            <th>
-                @TFITest4.Resources.Language.action
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Detalle)
-                </td>
-                <td>
-                    @item.FechaDesde.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                </td>
-
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Activo)*@
-                    @item.Activo
-                </td>
-                <td>
-                    <button data-val="@item.IDListaPrecio"  value=""  class="VerDetalles btn btn-info " >@Language.ver</button>
-                    @Html.ActionLink(@Language.editar, "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
-                    <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >@Language.copiar</button>
-
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <p>
+        @Html.ActionLink(@Language.nuevo, "Create", new { }, new { @class = "btn btn-primary", @style = "color:white" })
+    </p>
+    <div class="medio col-md-5"></div>
+    <div class="medio col-md-2">
+        <p id="statusSelect" style="margin-top: -36px;"></p>
     </div>
+    <div style="clear: both"></div>
+    <table class="table tableJqueryPrecio table-bordered table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detalle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDesde)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activo)
+                </th>
+                <th>
+                    @TFITest4.Resources.Language.action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detalle)
+                    </td>
+                    <td>
+                        @item.FechaDesde.ToString("dd/MMM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture)
+                    </td>
+
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Activo)*@
+                        @item.Activo
+                    </td>
+                    <td>
+                        <button data-val="@item.IDListaPrecio"  value=""  class="VerDetalles btn btn-info " >@Language.ver</button>
+                        @Html.ActionLink(@Language.editar, "Edit", new { id = item.IDListaPrecio }, new { @class = "btn btn-primary", @style = "color:white" })
+                        <button data-val="@item.IDListaPrecio"  value=""  class="CopyListaPrecio btn btn-success " >@Language.copiar</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+                        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detalle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDesde)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Activo)
+                </th>
+                <th>
+                    @TFITest4.Resources.Language.action
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
 
 <div class="modal fade" id="ModalPrecio">
@@ -75,36 +96,36 @@
             </div>
             <div class="modal-body" id="ModalPrecioBody">
                 <h5 class="text-center"></h5>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Detalle</th>
-                                <th>Fecha Desde</th>
-                                <th>Factor de multiplicación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="text" id="CopiaText" required /></td>
-                                <td style="width: 40%;">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input name="FechaDesde" type='text' class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="number" id="CopiaFactor" step="0.1" value="1" required /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-group">
-                        <div>
-                        </div>
-                        <div class="clearfix"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Detalle</th>
+                            <th>Fecha Desde</th>
+                            <th>Factor de multiplicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" id="CopiaText" required /></td>
+                            <td style="width: 40%;">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input name="FechaDesde" type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="number" id="CopiaFactor" step="0.1" value="1" required /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div>
                     </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
 
             <div class="modal-footer">
@@ -132,29 +153,28 @@
             </div>
             <div class="modal-body" id="ModalDetalleBody">
                 <h5 class="text-center"></h5>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>@Language.producto</th>
-                                <th>@Language.estado</th>
-                                <th>@Language.precio</th>
-                                <th>@Language.action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                    <div class="form-group">
-                        <div>
-                        </div>
-                        <div class="clearfix"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Language.producto</th>
+                            <th>@Language.estado</th>
+                            <th>@Language.precio</th>
+                            <th>@Language.action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div>
                     </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
 
             <div class="modal-footer">
-                 <a id="" role="button"  href="/PrecioDetalle/Create" class="btn btn-primary">@Language.nuevo</a>
-                <button id="" type="button"  data-dismiss="modal" class="btn btn-warning">@Language.cerrar</button>
+                <a id="" role="button" href="/PrecioDetalle/Create" class="btn btn-primary">@Language.nuevo</a>
+                <button id="" type="button" data-dismiss="modal" class="btn btn-warning">@Language.cerrar</button>
             </div>
 
         </div>
@@ -246,21 +266,55 @@
 
 
 
-                     $('#ModalDetalle').modal('toggle');
+                    $('#ModalDetalle').modal('toggle');
                     //} else {
                     //    errorFunc;
                     //}
                 },
-                error: function (status) 
-                {
+                error: function (status) {
                     console.log(status);//errorFunc(),
                 },
                 complete: ocultarGIF
             });
             //$('#ModalDetalle').modal('toggle');
         });
-
-
-
     </script>
+      <script>
+
+          var urlDTLang = "";
+          if ($('#ActualCulture').val() == "esp") {
+              //urlDTLang = '/Scripts/Spanish.json';
+              moment.locale('es');
+              urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+          }
+
+          $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
+          //setTimeout(function () {
+          //    tabla = $('.tableJqueryUser').DataTable({
+
+          //        language: {
+          //            url: urlDTLang,
+          //        }
+          //    }).columnFilter();
+
+          //}, 1000);
+
+          setTimeout(function () {
+              $('.tableJqueryPrecio').dataTable({
+                  language: {
+                      url: urlDTLang,
+                  }
+              })
+              .columnFilter({
+                  aoColumns: [null,
+                           null,
+                           { sSelector: "#statusSelect", type: "select" },
+                          null
+                  ]
+
+              });
+          }, 1000);
+          
+    </script>
+
 }

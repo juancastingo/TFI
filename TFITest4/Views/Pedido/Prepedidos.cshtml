@@ -46,7 +46,7 @@
                 </td>
                 <td class="SignoPesos">$</td>
                 <td class="tdNumero">
-                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",",".")</span>
+                    <span class="MontoPrePedido">@item.Monto.ToString().Replace(",", ".")</span>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EstadoMisc.Detalle)
@@ -99,39 +99,46 @@
                 GetInit();
                 ocultarGIF();
             }
-            
+
         });
 
-        $('.DescartarPrePedido').click(function () {
-                mostrarGIF();
-                //var dataToSend = { CargarPedidoViejo: "juan" }
-                var serviceURL = '@Url.Action("DescartarPrePedido", "Pedido")';
-                $.ajax({
-                    type: "POST",
-                    url: serviceURL,
-                    data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
-                    dataType: 'text',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data, status) {
-                        toastr["success"]("@Language.OKNormal", "Success!")
-                        location.reload();
-                    },
-                    error: function (status) {
-                        toastr["error"]("@Language.ErrorLogInAgain", "Error")
-                    },
-                    complete: ocultarGIF
+            $('.DescartarPrePedido').click(function () {
+                $.confirm({
+                    confirm: function () {
+                        mostrarGIF();
+                        //var dataToSend = { CargarPedidoViejo: "juan" }
+                        var serviceURL = '@Url.Action("DescartarPrePedido", "Pedido")';
+                    $.ajax({
+                        type: "POST",
+                        url: serviceURL,
+                        data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
+                        dataType: 'text',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data, status) {
+                            toastr["success"]("@Language.OKNormal", "Success!")
+                            location.reload();
+                        },
+                        error: function (status) {
+                            toastr["error"]("@Language.ErrorLogInAgain", "Error")
+                            ocultarGIF();
+                        }
+                    });
+
+                    GetInit();
+                },
+                cancel: function () {
+                    toastr["info"]("@Language.operacionCancelada")
+                }
             });
+        });
 
-                GetInit();
-            });
+        //$(document).ready(function () {
+        //    $('.MontoPrePedido').each(function (index) {
+        //        esto = $(this).text();
 
-            //$(document).ready(function () {
-            //    $('.MontoPrePedido').each(function (index) {
-            //        esto = $(this).text();
-
-            //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
-            //    });
-            //});
+        //        $(this).text("$"+ parseFloat(esto).format(2, 3, '.', ','))
+        //    });
+        //});
     </script>
 }

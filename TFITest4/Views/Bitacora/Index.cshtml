@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BIZ.BIZBitacora>
+@using TFITest4.Resources
 
 <script type="text/javascript">
     if (document.getElementById('LoginExiste').getAttribute("data-val") != "Administrador") {
@@ -8,28 +9,28 @@
 
 
 
-<h2>Bitácora</h2>
+<h2 class="titulo">@Language.bitacora</h2>
 
-<table class="table tableJquery dt-responsive nowrap table-bordered" cellspacing="0" width="100%">
+<table class="table tableJqueryBit dt-responsive nowrap table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             @*        <th>
             @Html.DisplayNameFor(model => model.IDBitacora)
         </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Fecha)
+                @Language.fecha
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tipo)
+                @Language.tipo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
+                @Language.descripcion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Usuario.Nombre)
+                @Language.usuario
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IP)
+                IP
             </th>
         </tr>
     </thead>
@@ -37,7 +38,7 @@
         @foreach (var item in Model)
         {   
             
-                 <tr class="@item.Tipo">
+            <tr class="@item.Tipo">
                 @*        <td>
             @Html.DisplayFor(modelItem => item.IDBitacora)
         </td>*@
@@ -60,7 +61,7 @@
                         @Html.DisplayFor(modelItem => item.Usuario.Nombre)
                     }
                 </td>
-                      <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IP)
                 </td>
             </tr>
@@ -68,15 +69,35 @@
     </tbody>
 </table>
 @section readyEnding {
-       @* tabla
+    @* tabla
         .order([0, 'desc'])
         .draw();*@
 
-    $('.Informativo').css("color", "green");
-    $('.Error').css("color", "red");
-    $('.Advertencia').css("color","orange");
+        $('.Informativo').css("color", "green");
+        $('.Error').css("color", "red");
+        $('.Advertencia').css("color", "orange");
+        var urlDTLang = "";
+        if ($('#ActualCulture').val() == "esp") {
+            //urlDTLang = '/Scripts/Spanish.json';
+            moment.locale('es');
+            urlDTLang = 'http://cdn.datatables.net/plug-ins/1.10.9/i18n/Spanish.json';
+        }
 
-@*    $('.tableJquery').on( 'draw.dt', function () {
+        $.fn.dataTable.moment('DD/MMM/YYYY HH:mm');
+
+
+        setTimeout(function () {
+            $('.tableJqueryBit').dataTable({
+                language: {
+                    url: urlDTLang,
+                },
+                        "order": [[0, "desc"]]
+            })
+            },500);
+
+
+
+    @*    $('.tableJquery').on( 'draw.dt', function () {
         $('.Informativo').css("color", "green");
         $('.Error').css("color", "red");
         $('.Advertencia').css("color","orange");
