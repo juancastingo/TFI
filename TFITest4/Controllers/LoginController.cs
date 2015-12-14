@@ -30,6 +30,11 @@ namespace TFITest4.Controllers
 
             try
             {
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + Session["usuario"] + "\" cerró sesión", (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
                 Response.Cache.SetCacheability(HttpCacheability.NoCache);
                 //Response.Cache.SetAllowResponseInBrowserHistory(false);
                 Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
@@ -46,11 +51,7 @@ namespace TFITest4.Controllers
                 Response.AppendHeader("Pragma", "no-cache");
                 Response.AppendHeader("Expires", "0");
 
-                try
-                {
-                    Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + Session["usuario"] + "\" cerró sesión", (int)Session["userID"], Session["_ip"].ToString()));
-                }
-                catch (Exception ex) { }
+            
 
             }
             catch
