@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using TFITest4.Models;
+using BIZ;
 
 
 namespace TFITest4.Controllers
@@ -23,10 +24,43 @@ namespace TFITest4.Controllers
 
         public ActionResult RegistrarMes(string f1, string f2)
         {
-            DateTime fecha1 = Convert.ToDateTime(f1);
-            DateTime fecha2 = Convert.ToDateTime(f2);
-            DocWorker.registrarDocs(fecha1, fecha2);
-            return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            try
+            {
+                DateTime fecha1 = Convert.ToDateTime(f1);
+                DateTime fecha2 = Convert.ToDateTime(f2);
+                DocWorker.registrarDocs(fecha1, fecha2);
+
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se han registrado contablemente los documentos de "+ f1 + "a " + f2 , (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
+
+
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al registrar asientos", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return RedirectToAction("Registrar");
+            }
         }
 
         public ActionResult Asientos()
@@ -60,10 +94,27 @@ namespace TFITest4.Controllers
                 }
                 return Json(new {status = "", docs = asientos });
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error mostrar asientos contables", idUser, ip));
+                }
+                catch (Exception ex) { }
+                return Json(new { status = "Error" });
             }
-            return Json(new { status = "Error" });
         }
 
     }

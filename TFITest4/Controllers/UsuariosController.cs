@@ -22,21 +22,73 @@ namespace TFITest4.Controllers
 
         public ActionResult Index()
         {
-            var usuarios = userWorker.obtenerUsuarios();
-            var RetUser = Mapper.Map<List<BIZUsuario>, List<ModelUsuario>>(usuarios);
-            //List<BIZ.BIZUsuario> List = DUserTestBorrar.GetAllUsuarios();
-            //var usuario = db.Usuario;
-            return View(RetUser);
+            try
+            {
+                var usuarios = userWorker.obtenerUsuarios();
+                var RetUser = Mapper.Map<List<BIZUsuario>, List<ModelUsuario>>(usuarios);
+                //List<BIZ.BIZUsuario> List = DUserTestBorrar.GetAllUsuarios();
+                //var usuario = db.Usuario;
+                return View(RetUser);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar listar usuarios ", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index","Home");
+
+            }
         }
 
 
         public ActionResult RegisterIN()
         {
-            var tipos = userWorker.ObtenerTiposUsuario();
-            var tiposU = tipos.Where(c => c.Tipo != "Externo" && c.Tipo != "Administrador");
-            ViewBag.IDTipoUsuario = new SelectList(tiposU, "IDTipoUsuario", "Tipo");
+            try
+            {
+                var tipos = userWorker.ObtenerTiposUsuario();
+                var tiposU = tipos.Where(c => c.Tipo != "Externo" && c.Tipo != "Administrador");
+                ViewBag.IDTipoUsuario = new SelectList(tiposU, "IDTipoUsuario", "Tipo");
 
-            return View();
+                return View();
+            }
+            catch {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar mostrar vista para agregar usuario intenro", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
+
+            
+            }
         }
 
         //
@@ -115,7 +167,23 @@ namespace TFITest4.Controllers
             }
             catch
             {
-                return HttpNotFound();
+                Nullable<int> idUser = null;
+            string ip = "Unknown";
+            try
+            {
+                idUser = (int)Session["userID"];
+            } 
+            catch (Exception ex) {}
+            try {
+                 ip = Session["_ip"].ToString();
+            } catch (Exception ex) {}
+            try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar mostrar vista para editar usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
+            TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+            return RedirectToAction("Index");
             }
         }
 
@@ -136,16 +204,56 @@ namespace TFITest4.Controllers
                 user.FechaUltimaMod = DateTime.Now;
                 if (userWorker.ActualizarUsuario(user))
                 {
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha editando el usuario con id: "+ usuario.IDUsuario, (int)Session["userID"], Session["_ip"].ToString()));
+                    }
+                    catch (Exception ex) { }
                     TempData["OKNormal"] = Resources.Language.OKNormal;
                     return RedirectToAction("Index");
 
                 } else {
+
+                    Nullable<int> idUser = null;
+                    string ip = "Unknown";
+                    try
+                    {
+                        idUser = (int)Session["userID"];
+                    }
+                    catch (Exception ex) { }
+                    try
+                    {
+                        ip = Session["_ip"].ToString();
+                    }
+                    catch (Exception ex) { }
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar editar usuario", idUser, ip));
+                    }
+                    catch (Exception ex) { }
                     TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                     return RedirectToAction("Index");
                 }
             }
             catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar editar usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return RedirectToAction("Index");
             }

@@ -23,8 +23,33 @@ namespace TFITest4.Models
 
         public ActionResult Index()
         {
-            var clientes = Mapper.Map<List<BIZClienteEmpresa>, List<ModelClienteEmpresa>>(clienteWorker.ObtenerClienteEmpresas());
-            return View(clientes);
+            try
+            {
+                var clientes = Mapper.Map<List<BIZClienteEmpresa>, List<ModelClienteEmpresa>>(clienteWorker.ObtenerClienteEmpresas());
+                return View(clientes);
+            }
+            catch (Exception ex2)
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al listar clientes", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return View(new List<BIZClienteEmpresa>());
+            }
         }
 
         //
@@ -45,23 +70,48 @@ namespace TFITest4.Models
 
         public ActionResult Create()
         {
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
-            ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle");
-            var localidades = dirWorker.ObtenerLocalidades();
-            List<LocCliModel> MiLocalidades = new List<LocCliModel>();
-            LocCliModel miLoc;
-            foreach (var l in localidades)
+            try
             {
-                miLoc = new LocCliModel();
-                miLoc.IDLocalidad = l.IDLocalidad;
-                miLoc.Nombre = l.Nombre + " - " + l.Provincia.Nombre + " - " + l.Provincia.Pais.Nombre;
-                MiLocalidades.Add(miLoc);
+                ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle");
+                ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle");
+                var localidades = dirWorker.ObtenerLocalidades();
+                List<LocCliModel> MiLocalidades = new List<LocCliModel>();
+                LocCliModel miLoc;
+                foreach (var l in localidades)
+                {
+                    miLoc = new LocCliModel();
+                    miLoc.IDLocalidad = l.IDLocalidad;
+                    miLoc.Nombre = l.Nombre + " - " + l.Provincia.Nombre + " - " + l.Provincia.Pais.Nombre;
+                    MiLocalidades.Add(miLoc);
+                }
+                //ViewBag.IDLocalidad = new SelectList(dirWorker.TraerAllLocalidades(), "IDLocalidad", "Nombre");
+                ViewBag.IDLocalidad = new SelectList(MiLocalidades, "IDLocalidad", "Nombre");
+                //ModelClienteEmpresa c = new ModelClienteEmpresa();
+                //c.Piso = 0;
+                return View();
             }
-            //ViewBag.IDLocalidad = new SelectList(dirWorker.TraerAllLocalidades(), "IDLocalidad", "Nombre");
-            ViewBag.IDLocalidad = new SelectList(MiLocalidades, "IDLocalidad", "Nombre");
-            //ModelClienteEmpresa c = new ModelClienteEmpresa();
-            //c.Piso = 0;
-            return View();
+            catch (Exception ex2)
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar crear un usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         //
@@ -87,9 +137,10 @@ namespace TFITest4.Models
                 //bitacora
                 try
                 {
-                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha registrado el cliente \"" + cliente.Nombre, (int)Session["userID"], Session["_ip"].ToString()));
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado el cliente \"" + cliente.Nombre, (int)Session["userID"], Session["_ip"].ToString()));
                 }
-                catch (Exception ex) { }
+                catch (Exception ex) { 
+                }
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
@@ -136,34 +187,59 @@ namespace TFITest4.Models
 
         public ActionResult Edit(int id)
         {
-            //ClienteEmpresa clienteempresa = db.ClienteEmpresa.Find(id);
-            var cliente = clienteWorker.ObtenerCliente(id);
-            if (cliente == null)
+            try
             {
-                return HttpNotFound();
+                //ClienteEmpresa clienteempresa = db.ClienteEmpresa.Find(id);
+                var cliente = clienteWorker.ObtenerCliente(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var rcliente = Mapper.Map<BIZClienteEmpresa, ModelClienteEmpresa>(cliente);
+
+                ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle", rcliente.IDEstado);
+                ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle", rcliente.IDTipoIVA);
+
+
+                var localidades = dirWorker.ObtenerLocalidades();
+                List<LocCliModel> MiLocalidades = new List<LocCliModel>();
+                LocCliModel miLoc;
+                foreach (var l in localidades)
+                {
+                    miLoc = new LocCliModel();
+                    miLoc.IDLocalidad = l.IDLocalidad;
+                    miLoc.Nombre = l.Nombre + " - " + l.Provincia.Nombre + " - " + l.Provincia.Pais.Nombre;
+                    MiLocalidades.Add(miLoc);
+                }
+                ViewBag.IDLocalidad = new SelectList(MiLocalidades, "IDLocalidad", "Nombre", rcliente.Direccion.IDLocalidad);
+                //ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo", clienteempresa.IDEstado);
+                //ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.IDTipoIVA);
+
+                return View(rcliente);
             }
-
-            var rcliente = Mapper.Map<BIZClienteEmpresa, ModelClienteEmpresa>(cliente);
-
-            ViewBag.IDEstado = new SelectList(generalWorker.traerEstadoMisc("ClienteEmpresa"), "IDEstado", "Detalle", rcliente.IDEstado);
-            ViewBag.IDTipoIVA = new SelectList(generalWorker.TrearTiposIVA(), "IDTipoIVA", "Detalle", rcliente.IDTipoIVA);
-
-
-            var localidades = dirWorker.ObtenerLocalidades();
-            List<LocCliModel> MiLocalidades = new List<LocCliModel>();
-            LocCliModel miLoc;
-            foreach (var l in localidades)
+            catch
             {
-                miLoc = new LocCliModel();
-                miLoc.IDLocalidad = l.IDLocalidad;
-                miLoc.Nombre = l.Nombre + " - " + l.Provincia.Nombre + " - " + l.Provincia.Pais.Nombre;
-                MiLocalidades.Add(miLoc);
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar editar un usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
             }
-            ViewBag.IDLocalidad = new SelectList(MiLocalidades, "IDLocalidad", "Nombre", rcliente.Direccion.IDLocalidad);
-            //ViewBag.IDEstado = new SelectList(db.EstadoMisc, "IDEstado", "Tipo", clienteempresa.IDEstado);
-            //ViewBag.IDTipoIVA = new SelectList(db.TipoIVA, "IDTipoIVA", "Detalle", clienteempresa.IDTipoIVA);
-           
-            return View(rcliente);
             //return View();
         }
 

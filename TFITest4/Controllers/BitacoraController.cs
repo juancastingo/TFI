@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using BIZ;
 
 namespace TFITest4.Controllers
 {
@@ -15,8 +16,33 @@ namespace TFITest4.Controllers
 
         public ActionResult Index()
         {
-            var Lbitacora = Bita.obtenerBitacora();
-            return View(Lbitacora);
+            try
+            {
+                var Lbitacora = Bita.obtenerBitacora();
+                return View(Lbitacora);
+            }
+            catch (Exception ex2)
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar visualizar bitácora", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return View();
+            }
         }
 
         //

@@ -19,9 +19,34 @@ namespace TFITest4.Models
 
         public ActionResult Index()
         {
-            var lista = precioWorker.getAllListaPrecio();
-            var rList = Mapper.Map<List<BIZListaPrecio>, List<ModelListaPrecio>>(lista);
-            return View(rList);
+            try
+            {
+                var lista = precioWorker.getAllListaPrecio();
+                var rList = Mapper.Map<List<BIZListaPrecio>, List<ModelListaPrecio>>(lista);
+                return View(rList);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error intentar listar Lista de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         //
@@ -43,11 +68,35 @@ namespace TFITest4.Models
             {
                 ListaPrecio.FechaUltimaMod = DateTime.Now;
                 precioWorker.CreateListaPrecio(ListaPrecio);
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado la lista de precios: " + ListaPrecio.Detalle, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
+
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar crear lista de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
                 return View();
             }
         }
@@ -57,9 +106,35 @@ namespace TFITest4.Models
 
         public ActionResult Edit(int id)
         {
-            var Lista = precioWorker.GetByID(id);
-            var rList = Mapper.Map<BIZListaPrecio, ModelListaPrecio>(Lista);
-            return View(rList);
+            try
+            {
+                var Lista = precioWorker.GetByID(id);
+                var rList = Mapper.Map<BIZListaPrecio, ModelListaPrecio>(Lista);
+                return View(rList);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error intentar editar Lista de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+                ViewBag.AlertError = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
+
+            }
         }
 
         //
@@ -71,13 +146,35 @@ namespace TFITest4.Models
             try
             {
                 precioWorker.UpdateListaPrecio(collection);
-                // TODO: Add update logic here
-
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha editado la lista de precios: " + collection.IDListaPrecio, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
+                TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar editar lista de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
             }
         }
 
@@ -93,10 +190,33 @@ namespace TFITest4.Models
                 double factor = Convert.ToDouble(CopiaFactor);
                 ListaACopiar.FechaDesde = Convert.ToDateTime(FechaDesde);
                 precioWorker.copiarLista(ListaACopiar, factor);
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha copiado la lista de precios: " + IDLista + " a una llamada: "+ CopiaText, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
                 return Json(new { Result = ""}, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar copiar lista de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 return Json(new { Result = "error" }, JsonRequestBehavior.AllowGet);
             }
 

@@ -73,32 +73,40 @@
     <script>
         //.attr('data-val') 
         $('.CargarPedidos').click(function () {
-            mostrarGIF();
-            //var dataToSend = { CargarPedidoViejo: "juan" }
-            var serviceURL = '@Url.Action("CargarPedidoViejo", "Pedido")';
-            $.ajax({
-                type: "POST",
-                url: serviceURL,
-                data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
-                dataType: 'text',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: successFunc,
-                error: errorFunc,
-                complete: Doscosas
+            var esto = $(this).attr('data-val');
+            $.confirm({
+                confirm: function () {
+                    mostrarGIF();
+                    //var dataToSend = { CargarPedidoViejo: "juan" }
+                    var serviceURL = '@Url.Action("CargarPedidoViejo", "Pedido")';
+                    $.ajax({
+                        type: "POST",
+                        url: serviceURL,
+                        data: JSON.stringify({ PrePed: esto }),
+                        dataType: 'text',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: successFunc,
+                        error: errorFunc,
+                        complete: Doscosas
+                    });
+                    function successFunc(data, status) {
+                        console.log(data);
+                        toastr["success"]("@Language.prePedidoCargado", "Success!")
+                        if (data.Result != "") toastr["warning"](data.Result, "@Language.Atencion")
+                    }
+                    function errorFunc(status) {
+                        toastr["error"]("@Language.ErrorLogInAgain", "Error")
+                    }
+                    function Doscosas() {
+                        GetInit();
+                        ocultarGIF();
+                    }
+                },
+                cancel: function () {
+                    toastr["info"]("@Language.operacionCancelada")
+                }
             });
-            function successFunc(data, status) {
-                console.log(data);
-                toastr["success"]("@Language.prePedidoCargado", "Success!")
-                if (data.Result != "") toastr["warning"](data.Result, "@Language.Atencion")
-            }
-            function errorFunc(status) {
-                toastr["error"]("@Language.ErrorLogInAgain", "Error")
-            }
-            function Doscosas() {
-                GetInit();
-                ocultarGIF();
-            }
 
         });
 

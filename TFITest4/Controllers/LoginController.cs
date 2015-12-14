@@ -27,28 +27,53 @@ namespace TFITest4.Controllers
         
         public ActionResult CerrarSesion()
         {
+
             try
             {
-                Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + Session["usuario"] + "\" cerró sesión", (int)Session["userID"], Session["_ip"].ToString()));
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                //Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+                Response.Cache.SetNoStore();
+                FormsAuthentication.SignOut();
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+
+                ViewBag.AlertOK = "Se ha cerrado la sesion correctamente";
+
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.AppendCacheExtension("no-store, must-revalidate");
+                Response.AppendHeader("Pragma", "no-cache");
+                Response.AppendHeader("Expires", "0");
+
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + Session["usuario"] + "\" cerró sesión", (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
+
             }
-            catch (Exception ex) { }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al cerrar sesion", idUser, ip));
+                }
+                catch (Exception ex) { }
 
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            //Response.Cache.SetAllowResponseInBrowserHistory(false);
-            Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
-            Response.Cache.SetNoStore();
-            FormsAuthentication.SignOut();
-            Session.Abandon();
-            Session.Clear();
-            Session.RemoveAll();
-
-            ViewBag.AlertOK = "Se ha cerrado la sesion correctamente";
-
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.Cache.AppendCacheExtension("no-store, must-revalidate");
-            Response.AppendHeader("Pragma", "no-cache");
-            Response.AppendHeader("Expires", "0");
-
+            }
             return View();
             // TempData["Resultado"] = "Se ha cerrado la sesion";
             // return RedirectToAction("Index", "Home");
@@ -95,7 +120,11 @@ namespace TFITest4.Controllers
             try {
                  ip = Session["_ip"].ToString();
             } catch (Exception ex) {}
-            Bita.guardarBitacora(new BIZBitacora("Advertencia", "Inento de acceso indebido", idUser, ip));
+            try
+            {
+                Bita.guardarBitacora(new BIZBitacora("Advertencia", "Inento de acceso indebido", idUser, ip));
+            }
+            catch { }
             ViewBag.AlertError = @Language.AccesoError;
             return View();
         }
@@ -104,55 +133,80 @@ namespace TFITest4.Controllers
         [HttpPost]
         public ActionResult MenuReload(string UserName, string Password)
         {
-            BIZUsuario UserCheck = new BIZUsuario();
-            UserCheck.Usuario1 = UserName;
-            UserCheck.Password = Password;
-            BIZUsuario _usuario = UsuarioWorker.validarLogin(UserCheck);
-            //ip
-            
-
-            if (_usuario != null && _usuario.IDEstado == 13)
+            try
             {
-                FormsAuthentication.SetAuthCookie(UserName, false);
-                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.Cache.SetAllowResponseInBrowserHistory(false);
-                Response.Cache.SetNoStore();
+                BIZUsuario UserCheck = new BIZUsuario();
+                UserCheck.Usuario1 = UserName;
+                UserCheck.Password = Password;
+                BIZUsuario _usuario = UsuarioWorker.validarLogin(UserCheck);
+                //ip
 
-                try
+
+                if (_usuario != null && _usuario.IDEstado == 13)
                 {
-                    Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + _usuario.Usuario1 + "\" inició sesión", _usuario.IDUsuario, Session["_ip"].ToString()));
+                    FormsAuthentication.SetAuthCookie(UserName, false);
+                    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    Response.Cache.SetAllowResponseInBrowserHistory(false);
+                    Response.Cache.SetNoStore();
+
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario \"" + _usuario.Usuario1 + "\" inició sesión", _usuario.IDUsuario, Session["_ip"].ToString()));
+                    }
+
+                    catch (Exception ex) { }
+                    Session.Timeout = 9999;
+                    Session["usuario"] = _usuario.Usuario1;
+                    Session["userID"] = _usuario.IDUsuario;
+                    Session["SUsuario"] = _usuario;
+                    ViewBag.UserGroup = _usuario.TipoUsuario.Tipo;
+                    Session["grupo"] = _usuario.TipoUsuario.Tipo;
+                    return PartialView("~/Views/Shared/Menu.cshtml");
                 }
-
-                catch (Exception ex) { }
-                Session.Timeout = 9999;
-                Session["usuario"] = _usuario.Usuario1;
-                Session["userID"] = _usuario.IDUsuario;
-                Session["SUsuario"] = _usuario;
-                ViewBag.UserGroup = _usuario.TipoUsuario.Tipo;
-                Session["grupo"] = _usuario.TipoUsuario.Tipo;
-                return PartialView("~/Views/Shared/Menu.cshtml");
-            }
-            else if (_usuario != null)
-            {
-                if (_usuario.IDEstado == 12)
+                else if (_usuario != null)
                 {
-                    return Json(new { status = "error", message = @Language.UsuarioNoHabilitado });
-                }
-                else if (_usuario.IDEstado == 26)
-                {
+                    if (_usuario.IDEstado == 12)
+                    {
+                        return Json(new { status = "error", message = @Language.UsuarioNoHabilitado });
+                    }
+                    else if (_usuario.IDEstado == 26)
+                    {
 
-                    return Json(new { status = "error", message = @Language.UsuarioNoConfirmado });
+                        return Json(new { status = "error", message = @Language.UsuarioNoConfirmado });
+                    }
+                    else
+                    {
+                        return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
+                    }
                 }
                 else
                 {
                     return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
                 }
             }
-            else
+            catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar iniciar sesion", idUser, ip));
+                }
+                catch (Exception ex) { }
                 return Json(new { status = "error", message = @Language.RevisarUsuarioContra });
             }
         }
+
 
         public ActionResult keepAlive()
         {
@@ -190,14 +244,37 @@ namespace TFITest4.Controllers
                     correo.Body = body;
                     util.sendMail(correo);
                     TempData["OKNormal"] = Resources.Language.OKNormal;
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha enviado mail de recupero de password usuario con id: " + user.IDUsuario, (int)Session["userID"], Session["_ip"].ToString()));
+                    }
+                    catch (Exception ex) { }
                 }
                 else
                 {
                     TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error intentar recuperar password", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             }
             return View();
@@ -214,15 +291,40 @@ namespace TFITest4.Controllers
                 if (newPass != "")
                 {
                     ViewBag.pass = newPass;
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha reseteado la password del usuario: " + UserToReset, null, Session["_ip"].ToString()));
+                    }
+                    catch (Exception ex) { }
+
                 }
                 else
                 {
+
                     TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 }
                 
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar resetear password de un usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             }
 

@@ -33,31 +33,55 @@ namespace TFITest4.Controllers
         public ActionResult Index()
         {
 
-
-
-            var ListaP = ProdWorker.traerProductosConPrecio();
-            // guardo todo en sesion
-            Session["productosSesion"] = ListaP;
-
-            // carrito
-            //viejo
-            //var cartObjects = (Session["CartObjects"] as List<modelCarrito>) ?? new List<modelCarrito>();
-            //nuevo
-            var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
-            double Subtotal = 0;
-            if (ListCarrito.Productos.Count != 0)
+            try
             {
-                foreach (modelCarrito elem in ListCarrito.Productos)
+
+                var ListaP = ProdWorker.traerProductosConPrecio();
+                // guardo todo en sesion
+                Session["productosSesion"] = ListaP;
+
+                // carrito
+                //viejo
+                //var cartObjects = (Session["CartObjects"] as List<modelCarrito>) ?? new List<modelCarrito>();
+                //nuevo
+                var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
+                double Subtotal = 0;
+                if (ListCarrito.Productos.Count != 0)
                 {
-                    Subtotal += (double)elem.Precio * (int)elem.Cant;
+                    foreach (modelCarrito elem in ListCarrito.Productos)
+                    {
+                        Subtotal += (double)elem.Precio * (int)elem.Cant;
+                    }
                 }
+                ViewBag.subtotal = Subtotal;
+                ViewBag.NrPedido = ListCarrito.IDDocumento;
+
+
+
+                return View(ListaP);
             }
-            ViewBag.subtotal = Subtotal;
-            ViewBag.NrPedido = ListCarrito.IDDocumento;
-
-
-
-            return View(ListaP);
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error intentar listar el carrito de compras", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorLogInAgain;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public class ListCarrito
@@ -133,9 +157,31 @@ namespace TFITest4.Controllers
             //viejo
             //Session["ListCarrito"] = null;
             //nuevo solo borro los items y no el id del PrePedido
-            var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
-            ListCarrito.Productos = new List<modelCarrito>();
-            return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var ListCarrito = (Session["ListCarrito"] as ListCarrito) ?? new ListCarrito();
+                ListCarrito.Productos = new List<modelCarrito>();
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            } catch {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al limpiar carrito", idUser, ip));
+                }
+                catch (Exception ex) { }
+                return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
+            }
         }
 
 
@@ -195,8 +241,26 @@ namespace TFITest4.Controllers
                 }
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar guardar carrito", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 ViewBag.AlertError = Language.ErrorLogInAgain;
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
@@ -304,6 +368,24 @@ namespace TFITest4.Controllers
             }
             catch (Exception er)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar agregar un producto al carrito", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 ViewBag.AlertError = Language.ErrorLogInAgain;
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
@@ -329,8 +411,27 @@ namespace TFITest4.Controllers
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar listar prepedidos", idUser, ip));
+                }
+                catch (Exception ex) { }
+
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
         }
@@ -387,8 +488,26 @@ namespace TFITest4.Controllers
                 ViewBag.NrPedido = carrito.IDDocumento;
                 return Json(new { Result = msgReturn }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar cargar un prepedido", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
 
@@ -408,9 +527,31 @@ namespace TFITest4.Controllers
                 {
                     Session["ListCarrito"] = null;
                 }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se descartado el prepedido nr# " + NrPrePedido, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar descartar un prepedido", idUser, ip));
+                }
+                catch (Exception ex) { }
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
@@ -487,6 +628,11 @@ namespace TFITest4.Controllers
 
                         Session["ListCarrito"] = null;
                         devolver = @Language.OKNormal;
+                        try
+                        {
+                            Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha submitido el pedido nr# " + IDDocNuevo, (int)Session["userID"], Session["_ip"].ToString()));
+                        }
+                        catch { }
                         return Json(new { Result = devolver, CarritoStock = "ir" }, JsonRequestBehavior.AllowGet);
                     }
                     else //algun producto no tiene stock. Lo veo con JS.
@@ -495,7 +641,26 @@ namespace TFITest4.Controllers
                     }
                 }
             }
-            catch (Exception ex) { devolver = @Language.ErrorLogInAgain; }
+            catch (Exception ex2) {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar submitir un pedido", idUser, ip));
+                }
+                catch (Exception ex) { }
+                devolver = @Language.ErrorLogInAgain;
+            }
             return Json(new { Result = devolver, CarritoStock = "", IVA = 21 }, JsonRequestBehavior.AllowGet);
         }
 
@@ -522,8 +687,26 @@ namespace TFITest4.Controllers
                 ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar listar pedidos", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
         }
@@ -552,8 +735,26 @@ namespace TFITest4.Controllers
                 //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar listar pedidos para controlar", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
         }
@@ -561,25 +762,74 @@ namespace TFITest4.Controllers
 
         public ActionResult PedidoPDF(string NrPedido)
         {
-            //var model = new GeneratePDFModel();
-            //Code to get content
-            // return new Rotativa.ViewAsPdf("GeneratePDF", model){FileName = "TestViewAsPdf.pdf"}
-            gIdPedido = Convert.ToInt32(NrPedido);
-            return new ActionAsPdf("makePDF") { FileName = "Pedido-" + gIdPedido + ".pdf" };
-            // return new ActionAsPdf("Index") { FileName = "Test.pdf" };
+            try
+            {
+                gIdPedido = Convert.ToInt32(NrPedido);
+                return new ActionAsPdf("makePDF") { FileName = "Pedido-" + gIdPedido + ".pdf" };
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar generar pdf", idUser, ip));
+                }
+                catch (Exception ex) { }
+
+                TempData["ErrorNormal"] = Language.ErrorNormal;
+                return RedirectToAction("home", "Index");
+            }
         }
 
         public ActionResult makePDF()
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
-            var doc = DocWorker.ObtenerDocXID(gIdPedido);
-            //Utils utils = new Utils();
-            //string codigo = "123456";
-            //utils.generaCodigoBarras(codigo);
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
+                var doc = DocWorker.ObtenerDocXID(gIdPedido);
+                //Utils utils = new Utils();
+                //string codigo = "123456";
+                //utils.generaCodigoBarras(codigo);
 
 
-            //ViewBag.Barcode = codigo + ".jpg";
-            return View(doc);
+                //ViewBag.Barcode = codigo + ".jpg";
+                return View(doc);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar generar pdf", idUser, ip));
+                }
+                catch (Exception ex) { }
+
+                TempData["ErrorNormal"] = Language.ErrorNormal;
+                return RedirectToAction("home", "Index");
+
+            }
         }
 
 
@@ -613,8 +863,26 @@ namespace TFITest4.Controllers
                 ViewBag.NrPedido = carritoPedido.IDDocumento;
                 return Json(new { Result = "", Pedido = carritoPedido }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar visualizar pedido en modal", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
 
@@ -686,8 +954,26 @@ namespace TFITest4.Controllers
                 return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
 
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar aprobar/rechazar pedido", idUser, ip));
+                }
+                catch (Exception ex) { }
+
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
@@ -719,7 +1005,11 @@ namespace TFITest4.Controllers
             }
             catch (Exception ex)
             {
-                Bita.guardarBitacora(new BIZBitacora("Error", "Error al cancelar pedido" , null, "Unknown"));
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al cancelar pedido", null, "Unknown"));
+                }
+                catch { }
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
@@ -753,8 +1043,26 @@ namespace TFITest4.Controllers
                 //ViewBag.Empresa = UsuarioIN.ClienteEmpresa.Nombre;
                 return View(docs);
             }
-            catch (Exception ex)
+            catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar visualizar pedidos para facturar", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Language.ErrorLogInAgain;
                 return RedirectToAction("CerrarSesion", "Login");
             }
         }
@@ -828,7 +1136,11 @@ namespace TFITest4.Controllers
             }
             catch (Exception ex)
             {
-                Bita.guardarBitacora(new BIZBitacora("Error", "Error al originar la factura", null, null));
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al originar la factura", null, null));
+                }
+                catch { }
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
@@ -844,8 +1156,25 @@ namespace TFITest4.Controllers
                 return new ActionAsPdf("makePDFFact") { FileName = "invoice" + GIdFactura + ".pdf" };
                 //return Json(new { Result = "" }, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar imprimir factura", idUser, ip));
+                }
+                catch (Exception ex) { }
                 return Json(new { Result = "Error" }, JsonRequestBehavior.AllowGet);
             }
 
@@ -855,35 +1184,60 @@ namespace TFITest4.Controllers
         
         public ActionResult makePDFFact()
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
-            var doc = DocWorker.ObtenerDocXID(GIdFactura);
-            double monto = 0;
-            if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
+            try
             {
-                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-AR");
+                var doc = DocWorker.ObtenerDocXID(GIdFactura);
+                double monto = 0;
+                if (doc.ClienteEmpresa.TipoIVA.Detalle != "Responsable Inscripto")
                 {
-                    d.PrecioDetalle.Precio = d.PrecioDetalle.Precio + (doc.ClienteEmpresa.TipoIVA.Valor * d.PrecioDetalle.Precio / 100);
-                    monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                    foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                    {
+                        d.PrecioDetalle.Precio = d.PrecioDetalle.Precio + (doc.ClienteEmpresa.TipoIVA.Valor * d.PrecioDetalle.Precio / 100);
+                        monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                    }
                 }
-            }
-            else
-            {
-                foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                else
                 {
-                    monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                    foreach (BIZDocumentoDetalle d in doc.DocumentoDetalle)
+                    {
+                        monto += Convert.ToDouble(d.PrecioDetalle.Precio) * d.Cantidad;
+                    }
+                    monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
                 }
-                monto = monto + (monto * doc.ClienteEmpresa.TipoIVA.Valor / 100);
-            }
-            doc.Monto = monto;
-            Utils utils = new Utils();
-            int codigo = Convert.ToInt32(doc.NrDocumento);
-            string Scodigo = codigo.ToString();
-            ViewBag.CB = utils.generaCodigoBarras("779053800" + Scodigo.PadLeft(3, '0')); //un numero +nr fact
-            ViewBag.QR = utils.generarQR("779053800" + Scodigo.PadLeft(3, '0'));
-            ViewBag.letras = utils.enletras(doc.Monto.ToString());
+                doc.Monto = monto;
+                Utils utils = new Utils();
+                int codigo = Convert.ToInt32(doc.NrDocumento);
+                string Scodigo = codigo.ToString();
+                ViewBag.CB = utils.generaCodigoBarras("779053800" + Scodigo.PadLeft(3, '0')); //un numero +nr fact
+                ViewBag.QR = utils.generarQR("779053800" + Scodigo.PadLeft(3, '0'));
+                ViewBag.letras = utils.enletras(doc.Monto.ToString());
 
-            //ViewBag.Barcode = codigo + ".jpg";
-            return View(doc);
+                //ViewBag.Barcode = codigo + ".jpg";
+                return View(doc);
+            }
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar imprimir factura", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
 

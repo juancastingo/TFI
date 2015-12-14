@@ -21,30 +21,108 @@ namespace TFITest4.Controllers
 
         public ActionResult Index()
         {
-            var lista = precioWorker.traerPrecioDetalles();
-            return View(lista);
+            try
+            {
+                var lista = precioWorker.traerPrecioDetalles();
+                return View(lista);
+            }
+            catch
+            {
+
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar listar detalles de precios", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult Edit(int id)
         {
-            var precio = precioWorker.traerPrecioDetalle(id);
-            if (precio == null)
+            try
             {
-                return HttpNotFound();
+                var precio = precioWorker.traerPrecioDetalle(id);
+                if (precio == null)
+                {
+                    return HttpNotFound();
+                }
+                //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
+                return View(precio);
             }
-            //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle", preciodetalle.IDListaPrecio);
-            return View(precio);
+            catch
+            {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar mostrar precio para editar", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
+            }
         }
 
 
 
         public ActionResult Create()
         {
-            ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
-            //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
-            ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
-            //ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre");
-            return View();
+            try
+            {
+                ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
+                //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
+                ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
+                //ViewBag.IDProducto = new SelectList(db.Producto, "IDProducto", "Nombre");
+                return View();
+            }
+            catch {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar mostrar vista para crear precio detalle", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
+            
+            
+            }
+
         }
 
         //
@@ -58,6 +136,12 @@ namespace TFITest4.Controllers
                 PrecioDetalle.Precio = Convert.ToDouble(Precio);
                 var precioD = Mapper.Map<ModelPrecioDetalle, BIZPrecioDetalle>(PrecioDetalle);
                 precioWorker.CrearDetallePrecio(precioD);
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha creado el precio detalle para lista: "+ PrecioDetalle.IDListaPrecio, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
+
                 TempData["OKNormal"] = Resources.Language.OKNormal;
                 return RedirectToAction("Index");
             }
@@ -66,6 +150,23 @@ namespace TFITest4.Controllers
                 ViewBag.IDListaPrecio = new SelectList(precioWorker.TraerAllListaPrecio(), "IDListaPrecio", "Detalle");
                 //ViewBag.IDListaPrecio = new SelectList(db.ListaPrecio, "IDListaPrecio", "Detalle");
                 ViewBag.IDProducto = new SelectList(productoWorker.traerAllProductos(), "IDProducto", "Nombre");
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar crear precio detalle", idUser, ip));
+                }
+                catch (Exception ex) { }
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return View();
             }
@@ -134,13 +235,34 @@ namespace TFITest4.Controllers
             try
             {
                 precioWorker.ActualizarPrecioDetalle(id, Activo);
-                // TODO: Add update logic here
-
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha editado el precio detalle con id: "+ id, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al intentar editar precio detalle", idUser, ip));
+                }
+                catch (Exception ex) { }
+                TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
+                return RedirectToAction("Index");
             }
         }
 

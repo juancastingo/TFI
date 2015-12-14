@@ -96,8 +96,22 @@ namespace TFITest4.Controllers
                 //}
                 //throw new ArgumentNullException("value");
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                Bita.guardarBitacora(new BIZBitacora("Error", "Error en el registro", idUser, ip));
+
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 ViewBag.IDClienteEmpresa = new SelectList(ClienteWorker.ObtenerClienteEmpresas(), "IDClienteEmpresa", "Nombre");
                 return View(U);
@@ -121,11 +135,15 @@ namespace TFITest4.Controllers
         [ActionName("AjaxUserCheck")]
         public ActionResult AjaxUserCheck(palabra b)
         {
-            BIZUsuario User = new BIZUsuario();
-            User.Usuario1 = b.name;
-            BLLUsuario DUser = new BLLUsuario();
-            b.existe = DUser.CheckByName(User);
-            return Json(b, JsonRequestBehavior.AllowGet);
+            try
+            {
+                BIZUsuario User = new BIZUsuario();
+                User.Usuario1 = b.name;
+                BLLUsuario DUser = new BLLUsuario();
+                b.existe = DUser.CheckByName(User);
+                return Json(b, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex) { return Json(new BIZUsuario(), JsonRequestBehavior.AllowGet); }
         }
 
 
@@ -144,10 +162,32 @@ namespace TFITest4.Controllers
                 BIZ.BIZUsuario User = new BIZUsuario();
                 User.Usuario1 = UserToValidate;
                 UsuarioWorker.ValidarUsuario(User);
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Informativo", "Se ha validado el usuario: "+ User.Usuario1, (int)Session["userID"], Session["_ip"].ToString()));
+                }
+                catch (Exception ex) { }
                 TempData["OKNormal"] = Resources.Language.OKNormal;
             }
             catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al validar usuario", idUser, ip));
+                }
+                catch (Exception ex) { }
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
             }
             return View();
@@ -174,6 +214,11 @@ namespace TFITest4.Controllers
                     _usuario.Password = usuario.Password;
                     UsuarioWorker.ActualizarUsuario(_usuario);
                     TempData["OKNormal"] = Resources.Language.okCambioPass;
+                    try
+                    {
+                        Bita.guardarBitacora(new BIZBitacora("Informativo", "El usuario " + _usuario.Usuario1 + " ha cambiado su password", (int)Session["userID"], Session["_ip"].ToString()));
+                    }
+                    catch (Exception ex) { }
                     return Redirect("/Login/CerrarSesion");
                 }
                 else
@@ -184,6 +229,23 @@ namespace TFITest4.Controllers
             }
             catch
             {
+                Nullable<int> idUser = null;
+                string ip = "Unknown";
+                try
+                {
+                    idUser = (int)Session["userID"];
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    ip = Session["_ip"].ToString();
+                }
+                catch (Exception ex) { }
+                try
+                {
+                    Bita.guardarBitacora(new BIZBitacora("Error", "Error al cambiar la password", idUser, ip));
+                }
+                catch (Exception ex) { }
                 TempData["ErrorNormal"] = Resources.Language.ErrorNormal;
                 return View(usuario);
             }
