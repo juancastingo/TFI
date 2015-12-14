@@ -525,6 +525,9 @@
   <data name="acerca" xml:space="preserve">
     <value>Acerca</value>
   </data>
+  <data name="actualizacion" xml:space="preserve">
+    <value>Nueva Actualización en sus pedidos</value>
+  </data>
   <data name="asientos" xml:space="preserve">
     <value>Asientos</value>
   </data>
@@ -545,6 +548,15 @@
   </data>
   <data name="haber" xml:space="preserve">
     <value>Haber</value>
+  </data>
+  <data name="ingreseAct" xml:space="preserve">
+    <value>. Ingrese al sistema para visualizarlo</value>
+  </data>
+  <data name="pedidoAprobado" xml:space="preserve">
+    <value>Se ha aprobado su pepido nr # </value>
+  </data>
+  <data name="pedidoRechazado" xml:space="preserve">
+    <value>Se ha rechazado su pepido nr # </value>
   </data>
   <data name="siteMap" xml:space="preserve">
     <value>Mapa del Sitio</value>

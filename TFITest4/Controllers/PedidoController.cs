@@ -669,16 +669,16 @@ namespace TFITest4.Controllers
                 //mail
                 var EstePedido = DocWorker.ObtenerDocXID(IDPedido);
                 BIZ.BIZCorreo correo = new BIZCorreo();
-                correo.Subject = "Nueva Actualización en sus pedidos";
+                correo.Subject = @Language.actualizacion;
                 correo.To = EstePedido.ClienteEmpresa.Email;
                 correo.cc = EstePedido.Usuario.Email;
                 if (status == 6)
                 {
-                    correo.Body =  "<span>"+ EstePedido.Usuario.Nombre +",</span><br><span>Se ha aprobado su pepido nr # " + IDPedido + ". Ingrese al sistema para visualizarlo</span>";
+                    correo.Body = "<span>" + EstePedido.Usuario.Nombre + ",</span><br><span>" + @Language.pedidoAprobado + IDPedido + @Language.ingreseAct + "</span>";
                 }
                 else
                 {
-                    correo.Body = "<span>" + EstePedido.Usuario.Nombre + ",</span><br><span>Se ha rechazado su pepido nr # " + IDPedido + ". Ingrese al sistema para visualizarloo</span>";
+                    correo.Body = "<span>" + EstePedido.Usuario.Nombre + ",</span><br><span>" + @Language.pedidoRechazado  + IDPedido + @Language.ingreseAct+"</span>";
 
                 }
                 util.sendMail(correo);

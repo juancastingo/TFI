@@ -97,6 +97,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Nueva Actualización en sus pedidos.
+        /// </summary>
+        public static string actualizacion {
+            get {
+                return ResourceManager.GetString("actualizacion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Agregar.
         /// </summary>
         public static string agregar {
@@ -709,6 +718,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a . Ingrese al sistema para visualizarlo.
+        /// </summary>
+        public static string ingreseAct {
+            get {
+                return ResourceManager.GetString("ingreseAct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Iniciar Sesión.
         /// </summary>
         public static string inicioSesion {
@@ -1002,6 +1020,24 @@ namespace TFITest4.Resources {
         public static string pedido {
             get {
                 return ResourceManager.GetString("pedido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha aprobado su pepido nr # .
+        /// </summary>
+        public static string pedidoAprobado {
+            get {
+                return ResourceManager.GetString("pedidoAprobado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se ha rechazado su pepido nr # .
+        /// </summary>
+        public static string pedidoRechazado {
+            get {
+                return ResourceManager.GetString("pedidoRechazado", resourceCulture);
             }
         }
         
