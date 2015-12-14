@@ -546,11 +546,17 @@
   <data name="ejecutar" xml:space="preserve">
     <value>Ejecutar</value>
   </data>
+  <data name="facturaInfo" xml:space="preserve">
+    <value>Se ha Facturado su pepido nr # </value>
+  </data>
   <data name="haber" xml:space="preserve">
     <value>Haber</value>
   </data>
   <data name="ingreseAct" xml:space="preserve">
     <value>. Ingrese al sistema para visualizarlo</value>
+  </data>
+  <data name="ingreseFact" xml:space="preserve">
+    <value>. Ingrese al sistema para imprimir la factura --&gt;</value>
   </data>
   <data name="pedidoAprobado" xml:space="preserve">
     <value>Se ha aprobado su pepido nr # </value>

@@ -565,6 +565,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha Facturado su pepido nr # .
+        /// </summary>
+        public static string facturaInfo {
+            get {
+                return ResourceManager.GetString("facturaInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Facturar.
         /// </summary>
         public static string facturar {
@@ -723,6 +732,15 @@ namespace TFITest4.Resources {
         public static string ingreseAct {
             get {
                 return ResourceManager.GetString("ingreseAct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a . Ingrese al sistema para imprimir la factura --&gt;.
+        /// </summary>
+        public static string ingreseFact {
+            get {
+                return ResourceManager.GetString("ingreseFact", resourceCulture);
             }
         }
         

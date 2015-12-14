@@ -819,7 +819,7 @@ namespace TFITest4.Controllers
                 correo.To = pedido.ClienteEmpresa.Email;
                 correo.cc = pedido.Usuario.Email;
                 string link = "<a href='http://" + Request.Url.Host.ToLower() + ":" + Request.Url.Port + "/home/PDFMaker?odwidji32i324mu32u83257fm3209v5m320m392=u32hrwqduwqhdwqudhwqduwqdhwqduhwqudhwqudhwqud32hr32hrhf932hrn928v5u208m3f47&fghjhtyuighj=" + IDDocNuevo +"&32m3204c32094mqwdqwdwqdwqdwqd32=d4023123213213m'>Link</a>";
-                string body = String.Format("<span>" + pedido.Usuario.Nombre + ",</span><br><span>Se ha Facturado su pepido nr # " + IDPedido + ". Ingrese al sistema para imprimir la factura --> " + link +"</span>");
+                string body = String.Format("<span>" + pedido.Usuario.Nombre + ",</span><br><span>" + @Language.facturaInfo + IDPedido + @Language.ingreseFact + link + "</span>");
                 correo.Body = body;
                 util.sendMail(correo);
 

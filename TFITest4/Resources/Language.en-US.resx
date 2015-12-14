@@ -546,11 +546,17 @@
   <data name="ejecutar" xml:space="preserve">
     <value>Execute</value>
   </data>
+  <data name="facturaInfo" xml:space="preserve">
+    <value>We have billed your order nr # </value>
+  </data>
   <data name="haber" xml:space="preserve">
     <value>Credit</value>
   </data>
   <data name="ingreseAct" xml:space="preserve">
     <value>. Please acces your account at IID to review it.</value>
+  </data>
+  <data name="ingreseFact" xml:space="preserve">
+    <value>Access the system to print it --&gt; </value>
   </data>
   <data name="pedidoAprobado" xml:space="preserve">
     <value>We have approved your order nr # </value>
