@@ -112,7 +112,14 @@ namespace DAL
                     .Where(c => c.Password == oUser.Password)
                     .FirstOrDefault();
                 var UserReturn = Mapper.Map<Usuario, BIZUsuario>(TUser);
-                return UserReturn;
+                if (UserReturn.Usuario1 == oUser.Usuario1 && UserReturn.Password == oUser.Password)
+                {
+                    return UserReturn;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {

@@ -25,7 +25,7 @@
 </script>
 
 
-<h2 class="titulo">Asientos</h2>
+<h2 class="titulo">@Language.asientos</h2>
 
 
 
@@ -62,7 +62,7 @@
 
 <div class="row">
     <div class="center">
-        <input id="ObtenerAsientos" type="button" class="btn btn-primary desab" value="Ejecutar" />
+        <input id="ObtenerAsientos" type="button" class="btn btn-primary desab" value="@Language.ejecutar" />
     </div>
 </div>
 <div class="row"></div>
@@ -103,11 +103,11 @@
     <table id="tablaAsientos" class="table table-bordered nowrap table-striped desab" cellspacing="0" width="100%" style="border: 2px solid black;">
         <thead>
             <tr class="ultima">
-                <th>Fecha</th>
-                <th>Cuenta Debe</th>
-                <th>Cuenta Haber</th>
-                <th>Debe</th>
-                <th>Haber</th>
+                <th>@Language.fecha</th>
+                <th>@Language.cuentaDebe</th>
+                <th>@Language.cuentaHaber</th>
+                <th>@Language.debe</th>
+                <th>@Language.haber</th>
             </tr>
         </thead>
         <tbody>
@@ -176,7 +176,7 @@
                     error: errorFunc
                 });
         } else {
-            toastr["info"]("Please complete all fields", "Info");
+                toastr["info"]("@Language.completarCampos", "Info");
         }
         });
 

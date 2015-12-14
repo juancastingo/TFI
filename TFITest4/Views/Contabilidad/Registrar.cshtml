@@ -63,7 +63,7 @@
 
 <div class="row">
     <div class="center">
-        <input id="RegistrarMes" type="button" class="btn btn-primary" value="Registrar" />
+        <input id="RegistrarMes" type="button" class="btn btn-primary" value="@Language.registrar" />
     </div>
 </div>
 
@@ -120,32 +120,39 @@
             console.log($("#fecha1").val());
             console.log($("#fecha2").val());
             if ($("#fecha1").val() != "" && $("#fecha2").val() != "") {
-                Fecha1 = $('#fecha1').val();
-                Fecha2 = $('#fecha2').val();
-                //moment(PFecha);
-                mostrarGIF();
-                var serviceURL = '@Url.Action("RegistrarMes", "Contabilidad")';
-                $.ajax({
-                    type: "POST",
-                    url: serviceURL,
-                    data: JSON.stringify({ f1: Fecha1, f2: Fecha2 }),
-                    dataType: 'text',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data, status) {
-                        //console.log(data);
-                        if (data.Result == "") {
-                            toastr["success"]("@Language.OKNormal", "OK!");
-                        ocultarGIF();
-                            //location.reload();
-                    } else {
-                        errorFunc;
-                    }
+                $.confirm({
+                    confirm: function () {
+                        Fecha1 = $('#fecha1').val();
+                        Fecha2 = $('#fecha2').val();
+                        //moment(PFecha);
+                        mostrarGIF();
+                        var serviceURL = '@Url.Action("RegistrarMes", "Contabilidad")';
+                        $.ajax({
+                            type: "POST",
+                            url: serviceURL,
+                            data: JSON.stringify({ f1: Fecha1, f2: Fecha2 }),
+                            dataType: 'text',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data, status) {
+                                //console.log(data);
+                                if (data.Result == "") {
+                                    toastr["success"]("@Language.OKNormal", "OK!");
+                                ocultarGIF();
+                                    //location.reload();
+                            } else {
+                                errorFunc;
+                            }
+                            },
+                            error: errorFunc
+                        });
                     },
-                    error: errorFunc
+                    cancel: function () {
+                        toastr["info"]("@Language.operacionCancelada")
+                    }
                 });
-        } else {
-            toastr["info"]("@Language.completarCampos", "Info");
+            } else {
+                toastr["info"]("@Language.completarCampos", "Info");
             }
         });
 

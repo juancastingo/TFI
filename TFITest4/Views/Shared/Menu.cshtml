@@ -74,13 +74,13 @@
                             if (Session["grupo"].ToString() == "Contable")
                             {
                             <li class="dropdown">
-                                <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">Contabilidadddd<b class="caret"></b></a>
+                                <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">@Language.contabilidad<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         @Html.ActionLink(@Language.registrar, "Registrar", "Contabilidad")
                                     </li>
                                     <li>
-                                        @Html.ActionLink("Asientossss", "Asientos", "Contabilidad")
+                                        @Html.ActionLink(@Language.asientos, "Asientos", "Contabilidad")
                                     </li>
 
                                 </ul>
@@ -101,7 +101,7 @@
                                     <li>
                                         @Html.ActionLink(@Language.producto + "s", "Index", "producto")
                                     </li>
-                                    <li class="dropdown-submenu">
+                                  @*  <li class="dropdown-submenu">
 
 
                                         <a tabindex="-1" href="#">@Language.lugares</a>
@@ -116,7 +116,7 @@
                                                 @Html.ActionLink("Localidad", "Index", "Localidad")
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li>*@
                                     <li>
                                         @Html.ActionLink(@Language.usuario + "s", "Index", "Usuarios")
                                     </li>
@@ -161,7 +161,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="nombre_usuario" data-val="@Session["usuario"]">@Language.usuario: @Session["usuario"]</a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a>Tipo Usuario: <span>@Session["grupo"].ToString()</span></a>
+                                        <a>@Language.usuario @Language.tipo: <span>@Session["grupo"].ToString()</span></a>
                                     </li>
                                     @if (Session["_ip"] != null)
                                     {
@@ -195,14 +195,12 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">Aboutttt<b class="caret"></b></a>
+                            <a class="dropdown-toggle" style="cursor: pointer;" data-toggle="dropdown">@Language.acerca<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    @Html.ActionLink("siteMapppp", "siteMap", "About")
+                                    @Html.ActionLink(@Language.siteMap, "siteMap", "About")
                                 </li>
-                                <li>
-                                    @Html.ActionLink("Abouttttt", "About", "Home")
-                                </li>
+
 
                             </ul>
                         </li>

@@ -522,4 +522,31 @@
   <data name="tipo" xml:space="preserve">
     <value>Tipo</value>
   </data>
+  <data name="acerca" xml:space="preserve">
+    <value>Acerca</value>
+  </data>
+  <data name="asientos" xml:space="preserve">
+    <value>Asientos</value>
+  </data>
+  <data name="contabilidad" xml:space="preserve">
+    <value>Contabilidad</value>
+  </data>
+  <data name="cuentaDebe" xml:space="preserve">
+    <value>cuenta Debe</value>
+  </data>
+  <data name="cuentaHaber" xml:space="preserve">
+    <value>cuenta Haber</value>
+  </data>
+  <data name="debe" xml:space="preserve">
+    <value>Debe</value>
+  </data>
+  <data name="ejecutar" xml:space="preserve">
+    <value>Ejecutar</value>
+  </data>
+  <data name="haber" xml:space="preserve">
+    <value>Haber</value>
+  </data>
+  <data name="siteMap" xml:space="preserve">
+    <value>Mapa del Sitio</value>
+  </data>
 </root>

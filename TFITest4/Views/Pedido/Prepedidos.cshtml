@@ -102,7 +102,8 @@
 
         });
 
-            $('.DescartarPrePedido').click(function () {
+        $('.DescartarPrePedido').click(function () {
+            var esto = $(this).attr('data-val');
                 $.confirm({
                     confirm: function () {
                         mostrarGIF();
@@ -111,7 +112,7 @@
                     $.ajax({
                         type: "POST",
                         url: serviceURL,
-                        data: JSON.stringify({ PrePed: $(this).attr('data-val') }),
+                        data: JSON.stringify({ PrePed: esto}),
                         dataType: 'text',
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

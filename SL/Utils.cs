@@ -65,7 +65,7 @@ namespace SL
                 }
                 mail.From = new MailAddress("iidcorpuai@gmail.com");
                 mail.Subject = pCorreo.Subject;
-                mail.Body = pCorreo.Body + "<br><br><hr><span>Atte.</span><br><span>IID<img src='http://iid.somee.com/Content/images/Logo2.png' width='50' height='50'> </span>";
+                mail.Body = pCorreo.Body + "<br><br><hr><span>Atte.</span><br><span><img src='http://iid.somee.com/Content/images/Logo2.png' width='50' height='50'> </span>";
 
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();

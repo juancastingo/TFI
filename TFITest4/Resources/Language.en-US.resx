@@ -522,4 +522,31 @@
   <data name="tipo" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="acerca" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="asientos" xml:space="preserve">
+    <value>accounting entries</value>
+  </data>
+  <data name="contabilidad" xml:space="preserve">
+    <value>accounting</value>
+  </data>
+  <data name="cuentaDebe" xml:space="preserve">
+    <value>Debit account</value>
+  </data>
+  <data name="cuentaHaber" xml:space="preserve">
+    <value>Credit account</value>
+  </data>
+  <data name="debe" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="ejecutar" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="haber" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="siteMap" xml:space="preserve">
+    <value>Site Map</value>
+  </data>
 </root>

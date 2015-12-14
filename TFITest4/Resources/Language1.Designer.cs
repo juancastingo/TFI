@@ -70,6 +70,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Acerca.
+        /// </summary>
+        public static string acerca {
+            get {
+                return ResourceManager.GetString("acerca", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Acciones.
         /// </summary>
         public static string action {
@@ -120,6 +129,15 @@ namespace TFITest4.Resources {
         public static string aprobar {
             get {
                 return ResourceManager.GetString("aprobar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Asientos.
+        /// </summary>
+        public static string asientos {
+            get {
+                return ResourceManager.GetString("asientos", resourceCulture);
             }
         }
         
@@ -313,6 +331,15 @@ namespace TFITest4.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Contabilidad.
+        /// </summary>
+        public static string contabilidad {
+            get {
+                return ResourceManager.GetString("contabilidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Controlar.
         /// </summary>
         public static string controlar {
@@ -345,6 +372,33 @@ namespace TFITest4.Resources {
         public static string cuentaCorriente {
             get {
                 return ResourceManager.GetString("cuentaCorriente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a cuenta Debe.
+        /// </summary>
+        public static string cuentaDebe {
+            get {
+                return ResourceManager.GetString("cuentaDebe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a cuenta Haber.
+        /// </summary>
+        public static string cuentaHaber {
+            get {
+                return ResourceManager.GetString("cuentaHaber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Debe.
+        /// </summary>
+        public static string debe {
+            get {
+                return ResourceManager.GetString("debe", resourceCulture);
             }
         }
         
@@ -408,6 +462,15 @@ namespace TFITest4.Resources {
         public static string editar {
             get {
                 return ResourceManager.GetString("editar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ejecutar.
+        /// </summary>
+        public static string ejecutar {
+            get {
+                return ResourceManager.GetString("ejecutar", resourceCulture);
             }
         }
         
@@ -597,6 +660,15 @@ namespace TFITest4.Resources {
         public static string guardarCarrito {
             get {
                 return ResourceManager.GetString("guardarCarrito", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Haber.
+        /// </summary>
+        public static string haber {
+            get {
+                return ResourceManager.GetString("haber", resourceCulture);
             }
         }
         
@@ -1101,6 +1173,15 @@ namespace TFITest4.Resources {
         public static string RevisarUsuarioContra {
             get {
                 return ResourceManager.GetString("RevisarUsuarioContra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mapa del Sitio.
+        /// </summary>
+        public static string siteMap {
+            get {
+                return ResourceManager.GetString("siteMap", resourceCulture);
             }
         }
         
